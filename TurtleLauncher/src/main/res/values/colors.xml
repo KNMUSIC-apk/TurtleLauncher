@@ -4,52 +4,52 @@
     <color name="black_or_white">#F2F5F0</color>
 
     <!-- ── Canonical palette ───────────────────────────────────────── -->
-    <color name="palette_primary">#7B6CF6</color>
-    <color name="palette_secondary">#4FC3F7</color>
+    <color name="palette_primary">#D9D9D9</color>
+    <color name="palette_secondary">#A6A6A6</color>
 
     <!-- ── Main Background ─────────────────────────────────────────── -->
-    <color name="background_app">#07061A</color>
-    <color name="background_app_error">#07061A</color>
+    <color name="background_app">#1E1E1E</color>
+    <color name="background_app_error">#1E1E1E</color>
     <color name="background_overlay">#88000000</color>
 
     <!-- ── Top Bar ───────────────────────────────────────────────────── -->
-    <color name="background_menu_top">#2E120F2E</color>
-    <color name="background_menu_top_error">#2E120F2E</color>
-    <color name="background_menu_element">#2E120F2E</color>
-    <color name="background_ripple_effect">#337B6CF6</color>
+    <color name="background_menu_top">#2E1A1A1A</color>
+    <color name="background_menu_top_error">#2E1A1A1A</color>
+    <color name="background_menu_element">#2E1A1A1A</color>
+    <color name="background_ripple_effect">#33FFFFFF</color>
 
     <!-- ── Buttons ───────────────────────────────────────────────────── -->
-    <color name="button_background">#7B6CF6</color>
+    <color name="button_background">#D9D9D9</color>
 
     <!-- ── Dialog ───────────────────────────────────────────────────── -->
-    <color name="dialog_background">#B31A1440</color>
+    <color name="dialog_background">#B31E1E1E</color>
 
     <!-- ── Menu ─────────────────────────────────────────────────────── -->
     <color name="menu_bar_text">#F2F5F0</color>
-    <color name="menu_progress">#7B6CF6</color>
+    <color name="menu_progress">#D9D9D9</color>
 
     <!-- ── Cards ────────────────────────────────────────────────────── -->
-    <color name="background_item_selected">#557B6CF6</color>
-    <color name="background_item_disabled">#551A1440</color>
+    <color name="background_item_selected">#55FFFFFF</color>
+    <color name="background_item_disabled">#551E1E1E</color>
 
     <!-- ── Sponsor ──────────────────────────────────────────────────── -->
-    <color name="background_sponsor_intermediate">#55FF8A8A</color>
+    <color name="background_sponsor_intermediate">#55C8C8C8</color>
     <color name="background_sponsor_advanced">#559CCF93</color>
 
     <!-- ── Inputs ───────────────────────────────────────────────────── -->
 
     <!-- ── Categories ───────────────────────────────────────────────── -->
-    <color name="mod_category_fill">#33120F2E</color>
-    <color name="text_background_fill">#33120F2E</color>
+    <color name="mod_category_fill">#331A1A1A</color>
+    <color name="text_background_fill">#331A1A1A</color>
 
     <!-- ── Primary Accent: blue ─────────────────────────────────────── -->
-    <color name="settings_category">#7B6CF6</color>
-    <color name="accent_primary">#7B6CF6</color>
+    <color name="settings_category">#D9D9D9</color>
+    <color name="accent_primary">#D9D9D9</color>
 
     <!-- ── Secondary accents ───────────────────────────────────────── -->
-    <color name="accent_cyan">#4FC3F7</color>
-    <color name="accent_orange">#FF8A8A</color>
-    <color name="favorite_color">#FF8A8A</color>
+    <color name="accent_cyan">#A6A6A6</color>
+    <color name="accent_orange">#C8C8C8</color>
+    <color name="favorite_color">#C8C8C8</color>
 
     <!-- ── Icon / Text defaults ──────────────────────────────────────── -->
     <color name="turtle_icon_color">#F2F5F0</color>
@@ -57,36 +57,36 @@
     <color name="turtle_text_primary">#F2F5F0</color>
 
     <!-- ── Glass / dark surfaces ───────────────────────────────────── -->
-    <color name="bg_deep">#07061A</color>
+    <color name="bg_deep">#1E1E1E</color>
     <color name="bg_card">#22FFFFFF</color>
 
     <!-- ── Surfaces ──────────────────────────────────────────────────── -->
-    <color name="turtle_surface">#2E120F2E</color>
+    <color name="turtle_surface">#2E1A1A1A</color>
     <color name="turtle_surface_variant">#88202020</color>
     <color name="turtle_divider">#59FFFFFF</color>
-    <color name="turtle_stroke">#337B6CF6</color>
+    <color name="turtle_stroke">#33FFFFFF</color>
 
     <!-- ── Extended aliases ──────────────────────────────────────────── -->
-    <color name="turtle_accent_glow">#7B6CF6</color>
-    <color name="turtle_accent_dim">#4FC3F7</color>
-    <color name="turtle_accent_ripple">#337B6CF6</color>
-    <color name="launch_button_color">#7B6CF6</color>
-    <color name="launch_button_hover">#4FC3F7</color>
-    <color name="launch_button_pressed">#4FC3F7</color>
-    <color name="launch_button_ripple">#337B6CF6</color>
+    <color name="turtle_accent_glow">#D9D9D9</color>
+    <color name="turtle_accent_dim">#A6A6A6</color>
+    <color name="turtle_accent_ripple">#33FFFFFF</color>
+    <color name="launch_button_color">#D9D9D9</color>
+    <color name="launch_button_hover">#A6A6A6</color>
+    <color name="launch_button_pressed">#A6A6A6</color>
+    <color name="launch_button_ripple">#33FFFFFF</color>
 
     <!-- Background layers -->
-    <color name="turtle_bg_surface">#120F2E</color>
-    <color name="turtle_bg_elevated">#1A1440</color>
-    <color name="turtle_bg_navbar">#120F2E</color>
-    <color name="turtle_bg_sidebar">#120F2E</color>
-    <color name="turtle_bg_terminal">#07061A</color>
+    <color name="turtle_bg_surface">#1A1A1A</color>
+    <color name="turtle_bg_elevated">#1E1E1E</color>
+    <color name="turtle_bg_navbar">#1A1A1A</color>
+    <color name="turtle_bg_sidebar">#1A1A1A</color>
+    <color name="turtle_bg_terminal">#1E1E1E</color>
 
     <!-- Text -->
     <color name="turtle_text_secondary">#A8B0A6</color>
     <color name="turtle_text_disabled">#A8B0A6</color>
-    <color name="turtle_text_on_accent">#07061A</color>
-    <color name="turtle_text_terminal">#4FC3F7</color>
+    <color name="turtle_text_on_accent">#1E1E1E</color>
+    <color name="turtle_text_terminal">#A6A6A6</color>
 
     <!-- Borders -->
     <color name="turtle_border_subtle">#1A202020</color>
@@ -94,22 +94,22 @@
 
     <color name="turtle_hc_border">#F2F5F0</color>
     <color name="turtle_hc_text_secondary">#F2F5F0</color>
-    <color name="turtle_hc_surface">#07061A</color>
+    <color name="turtle_hc_surface">#1E1E1E</color>
 
     <!-- Semantic states -->
-    <color name="turtle_error">#FF8A8A</color>
-    <color name="turtle_warning">#FF8A8A</color>
-    <color name="turtle_success">#4FC3F7</color>
+    <color name="turtle_error">#C8C8C8</color>
+    <color name="turtle_warning">#C8C8C8</color>
+    <color name="turtle_success">#A6A6A6</color>
 
     <!-- Overlays -->
     <color name="turtle_glass_overlay">#229CCF93</color>
     <color name="turtle_shadow_color">#66000000</color>
     <color name="turtle_overlay_scrim">#88000000</color>
     
-    <color name="turtle_stat_fps">#4FC3F7</color>
-    <color name="turtle_stat_ram">#4FC3F7</color>
-    <color name="turtle_stat_cpu">#FF8A8A</color>
-    <color name="turtle_stat_ping">#FF8A8A</color>
+    <color name="turtle_stat_fps">#A6A6A6</color>
+    <color name="turtle_stat_ram">#A6A6A6</color>
+    <color name="turtle_stat_cpu">#C8C8C8</color>
+    <color name="turtle_stat_ping">#C8C8C8</color>
 
     <!-- ── Panel / overlay tokens ──────────────────────────────────── -->
     <color name="panel_translucent">#DD171717</color>
@@ -117,40 +117,40 @@
     <color name="turtle_highlight_subtle">#22F2F5F0</color>
 
     <!-- Backgrounds -->
-    <color name="new_background_main">#07061A</color>
-    <color name="new_background_secondary">#120F2E</color>
-    <color name="new_background_cards_panels">#120F2E</color>
-    <color name="new_background_elevated_cards">#1A1440</color>
-    <color name="new_background_sidebar_topbar">#120F2E</color>
+    <color name="new_background_main">#1E1E1E</color>
+    <color name="new_background_secondary">#1A1A1A</color>
+    <color name="new_background_cards_panels">#1A1A1A</color>
+    <color name="new_background_elevated_cards">#1E1E1E</color>
+    <color name="new_background_sidebar_topbar">#1A1A1A</color>
 
     <!-- Primary Accent (name kept as "primary_blue" for compatibility) -->
-    <color name="new_primary_blue">#7B6CF6</color>
-    <color name="new_primary_blue_hover">#4FC3F7</color>
-    <color name="new_primary_blue_pressed">#4FC3F7</color>
-    <color name="new_primary_blue_glow">#7B6CF6</color>
+    <color name="new_primary_blue">#D9D9D9</color>
+    <color name="new_primary_blue_hover">#A6A6A6</color>
+    <color name="new_primary_blue_pressed">#A6A6A6</color>
+    <color name="new_primary_blue_glow">#D9D9D9</color>
 
     <!-- Secondary Accent (name kept as "cyan_accent" for compatibility) -->
-    <color name="new_cyan_accent">#4FC3F7</color>
-    <color name="new_cyan_accent_hover">#4FC3F7</color>
-    <color name="new_cyan_accent_pressed">#4FC3F7</color>
+    <color name="new_cyan_accent">#A6A6A6</color>
+    <color name="new_cyan_accent_hover">#A6A6A6</color>
+    <color name="new_cyan_accent_pressed">#A6A6A6</color>
 
     <!-- Buttons: Primary -->
-    <color name="new_button_primary_background">#7B6CF6</color>
-    <color name="new_button_primary_hover">#4FC3F7</color>
-    <color name="new_button_primary_pressed">#4FC3F7</color>
-    <color name="new_button_primary_text">#07061A</color>
+    <color name="new_button_primary_background">#D9D9D9</color>
+    <color name="new_button_primary_hover">#A6A6A6</color>
+    <color name="new_button_primary_pressed">#A6A6A6</color>
+    <color name="new_button_primary_text">#1E1E1E</color>
 
     <!-- Buttons: Secondary -->
-    <color name="new_button_secondary_background">#1A1440</color>
-    <color name="new_button_secondary_hover">#120F2E</color>
-    <color name="new_button_secondary_pressed">#120F2E</color>
+    <color name="new_button_secondary_background">#1E1E1E</color>
+    <color name="new_button_secondary_hover">#1A1A1A</color>
+    <color name="new_button_secondary_pressed">#1A1A1A</color>
     <color name="new_button_secondary_text">#F2F5F0</color>
 
     <!-- Buttons: Destructive (spec has no distinct destructive ramp;
          reuses Error, the only red in the given palette) -->
-    <color name="new_button_destructive_background">#FF8A8A</color>
-    <color name="new_button_destructive_hover">#FF8A8A</color>
-    <color name="new_button_destructive_text">#07061A</color>
+    <color name="new_button_destructive_background">#C8C8C8</color>
+    <color name="new_button_destructive_hover">#C8C8C8</color>
+    <color name="new_button_destructive_text">#1E1E1E</color>
 
     <!-- Text -->
     <color name="new_text_primary">#F2F5F0</color>
@@ -159,44 +159,44 @@
     <color name="new_text_disabled">#A8B0A6</color>
 
     <!-- Inputs -->
-    <color name="new_input_background">#120F2E</color>
-    <color name="new_input_border">#1A1440</color>
-    <color name="new_input_focus_border">#7B6CF6</color>
+    <color name="new_input_background">#1A1A1A</color>
+    <color name="new_input_border">#1E1E1E</color>
+    <color name="new_input_focus_border">#D9D9D9</color>
     <color name="new_input_placeholder">#A8B0A6</color>
     <color name="new_input_text">#F2F5F0</color>
 
     <!-- Version Cards -->
-    <color name="new_version_card_background">#120F2E</color>
-    <color name="new_version_card_border">#1A1440</color>
-    <color name="new_version_card_selected_border">#7B6CF6</color>
-    <color name="new_version_card_hover_glow">#4FC3F7</color>
+    <color name="new_version_card_background">#1A1A1A</color>
+    <color name="new_version_card_border">#1E1E1E</color>
+    <color name="new_version_card_selected_border">#D9D9D9</color>
+    <color name="new_version_card_hover_glow">#A6A6A6</color>
 
     <!-- Navigation -->
-    <color name="new_nav_active_icon">#7B6CF6</color>
+    <color name="new_nav_active_icon">#D9D9D9</color>
     <color name="new_nav_inactive_icon">#A8B0A6</color>
-    <color name="new_nav_active_indicator">#4FC3F7</color>
+    <color name="new_nav_active_indicator">#A6A6A6</color>
 
     <!-- Status Colors -->
-    <color name="new_status_success">#4FC3F7</color>
-    <color name="new_status_warning">#FF8A8A</color>
-    <color name="new_status_error">#FF8A8A</color>
-    <color name="new_status_info">#4FC3F7</color>
+    <color name="new_status_success">#A6A6A6</color>
+    <color name="new_status_warning">#C8C8C8</color>
+    <color name="new_status_error">#C8C8C8</color>
+    <color name="new_status_info">#A6A6A6</color>
 
     <!-- Borders -->
-    <color name="new_border_default">#1A1440</color>
-    <color name="new_border_hover">#1A1440</color>
-    <color name="new_border_selected">#7B6CF6</color>
+    <color name="new_border_default">#1E1E1E</color>
+    <color name="new_border_hover">#1E1E1E</color>
+    <color name="new_border_selected">#D9D9D9</color>
 
     <!-- Shadows & Glow (names kept as "blue"/"cyan" for compatibility;
          both glows are now the accent greens, shadow/overlay untouched
          alpha-black since they're dimming layers, not palette colors) -->
     <color name="new_shadow">#66000000</color>
     <color name="new_overlay">#88000000</color>
-    <color name="new_blue_glow">#337B6CF6</color>
+    <color name="new_blue_glow">#33FFFFFF</color>
     <color name="new_cyan_glow">#229CCF93</color>
 
     <!-- Progress Bar -->
-    <color name="new_progress_track">#120F2E</color>
+    <color name="new_progress_track">#1A1A1A</color>
     <color name="new_progress_fill">#e3e8b0</color>
 
 </resources>
