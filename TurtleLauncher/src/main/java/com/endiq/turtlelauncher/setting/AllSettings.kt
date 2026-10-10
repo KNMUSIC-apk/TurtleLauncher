@@ -64,7 +64,8 @@ class AllSettings {
         @JvmStatic val ignoreNotchLauncher      = BooleanSettingUnit("ignoreNotchLauncher", true)
         @JvmStatic val resolutionRatio          = IntSettingUnit("resolutionRatio", 100)
         /** Lower the render scale in-game while FPS is low, and restore the chosen one once it recovers. */
-        @JvmStatic val adaptiveResolution       = BooleanSettingUnit("adaptiveResolution", false)
+        /** Level of detail for entities and particles, applied to options.txt at launch. 0 = off (game default). */
+        @JvmStatic val levelOfDetail            = IntSettingUnit("levelOfDetail", 0)
         @JvmStatic val sustainedPerformance     = BooleanSettingUnit("sustainedPerformance", false)
         @JvmStatic val alternateSurface         = BooleanSettingUnit("alternate_surface", false)
         @JvmStatic val forceVsync               = BooleanSettingUnit("force_vsync", false)

@@ -143,7 +143,18 @@ class VideoSettingsFragment : AbstractSettingsFragment(R.layout.settings_fragmen
         }
         val currentRendererId = AllSettings.renderer.getValue()
         AllSettings.preferOpenGLBackend.put(currentRendererId != vulkanRendererId).save()
-        SwitchSettingsWrapper(context, AllSettings.adaptiveResolution, binding.adaptiveResolutionLayout, binding.adaptiveResolutionSwitch)
+        // Level of Detail: tap the row to cycle LOD 0 → 3 → 0. Applied to options.txt when the game launches.
+        val lodLabels = resources.getStringArray(R.array.lod_levels)
+        fun showLod() {
+            val level = AllSettings.levelOfDetail.getValue().coerceIn(0, lodLabels.size - 1)
+            binding.lodValue.text = lodLabels[level]
+        }
+        showLod()
+        binding.lodLayout.setOnClickListener {
+            val next = (AllSettings.levelOfDetail.getValue() + 1) % lodLabels.size
+            AllSettings.levelOfDetail.put(next).save()
+            showLod()
+        }
         SwitchSettingsWrapper(context, AllSettings.preferOpenGLBackend, binding.graphicsBackendLayout, binding.graphicsBackendSwitch)
             .setOnCheckedChangeListener { _, isChecked, listener ->
                 listener.onSave()

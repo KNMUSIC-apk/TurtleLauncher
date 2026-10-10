@@ -13,23 +13,23 @@
     <color name="background_overlay">#88000000</color>
 
     <!-- ── Top Bar ───────────────────────────────────────────────────── -->
-    <color name="background_menu_top">#CC120F2E</color>
-    <color name="background_menu_top_error">#99120F2E</color>
-    <color name="background_menu_element">#120F2E</color>
+    <color name="background_menu_top">#2E120F2E</color>
+    <color name="background_menu_top_error">#2E120F2E</color>
+    <color name="background_menu_element">#2E120F2E</color>
     <color name="background_ripple_effect">#337B6CF6</color>
 
     <!-- ── Buttons ───────────────────────────────────────────────────── -->
     <color name="button_background">#7B6CF6</color>
 
     <!-- ── Dialog ───────────────────────────────────────────────────── -->
-    <color name="dialog_background">#EE1A1440</color>
+    <color name="dialog_background">#B31A1440</color>
 
     <!-- ── Menu ─────────────────────────────────────────────────────── -->
     <color name="menu_bar_text">#F2F5F0</color>
     <color name="menu_progress">#7B6CF6</color>
 
     <!-- ── Cards ────────────────────────────────────────────────────── -->
-    <color name="background_item_selected">#AA1A1440</color>
+    <color name="background_item_selected">#557B6CF6</color>
     <color name="background_item_disabled">#551A1440</color>
 
     <!-- ── Sponsor ──────────────────────────────────────────────────── -->
@@ -39,8 +39,8 @@
     <!-- ── Inputs ───────────────────────────────────────────────────── -->
 
     <!-- ── Categories ───────────────────────────────────────────────── -->
-    <color name="mod_category_fill">#66120F2E</color>
-    <color name="text_background_fill">#66120F2E</color>
+    <color name="mod_category_fill">#33120F2E</color>
+    <color name="text_background_fill">#33120F2E</color>
 
     <!-- ── Primary Accent: blue ─────────────────────────────────────── -->
     <color name="settings_category">#7B6CF6</color>
@@ -58,12 +58,12 @@
 
     <!-- ── Glass / dark surfaces ───────────────────────────────────── -->
     <color name="bg_deep">#07061A</color>
-    <color name="bg_card">#AA171717</color>
+    <color name="bg_card">#22FFFFFF</color>
 
     <!-- ── Surfaces ──────────────────────────────────────────────────── -->
-    <color name="turtle_surface">#CC120F2E</color>
+    <color name="turtle_surface">#2E120F2E</color>
     <color name="turtle_surface_variant">#88202020</color>
-    <color name="turtle_divider">#1A202020</color>
+    <color name="turtle_divider">#59FFFFFF</color>
     <color name="turtle_stroke">#337B6CF6</color>
 
     <!-- ── Extended aliases ──────────────────────────────────────────── -->
@@ -90,7 +90,7 @@
 
     <!-- Borders -->
     <color name="turtle_border_subtle">#1A202020</color>
-    <color name="turtle_border_default">#1A1440</color>
+    <color name="turtle_border_default">#4DFFFFFF</color>
 
     <color name="turtle_hc_border">#F2F5F0</color>
     <color name="turtle_hc_text_secondary">#F2F5F0</color>
