@@ -779,6 +779,8 @@
     <string name="setting_graphics_backend_title">Nền tảng kết xuất đồ họa</string>
     <string name="setting_graphics_backend_summary">Chuyển nhanh giữa kết xuất OpenGL và Vulkan. Đây là lối tắt cho tùy chọn Bộ kết xuất bên dưới — OpenGL chọn GL4ES, còn Vulkan chọn Zink.</string>
     <string name="setting_prefer_opengl_title">Ưu tiên OpenGL</string>
+    <string name="setting_adaptive_resolution_title">Tự điều chỉnh độ phân giải</string>
+    <string name="setting_adaptive_resolution_summary">Khi chơi, giảm độ phân giải nếu FPS thấp và tăng lại đến mức bạn đã chọn khi FPS ổn định.</string>
     <string name="setting_prefer_opengl_summary">Bật để sử dụng bộ kết xuất OpenGL (GL4ES). Tắt để chuyển sang Vulkan (Zink). Đây là lối tắt tương tự tùy chọn Bộ kết xuất chi tiết bên dưới; mặc định là bật (OpenGL).</string>
     <string name="setting_renderer_title">Bộ kết xuất</string>
     <string name="setting_renderer_from_plugins">Từ plugin %s</string>

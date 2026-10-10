@@ -143,6 +143,7 @@ class VideoSettingsFragment : AbstractSettingsFragment(R.layout.settings_fragmen
         }
         val currentRendererId = AllSettings.renderer.getValue()
         AllSettings.preferOpenGLBackend.put(currentRendererId != vulkanRendererId).save()
+        SwitchSettingsWrapper(context, AllSettings.adaptiveResolution, binding.adaptiveResolutionLayout, binding.adaptiveResolutionSwitch)
         SwitchSettingsWrapper(context, AllSettings.preferOpenGLBackend, binding.graphicsBackendLayout, binding.graphicsBackendSwitch)
             .setOnCheckedChangeListener { _, isChecked, listener ->
                 listener.onSave()
