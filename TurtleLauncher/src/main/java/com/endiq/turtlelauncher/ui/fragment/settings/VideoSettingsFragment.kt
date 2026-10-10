@@ -150,6 +150,17 @@ class VideoSettingsFragment : AbstractSettingsFragment(R.layout.settings_fragmen
             binding.lodValue.text = lodLabels[level]
         }
         showLod()
+        // Performance preset: tap to cycle Auto → Off → Save → Balanced → Auto. Stored value is -1..2.
+        val presetLabels = resources.getStringArray(R.array.performance_presets)
+        fun showPreset() {
+            binding.presetValue.text = presetLabels[AllSettings.performancePreset.getValue() + 1]
+        }
+        showPreset()
+        binding.presetLayout.setOnClickListener {
+            val next = (AllSettings.performancePreset.getValue() + 2) % presetLabels.size - 1
+            AllSettings.performancePreset.put(next).save()
+            showPreset()
+        }
         binding.lodLayout.setOnClickListener {
             val next = (AllSettings.levelOfDetail.getValue() + 1) % lodLabels.size
             AllSettings.levelOfDetail.put(next).save()

@@ -251,7 +251,10 @@ class AllSettings {
 
         // ── TurtleLauncher FPS Boost ──────────────────────────────────────────
         /** Remove Minecraft's 300-FPS cap; adds -XX:+DisableExplicitGC */
-        @JvmStatic val unlimitedFps             = BooleanSettingUnit("unlimitedFps", true)
+        // Off by default. The key is versioned so a value saved by an older build (which was on by default) is ignored.
+        @JvmStatic val unlimitedFps             = BooleanSettingUnit("unlimitedFpsV2", false)
+        /** Performance preset: -1 = auto (by RAM), 0 = off, 1 = save, 2 = balanced. */
+        @JvmStatic val performancePreset        = IntSettingUnit("performancePresetV2", -1)
         /** Low-latency rendering: JVM string/compile optimizations */
         @JvmStatic val lowLatencyRendering      = BooleanSettingUnit("lowLatencyRendering", true)
         /** LWJGL frame-pacing hints for smoother mobile GPU frame delivery */

@@ -349,8 +349,7 @@ class LaunchGame {
 
                 // Pre-processing.
                 Tools.disableSplash(gameDirPath)
-                applyUncappedFpsOptions(gameDirPath)
-                applyLodOptions(gameDirPath)
+                applyOptimizationOptions(gameDirPath)
                 androidx.tracing.Trace.beginSection("LaunchGame.classpath")
                 val launchClassPath = Tools.generateLaunchClassPath(versionInfo, minecraftVersion)
                 androidx.tracing.Trace.endSection()
@@ -380,77 +379,130 @@ class LaunchGame {
             }
         }
 
+        /** Minecraft options this launcher may set. Any of them not set this launch is restored from backup. */
+        private val MANAGED_OPTION_KEYS = listOf(
+            "maxFps", "enableVsync", "renderDistance", "simulationDistance", "particles",
+            "graphicsMode", "biomeBlendRadius", "entityDistanceScaling", "entityShadows"
+        )
+        private const val OPTIONS_BACKUP_FILE = "turtle_options_backup.properties"
+        private const val ABSENT_MARKER = "__absent__"
+
         /**
-         * "Unlimited FPS" used to only toggle a JVM flag, so Minecraft's own frame cap and V-Sync
-         * stayed whatever options.txt said (often 60/120 FPS with V-Sync on). When the toggle is on,
-         * raise maxFps to Minecraft's "Unlimited" value (260) and turn V-Sync off before launch.
-         * Only keys that already exist or are missing are touched; the rest of the file is kept.
+         * Performance preset: 0 = off, 1 = save, 2 = balanced. Auto (-1) picks from total RAM.
+         * Render distance is the biggest FPS lever in Minecraft, so presets lower it.
          */
-        /**
-         * Level of detail: lowers entity distance and particle density in options.txt for the chosen level.
-         * LOD 0 leaves options.txt untouched. The game reads these at start, so changes apply next launch.
-         */
-        private fun applyLodOptions(gameDir: File) {
-            val overrides: Map<String, String> = when (AllSettings.levelOfDetail.getValue()) {
-                1 -> linkedMapOf("entityDistanceScaling" to "0.75", "biomeBlendRadius" to "2")
-                2 -> linkedMapOf("entityDistanceScaling" to "0.5", "particles" to "1", "entityShadows" to "false",
-                    "biomeBlendRadius" to "1", "graphicsMode" to "0")
-                3 -> linkedMapOf("entityDistanceScaling" to "0.5", "particles" to "2", "entityShadows" to "false",
-                    "biomeBlendRadius" to "0", "graphicsMode" to "0")
-                else -> return
+        private fun resolvePerformancePreset(): Int {
+            val chosen = AllSettings.performancePreset.getValue()
+            if (chosen >= 0) return chosen
+            val totalMb = runCatching {
+                File("/proc/meminfo").readLines().first { it.startsWith("MemTotal:") }
+                    .trim().split(Regex("\\s+"))[1].toLong() / 1024
+            }.getOrDefault(0L)
+            return when {
+                totalMb in 1..4500 -> 1
+                totalMb in 4501..8500 -> 2
+                else -> 0
             }
-            applyOptionOverrides(gameDir, overrides)
         }
 
-        private fun applyOptionOverrides(gameDir: File, overrides: Map<String, String>) {
+        private fun presetOptions(preset: Int): Map<String, String> = when (preset) {
+            1 -> linkedMapOf("renderDistance" to "4", "simulationDistance" to "4", "particles" to "2",
+                "graphicsMode" to "0", "biomeBlendRadius" to "0", "entityDistanceScaling" to "0.5",
+                "entityShadows" to "false")
+            2 -> linkedMapOf("renderDistance" to "6", "simulationDistance" to "6", "particles" to "1",
+                "graphicsMode" to "1", "biomeBlendRadius" to "2", "entityDistanceScaling" to "0.75")
+            else -> emptyMap()
+        }
+
+        /** Level of detail: lowers entity distance, particles and blending. LOD 0 sets nothing. */
+        private fun lodOptions(level: Int): Map<String, String> = when (level) {
+            1 -> linkedMapOf("entityDistanceScaling" to "0.75", "biomeBlendRadius" to "2")
+            2 -> linkedMapOf("entityDistanceScaling" to "0.5", "particles" to "1", "entityShadows" to "false",
+                "biomeBlendRadius" to "1", "graphicsMode" to "0")
+            3 -> linkedMapOf("entityDistanceScaling" to "0.5", "particles" to "2", "entityShadows" to "false",
+                "biomeBlendRadius" to "0", "graphicsMode" to "0")
+            else -> emptyMap()
+        }
+
+        /** Builds every option this launch wants, writes them, and restores the rest to the player's values. */
+        private fun applyOptimizationOptions(gameDir: File) {
+            val preset = resolvePerformancePreset()
+            val lod = AllSettings.levelOfDetail.getValue()
+            val unlimited = AllSettings.unlimitedFps.getValue()
+
+            val desired = linkedMapOf<String, String>()
+            desired += presetOptions(preset)
+            desired += lodOptions(lod)
+            if (unlimited) {
+                desired["maxFps"] = "260"
+                desired["enableVsync"] = "false"
+            }
+            Logging.i("LaunchGame", "Optimization for this launch: preset=$preset, LOD=$lod, unlimitedFps=$unlimited, " +
+                "managed options=${desired.size}")
+            writeManagedOptions(gameDir, desired)
+        }
+
+        /**
+         * Writes [desired] into options.txt. The player's original value of each key is saved to a backup
+         * the first time the launcher changes it. Keys no longer desired are put back from that backup,
+         * so turning an optimization off really undoes it.
+         */
+        private fun writeManagedOptions(gameDir: File, desired: Map<String, String>) {
             val optionsFile = File(gameDir, "options.txt")
             if (!optionsFile.isFile) return
+            val backupFile = File(gameDir, OPTIONS_BACKUP_FILE)
             try {
+                val backup = java.util.Properties()
+                if (backupFile.isFile) backupFile.inputStream().use { backup.load(it) }
+
                 val original = optionsFile.readLines()
-                val seen = mutableSetOf<String>()
-                val updated = original.map { line ->
-                    val key = line.substringBefore(':')
-                    val value = overrides[key]
-                    if (value != null) {
-                        seen += key
-                        "$key:$value"
-                    } else {
-                        line
-                    }
-                }.toMutableList()
-                overrides.forEach { (key, value) ->
-                    if (key !in seen) updated += "$key:$value"
+                val current = HashMap<String, String>()
+                original.forEach { line -> if (':' in line) current[line.substringBefore(':')] = line.substringAfter(':') }
+
+                // Cleanup for builds that forced "Unlimited" (260 FPS, V-Sync off) with no backup:
+                // those are the sentinel values, so treat Minecraft's defaults as the player's originals.
+                if (!backup.containsKey("maxFps") && current["maxFps"] == "260") backup.setProperty("maxFps", "120")
+                if (!backup.containsKey("enableVsync") && current["enableVsync"] == "false") backup.setProperty("enableVsync", "true")
+
+                for (key in desired.keys) {
+                    if (!backup.containsKey(key)) backup.setProperty(key, current[key] ?: ABSENT_MARKER)
                 }
+
+                val target = linkedMapOf<String, String?>()   // null means remove the line
+                for (key in MANAGED_OPTION_KEYS) {
+                    when {
+                        key in desired -> target[key] = desired.getValue(key)
+                        backup.containsKey(key) -> {
+                            val saved = backup.getProperty(key)
+                            target[key] = if (saved == ABSENT_MARKER) null else saved
+                        }
+                    }
+                }
+
+                val updated = mutableListOf<String>()
+                val seen = mutableSetOf<String>()
+                for (line in original) {
+                    val key = if (':' in line) line.substringBefore(':') else null
+                    if (key != null && target.containsKey(key)) {
+                        seen += key
+                        target[key]?.let { updated += "$key:$it" }
+                    } else {
+                        updated += line
+                    }
+                }
+                target.forEach { (key, value) -> if (key !in seen && value != null) updated += "$key:$value" }
+
+                // Keys that were put back are done with their backup entries.
+                for (key in target.keys) if (key !in desired) backup.remove(key)
+
                 if (updated != original) optionsFile.writeText(updated.joinToString("\n"))
+                if (backup.isEmpty()) {
+                    backupFile.delete()
+                } else {
+                    backupFile.outputStream().use { backup.store(it, "TurtleLauncher: original option values") }
+                }
             } catch (e: IOException) {
                 Logging.w("LaunchGame", "Could not update options.txt: ${e.message}")
-            }
-        }
-
-        private fun applyUncappedFpsOptions(gameDir: File) {
-            if (!AllSettings.unlimitedFps.getValue()) return
-            val optionsFile = File(gameDir, "options.txt")
-            if (!optionsFile.isFile) return
-            val overrides = linkedMapOf("maxFps" to "260", "enableVsync" to "false")
-            try {
-                val original = optionsFile.readLines()
-                val seen = mutableSetOf<String>()
-                val updated = original.map { line ->
-                    val key = line.substringBefore(':')
-                    val value = overrides[key]
-                    if (value != null) {
-                        seen += key
-                        "$key:$value"
-                    } else {
-                        line
-                    }
-                }.toMutableList()
-                overrides.forEach { (key, value) ->
-                    if (key !in seen) updated += "$key:$value"
-                }
-                if (updated != original) optionsFile.writeText(updated.joinToString("\n"))
-            } catch (e: IOException) {
-                Logging.w("LaunchGame", "Could not apply the FPS options to options.txt", e)
             }
         }
 

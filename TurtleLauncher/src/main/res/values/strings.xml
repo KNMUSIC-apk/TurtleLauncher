@@ -784,6 +784,15 @@
     <string name="setting_graphics_backend_title">Nền tảng kết xuất đồ họa</string>
     <string name="setting_graphics_backend_summary">Chuyển nhanh giữa kết xuất OpenGL và Vulkan. Đây là lối tắt cho tùy chọn Bộ kết xuất bên dưới — OpenGL chọn GL4ES, còn Vulkan chọn Zink.</string>
     <string name="setting_prefer_opengl_title">Ưu tiên OpenGL</string>
+    <string name="setting_preset_title">Tối ưu hiệu năng</string>
+    <string name="setting_preset_summary">Giảm khoảng cách hiển thị và hiệu ứng để tăng FPS. Áp dụng khi mở game. Tự động chọn theo RAM.</string>
+    <string-array name="performance_presets">
+        <item>Tự động</item>
+        <item>Tắt</item>
+        <item>Tiết kiệm</item>
+        <item>Cân bằng</item>
+    </string-array>
+    <string name="fps_low_hint">FPS thấp kéo dài. Thử Tối ưu hiệu năng: Tiết kiệm trong Cài đặt video, rồi mở lại game.</string>
     <string name="setting_lod_title">Level of Detail (LOD)</string>
     <string name="setting_lod_summary">Giảm chi tiết vật thể và hạt ở xa để tăng FPS. Áp dụng khi mở game.</string>
     <string-array name="lod_levels">

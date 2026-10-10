@@ -466,6 +466,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
 
     @Override
     protected void onPause() {
+        com.endiq.turtlelauncher.feature.turtle.FpsMonitor.stop();
         mGyroControl.disable();
         if (CallbackBridge.isGrabbing()){
             sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_ESCAPE);
@@ -706,6 +707,8 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     public void onServiceConnected(ComponentName name, IBinder service) {
         binding.mainGameRenderView.start(GameService.isActive(), binding.mainTouchpad);
         GameService.setActive(true);
+        com.endiq.turtlelauncher.feature.turtle.FpsMonitor.start(() ->
+                android.widget.Toast.makeText(this, getString(R.string.fps_low_hint), android.widget.Toast.LENGTH_LONG).show());
     }
 
     @Override

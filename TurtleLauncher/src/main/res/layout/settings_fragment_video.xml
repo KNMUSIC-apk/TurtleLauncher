@@ -150,6 +150,43 @@
                         android:textColor="@color/turtle_primary_text" />
                 </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
 
+                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                    android:id="@+id/preset_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:padding="@dimen/_12sdp">
+
+                    <TextView
+                        android:id="@+id/preset_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_toStartOf="@+id/preset_value"
+                        android:text="@string/setting_preset_title"
+                        android:textColor="@color/turtle_primary_text" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/preset_title"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_toStartOf="@+id/preset_value"
+                        android:text="@string/setting_preset_summary"
+                        android:textSize="@dimen/_11ssp"
+                        android:textColor="@color/turtle_text_secondary" />
+
+                    <TextView
+                        android:id="@+id/preset_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/turtle_primary_text" />
+                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+
                 <!-- Renderer -->
                 <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
                     android:id="@+id/renderer_layout"
