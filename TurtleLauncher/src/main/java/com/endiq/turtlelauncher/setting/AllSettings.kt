@@ -64,8 +64,6 @@ class AllSettings {
         @JvmStatic val ignoreNotchLauncher      = BooleanSettingUnit("ignoreNotchLauncher", true)
         @JvmStatic val resolutionRatio          = IntSettingUnit("resolutionRatio", 100)
         /** Lower the render scale in-game while FPS is low, and restore the chosen one once it recovers. */
-        /** Level of detail for entities and particles, applied to options.txt at launch. 0 = off (game default). */
-        @JvmStatic val levelOfDetail            = IntSettingUnit("levelOfDetail", 0)
         @JvmStatic val sustainedPerformance     = BooleanSettingUnit("sustainedPerformance", false)
         @JvmStatic val alternateSurface         = BooleanSettingUnit("alternate_surface", false)
         @JvmStatic val forceVsync               = BooleanSettingUnit("force_vsync", false)
@@ -253,8 +251,10 @@ class AllSettings {
         /** Remove Minecraft's 300-FPS cap; adds -XX:+DisableExplicitGC */
         // Off by default. The key is versioned so a value saved by an older build (which was on by default) is ignored.
         @JvmStatic val unlimitedFps             = BooleanSettingUnit("unlimitedFpsV2", false)
-        /** Performance preset: -1 = auto (by RAM), 0 = off, 1 = save, 2 = balanced. */
-        @JvmStatic val performancePreset        = IntSettingUnit("performancePresetV2", -1)
+        /** Each optimization owns its own options.txt keys, so none of them overlaps another. */
+        @JvmStatic val optRenderDistance        = BooleanSettingUnit("optRenderDistanceV1", false)
+        @JvmStatic val optEntityDetail          = BooleanSettingUnit("optEntityDetailV1", false)
+        @JvmStatic val optEffects               = BooleanSettingUnit("optEffectsV1", false)
         /** Low-latency rendering: JVM string/compile optimizations */
         @JvmStatic val lowLatencyRendering      = BooleanSettingUnit("lowLatencyRendering", true)
         /** LWJGL frame-pacing hints for smoother mobile GPU frame delivery */

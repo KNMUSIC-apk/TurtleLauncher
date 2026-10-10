@@ -17,6 +17,9 @@ object FpsMonitor {
     private const val LOW_AVG = 15
     private const val REARM_AVG = 30
 
+    /** Last 20-second average FPS, or -1 if the game has not reported one yet. */
+    @Volatile var lastAverage: Int = -1
+
     private val handler = Handler(Looper.getMainLooper())
     private val samples = IntArray(WINDOW)
     private var index = 0
@@ -63,6 +66,7 @@ object FpsMonitor {
         if (filled < WINDOW) return
 
         val avg = samples.average()
+        lastAverage = avg.toInt()
         if (ticks % LOG_EVERY == 0L) Logging.i("FpsMonitor", "FPS trung bình 20 s: ${avg.toInt()}")
         if (avg < LOW_AVG && !warned) {
             warned = true

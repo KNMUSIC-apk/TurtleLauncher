@@ -388,57 +388,40 @@ class LaunchGame {
         private const val ABSENT_MARKER = "__absent__"
 
         /**
-         * Performance preset: 0 = off, 1 = save, 2 = balanced. Auto (-1) picks from total RAM.
-         * Render distance is the biggest FPS lever in Minecraft, so presets lower it.
+         * Each optimization owns its own options.txt keys, so turning one on or off never changes
+         * what another writes. Applied when the game launches; keys that are off are restored.
          */
-        private fun resolvePerformancePreset(): Int {
-            val chosen = AllSettings.performancePreset.getValue()
-            if (chosen >= 0) return chosen
-            val totalMb = runCatching {
-                File("/proc/meminfo").readLines().first { it.startsWith("MemTotal:") }
-                    .trim().split(Regex("\\s+"))[1].toLong() / 1024
-            }.getOrDefault(0L)
-            return when {
-                totalMb in 1..4500 -> 1
-                totalMb in 4501..8500 -> 2
-                else -> 0
-            }
-        }
-
-        private fun presetOptions(preset: Int): Map<String, String> = when (preset) {
-            1 -> linkedMapOf("renderDistance" to "4", "simulationDistance" to "4", "particles" to "2",
-                "graphicsMode" to "0", "biomeBlendRadius" to "0", "entityDistanceScaling" to "0.5",
-                "entityShadows" to "false")
-            2 -> linkedMapOf("renderDistance" to "6", "simulationDistance" to "6", "particles" to "1",
-                "graphicsMode" to "1", "biomeBlendRadius" to "2", "entityDistanceScaling" to "0.75")
-            else -> emptyMap()
-        }
-
-        /** Level of detail: lowers entity distance, particles and blending. LOD 0 sets nothing. */
-        private fun lodOptions(level: Int): Map<String, String> = when (level) {
-            1 -> linkedMapOf("entityDistanceScaling" to "0.75", "biomeBlendRadius" to "2")
-            2 -> linkedMapOf("entityDistanceScaling" to "0.5", "particles" to "1", "entityShadows" to "false",
-                "biomeBlendRadius" to "1", "graphicsMode" to "0")
-            3 -> linkedMapOf("entityDistanceScaling" to "0.5", "particles" to "2", "entityShadows" to "false",
-                "biomeBlendRadius" to "0", "graphicsMode" to "0")
-            else -> emptyMap()
-        }
-
-        /** Builds every option this launch wants, writes them, and restores the rest to the player's values. */
-        private fun applyOptimizationOptions(gameDir: File) {
-            val preset = resolvePerformancePreset()
-            val lod = AllSettings.levelOfDetail.getValue()
-            val unlimited = AllSettings.unlimitedFps.getValue()
-
+        private fun featureOptions(): Map<String, String> {
             val desired = linkedMapOf<String, String>()
-            desired += presetOptions(preset)
-            desired += lodOptions(lod)
-            if (unlimited) {
+            if (AllSettings.optRenderDistance.getValue()) {
+                desired["renderDistance"] = "6"
+                desired["simulationDistance"] = "6"
+            }
+            if (AllSettings.optEntityDetail.getValue()) {
+                desired["entityDistanceScaling"] = "0.5"
+                desired["entityShadows"] = "false"
+            }
+            if (AllSettings.optEffects.getValue()) {
+                desired["particles"] = "1"
+                desired["graphicsMode"] = "0"
+                desired["biomeBlendRadius"] = "1"
+            }
+            if (AllSettings.unlimitedFps.getValue()) {
                 desired["maxFps"] = "260"
                 desired["enableVsync"] = "false"
             }
-            Logging.i("LaunchGame", "Optimization for this launch: preset=$preset, LOD=$lod, unlimitedFps=$unlimited, " +
-                "managed options=${desired.size}")
+            return desired
+        }
+
+        private fun applyOptimizationOptions(gameDir: File) {
+            val desired = featureOptions()
+            val enabled = listOfNotNull(
+                "renderDistance".takeIf { AllSettings.optRenderDistance.getValue() },
+                "entityDetail".takeIf { AllSettings.optEntityDetail.getValue() },
+                "effects".takeIf { AllSettings.optEffects.getValue() },
+                "unlimitedFps".takeIf { AllSettings.unlimitedFps.getValue() }
+            )
+            Logging.i("LaunchGame", "Optimizations for this launch: ${if (enabled.isEmpty()) "none" else enabled.joinToString()}")
             writeManagedOptions(gameDir, desired)
         }
 
