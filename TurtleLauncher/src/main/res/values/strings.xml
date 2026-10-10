@@ -427,6 +427,11 @@
     <string name="custom_background_title">Ảnh nền trình khởi chạy tùy chỉnh</string>
     <string name="custom_background_desc">Mở giao diện quản lý ảnh nền của trình khởi chạy, tại đây bạn có thể thêm ảnh nền yêu thích và đặt nền riêng cho từng giao diện</string>
     <string name="custom_background_main_menu">Menu chính</string>
+    <string name="video_background_title">Video nền</string>
+    <string name="video_background_desc">Chọn video MP4 hoặc WebM để phát lặp lại làm nền menu. Nhấn giữ để xóa video.</string>
+    <string name="video_background_saved">Đã đặt video nền</string>
+    <string name="video_background_failed">Không thể đặt video nền</string>
+    <string name="video_background_cleared">Đã xóa video nền</string>
     <string name="custom_background_in_game">Giao diện trong trò chơi</string>
     <string name="custom_background_dialog_message">Nhấn nút "Chọn" để đặt ảnh này làm nền cho %s</string>
     <string name="custom_background_selected">Đã đặt ảnh nền cho %s thành công:</string>

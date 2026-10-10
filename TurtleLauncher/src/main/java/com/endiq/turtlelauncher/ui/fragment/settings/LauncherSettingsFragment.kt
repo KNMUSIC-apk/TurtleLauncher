@@ -1,9 +1,14 @@
 package com.endiq.turtlelauncher.ui.fragment.settings
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import com.endiq.turtlelauncher.feature.background.VideoBackground
 import com.endiq.anim.AnimPlayer
 import com.endiq.anim.animations.Animations
 import com.endiq.turtlelauncher.R
@@ -31,6 +36,21 @@ class LauncherSettingsFragment() : AbstractSettingsFragment(R.layout.settings_fr
 
     private lateinit var binding: SettingsFragmentLauncherBinding
     private var parentFragment: FragmentWithAnim? = null
+    private lateinit var openVideoLauncher: ActivityResultLauncher<Array<String>>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        openVideoLauncher = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri: Uri? ->
+            val appContext = context ?: return@registerForActivityResult
+            if (uri == null) return@registerForActivityResult
+            val messageRes = if (VideoBackground.importFrom(appContext, uri)) {
+                R.string.video_background_saved
+            } else {
+                R.string.video_background_failed
+            }
+            Toast.makeText(appContext, messageRes, Toast.LENGTH_SHORT).show()
+        }
+    }
 
     constructor(parentFragment: FragmentWithAnim?) : this() {
         this.parentFragment = parentFragment
@@ -150,6 +170,18 @@ class LauncherSettingsFragment() : AbstractSettingsFragment(R.layout.settings_fr
                     CustomBackgroundFragment.TAG,
                     null
                 )
+        }
+
+        BaseSettingsWrapper(
+            context,
+            binding.videoBackgroundLayout
+        ) {
+            openVideoLauncher.launch(arrayOf("video/*"))
+        }
+        binding.videoBackgroundLayout.setOnLongClickListener {
+            VideoBackground.clear()
+            Toast.makeText(context, R.string.video_background_cleared, Toast.LENGTH_SHORT).show()
+            true
         }
 
         SwitchSettingsWrapper(

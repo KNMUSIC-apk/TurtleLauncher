@@ -579,11 +579,19 @@ public class LauncherActivity extends BaseActivity {
         com.endiq.turtlelauncher.feature.turtle.AssetPrefetcher.prefetch(this);
         com.endiq.turtlelauncher.feature.turtle.LauncherWarmStart.warmStart(this);
         com.endiq.turtlelauncher.feature.maintenance.AutoCleanup.runIfDue();
+        startVideoBackground();
 
         Task.runTask(() -> {
             UpdateUtils.checkDownloadedPackage(this, false, true);
             return null;
         }).execute();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Free the video decoder while the launcher is in the background or a game is running.
+        com.endiq.turtlelauncher.feature.background.VideoBackground.release();
     }
 
     @Override
@@ -688,7 +696,28 @@ public class LauncherActivity extends BaseActivity {
     }
 
     private void refreshBackground() {
+        if (com.endiq.turtlelauncher.feature.background.VideoBackground.hasVideo()) {
+            binding.backgroundView.setImageDrawable(null);
+            binding.videoBackgroundView.setVisibility(android.view.View.VISIBLE);
+            return;
+        }
+        showStillBackground();
+    }
+
+    private void showStillBackground() {
+        binding.videoBackgroundView.setVisibility(android.view.View.GONE);
         BackgroundManager.setBackgroundImage(this, BackgroundType.MAIN_MENU, binding.backgroundView, this::refreshTopBarColor);
+    }
+
+    /** Plays the chosen video behind the menu, or shows the still background if there is none. */
+    private void startVideoBackground() {
+        if (!com.endiq.turtlelauncher.feature.background.VideoBackground.hasVideo()) {
+            showStillBackground();
+            return;
+        }
+        refreshBackground();
+        com.endiq.turtlelauncher.feature.background.VideoBackground.start(
+                this, binding.videoBackgroundView, this::showStillBackground);
     }
 
     private void refreshTopBarColor(boolean loadFromBackground) {
