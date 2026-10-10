@@ -459,7 +459,7 @@ public final class ZHTools {
                 // TurtleLauncher is dark-only, so WebView content always follows the app's
                 // own theme (Cards / Primary Text) instead of the system's light/dark setting.
                 String[] color = new String[2];
-                color[0] = "#171717";
+                color[0] = "#120F2E";
                 color[1] = "#F2F5F0";
 
                 String css = "body { background-color: " + color[0] + "; color: " + color[1] + "; }" +

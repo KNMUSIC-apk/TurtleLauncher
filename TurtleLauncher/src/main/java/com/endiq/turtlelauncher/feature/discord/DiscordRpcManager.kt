@@ -113,7 +113,7 @@ object DiscordRpcManager {
         val properties = JsonObject().apply {
             addProperty("os", "Android")
             addProperty("browser", "Discord Client")
-            addProperty("device", "Turtle Launcher")
+            addProperty("device", "Cyplix Launcher")
         }
         val identify = JsonObject().apply {
             addProperty("token", token)

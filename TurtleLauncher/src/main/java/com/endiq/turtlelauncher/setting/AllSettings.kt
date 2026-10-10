@@ -32,12 +32,12 @@ class AllSettings {
         @JvmStatic val discordRpcToken = StringSettingUnit("discordRpcToken", "")
         @JvmStatic val discordRpcName = StringSettingUnit("discordRpcName", "Minecraft: Java Edition")
         @JvmStatic val discordRpcDetails = StringSettingUnit("discordRpcDetails", "Playing {version}")
-        @JvmStatic val discordRpcState = StringSettingUnit("discordRpcState", "Launched with Turtle Launcher")
+        @JvmStatic val discordRpcState = StringSettingUnit("discordRpcState", "Launched with Cyplix Launcher")
         @JvmStatic val discordRpcStatus = StringSettingUnit("discordRpcStatus", "online")
         @JvmStatic val discordRpcShowElapsed = BooleanSettingUnit("discordRpcShowElapsed", true)
         @JvmStatic val discordRpcApplicationId = StringSettingUnit("discordRpcApplicationId", "")
         @JvmStatic val discordRpcLargeImage = StringSettingUnit("discordRpcLargeImage", "")
-        @JvmStatic val discordRpcLargeText = StringSettingUnit("discordRpcLargeText", "Turtle Launcher")
+        @JvmStatic val discordRpcLargeText = StringSettingUnit("discordRpcLargeText", "Cyplix Launcher")
 
         // ── Video ──────────────────────────────────────────────────────────────
         @JvmStatic val renderer = StringSettingUnit("renderer", "4b4b8e4b-083d-429c-97e1-5e8239b6dc17")

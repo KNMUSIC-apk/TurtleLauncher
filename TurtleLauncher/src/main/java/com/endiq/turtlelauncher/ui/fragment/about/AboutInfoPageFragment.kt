@@ -85,7 +85,7 @@ class AboutInfoPageFragment() : Fragment(R.layout.fragment_about_info_page) {
         mAboutData.add(
             AboutItemBean(
                 resources.getDrawable(R.drawable.ic_turtle_full, requireContext().theme),
-                "Turtle Launcher",
+                "Cyplix Launcher",
                 getString(R.string.about_TurtleLauncher_desc),
                 AboutItemButtonBean(requireActivity(), "Github", UrlManager.URL_HOME)
             )

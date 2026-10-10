@@ -288,7 +288,7 @@
     <string name="install_extras_title">Tùy chọn cài đặt</string>
     <string name="install_extras_subtitle">Thêm một trong các mục này vào bản cài đặt, sau đó xác nhận bên dưới</string>
     <string name="install_extras_turtle_client">Turtle Client</string>
-    <string name="install_extras_turtle_client_desc">Mod máy khách do Turtle Launcher phát triển</string>
+    <string name="install_extras_turtle_client_desc">Mod máy khách do Cyplix Launcher phát triển</string>
     <string name="install_extras_fps_boost">Tăng FPS</string>
     <string name="install_extras_fps_boost_desc">Mod tối ưu hiệu năng giúp tốc độ khung hình mượt mà hơn</string>
     <string name="account_detail_uuid">UUID</string>
@@ -567,7 +567,7 @@
     <string name="main_section_selected_version">Phiên bản đã chọn</string>
     <string name="main_welcome_back">Chào mừng trở lại!</string>
     <string name="main_welcome_subtitle">Sẵn sàng chơi Minecraft Java Edition</string>
-    <string name="main_top_bar_title">Turtle Launcher</string>
+    <string name="main_top_bar_title">Cyplix Launcher</string>
     <string name="main_top_bar_subtitle">Mượt mà • Nhanh • Hiện đại</string>
     <string name="main_section_statistics">Thống kê hôm nay</string>
     <string name="main_stats_weekly_label">Thời gian chơi (7 ngày gần nhất)</string>
@@ -603,7 +603,7 @@
     <string name="settings_row_advanced_title">Cài đặt nâng cao</string>
     <string name="settings_row_advanced_desc">Tính năng dành cho nhà phát triển và tính năng thử nghiệm</string>
     <string name="settings_row_about_title">Giới thiệu</string>
-    <string name="settings_row_about_desc">Phiên bản Turtle Launcher và thông tin đóng góp</string>
+    <string name="settings_row_about_desc">Phiên bản Cyplix Launcher và thông tin đóng góp</string>
     <string name="share_logs_title">Chia sẻ nhật ký</string>
     <string name="share_logs_latest_log">Nhật ký mới nhất</string>
     <string name="share_logs_none_found">Chưa tìm thấy tệp nhật ký nào</string>
@@ -637,7 +637,7 @@
     <string name="ai_voice_hearing">Đang nghe bạn nói…</string>
     <string name="ai_voice_speaking">Turtle AI đang nói…</string>
     <string name="ai_voice_ended">Đã kết thúc cuộc trò chuyện bằng giọng nói</string>
-    <string name="ai_voice_no_mic">Tôi cần quyền sử dụng micrô để nói. Hãy bật quyền này trong Cài đặt → Ứng dụng → Turtle Launcher → Quyền.</string>
+    <string name="ai_voice_no_mic">Tôi cần quyền sử dụng micrô để nói. Hãy bật quyền này trong Cài đặt → Ứng dụng → Cyplix Launcher → Quyền.</string>
     <string name="assistant_share_audio">Đây là bản ghi âm tôi vừa chia sẻ — bạn có thể chuyển lời nói thành văn bản không?</string>
     <string name="ai_chat_clear_title">Xóa cuộc trò chuyện?</string>
     <string name="ai_chat_clear_message">Thao tác này sẽ xóa lịch sử Trợ lý đã lưu trên thiết bị và không thể hoàn tác.</string>
@@ -1090,7 +1090,7 @@
     <string name="about_sponsors_desc">Dưới đây là danh sách tất cả nhà tài trợ đã hỗ trợ phát triển. Xin chân thành cảm ơn!</string>
     <string name="about_sponsors_amount">Thời gian và tổng số tiền</string>
     <string name="about_button_support_development">Tài trợ phát triển</string>
-    <string name="about_MovTery_desc">Nhà phát triển chính của Turtle Launcher (Endiq)</string>
+    <string name="about_MovTery_desc">Nhà phát triển chính của Cyplix Launcher (Endiq)</string>
     <string name="about_TurtleLauncher_desc">Dựa trên dự án Turtle Launcher mã nguồn mở, hiện do Endiq duy trì và phát triển</string>
     <string name="about_mcmod_desc">Trình khởi chạy sử dụng bản dịch tiếng Trung của mod và modpack từ MC Wiki</string>
     <string name="about_VeraFirefly_desc">Hỗ trợ kỹ thuật về kết xuất cho trình khởi chạy</string>
@@ -1216,7 +1216,7 @@
     <string name="discord_rpc_details">Nội dung chi tiết</string>
     <string name="discord_rpc_details_hint">Đang chơi {version}</string>
     <string name="discord_rpc_state">Nội dung trạng thái</string>
-    <string name="discord_rpc_state_hint">Khởi chạy bằng Turtle Launcher</string>
+    <string name="discord_rpc_state_hint">Khởi chạy bằng Cyplix Launcher</string>
     <string name="discord_rpc_status">Trạng thái Discord</string>
     <string name="discord_rpc_elapsed">Hiển thị thời gian phiên đã trôi qua</string>
     <string name="discord_rpc_application_id">ID ứng dụng Discord</string>
@@ -1224,21 +1224,21 @@
     <string name="discord_rpc_large_image">Khóa tài nguyên ảnh lớn</string>
     <string name="discord_rpc_large_image_hint">Yêu cầu có ID ứng dụng và tài nguyên đã tải lên</string>
     <string name="discord_rpc_large_text">Văn bản khi di chuột lên ảnh lớn</string>
-    <string name="discord_rpc_large_text_hint">Turtle Launcher</string>
+    <string name="discord_rpc_large_text_hint">Cyplix Launcher</string>
     <string name="discord_rpc_template_help">Dùng {version} để chèn phiên bản Minecraft đã chọn.</string>
     <string name="discord_rpc_reset_customization">Đặt lại tùy chỉnh</string>
     <string name="discord_rpc_reset_done">Đã đặt lại tùy chỉnh Discord Presence</string>
     <string name="discord_rpc_on">Bật</string>
     <string name="discord_rpc_off">Tắt</string>
     <string name="music_delete_track">Gỡ bỏ</string>
-    <string name="whats_new_title">🐢 Có gì mới trong Turtle Launcher</string>
+    <string name="whats_new_title">🐢 Có gì mới trong Cyplix Launcher</string>
     <string name="whats_new_version">v3.1</string>
     <string name="whats_new_feature_1">🎭 Biểu cảm: tự động cài phụ thuộc</string>
     <string name="whats_new_feature_1_desc">Khi cài mod Emotecraft, ứng dụng sẽ tự động tải thư viện phụ thuộc Player Animation Library (đọc trực tiếp từ siêu dữ liệu của mod), nhờ đó trò chơi không còn gặp lỗi thiếu phụ thuộc khi khởi động.</string>
     <string name="whats_new_feature_2">📜 Cuối cùng nhật ký trò chơi cũng được lưu</string>
     <string name="whats_new_feature_2_desc">Đầu ra của trò chơi — bộ nạp mod, thông báo bảng điều khiển và dấu vết sự cố — sẽ được ghi vào nhật ký trình khởi chạy. Thẻ Nhật ký trò chơi gần nhất ở màn hình chính hiển thị phiên cuối ngay cả sau khi khởi động lại, và Trợ lý có thể đọc nhật ký khi bạn hỏi vì sao trò chơi gặp sự cố.</string>
     <string name="whats_new_feature_3">📤 Chia sẻ nhật ký trực tiếp với Trợ lý</string>
-    <string name="whats_new_feature_3_desc">Turtle Launcher hiện xuất hiện trong menu chia sẻ của Android. Chia sẻ bất kỳ nhật ký trò chơi nào (tệp hoặc văn bản) từ ứng dụng khác, Trợ lý sẽ phân tích ngay mà không cần sao chép và dán.</string>
+    <string name="whats_new_feature_3_desc">Cyplix Launcher hiện xuất hiện trong menu chia sẻ của Android. Chia sẻ bất kỳ nhật ký trò chơi nào (tệp hoặc văn bản) từ ứng dụng khác, Trợ lý sẽ phân tích ngay mà không cần sao chép và dán.</string>
     <string name="whats_new_warning">🧩 Ứng dụng plugin bộ kết xuất (ví dụ MobileGlues) sẽ xuất hiện trong danh sách bộ kết xuất ngay sau khi cài đặt, không cần khởi động lại; đồng thời, phạm vi phiên bản Minecraft được hỗ trợ sẽ được áp dụng giống như bộ kết xuất tích hợp sẵn.</string>
     <string name="preset_pvp_title">Thiết lập PvP</string>
     <string name="preset_survival_title">Thiết lập Sinh tồn</string>
@@ -1348,7 +1348,7 @@
     <string name="setting_category_shizuku">Shizuku</string>
     <string name="settings_row_shizuku_title">Shizuku</string>
     <string name="settings_row_shizuku_desc">Quyền truy cập đặc quyền tùy chọn để cấp quyền, tinh chỉnh duy trì hoạt động và lấy nhật ký sự cố đầy đủ</string>
-    <string name="settings_hub_subtitle">Mọi tùy chọn định hình giao diện, hiệu năng và cách chơi của Turtle Launcher</string>
+    <string name="settings_hub_subtitle">Mọi tùy chọn định hình giao diện, hiệu năng và cách chơi của Cyplix Launcher</string>
     <string name="settings_hub_search_hint">Tìm kiếm cài đặt</string>
     <string name="settings_hub_empty_result">Không có cài đặt nào khớp với "%1$s"</string>
     <string name="setting_category_shizuku_status">TRẠNG THÁI</string>

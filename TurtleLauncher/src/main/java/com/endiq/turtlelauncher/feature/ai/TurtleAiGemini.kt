@@ -196,7 +196,7 @@ object TurtleAiGemini {
             append("Question: ").append(question.trim())
             if (!localAnswer.isNullOrBlank()) {
                 append("\n\nThis launcher's own verified answer to that question (authoritative for ")
-                append("anything about Turtle Launcher; translate or rephrase it as needed, and do ")
+                append("anything about Cyplix Launcher; translate or rephrase it as needed, and do ")
                 append("not contradict it):\n")
                 append(localAnswer.trim())
             }

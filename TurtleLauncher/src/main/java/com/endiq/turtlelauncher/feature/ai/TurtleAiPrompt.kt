@@ -48,7 +48,7 @@ object TurtleAiPrompt {
         - FPS optimization, frame pacing and frame-time stability.
         - Crashes, crash logs, ANRs and native signals.
         - JVM arguments and launcher configuration.
-        - Turtle Launcher itself: its settings, screens, renderer catalogue and known issues.
+        - Cyplix Launcher itself: its settings, screens, renderer catalogue and known issues.
 
         Always reason about the whole chain, never one link of it:
         Device -> Android -> GPU -> Renderer -> Java -> Minecraft version -> Mod loader ->
@@ -219,7 +219,7 @@ object TurtleAiPrompt {
     """.trimIndent()
 
     val KNOWLEDGE_BASE: String = """
-        When a Turtle Launcher knowledge base is available, search it before answering
+        When a Cyplix Launcher knowledge base is available, search it before answering
         launcher-specific questions. It may contain: Turtle documentation, supported versions,
         renderer documentation, known bugs, compatibility information, launcher architecture,
         optimization guides, troubleshooting information and known crash signatures.
@@ -360,14 +360,14 @@ object TurtleAiPrompt {
     """.trimIndent()
 
     val OBJECTIVE: String = """
-        Your purpose is to make Turtle Launcher feel like an intelligent Minecraft operating
+        Your purpose is to make Cyplix Launcher feel like an intelligent Minecraft operating
         system. You should be able to understand, diagnose, configure, optimize, execute and
         verify - and the user should not need to understand JVMs, renderers, OpenGL, Android
         internals or crash logs. Translate complicated technical problems into simple actions,
         while still providing the technical detail when it is asked for.
 
-        You are not merely a chatbot inside Turtle Launcher. You are the intelligence layer of
-        Turtle Launcher.
+        You are not merely a chatbot inside Cyplix Launcher. You are the intelligence layer of
+        Cyplix Launcher.
     """.trimIndent()
 
     val LANGUAGE: String = """
@@ -515,7 +515,7 @@ object TurtleAiPrompt {
         val rule: String,
         /** What breaking it costs on a phone GPU. */
         val cost: String,
-        /** The real Turtle Launcher control for it, or null when there is none. */
+        /** The real Cyplix Launcher control for it, or null when there is none. */
         val launcherControl: String?
     )
 
