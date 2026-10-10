@@ -47,122 +47,6 @@
             app:layout_constraintEnd_toStartOf="@id/home_top_bar_actions"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <LinearLayout
-            android:id="@+id/home_top_bar_actions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <ImageButton
-                android:id="@+id/top_bar_account_button"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_help"
-                android:padding="9dp"
-                android:tint="@color/turtle_text_secondary"
-                android:contentDescription="@string/main_nav_account"/>
-
-            <ImageButton
-                android:id="@+id/top_bar_storage_button"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_folder"
-                android:padding="9dp"
-                android:tint="@color/turtle_text_secondary"
-                android:contentDescription="@string/main_nav_files"/>
-
-            <ImageButton
-                android:id="@+id/top_bar_download_button"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_download"
-                android:padding="9dp"
-                android:tint="@color/turtle_text_secondary"
-                android:contentDescription="@string/main_nav_download"/>
-
-            <FrameLayout
-                android:layout_width="40dp"
-                android:layout_height="40dp">
-
-                <ImageButton
-                    android:id="@+id/top_bar_tasks_button"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_tasks"
-                    android:padding="9dp"
-                    android:tint="@color/turtle_text_secondary"
-                    android:contentDescription="@string/main_nav_tasks"/>
-
-                <TextView
-                    android:id="@+id/top_bar_tasks_badge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top|end"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:minWidth="14dp"
-                    android:minHeight="14dp"
-                    android:background="@drawable/background_task_badge"
-                    android:gravity="center"
-                    android:includeFontPadding="false"
-                    android:textSize="9sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/turtle_text_on_accent"
-                    android:paddingHorizontal="3dp"
-                    android:visibility="gone"
-                    tools:text="2"/>
-
-            </FrameLayout>
-
-            <ImageButton
-                android:id="@+id/top_bar_music_button"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_music_note"
-                android:padding="9dp"
-                android:tint="@color/turtle_text_secondary"
-                android:contentDescription="@string/music_title"/>
-
-            <ImageButton
-                android:id="@+id/top_bar_cursor_button"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_cursor"
-                android:padding="9dp"
-                android:tint="@color/turtle_text_secondary"
-                android:contentDescription="@string/main_nav_cursor"/>
-
-            <ImageButton
-                android:id="@+id/top_bar_ai_button"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_ai_assistant"
-                android:padding="9dp"
-                android:tint="@color/turtle_text_secondary"
-                android:contentDescription="@string/main_nav_assistant"/>
-
-            <ImageButton
-                android:id="@+id/top_bar_settings_button"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_menu_settings"
-                android:padding="9dp"
-                android:tint="@color/turtle_text_secondary"
-                android:contentDescription="@string/main_nav_settings"/>
-
-        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -181,7 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/launcher_footer"
+            app:layout_constraintBottom_toTopOf="@id/bottom_panel"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
@@ -370,6 +254,7 @@
                         <!-- Play Time (Last 7 Days) -->
                         <LinearLayout
                             android:id="@+id/stats_card"
+                            android:visibility="gone"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -394,44 +279,11 @@
                         </LinearLayout>
 
                         <!-- Friends / LAN (Terracotta over EasyTier) -->
-                        <LinearLayout
-                            android:id="@+id/terracotta_button"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_marginEnd="@dimen/space_s"
-                            android:orientation="vertical"
-                            android:gravity="center_horizontal"
-                            android:padding="@dimen/space_m"
-                            android:background="@drawable/background_grid_card"
-                            android:foreground="?attr/selectableItemBackground"
-                            android:clickable="true"
-                            android:focusable="true">
-
-                            <ImageView
-                                android:id="@+id/terracotta_icon"
-                                android:layout_width="28dp"
-                                android:layout_height="28dp"
-                                android:layout_marginTop="@dimen/space_xs"
-                                android:src="@drawable/ic_globe"
-                                android:tint="@color/accent_primary"
-                                android:contentDescription="@string/main_terracotta"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/space_s"
-                                android:text="@string/main_terracotta"
-                                android:textSize="12sp"
-                                android:textStyle="bold"
-                                android:textColor="@color/turtle_text_secondary"
-                                android:gravity="center"/>
-
-                        </LinearLayout>
 
                         <!-- Community -->
                         <LinearLayout
                             android:id="@+id/community_card"
+                            android:visibility="gone"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -505,6 +357,7 @@
                         <!-- Last Game Log -->
                         <LinearLayout
                             android:id="@+id/last_log_card"
+                            android:visibility="gone"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -549,6 +402,167 @@
             </androidx.core.widget.NestedScrollView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Bottom panel: quick-action icons, then the LAN card -->
+        <LinearLayout
+            android:id="@+id/bottom_panel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/space_l"
+            android:paddingVertical="@dimen/space_s"
+            app:layout_constraintBottom_toTopOf="@id/launcher_footer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:id="@+id/home_top_bar_actions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageButton
+                    android:id="@+id/top_bar_account_button"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_help"
+                    android:padding="9dp"
+                    android:tint="@color/turtle_text_secondary"
+                    android:contentDescription="@string/main_nav_account"/>
+
+                <ImageButton
+                    android:id="@+id/top_bar_storage_button"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_folder"
+                    android:padding="9dp"
+                    android:tint="@color/turtle_text_secondary"
+                    android:contentDescription="@string/main_nav_files"/>
+
+                <ImageButton
+                    android:id="@+id/top_bar_download_button"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_download"
+                    android:padding="9dp"
+                    android:tint="@color/turtle_text_secondary"
+                    android:contentDescription="@string/main_nav_download"/>
+
+                <FrameLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp">
+
+                    <ImageButton
+                        android:id="@+id/top_bar_tasks_button"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_tasks"
+                        android:padding="9dp"
+                        android:tint="@color/turtle_text_secondary"
+                        android:contentDescription="@string/main_nav_tasks"/>
+
+                    <TextView
+                        android:id="@+id/top_bar_tasks_badge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|end"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="4dp"
+                        android:minWidth="14dp"
+                        android:minHeight="14dp"
+                        android:background="@drawable/background_task_badge"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:textSize="9sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/turtle_text_on_accent"
+                        android:paddingHorizontal="3dp"
+                        android:visibility="gone"
+                        tools:text="2"/>
+
+                </FrameLayout>
+
+                <ImageButton
+                    android:id="@+id/top_bar_music_button"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_music_note"
+                    android:padding="9dp"
+                    android:tint="@color/turtle_text_secondary"
+                    android:contentDescription="@string/music_title"/>
+
+                <ImageButton
+                    android:id="@+id/top_bar_cursor_button"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_cursor"
+                    android:padding="9dp"
+                    android:tint="@color/turtle_text_secondary"
+                    android:contentDescription="@string/main_nav_cursor"/>
+
+                <ImageButton
+                    android:id="@+id/top_bar_ai_button"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_ai_assistant"
+                    android:padding="9dp"
+                    android:tint="@color/turtle_text_secondary"
+                    android:contentDescription="@string/main_nav_assistant"/>
+
+                <ImageButton
+                    android:id="@+id/top_bar_settings_button"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_menu_settings"
+                    android:padding="9dp"
+                    android:tint="@color/turtle_text_secondary"
+                    android:contentDescription="@string/main_nav_settings"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/terracotta_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/space_s"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:padding="@dimen/space_m"
+                android:background="@drawable/background_grid_card"
+                android:foreground="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:id="@+id/terracotta_icon"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginTop="@dimen/space_xs"
+                    android:src="@drawable/ic_globe"
+                    android:tint="@color/accent_primary"
+                    android:contentDescription="@string/main_terracotta"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_s"
+                    android:text="@string/main_terracotta"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/turtle_text_secondary"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+        </LinearLayout>
 
         <!-- Footer -->
         <LinearLayout
