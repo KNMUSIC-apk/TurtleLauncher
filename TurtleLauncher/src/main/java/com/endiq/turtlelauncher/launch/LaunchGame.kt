@@ -392,9 +392,11 @@ class LaunchGame {
          */
         private fun applyLodOptions(gameDir: File) {
             val overrides: Map<String, String> = when (AllSettings.levelOfDetail.getValue()) {
-                1 -> linkedMapOf("entityDistanceScaling" to "0.75")
-                2 -> linkedMapOf("entityDistanceScaling" to "0.5", "particles" to "1", "entityShadows" to "false")
-                3 -> linkedMapOf("entityDistanceScaling" to "0.5", "particles" to "2", "entityShadows" to "false")
+                1 -> linkedMapOf("entityDistanceScaling" to "0.75", "biomeBlendRadius" to "2")
+                2 -> linkedMapOf("entityDistanceScaling" to "0.5", "particles" to "1", "entityShadows" to "false",
+                    "biomeBlendRadius" to "1", "graphicsMode" to "0")
+                3 -> linkedMapOf("entityDistanceScaling" to "0.5", "particles" to "2", "entityShadows" to "false",
+                    "biomeBlendRadius" to "0", "graphicsMode" to "0")
                 else -> return
             }
             applyOptionOverrides(gameDir, overrides)

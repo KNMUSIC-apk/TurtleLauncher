@@ -88,7 +88,6 @@ public class MinecraftGLSurface extends View implements GrabListener {
     private volatile boolean mSurfaceValid = false;
 
     /** Resolution scale the window was last sized with; NaN until the first refreshSize(). */
-    private float mAppliedScale = Float.NaN;
 
     /* Source token (SurfaceHolder or SurfaceTexture) of the Surface currently
      * registered with SDL, for matching destroy callbacks to their Surface. */
@@ -438,6 +437,11 @@ public class MinecraftGLSurface extends View implements GrabListener {
             Logging.e("MGLSurface", String.format(Locale.getDefault(), "Impossible resolution : %dx%d", newWidth, newHeight));
             return;
         }
+        // Cursor is stored in window pixels of the previous size. Keep its fraction of the window.
+        final int prevWidth = windowWidth;
+        final int prevHeight = windowHeight;
+        final float fracX = prevWidth > 0 ? CallbackBridge.mouseX / prevWidth : 0f;
+        final float fracY = prevHeight > 0 ? CallbackBridge.mouseY / prevHeight : 0f;
         windowWidth = newWidth;
         windowHeight = newHeight;
         if(mSurface == null){
@@ -458,15 +462,11 @@ public class MinecraftGLSurface extends View implements GrabListener {
 
         CallbackBridge.sendUpdateWindowSize(windowWidth, windowHeight);
 
-        // The cursor is stored in window pixels. When the resolution scale changes, the window
-        // is resized, so the stored position must be converted to the new pixel grid. Otherwise
-        // the game keeps the old coordinates and the next click lands somewhere else.
-        float scale = AllStaticSettings.scaleFactor;
-        if (!Float.isNaN(mAppliedScale) && mAppliedScale > 0f && scale != mAppliedScale) {
-            float ratio = scale / mAppliedScale;
-            CallbackBridge.sendCursorPos(CallbackBridge.mouseX * ratio, CallbackBridge.mouseY * ratio);
+        // When the window size changes, put the cursor back at the same fraction of the window,
+        // so it stays on the same spot on screen instead of jumping.
+        if (prevWidth > 0 && prevHeight > 0 && (newWidth != prevWidth || newHeight != prevHeight)) {
+            CallbackBridge.sendCursorPos(fracX * newWidth, fracY * newHeight);
         }
-        mAppliedScale = scale;
 
         notifySdlOfSurfaceSize();
         EventBus.getDefault().post(new RefreshHotbarEvent());
