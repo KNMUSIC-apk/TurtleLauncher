@@ -40,7 +40,7 @@ class AllSettings {
         @JvmStatic val discordRpcLargeText = StringSettingUnit("discordRpcLargeText", "Cyplix Launcher")
 
         // ── Video ──────────────────────────────────────────────────────────────
-        @JvmStatic val renderer = StringSettingUnit("renderer", "4b4b8e4b-083d-429c-97e1-5e8239b6dc17")
+        @JvmStatic val renderer = StringSettingUnit("renderer", "f7e985d8-6d4c-f63c-d9f1-06074dab823a")
         @JvmStatic val driver   = StringSettingUnit("driver", "Turnip")
         @JvmStatic val preferOpenGLBackend = BooleanSettingUnit("preferOpenGLBackend", true)
         @JvmStatic val lwjglCompatMode = StringSettingUnit("lwjglCompatMode", "auto")

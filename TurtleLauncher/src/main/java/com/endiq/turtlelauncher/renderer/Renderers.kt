@@ -2,13 +2,10 @@ package com.endiq.turtlelauncher.renderer
 
 import android.content.Context
 import com.endiq.turtlelauncher.feature.log.Logging
-import com.endiq.turtlelauncher.renderer.renderers.AngleRenderer
-import com.endiq.turtlelauncher.renderer.renderers.MobileGluesRenderer
 import com.endiq.turtlelauncher.renderer.renderers.FreedrenoRenderer
 import com.endiq.turtlelauncher.renderer.renderers.GL4ES115Renderer
 import com.endiq.turtlelauncher.renderer.renderers.HolyGL4ESRenderer
-import com.endiq.turtlelauncher.renderer.renderers.NWRenderer
-import com.endiq.turtlelauncher.renderer.renderers.VGPURenderer
+import com.endiq.turtlelauncher.renderer.renderers.PanfrostRenderer
 import com.endiq.turtlelauncher.renderer.renderers.VirGLRenderer
 import com.endiq.turtlelauncher.renderer.renderers.ZinkRenderer
 import com.endiq.turtlelauncher.utils.path.PathManager
@@ -31,15 +28,12 @@ object Renderers {
         }
         // Only register renderer implementations that still exist in this source tree.
         addRenderers(
-            MobileGluesRenderer(),
             HolyGL4ESRenderer(),
-            GL4ES115Renderer(),
-            NWRenderer(),
-            AngleRenderer(),
-            VirGLRenderer(),
             ZinkRenderer(),
+            VirGLRenderer(),
             FreedrenoRenderer(),
-            VGPURenderer()
+            PanfrostRenderer(),
+            GL4ES115Renderer()
         )
     }
 

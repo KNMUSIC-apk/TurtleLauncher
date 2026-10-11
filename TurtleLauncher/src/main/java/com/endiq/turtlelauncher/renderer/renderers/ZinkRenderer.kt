@@ -21,7 +21,7 @@ class ZinkRenderer : RendererInterface {
 
     override fun getUniqueIdentifier(): String = "18d93f17-ff53-a319-fa61-58709a77bf87"
 
-    override fun getRendererName(): String = "Zink"
+    override fun getRendererName(): String = "Vulkan Zink"
 
     override fun getRendererEnv(): Lazy<Map<String, String>> = lazy { emptyMap() }
 
