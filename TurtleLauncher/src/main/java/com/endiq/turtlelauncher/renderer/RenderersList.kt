@@ -1,7 +1,7 @@
-package com.endiq.turtlelauncher.renderer
+package com.movtery.zalithlauncher.renderer
 
 /**
- * @param rendererIdentifier unique renderer identifier
- * @param rendererNames list of renderer names
+ * @param rendererIdentifier 渲染器唯一标识符
+ * @param rendererNames 渲染器名称列表
  */
 class RenderersList(val rendererIdentifier: List<String>, val rendererNames: List<String>)
