@@ -170,6 +170,30 @@ object CrashAnalyzer {
                     repairActions = listOf(RepairAction(RepairActionType.RESET_RENDERER_OVERRIDE, "Reset renderer override"))
                 )
             ),
+            // 2a-LTW. The LTW renderer plugin (POJAV_RENDERER=opengles3_ltw, libltw.so) reported
+            // "Running on OpenGL ES" but never made its GL context current on the render thread.
+            // Every GL query then came back empty ("No context is current"), Minecraft read a null
+            // GL pointer, and the JVM died with SIGSEGV in sun.misc.Unsafe.getByte. Seen on an
+            // Adreno/Turnip device, Android 10, MC 1.21.11 Fabric. The LWJGL-specific rule above
+            // does not match this log because it never reaches GL.createCapabilities.
+            Rule(
+                title = "ltw_plugin_no_current_context",
+                matches = { has(it, "No context is current") && has(it, "SIGSEGV") && has(it, "opengles3_ltw", "libltw.so") },
+                diagnosis = fixed(
+                    "The LTW renderer plugin never made its GL context current",
+                    "The LTW renderer plugin (POJAV_RENDERER=opengles3_ltw, libltw.so) initialised OpenGL ES, " +
+                        "but the render thread had no current GL context. Every GL query returned nothing, " +
+                        "and the JVM crashed with SIGSEGV in sun.misc.Unsafe.getByte before Minecraft drew a frame.",
+                    listOf(
+                        "Switch this version's renderer to Holy GL4ES or MobileGlues (Settings → Video → Renderer).",
+                        "Reset the version's renderer override below to fall back to the launcher default.",
+                        "Send this log to the LTW plugin's author. The plugin declares opengles3_ltw, which is not in the " +
+                            "six POJAV_RENDERER strings the bundled libpojavexec.so is known to recognize, so the native side " +
+                            "may be taking a fallback path."
+                    ),
+                    repairActions = listOf(RepairAction(RepairActionType.RESET_RENDERER_OVERRIDE, "Reset renderer override"))
+                )
+            ),
             // 2b. Krypton Wrapper's native GL4ES backend (libng_gl4es.so) SIGSEGV - seen in an
             // uploaded log on a PowerVR Rogue GPU, back when Krypton Wrapper was still a
             // built-in renderer. It was removed as a built-in for exactly this crash (replaced
