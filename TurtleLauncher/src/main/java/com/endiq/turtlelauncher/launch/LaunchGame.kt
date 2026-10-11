@@ -388,24 +388,11 @@ class LaunchGame {
         private const val ABSENT_MARKER = "__absent__"
 
         /**
-         * Each optimization owns its own options.txt keys, so turning one on or off never changes
-         * what another writes. Applied when the game launches; keys that are off are restored.
+         * Options the launcher manages in options.txt. Keys that are not desired are put back from the
+         * backup, so turning an option off really undoes it.
          */
         private fun featureOptions(): Map<String, String> {
             val desired = linkedMapOf<String, String>()
-            if (AllSettings.optRenderDistance.getValue()) {
-                desired["renderDistance"] = "6"
-                desired["simulationDistance"] = "6"
-            }
-            if (AllSettings.optEntityDetail.getValue()) {
-                desired["entityDistanceScaling"] = "0.5"
-                desired["entityShadows"] = "false"
-            }
-            if (AllSettings.optEffects.getValue()) {
-                desired["particles"] = "1"
-                desired["graphicsMode"] = "0"
-                desired["biomeBlendRadius"] = "1"
-            }
             if (AllSettings.unlimitedFps.getValue()) {
                 desired["maxFps"] = "260"
                 desired["enableVsync"] = "false"
@@ -414,15 +401,9 @@ class LaunchGame {
         }
 
         private fun applyOptimizationOptions(gameDir: File) {
-            val desired = featureOptions()
-            val enabled = listOfNotNull(
-                "renderDistance".takeIf { AllSettings.optRenderDistance.getValue() },
-                "entityDetail".takeIf { AllSettings.optEntityDetail.getValue() },
-                "effects".takeIf { AllSettings.optEffects.getValue() },
-                "unlimitedFps".takeIf { AllSettings.unlimitedFps.getValue() }
-            )
-            Logging.i("LaunchGame", "Optimizations for this launch: ${if (enabled.isEmpty()) "none" else enabled.joinToString()}")
-            writeManagedOptions(gameDir, desired)
+            val enabled = if (AllSettings.unlimitedFps.getValue()) "unlimitedFps" else "none"
+            Logging.i("LaunchGame", "Optimizations for this launch: $enabled")
+            writeManagedOptions(gameDir, featureOptions())
         }
 
         /**

@@ -251,10 +251,6 @@ class AllSettings {
         /** Remove Minecraft's 300-FPS cap; adds -XX:+DisableExplicitGC */
         // Off by default. The key is versioned so a value saved by an older build (which was on by default) is ignored.
         @JvmStatic val unlimitedFps             = BooleanSettingUnit("unlimitedFpsV2", false)
-        /** Each optimization owns its own options.txt keys, so none of them overlaps another. */
-        @JvmStatic val optRenderDistance        = BooleanSettingUnit("optRenderDistanceV1", false)
-        @JvmStatic val optEntityDetail          = BooleanSettingUnit("optEntityDetailV1", false)
-        @JvmStatic val optEffects               = BooleanSettingUnit("optEffectsV1", false)
         /** Low-latency rendering: JVM string/compile optimizations */
         @JvmStatic val lowLatencyRendering      = BooleanSettingUnit("lowLatencyRendering", true)
         /** LWJGL frame-pacing hints for smoother mobile GPU frame delivery */

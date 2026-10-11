@@ -23,7 +23,6 @@ import com.endiq.turtlelauncher.renderer.Renderers
 import com.endiq.turtlelauncher.renderer.renderers.HolyGL4ESRenderer
 import com.endiq.turtlelauncher.renderer.renderers.MobileGluesRenderer
 import com.endiq.turtlelauncher.renderer.renderers.ZinkRenderer
-import com.endiq.turtlelauncher.feature.ai.AiOptimizer
 import com.endiq.turtlelauncher.setting.AllSettings
 import com.endiq.turtlelauncher.setting.AllStaticSettings
 import com.endiq.turtlelauncher.task.Task
@@ -144,21 +143,6 @@ class VideoSettingsFragment : AbstractSettingsFragment(R.layout.settings_fragmen
         }
         val currentRendererId = AllSettings.renderer.getValue()
         AllSettings.preferOpenGLBackend.put(currentRendererId != vulkanRendererId).save()
-        // Independent optimizations. Each switch owns its own game options, so none overlaps another.
-        SwitchSettingsWrapper(context, AllSettings.optRenderDistance, binding.optRenderLayout, binding.optRenderSwitch)
-        SwitchSettingsWrapper(context, AllSettings.optEntityDetail, binding.optEntityLayout, binding.optEntitySwitch)
-        SwitchSettingsWrapper(context, AllSettings.optEffects, binding.optEffectsLayout, binding.optEffectsSwitch)
-
-        // AI optimizer: explains what is sent, analyses, and shows a plan. Nothing changes until it is applied.
-        fun refreshOptimizationSwitches() {
-            binding.optRenderSwitch.isChecked = AllSettings.optRenderDistance.getValue()
-            binding.optEntitySwitch.isChecked = AllSettings.optEntityDetail.getValue()
-            binding.optEffectsSwitch.isChecked = AllSettings.optEffects.getValue()
-        }
-        binding.aiOptimizeLayout.setOnClickListener {
-            AiOptimizer.start(requireContext(), Runnable { refreshOptimizationSwitches() })
-        }
-
         SwitchSettingsWrapper(context, AllSettings.preferOpenGLBackend, binding.graphicsBackendLayout, binding.graphicsBackendSwitch)
             .setOnCheckedChangeListener { _, isChecked, listener ->
                 listener.onSave()
