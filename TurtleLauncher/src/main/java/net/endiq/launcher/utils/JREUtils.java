@@ -307,7 +307,7 @@ public final class JREUtils {
             }
         }
 
-        envMap.put("POJAV_RENDERER", currentRenderer.getNativeRendererId());
+        envMap.put("POJAV_RENDERER", currentRenderer.getRendererId());
 
         if (RendererPluginManager.getSelectedRendererPlugin() != null) return;
 
