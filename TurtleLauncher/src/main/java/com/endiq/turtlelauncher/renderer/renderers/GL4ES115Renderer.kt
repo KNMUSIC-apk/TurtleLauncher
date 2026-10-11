@@ -18,7 +18,7 @@ class GL4ES115Renderer : RendererInterface {
 
     override fun getUniqueIdentifier(): String = "f75f5174-e176-4c1f-a6ff-e9029dad1de0"
 
-    override fun getRendererName(): String = "GL4ES 1.1.5 (Experimental)"
+    override fun getRendererName(): String = "LTA"
 
     override fun getRendererEnv(): Lazy<Map<String, String>> = lazy { emptyMap() }
 

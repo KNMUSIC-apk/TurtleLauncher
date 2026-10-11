@@ -2,6 +2,7 @@ package com.endiq.turtlelauncher.renderer
 
 import com.endiq.turtlelauncher.renderer.renderers.AngleRenderer
 import com.endiq.turtlelauncher.renderer.renderers.FreedrenoRenderer
+import com.endiq.turtlelauncher.renderer.renderers.GL4ES115Renderer
 import com.endiq.turtlelauncher.renderer.renderers.HolyGL4ESRenderer
 import com.endiq.turtlelauncher.renderer.renderers.NWRenderer
 import com.endiq.turtlelauncher.renderer.renderers.VGPURenderer
@@ -20,6 +21,7 @@ object RendererCatalog {
 
     private val entries: Map<String, Entry> = mapOf(
         HolyGL4ESRenderer.ID to Entry(maxMinecraftVersion = "1.21.4", badge = Badge.STABLE),
+        GL4ES115Renderer.ID to Entry(maxMinecraftVersion = "26.1.2", badge = Badge.EXPERIMENTAL),
         NWRenderer.ID to Entry(badge = Badge.EXPERIMENTAL),
         VirGLRenderer.ID to Entry(badge = Badge.EXPERIMENTAL, supportsShaderPacks = true),
         ZinkRenderer.ID to Entry(badge = Badge.STABLE, supportsShaderPacks = true),
