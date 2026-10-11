@@ -18,7 +18,7 @@ import com.endiq.turtlelauncher.feature.accounts.AccountsManager;
 import com.endiq.turtlelauncher.feature.customprofilepath.ProfilePathManager;
 import com.endiq.turtlelauncher.feature.log.Logging;
 import com.endiq.turtlelauncher.plugins.PluginLoader;
-import com.endiq.turtlelauncher.renderer.Renderers;
+import com.movtery.zalithlauncher.renderer.Renderers;
 import com.endiq.turtlelauncher.setting.AllSettings;
 import com.endiq.turtlelauncher.task.TaskExecutors;
 import com.endiq.turtlelauncher.utils.StoragePermissionsUtils;

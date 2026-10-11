@@ -26,10 +26,10 @@ import com.endiq.turtlelauncher.feature.version.VersionInfo;
 import com.endiq.turtlelauncher.plugins.driver.DriverPluginManager;
 import com.endiq.turtlelauncher.plugins.renderer.RendererPluginManager;
 import com.endiq.turtlelauncher.plugins.renderer.RendererPlugin;
-import com.endiq.turtlelauncher.renderer.RendererInterface;
-import com.endiq.turtlelauncher.renderer.Renderers;
-import com.endiq.turtlelauncher.renderer.renderers.HolyGL4ESRenderer;
-import com.endiq.turtlelauncher.renderer.renderers.ZinkRenderer;
+import com.movtery.zalithlauncher.renderer.RendererInterface;
+import com.movtery.zalithlauncher.renderer.Renderers;
+import com.movtery.zalithlauncher.renderer.renderers.GL4ESRenderer;
+import com.movtery.zalithlauncher.renderer.renderers.VulkanZinkRenderer;
 import com.endiq.turtlelauncher.setting.AllSettings;
 import com.endiq.turtlelauncher.ui.activity.ErrorActivity;
 import com.endiq.turtlelauncher.utils.ZHTools;
@@ -266,7 +266,7 @@ public final class JREUtils {
         RendererInterface currentRenderer = Renderers.INSTANCE.getCurrentRenderer();
         String rendererId = currentRenderer.getRendererId();
 
-        boolean isGl4esRenderer = rendererId.equals(HolyGL4ESRenderer.ID);
+        boolean isGl4esRenderer = rendererId.equals(GL4ESRenderer.ID);
 
         if (isGl4esRenderer) {
             envMap.put("LIBGL_ES", "2");
@@ -307,11 +307,11 @@ public final class JREUtils {
             }
         }
 
-        envMap.put("POJAV_RENDERER", currentRenderer.getNativeRendererId());
+        envMap.put("POJAV_RENDERER", currentRenderer.getRendererId());
 
         if (RendererPluginManager.getSelectedRendererPlugin() != null) return;
 
-        boolean isZinkRenderer = rendererId.equals(ZinkRenderer.ID);
+        boolean isZinkRenderer = rendererId.equals(VulkanZinkRenderer.ID);
         boolean shaderCacheEnabled = com.endiq.turtlelauncher.setting.AllSettings.getRendererShaderCacheEnabled().getValue();
 
         if (isZinkRenderer) {

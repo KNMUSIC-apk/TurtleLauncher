@@ -1,33 +1,26 @@
-package com.endiq.turtlelauncher.renderer.renderers
+package com.movtery.zalithlauncher.renderer.renderers
 
-import com.endiq.turtlelauncher.renderer.RendererInterface
+import com.movtery.zalithlauncher.renderer.RendererInterface
 
-/**
- * Zink - a Vulkan-backed OpenGL implementation (Mesa's zink gallium driver, via
- * libglxshim.so/libEGL_mesa.so). Library names and the unique identifier are taken directly
- * from FCL-Team/FoldCraftLauncher's own RendererManager.kt (ID_ZINK), not guessed.
- *
- * Requires the device to actually support Vulkan - gate renderer availability on that at
- * the call site (Renderers.getCompatibleRenderers already does this by id).
- */
-class ZinkRenderer : RendererInterface {
+class VulkanZinkRenderer : RendererInterface {
     companion object {
-        const val ID = "ZINK"
+        const val ID = "vulkan_zink"
     }
 
-    override fun getRendererId(): String = ID
+    override fun getRendererId(): String = "vulkan_zink"
 
-    override fun getNativeRendererId(): String = "vulkan_zink"
+    override fun getUniqueIdentifier(): String = "0fa435e2-46df-45c9-906c-b29606aaef00"
 
-    override fun getUniqueIdentifier(): String = "18d93f17-ff53-a319-fa61-58709a77bf87"
+    override fun getRendererName(): String = "Vulkan Zink"
 
-    override fun getRendererName(): String = "Zink"
-
-    override fun getRendererEnv(): Lazy<Map<String, String>> = lazy { emptyMap() }
+    override fun getRendererEnv(): Lazy<Map<String, String>> = lazy {
+        mapOf(
+            "MESA_GL_VERSION_OVERRIDE" to "4.6",
+            "MESA_GLSL_VERSION_OVERRIDE" to "460"
+        )
+    }
 
     override fun getDlopenLibrary(): Lazy<List<String>> = lazy { emptyList() }
 
-    override fun getRendererLibrary(): String = "libglxshim.so"
-
-    override fun getRendererEGL(): String = "libEGL_mesa.so"
+    override fun getRendererLibrary(): String = "libOSMesa_8.so"
 }

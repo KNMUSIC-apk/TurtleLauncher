@@ -1,25 +1,21 @@
-package com.endiq.turtlelauncher.renderer.renderers
+package com.movtery.zalithlauncher.renderer.renderers
 
-import com.endiq.turtlelauncher.renderer.RendererInterface
+import com.movtery.zalithlauncher.renderer.RendererInterface
 
-class HolyGL4ESRenderer : RendererInterface {
+class GL4ESRenderer : RendererInterface {
     companion object {
-        const val ID = "GL4ES"
+        const val ID = "opengles2"
     }
 
-    override fun getRendererId(): String = ID
+    override fun getRendererId(): String = "opengles2"
 
-    override fun getNativeRendererId(): String = "opengles"
+    override fun getUniqueIdentifier(): String = "8b52d82d-8f6d-4d3a-a767-dc93f8b72fc7"
 
-    override fun getUniqueIdentifier(): String = "f7e985d8-6d4c-f63c-d9f1-06074dab823a"
-
-    override fun getRendererName(): String = "Holy GL4ES (Fast, till 1.21.4)"
+    override fun getRendererName(): String = "GL4ES"
 
     override fun getRendererEnv(): Lazy<Map<String, String>> = lazy { emptyMap() }
 
     override fun getDlopenLibrary(): Lazy<List<String>> = lazy { emptyList() }
 
     override fun getRendererLibrary(): String = "libgl4es_114.so"
-
-    override fun getRendererEGL(): String = "libEGL.so"
 }

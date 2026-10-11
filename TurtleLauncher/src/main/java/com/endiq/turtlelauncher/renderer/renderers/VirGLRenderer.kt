@@ -1,25 +1,23 @@
-package com.endiq.turtlelauncher.renderer.renderers
+package com.movtery.zalithlauncher.renderer.renderers
 
-import com.endiq.turtlelauncher.renderer.RendererInterface
+import com.movtery.zalithlauncher.renderer.RendererInterface
+import com.endiq.turtlelauncher.utils.path.PathManager
+import java.io.File
 
 class VirGLRenderer : RendererInterface {
-    companion object {
-        const val ID = "VIRGL"
-    }
+    override fun getRendererId(): String = "gallium_virgl"
 
-    override fun getRendererId(): String = ID
-
-    override fun getNativeRendererId(): String = "gallium_virgl"
-
-    override fun getUniqueIdentifier(): String = "417a7a93-d9b4-98b9-ec6e-1ea400259c1f"
+    override fun getUniqueIdentifier(): String = "a3ccc1fe-de3f-4a81-8c45-2485181b63b3"
 
     override fun getRendererName(): String = "VirGLRenderer"
 
-    override fun getRendererEnv(): Lazy<Map<String, String>> = lazy { emptyMap() }
+    override fun getRendererEnv(): Lazy<Map<String, String>> = lazy {
+        mapOf(
+            "VTEST_SOCKET_NAME" to File(PathManager.DIR_CACHE, ".virgl_test").absolutePath
+        )
+    }
 
     override fun getDlopenLibrary(): Lazy<List<String>> = lazy { emptyList() }
 
-    override fun getRendererLibrary(): String = "libOSMesa_81.so"
-
-    override fun getRendererEGL(): String = "libEGL.so"
+    override fun getRendererLibrary(): String = "libOSMesa_2121.so"
 }

@@ -4,8 +4,8 @@ import android.content.Context
 import android.opengl.EGL14
 import android.os.Build
 import com.endiq.turtlelauncher.feature.log.Logging
-import com.endiq.turtlelauncher.renderer.renderers.FreedrenoRenderer
-import com.endiq.turtlelauncher.renderer.renderers.ZinkRenderer
+import com.movtery.zalithlauncher.renderer.renderers.FreedrenoRenderer
+import com.movtery.zalithlauncher.renderer.renderers.VulkanZinkRenderer
 import com.endiq.turtlelauncher.setting.AllSettings
 import com.endiq.turtlelauncher.utils.platform.BatterySaverManager
 import com.endiq.turtlelauncher.utils.platform.ThermalManager

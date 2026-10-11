@@ -8,8 +8,8 @@ import com.endiq.turtlelauncher.plugins.driver.DriverPluginManager
 import com.endiq.turtlelauncher.plugins.feature.FeaturePluginManager
 import com.endiq.turtlelauncher.plugins.renderer.RendererPlugin
 import com.endiq.turtlelauncher.plugins.renderer.RendererPluginManager
-import com.endiq.turtlelauncher.renderer.RendererInterface
-import com.endiq.turtlelauncher.renderer.Renderers
+import com.movtery.zalithlauncher.renderer.RendererInterface
+import com.movtery.zalithlauncher.renderer.Renderers
 import com.endiq.turtlelauncher.utils.path.PathManager
 import org.apache.commons.io.FileUtils
 
