@@ -23,7 +23,17 @@ class ZinkRenderer : RendererInterface {
 
     override fun getRendererName(): String = "Vulkan Zink"
 
-    override fun getRendererEnv(): Lazy<Map<String, String>> = lazy { emptyMap() }
+    /**
+     * Advertise OpenGL 4.6 / GLSL 4.60 to Mesa's zink driver. Newer Minecraft builds (26.x)
+     * refuse to start when the GL version is only 2.1/3.x. Values taken from ZalithLauncher's
+     * VulkanZinkRenderer (GPL-3.0, https://github.com/ZalithLauncher/ZalithLauncher).
+     */
+    override fun getRendererEnv(): Lazy<Map<String, String>> = lazy {
+        mapOf(
+            "MESA_GL_VERSION_OVERRIDE" to "4.6",
+            "MESA_GLSL_VERSION_OVERRIDE" to "460"
+        )
+    }
 
     override fun getDlopenLibrary(): Lazy<List<String>> = lazy { emptyList() }
 
