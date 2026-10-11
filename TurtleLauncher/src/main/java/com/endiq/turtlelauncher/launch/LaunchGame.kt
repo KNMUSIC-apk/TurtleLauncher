@@ -14,7 +14,7 @@ import com.endiq.turtlelauncher.feature.accounts.AccountsManager
 import com.endiq.turtlelauncher.feature.log.Logging
 import com.endiq.turtlelauncher.feature.mod.NanoVGNativesFix
 import com.endiq.turtlelauncher.feature.version.Version
-import com.endiq.turtlelauncher.renderer.Renderers
+import com.movtery.zalithlauncher.renderer.Renderers
 import com.endiq.turtlelauncher.setting.AllSettings
 import com.endiq.turtlelauncher.setting.AllStaticSettings
 import com.endiq.turtlelauncher.support.touch_controller.ControllerProxy
@@ -61,23 +61,14 @@ class LaunchGame {
 
             runCatching {
                 val rendererUniqueId = version.getRenderer()
-                val rendererInstance = runCatching {
-                    com.endiq.turtlelauncher.renderer.Renderers.getCompatibleRenderers(context).second
-                        .firstOrNull { it.getUniqueIdentifier() == rendererUniqueId }
-                }.getOrNull()
-                val catalogEntry = com.endiq.turtlelauncher.renderer.RendererCatalog.get(
-                    rendererInstance?.getRendererId() ?: rendererUniqueId
-                )
                 // Renderer plugin apps ship their own supported range in their manifest
                 // meta-data (minMCVer/maxMCVer - e.g. the MobileGlues plugin declares
                 // 1.17+); honor it exactly like a catalog range so an installed plugin is
                 // treated like any first-class renderer.
                 val plugin = com.endiq.turtlelauncher.plugins.renderer.RendererPluginManager.getRendererList()
                     .find { it.uniqueIdentifier == rendererUniqueId }
-                val maxVersion = catalogEntry?.maxMinecraftVersion
-                    ?: plugin?.maxMinecraftVersion?.takeIf { it.isNotBlank() }
-                val minVersion = catalogEntry?.minMinecraftVersion
-                    ?: plugin?.minMinecraftVersion?.takeIf { it.isNotBlank() }
+                val maxVersion = plugin?.maxMinecraftVersion?.takeIf { it.isNotBlank() }
+                val minVersion = plugin?.minMinecraftVersion?.takeIf { it.isNotBlank() }
                 val mcVersion = version.getVersionName()
                 val exceedsMax = maxVersion != null &&
                         org.jackhuang.hmcl.util.versioning.VersionNumber.compare(mcVersion, maxVersion) > 0

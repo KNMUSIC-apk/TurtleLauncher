@@ -3,6 +3,10 @@ package com.movtery.zalithlauncher.renderer.renderers
 import com.movtery.zalithlauncher.renderer.RendererInterface
 
 class VulkanZinkRenderer : RendererInterface {
+    companion object {
+        const val ID = "vulkan_zink"
+    }
+
     override fun getRendererId(): String = "vulkan_zink"
 
     override fun getUniqueIdentifier(): String = "0fa435e2-46df-45c9-906c-b29606aaef00"

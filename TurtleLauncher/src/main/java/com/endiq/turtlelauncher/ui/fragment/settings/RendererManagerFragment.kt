@@ -15,9 +15,8 @@ import com.endiq.turtlelauncher.feature.download.RendererCardAdapter
 import com.endiq.turtlelauncher.feature.pluginupdate.PluginAssetInfo
 import com.endiq.turtlelauncher.feature.pluginupdate.PluginKind
 import com.endiq.turtlelauncher.feature.pluginupdate.PluginUpdateManager
-import com.endiq.turtlelauncher.renderer.RendererCatalog
-import com.endiq.turtlelauncher.renderer.Renderers
-import com.endiq.turtlelauncher.renderer.renderers.HolyGL4ESRenderer
+import com.movtery.zalithlauncher.renderer.Renderers
+import com.movtery.zalithlauncher.renderer.renderers.GL4ESRenderer
 import com.endiq.turtlelauncher.setting.AllSettings
 import com.endiq.turtlelauncher.ui.fragment.FragmentWithAnim
 import com.endiq.turtlelauncher.utils.ZHTools
@@ -50,7 +49,7 @@ class RendererManagerFragment : FragmentWithAnim(R.layout.fragment_renderer_mana
         fetchAlwaysOfferedRenderers()
 
         binding.rendererManagerReset.setOnClickListener {
-            val defaultUuid = HolyGL4ESRenderer().getUniqueIdentifier()
+            val defaultUuid = GL4ESRenderer().getUniqueIdentifier()
             AllSettings.renderer.put(defaultUuid).save()
             Renderers.setCurrentRenderer(requireContext(), defaultUuid)
             render()
@@ -86,7 +85,6 @@ class RendererManagerFragment : FragmentWithAnim(R.layout.fragment_renderer_mana
     private fun toDownloadCard(asset: PluginAssetInfo, displayName: String) = RendererCardAdapter.CardEntry(
         uniqueIdentifier = "download:${asset.assetName}",
         name = displayName,
-        badge = RendererCatalog.Badge.EXPERIMENTAL,
         compatNote = getString(R.string.renderer_tap_to_download),
         isSelected = false,
         downloadAsset = asset
@@ -112,14 +110,12 @@ class RendererManagerFragment : FragmentWithAnim(R.layout.fragment_renderer_mana
         val hasVulkan = Tools.checkVulkanSupport(context.packageManager)
 
         val installedCards = compatibleRenderers.map { renderer ->
-            val catalogEntry = RendererCatalog.get(renderer.getRendererId())
             val plugin = com.endiq.turtlelauncher.plugins.renderer.RendererPluginManager.getRendererList()
                 .find { it.uniqueIdentifier == renderer.getUniqueIdentifier() }
-            val compatNote = buildCompatNote(renderer, catalogEntry, plugin, hasVulkan)
+            val compatNote = buildCompatNote(renderer, plugin, hasVulkan)
             RendererCardAdapter.CardEntry(
                 uniqueIdentifier = renderer.getUniqueIdentifier(),
                 name = renderer.getRendererName(),
-                badge = catalogEntry?.badge ?: RendererCatalog.Badge.EXPERIMENTAL,
                 compatNote = compatNote,
                 isSelected = renderer.getUniqueIdentifier() == currentUuid
             )
@@ -139,8 +135,7 @@ class RendererManagerFragment : FragmentWithAnim(R.layout.fragment_renderer_mana
     /** Missing-library warning takes priority over version-range notes - a renderer that
      *  will crash on load is more urgent to know about than its recommended version range. */
     private fun buildCompatNote(
-        renderer: com.endiq.turtlelauncher.renderer.RendererInterface,
-        catalogEntry: RendererCatalog.Entry?,
+        renderer: com.movtery.zalithlauncher.renderer.RendererInterface,
         plugin: com.endiq.turtlelauncher.plugins.renderer.RendererPlugin?,
         hasVulkan: Boolean
     ): String? {
@@ -152,12 +147,12 @@ class RendererManagerFragment : FragmentWithAnim(R.layout.fragment_renderer_mana
         else !File(com.endiq.turtlelauncher.utils.path.PathManager.DIR_NATIVE_LIB, library).exists()
         if (libMissing) return getString(R.string.renderer_compat_missing_library)
 
-        if (renderer.getRendererId() == com.endiq.turtlelauncher.renderer.renderers.ZinkRenderer.ID && !hasVulkan) {
+        if (renderer.getRendererId() == com.movtery.zalithlauncher.renderer.renderers.VulkanZinkRenderer.ID && !hasVulkan) {
             return getString(R.string.renderer_compat_requires_vulkan)
         }
 
-        val maxVersion = catalogEntry?.maxMinecraftVersion ?: plugin?.maxMinecraftVersion
-        val minVersion = catalogEntry?.minMinecraftVersion ?: plugin?.minMinecraftVersion
+        val maxVersion = plugin?.maxMinecraftVersion
+        val minVersion = plugin?.minMinecraftVersion
         maxVersion?.let { return getString(R.string.renderer_compat_max_version, it) }
         minVersion?.let { return getString(R.string.renderer_compat_min_version, it) }
         return null

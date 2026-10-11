@@ -5,7 +5,7 @@ import android.content.pm.ApplicationInfo
 import com.endiq.turtlelauncher.R
 import com.endiq.turtlelauncher.feature.log.Logging
 import com.endiq.turtlelauncher.feature.update.UpdateUtils
-import com.endiq.turtlelauncher.renderer.Renderers
+import com.movtery.zalithlauncher.renderer.Renderers
 import com.endiq.turtlelauncher.utils.path.PathManager
 import com.endiq.turtlelauncher.utils.stringutils.StringUtilsKt
 import net.endiq.launcher.Architecture

@@ -7,7 +7,7 @@ import com.endiq.turtlelauncher.feature.accounts.AccountUtils
 import com.endiq.turtlelauncher.feature.accounts.AccountsManager
 import com.endiq.turtlelauncher.feature.log.Logging
 import com.endiq.turtlelauncher.feature.version.VersionsManager
-import com.endiq.turtlelauncher.renderer.Renderers
+import com.movtery.zalithlauncher.renderer.Renderers
 import com.endiq.turtlelauncher.setting.AllSettings
 import com.endiq.turtlelauncher.utils.path.PathManager
 import net.endiq.launcher.Tools
