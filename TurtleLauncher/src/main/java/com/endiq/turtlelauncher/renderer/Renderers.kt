@@ -5,6 +5,7 @@ import com.endiq.turtlelauncher.feature.log.Logging
 import com.endiq.turtlelauncher.renderer.renderers.AngleRenderer
 import com.endiq.turtlelauncher.renderer.renderers.MobileGluesRenderer
 import com.endiq.turtlelauncher.renderer.renderers.FreedrenoRenderer
+import com.endiq.turtlelauncher.renderer.renderers.GL4ES115Renderer
 import com.endiq.turtlelauncher.renderer.renderers.HolyGL4ESRenderer
 import com.endiq.turtlelauncher.renderer.renderers.NWRenderer
 import com.endiq.turtlelauncher.renderer.renderers.VGPURenderer
@@ -32,6 +33,7 @@ object Renderers {
         addRenderers(
             MobileGluesRenderer(),
             HolyGL4ESRenderer(),
+            GL4ES115Renderer(),
             NWRenderer(),
             AngleRenderer(),
             VirGLRenderer(),
