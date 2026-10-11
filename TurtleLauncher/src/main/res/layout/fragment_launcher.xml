@@ -163,11 +163,11 @@
         <!-- Settings gear, far right of the top bar -->
         <ImageButton
             android:id="@+id/top_bar_settings_button"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/background_item"
             android:src="@drawable/ic_menu_settings"
-            android:padding="9dp"
+            android:padding="10dp"
             android:tint="@color/turtle_text_secondary"
             android:contentDescription="@string/main_nav_settings"
             app:layout_constraintTop_toTopOf="parent"
@@ -588,44 +588,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/home_top_bar">
 
-        <!-- LAN card: sits above the selected-version block in the right column -->
-        <LinearLayout
-            android:id="@+id/terracotta_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/space_m"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:padding="@dimen/space_m"
-            android:background="@drawable/background_grid_card"
-            android:foreground="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <ImageView
-                android:id="@+id/terracotta_icon"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_marginTop="@dimen/space_xs"
-                android:src="@drawable/ic_globe"
-                android:tint="@color/accent_primary"
-                android:contentDescription="@string/main_terracotta"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_s"
-                android:text="@string/main_terracotta"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:textColor="@color/turtle_text_secondary"
-                android:gravity="center"/>
-
-        </LinearLayout>
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/play_buttons_layout"
             android:layout_width="match_parent"
@@ -633,6 +595,44 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
+
+            <!-- LAN card: sits above the selected-version block in the right column -->
+            <LinearLayout
+                android:id="@+id/terracotta_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_m"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:padding="@dimen/space_m"
+                android:background="@drawable/background_grid_card"
+                android:foreground="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <ImageView
+                    android:id="@+id/terracotta_icon"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginTop="@dimen/space_xs"
+                    android:src="@drawable/ic_globe"
+                    android:tint="@color/accent_primary"
+                    android:contentDescription="@string/main_terracotta"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_s"
+                    android:text="@string/main_terracotta"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/turtle_text_secondary"
+                    android:gravity="center"/>
+
+            </LinearLayout>
 
             <!-- SELECTED VERSION header -->
             <TextView
@@ -648,7 +648,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/version"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@id/terracotta_button"/>
 
             <!-- Version selector -->
             <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
