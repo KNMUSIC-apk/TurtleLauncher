@@ -121,4 +121,16 @@ object Renderers {
      * 当前是否设置了渲染器
      */
     fun isCurrentRendererValid(): Boolean = isInitialized && this.currentRenderer != null
+
+    /**
+     * Drops renderers by unique identifier, used when plugin renderers are reloaded.
+     * If the current renderer is removed, it is cleared and the next launch re-selects one.
+     */
+    fun removeRenderers(uniqueIdentifiers: Collection<String>) {
+        renderers.removeAll { it.getUniqueIdentifier() in uniqueIdentifiers }
+        val current = currentRenderer
+        if (current != null && current.getUniqueIdentifier() in uniqueIdentifiers) currentRenderer = null
+        compatibleRenderers = null
+    }
+
 }

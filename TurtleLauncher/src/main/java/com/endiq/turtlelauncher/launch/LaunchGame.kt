@@ -77,14 +77,17 @@ class LaunchGame {
                 if (exceedsMax || belowMin) {
                     val boundary = if (exceedsMax) maxVersion else minVersion
                     val warningRes = if (exceedsMax) R.string.renderer_compat_launch_warning_max else R.string.renderer_compat_launch_warning_min
-                    val displayName = rendererInstance?.getRendererName() ?: rendererUniqueId
+                    val displayName = com.movtery.zalithlauncher.renderer.Renderers
+                        .getCompatibleRenderers(context).second
+                        .firstOrNull { it.getUniqueIdentifier() == rendererUniqueId }
+                        ?.getRendererName() ?: rendererUniqueId
                     Logging.w("LaunchGame", "Renderer $displayName is outside its documented range " +
                             "(max=$maxVersion, min=$minVersion) for MC $mcVersion - warning shown, launch not blocked")
                     Toast.makeText(context, context.getString(warningRes, displayName, boundary, mcVersion), Toast.LENGTH_LONG).show()
                 }
             }.onFailure { e -> Logging.e("LaunchGame", "Renderer/MC-version compatibility check failed", e) }
 
-            // Renderer compatibility is still checked by the catalog/plugin check above.
+            // Renderer compatibility is still checked by the plugin range check above.
 
 
             val networkAvailable = NetworkUtils.isNetworkAvailable(context)
