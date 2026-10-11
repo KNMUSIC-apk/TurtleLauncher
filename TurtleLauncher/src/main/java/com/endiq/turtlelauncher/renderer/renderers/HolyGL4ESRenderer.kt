@@ -3,6 +3,10 @@ package com.movtery.zalithlauncher.renderer.renderers
 import com.movtery.zalithlauncher.renderer.RendererInterface
 
 class GL4ESRenderer : RendererInterface {
+    companion object {
+        const val ID = "opengles2"
+    }
+
     override fun getRendererId(): String = "opengles2"
 
     override fun getUniqueIdentifier(): String = "8b52d82d-8f6d-4d3a-a767-dc93f8b72fc7"

@@ -59,7 +59,7 @@ import com.endiq.turtlelauncher.feature.version.VersionInfo;
 import com.endiq.turtlelauncher.launch.LaunchGame;
 import com.endiq.turtlelauncher.listener.SimpleTextWatcher;
 import com.endiq.turtlelauncher.plugins.driver.DriverPluginManager;
-import com.endiq.turtlelauncher.renderer.Renderers;
+import com.movtery.zalithlauncher.renderer.Renderers;
 import com.endiq.turtlelauncher.setting.AllSettings;
 import com.endiq.turtlelauncher.setting.AllStaticSettings;
 import com.endiq.turtlelauncher.task.Task;

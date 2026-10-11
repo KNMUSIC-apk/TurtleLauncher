@@ -8,9 +8,8 @@ import com.endiq.turtlelauncher.feature.log.CrashAnalyzer
 import com.endiq.turtlelauncher.feature.log.LatestLogResolver
 import com.endiq.turtlelauncher.feature.log.Logging
 import com.endiq.turtlelauncher.feature.version.VersionsManager
-import com.endiq.turtlelauncher.renderer.RendererCatalog
-import com.endiq.turtlelauncher.renderer.Renderers
-import com.endiq.turtlelauncher.renderer.renderers.HolyGL4ESRenderer
+import com.movtery.zalithlauncher.renderer.Renderers
+import com.movtery.zalithlauncher.renderer.renderers.GL4ESRenderer
 import com.endiq.turtlelauncher.setting.AllSettings
 import com.endiq.turtlelauncher.utils.ZHTools
 import com.endiq.turtlelauncher.utils.path.PathManager
@@ -858,8 +857,7 @@ object TurtleAssistant {
         val match = compatible.firstOrNull { it.getUniqueIdentifier() == wanted }
         when {
             match != null -> {
-                val badge = RendererCatalog.get(match.getRendererId())?.badge
-                "${match.getRendererName()}" + (badge?.let { " (${it.name.lowercase(Locale.ROOT)})" } ?: "")
+                "${match.getRendererName()}"
             }
             // Exactly the situation Renderers.setCurrentRenderer(retryToFirstOnFailure=true)
             // resolves at launch time - say so instead of printing a UUID that means nothing.
@@ -1039,8 +1037,8 @@ object TurtleAssistant {
             label = "Shaders not working",
             keywords = listOf("shader", "shaders", "iris", "optifine", "shader pack", "shadow"),
             answer = {
-                "Shader packs only render on some renderers. In this launcher, RendererCatalog marks " +
-                    "MobileGlues, VirGL and Zink as shader-capable (that mapping comes from " +
+                "Shader packs only render on some renderers. In this launcher, VirGL and Zink are " +
+                    "the shader-capable ones (that mapping comes from " +
                     "FCL-Team/FoldCraftLauncher's own README).\n\n" +
                     "So: switch to MobileGlues or Zink in Settings → Video → Renderer, install Iris " +
                     "(or OptiFine) for your exact game version from the Download screen, then put the " +
@@ -1173,7 +1171,7 @@ object TurtleAssistant {
             ),
             answer = { context ->
                 val rendererId = currentRendererId(context)
-                val isGl4es = rendererId == HolyGL4ESRenderer.ID
+                val isGl4es = rendererId == GL4ESRenderer.ID
                 val shaderCache = runCatching { AllSettings.rendererShaderCacheEnabled.getValue() }
                     .getOrDefault(false)
                 val forceVsync = runCatching { AllSettings.forceVsync.getValue() }.getOrDefault(false)

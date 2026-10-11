@@ -1,14 +1,14 @@
 package com.movtery.zalithlauncher.renderer
 
 import android.content.Context
-import com.movtery.zalithlauncher.feature.log.Logging
+import com.endiq.turtlelauncher.feature.log.Logging
 import com.movtery.zalithlauncher.renderer.renderers.FreedrenoRenderer
 import com.movtery.zalithlauncher.renderer.renderers.GL4ESRenderer
 import com.movtery.zalithlauncher.renderer.renderers.PanfrostRenderer
 import com.movtery.zalithlauncher.renderer.renderers.VirGLRenderer
 import com.movtery.zalithlauncher.renderer.renderers.VulkanZinkRenderer
-import net.kdt.pojavlaunch.Architecture
-import net.kdt.pojavlaunch.Tools
+import net.endiq.launcher.Architecture
+import net.endiq.launcher.Tools
 
 /**
  * 启动器所有渲染器总管理者，启动器内置的渲染器与渲染器插件加载的渲染器，都会加载到这里
@@ -121,4 +121,16 @@ object Renderers {
      * 当前是否设置了渲染器
      */
     fun isCurrentRendererValid(): Boolean = isInitialized && this.currentRenderer != null
+
+    /**
+     * Drops renderers by unique identifier, used when plugin renderers are reloaded.
+     * If the current renderer is removed, it is cleared and the next launch re-selects one.
+     */
+    fun removeRenderers(uniqueIdentifiers: Collection<String>) {
+        renderers.removeAll { it.getUniqueIdentifier() in uniqueIdentifiers }
+        val current = currentRenderer
+        if (current != null && current.getUniqueIdentifier() in uniqueIdentifiers) currentRenderer = null
+        compatibleRenderers = null
+    }
+
 }

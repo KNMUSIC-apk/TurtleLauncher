@@ -11,7 +11,7 @@ import com.endiq.turtlelauncher.databinding.ItemLocalRendererViewBinding
 import com.endiq.turtlelauncher.plugins.PluginLoader
 import com.endiq.turtlelauncher.plugins.renderer.LocalRendererPlugin
 import com.endiq.turtlelauncher.plugins.renderer.RendererPluginManager
-import com.endiq.turtlelauncher.renderer.Renderers
+import com.movtery.zalithlauncher.renderer.Renderers
 import org.apache.commons.io.FileUtils
 
 class LocalRendererPluginDialog(

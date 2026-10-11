@@ -19,10 +19,9 @@ import com.endiq.turtlelauncher.event.single.LauncherIgnoreNotchEvent
 import com.endiq.turtlelauncher.feature.log.Logging
 import com.endiq.turtlelauncher.plugins.driver.DriverPluginManager
 import com.endiq.turtlelauncher.plugins.renderer.RendererPluginManager
-import com.endiq.turtlelauncher.renderer.Renderers
-import com.endiq.turtlelauncher.renderer.renderers.HolyGL4ESRenderer
-import com.endiq.turtlelauncher.renderer.renderers.MobileGluesRenderer
-import com.endiq.turtlelauncher.renderer.renderers.ZinkRenderer
+import com.movtery.zalithlauncher.renderer.Renderers
+import com.movtery.zalithlauncher.renderer.renderers.GL4ESRenderer
+import com.movtery.zalithlauncher.renderer.renderers.VulkanZinkRenderer
 import com.endiq.turtlelauncher.setting.AllSettings
 import com.endiq.turtlelauncher.setting.AllStaticSettings
 import com.endiq.turtlelauncher.task.Task
@@ -132,9 +131,8 @@ class VideoSettingsFragment : AbstractSettingsFragment(R.layout.settings_fragmen
             ZHTools.swapFragmentWithAnim(this, com.endiq.turtlelauncher.ui.fragment.settings.RendererManagerFragment::class.java, com.endiq.turtlelauncher.ui.fragment.settings.RendererManagerFragment.TAG, null)
         }
 
-        val openglRendererId = rendererInstances.find { it.getRendererId() == MobileGluesRenderer.ID }?.getUniqueIdentifier()
-            ?: rendererInstances.find { it.getRendererId() == HolyGL4ESRenderer.ID }?.getUniqueIdentifier()
-        val vulkanRendererId = rendererInstances.find { it.getRendererId() == ZinkRenderer.ID }?.getUniqueIdentifier()
+        val openglRendererId = rendererInstances.find { it.getRendererId() == GL4ESRenderer.ID }?.getUniqueIdentifier()
+        val vulkanRendererId = rendererInstances.find { it.getRendererId() == VulkanZinkRenderer.ID }?.getUniqueIdentifier()
         fun applyBackend(rendererId: String?) {
             if (rendererId == null) return
             AllSettings.renderer.put(rendererId).save()

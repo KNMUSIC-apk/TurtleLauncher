@@ -25,7 +25,7 @@ import com.endiq.turtlelauncher.feature.version.VersionConfig.IsolationType
 import com.endiq.turtlelauncher.feature.version.VersionsManager.getCurrentVersion
 import com.endiq.turtlelauncher.feature.version.utils.VersionIconUtils
 import com.endiq.turtlelauncher.plugins.driver.DriverPluginManager
-import com.endiq.turtlelauncher.renderer.Renderers
+import com.movtery.zalithlauncher.renderer.Renderers
 import com.endiq.turtlelauncher.setting.AllSettings.Companion.versionIsolation
 import com.endiq.turtlelauncher.task.Task
 import com.endiq.turtlelauncher.task.TaskExecutors.Companion.getAndroidUI

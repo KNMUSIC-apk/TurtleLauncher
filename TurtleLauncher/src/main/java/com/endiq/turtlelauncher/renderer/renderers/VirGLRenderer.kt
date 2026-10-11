@@ -1,7 +1,7 @@
 package com.movtery.zalithlauncher.renderer.renderers
 
 import com.movtery.zalithlauncher.renderer.RendererInterface
-import com.movtery.zalithlauncher.utils.path.PathManager
+import com.endiq.turtlelauncher.utils.path.PathManager
 import java.io.File
 
 class VirGLRenderer : RendererInterface {
