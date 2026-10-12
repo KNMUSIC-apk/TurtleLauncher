@@ -3,7 +3,6 @@ package com.endiq.turtlelauncher.renderer
 import android.content.Context
 import com.endiq.turtlelauncher.feature.log.Logging
 import com.endiq.turtlelauncher.renderer.renderers.FreedrenoRenderer
-import com.endiq.turtlelauncher.renderer.renderers.GL4ES115Renderer
 import com.endiq.turtlelauncher.renderer.renderers.HolyGL4ESRenderer
 import com.endiq.turtlelauncher.renderer.renderers.KryptonRenderer
 import com.endiq.turtlelauncher.renderer.renderers.PanfrostRenderer
@@ -34,7 +33,6 @@ object Renderers {
             VirGLRenderer(),
             FreedrenoRenderer(),
             PanfrostRenderer(),
-            GL4ES115Renderer(),
             KryptonRenderer()
         )
     }

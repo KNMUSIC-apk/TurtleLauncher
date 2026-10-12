@@ -54,13 +54,6 @@ class AllSettings {
         /** LIBGL_BATCH: batches GL calls instead of issuing them one at a time. */
         @JvmStatic val jniBatching              = BooleanSettingUnit("jniBatching", true)
         @JvmStatic val jniCachedReferences       = BooleanSettingUnit("jniCachedReferences", true)
-        /** Hyper Launcher idea: map the hardware volume keys to an in-game key. Off by default,
-         *  so the volume keys keep controlling system volume. Wired in MinecraftGLSurface.processKeyEvent. */
-        @JvmStatic val volumeKeysEnabled         = BooleanSettingUnit("volumeKeysEnabled", false)
-        /** GLFW keycode sent for the volume-up key when volumeKeysEnabled; "-1" = unbound. */
-        @JvmStatic val volumeUpKey               = StringSettingUnit("volumeUpKey", "-1")
-        /** GLFW keycode sent for the volume-down key when volumeKeysEnabled; "-1" = unbound. */
-        @JvmStatic val volumeDownKey             = StringSettingUnit("volumeDownKey", "-1")
         /** Hyper Launcher idea: TU_DEBUG=sysmem for the Turnip driver (renders through system memory
          *  instead of GMEM). Read in JREUtils.setJavaEnv. Off by default. */
         @JvmStatic val turnipSysmem              = BooleanSettingUnit("turnipSysmem", false)
