@@ -17,6 +17,16 @@ class AllStaticSettings {
         @JvmField var scaleFactor = AllSettings.resolutionRatio.getValue() / 100f
 
         /**
+         * Re-read the saved resolution ratio into [scaleFactor]. Touch mapping and the game's
+         * window size both come from that ratio, so they must be re-synced whenever the saved
+         * value changes outside the in-game slider (Video settings, presets, auto optimizer).
+         */
+        @JvmStatic
+        fun syncScaleFromSettings() {
+            scaleFactor = AllSettings.resolutionRatio.getValue() / 100f
+        }
+
+        /**
          * Disable double-tap item swapping. Boolean.
          */
         @JvmField var disableDoubleTap = AllSettings.disableDoubleTap.getValue()

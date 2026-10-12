@@ -170,7 +170,7 @@ object TurtleTransitions {
      */
     @JvmStatic
     @JvmOverloads
-    fun stagger(animPlayer: AnimPlayer, views: List<View?>, stepMs: Long = 45L) {
+    fun stagger(animPlayer: AnimPlayer, views: List<View?>, stepMs: Long = 45L, startOffsetMs: Long = 0L) {
         if (!isEnabled()) return
         var index = 0
         for (view in views) {
@@ -178,7 +178,7 @@ object TurtleTransitions {
             // Each entry gets its own startDelay inside the one AnimatorSet, so the panels
             // arrive one after another instead of as a single flat block.
             val animators = enter().animator.getAnimators(view)
-            animators.forEach { it.startDelay = index * stepMs }
+            animators.forEach { it.startDelay = startOffsetMs + index * stepMs }
             animPlayer.addAll(animators)
             index++
         }
@@ -253,8 +253,7 @@ object TurtleTransitions {
                     v.animate().scaleX(1f).scaleY(1f)
                         .setDuration(180)
                         .setInterpolator(android.view.animation.OvershootInterpolator(2.0f)).start()
-                    // Let the click still happen.
-                    if (event.actionMasked == android.view.MotionEvent.ACTION_UP) v.performClick()
+                    // Returning false below hands the event to the View, which performs the click itself.
                 }
             }
             false

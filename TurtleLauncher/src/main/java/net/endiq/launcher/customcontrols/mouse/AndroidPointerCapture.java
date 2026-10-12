@@ -100,7 +100,8 @@ public class AndroidPointerCapture implements ViewTreeObserver.OnWindowFocusChan
             case MotionEvent.ACTION_BUTTON_RELEASE:
                 return MinecraftGLSurface.sendMouseButtonUnconverted(event.getActionButton(), false);
             case MotionEvent.ACTION_SCROLL:
-                CallbackBridge.sendScroll(
+                CallbackBridge.sendScrollEvent(
+                        event.getEventTime(),
                         event.getAxisValue(MotionEvent.AXIS_HSCROLL),
                         event.getAxisValue(MotionEvent.AXIS_VSCROLL)
                 );

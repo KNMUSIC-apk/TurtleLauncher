@@ -9,14 +9,17 @@ import com.endiq.turtlelauncher.utils.anim.ViewAnimUtils.Companion.setViewAnim
 
 class AnimUtils {
     companion object {
+        /** Default duration for the overloads without one: the user's animation speed setting. */
+        private fun defaultDuration(): Int = AllSettings.animationSpeed.getValue()
+
         @JvmStatic
         fun setVisibilityAnim(view: View, shouldShow: Boolean) {
-            setVisibilityAnim(view, shouldShow, 300, null)
+            setVisibilityAnim(view, shouldShow, defaultDuration(), null)
         }
 
         @JvmStatic
         fun setVisibilityAnim(view: View, shouldShow: Boolean, listener: AnimationListener?) {
-            setVisibilityAnim(view, shouldShow, 300, listener)
+            setVisibilityAnim(view, shouldShow, defaultDuration(), listener)
         }
 
         @JvmStatic
@@ -96,6 +99,13 @@ class AnimUtils {
         ) {
             if ((view.visibility != View.VISIBLE && end == 0f) || (view.visibility == View.VISIBLE && end == 1f)) {
                 endAction?.let { r -> Task.runTask { r.run() }.execute() }
+                return
+            }
+            // Respect the animation toggle: land on the final state straight away when animations are off.
+            if (!TurtleTransitions.isEnabled()) {
+                view.visibility = View.VISIBLE
+                view.alpha = end
+                endAction?.run()
                 return
             }
             view.visibility = View.VISIBLE

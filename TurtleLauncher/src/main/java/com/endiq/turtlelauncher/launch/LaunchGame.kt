@@ -174,6 +174,8 @@ class LaunchGame {
             if (AllSettings.autoSettingsOptimizer.getValue()) {
                 AutoSettingsOptimizer.apply(activity, version.id ?: "")
             }
+            // The optimizer may change the saved resolution ratio; keep touch mapping in step with the game window.
+            AllStaticSettings.syncScaleFromSettings()
 
             if (!Renderers.isCurrentRendererValid()) {
                 Renderers.setCurrentRenderer(activity, AllSettings.renderer.getValue())

@@ -93,6 +93,7 @@ public class MainMenuFragment extends FragmentWithAnim {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         binding.aboutText.setText(InfoCenter.replaceName(requireActivity(), R.string.about_tab));
         binding.aboutButton.setOnClickListener(v -> ZHTools.swapFragmentWithAnim(this, AboutFragment.class, AboutFragment.TAG, null));
+        com.endiq.turtlelauncher.utils.anim.TurtleTransitions.attachPressFeedback(binding.terracottaButton);
         binding.customControlButton.setOnClickListener(v -> ZHTools.swapFragmentWithAnim(this, ControlButtonFragment.class, ControlButtonFragment.TAG, null));
         binding.installJarButton.setOnClickListener(v -> runInstallerWithConfirmation(false));
         binding.installJarButton.setOnLongClickListener(v -> {
@@ -476,6 +477,13 @@ public class MainMenuFragment extends FragmentWithAnim {
                 animPlayer,
                 java.util.Arrays.asList(binding.launcherMenu, binding.playLayout),
                 55L);
+        // Shortcut buttons in the side rail arrive one after another, after the menu panels.
+        com.endiq.turtlelauncher.utils.anim.TurtleTransitions.stagger(
+                animPlayer,
+                java.util.Arrays.asList(binding.aboutButton, binding.customControlButton, binding.installJarButton,
+                        binding.shareLogsButton, binding.modpackImportButton),
+                40L,
+                120L);
         animPlayer.apply(new AnimPlayer.Entry(binding.playButtonsLayout, Animations.BounceEnlarge));
     }
 

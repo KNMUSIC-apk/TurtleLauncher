@@ -185,10 +185,11 @@ public class MinecraftGLSurface extends View implements GrabListener {
                         return;
                     }
                     isCalled = true;
+                    // Valid before realStart so its launch-time refreshSize() is not skipped.
+                    markSurfaceValid();
 
                     realStart(surfaceView.getHolder().getSurface());
                     publishSurfaceToSdl(surfaceView.getHolder().getSurface(), holder);
-                    markSurfaceValid();
                 }
 
                 @Override
@@ -221,10 +222,11 @@ public class MinecraftGLSurface extends View implements GrabListener {
                         return;
                     }
                     isCalled = true;
+                    // Valid before realStart so its launch-time refreshSize() is not skipped.
+                    markSurfaceValid();
 
                     realStart(tSurface);
                     publishSurfaceToSdl(tSurface, surface);
-                    markSurfaceValid();
                 }
 
                 @Override
@@ -322,7 +324,7 @@ public class MinecraftGLSurface extends View implements GrabListener {
                 CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
                 return true;
             case MotionEvent.ACTION_SCROLL:
-                CallbackBridge.sendScroll(event.getAxisValue(MotionEvent.AXIS_HSCROLL), event.getAxisValue(MotionEvent.AXIS_VSCROLL));
+                CallbackBridge.sendScrollEvent(event.getEventTime(), event.getAxisValue(MotionEvent.AXIS_HSCROLL), event.getAxisValue(MotionEvent.AXIS_VSCROLL));
                 return true;
             case MotionEvent.ACTION_BUTTON_PRESS:
                 return sendMouseButtonUnconverted(event.getActionButton(),true);
@@ -488,6 +490,8 @@ public class MinecraftGLSurface extends View implements GrabListener {
     }
 
     private void realStart(Surface surface){
+        // Touch mapping must use the saved resolution before the first size push.
+        AllStaticSettings.syncScaleFromSettings();
         // Initial size set
         refreshSize();
 
