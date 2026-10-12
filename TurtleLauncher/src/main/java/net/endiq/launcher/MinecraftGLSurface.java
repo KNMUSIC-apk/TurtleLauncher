@@ -343,6 +343,36 @@ public class MinecraftGLSurface extends View implements GrabListener {
         return super.dispatchTouchEvent(event);
     }
 
+    /**
+     * Volume keys mapped to an in-game key (Hyper Launcher idea). Returns false when the feature is
+     * off or the key is unbound, so the system still changes the volume as before.
+     */
+    private boolean processVolumeKey(KeyEvent event, int eventKeycode) {
+        if (!AllSettings.getVolumeKeysEnabled().getValue()) return false;
+
+        String value = eventKeycode == KeyEvent.KEYCODE_VOLUME_UP
+                ? AllSettings.getVolumeUpKey().getValue()
+                : AllSettings.getVolumeDownKey().getValue();
+        int glfwKey;
+        try {
+            glfwKey = Integer.parseInt(value.trim());
+        } catch (Exception e) {
+            glfwKey = -1;
+        }
+        if (glfwKey < 0) return false;
+
+        int action = event.getAction();
+        if (action == KeyEvent.ACTION_DOWN) {
+            if (event.getRepeatCount() != 0) return true;
+            CallbackBridge.setModifiers(glfwKey, true);
+            CallbackBridge.sendKeyPress(glfwKey, CallbackBridge.getCurrentMods(), true);
+        } else if (action == KeyEvent.ACTION_UP) {
+            CallbackBridge.sendKeyPress(glfwKey, CallbackBridge.getCurrentMods(), false);
+            CallbackBridge.setModifiers(glfwKey, false);
+        }
+        return true;
+    }
+
     /** The event for keyboard/ gamepad button inputs */
     public boolean processKeyEvent(KeyEvent event) {
         //Log.i("KeyEvent", event.toString());
@@ -350,8 +380,9 @@ public class MinecraftGLSurface extends View implements GrabListener {
         //Filtering useless events by order of probability
         int eventKeycode = event.getKeyCode();
         if(eventKeycode == KeyEvent.KEYCODE_UNKNOWN) return true;
-        if(eventKeycode == KeyEvent.KEYCODE_VOLUME_DOWN) return false;
-        if(eventKeycode == KeyEvent.KEYCODE_VOLUME_UP) return false;
+        if(eventKeycode == KeyEvent.KEYCODE_VOLUME_DOWN || eventKeycode == KeyEvent.KEYCODE_VOLUME_UP) {
+            return processVolumeKey(event, eventKeycode);
+        }
 
         int imeKeyCode = AllSettings.getPhysicalKeyImeCode().getValue();
         if (imeKeyCode != -1 && eventKeycode == imeKeyCode && touchCharInput != null

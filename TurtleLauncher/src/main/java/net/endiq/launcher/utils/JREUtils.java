@@ -218,6 +218,9 @@ public final class JREUtils {
         envMap.put("JAVA_HOME", jreHome);
 
         envMap.put("ALSOFT_DRIVERS", "opensl");
+        // Turnip sysmem (Hyper Launcher idea): render through system memory instead of GMEM.
+        // Ignored by every driver except Mesa Turnip; custom_env.txt is applied later and can override it.
+        if (AllSettings.getTurnipSysmem().getValue()) envMap.put("TU_DEBUG", "sysmem");
         envMap.put("HOME", PathManager.DIR_GAME_HOME);
         envMap.put("TMPDIR", PathManager.DIR_CACHE.getAbsolutePath());
         envMap.put("LD_LIBRARY_PATH", LD_LIBRARY_PATH);

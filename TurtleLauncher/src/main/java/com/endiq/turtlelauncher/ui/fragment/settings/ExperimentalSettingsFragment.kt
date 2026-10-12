@@ -48,6 +48,13 @@ class ExperimentalSettingsFragment :
 
         SwitchSettingsWrapper(
             context,
+            AllSettings.turnipSysmem,
+            binding.turnipSysmemLayout,
+            binding.turnipSysmem
+        )
+
+        SwitchSettingsWrapper(
+            context,
             AllSettings.bigCoreAffinity,
             binding.bigCoreAffinityLayout,
             binding.bigCoreAffinity

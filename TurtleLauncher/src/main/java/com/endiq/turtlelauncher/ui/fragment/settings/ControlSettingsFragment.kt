@@ -16,6 +16,7 @@ import com.endiq.turtlelauncher.databinding.SettingsFragmentControlBinding
 import com.endiq.turtlelauncher.setting.AllSettings
 import com.endiq.turtlelauncher.ui.fragment.FragmentWithAnim
 import com.endiq.turtlelauncher.ui.fragment.settings.wrapper.BaseSettingsWrapper
+import com.endiq.turtlelauncher.ui.fragment.settings.wrapper.ListSettingsWrapper
 import com.endiq.turtlelauncher.ui.fragment.settings.wrapper.SeekBarSettingsWrapper
 import com.endiq.turtlelauncher.ui.fragment.settings.wrapper.SwitchSettingsWrapper
 import com.endiq.turtlelauncher.utils.ZHTools
@@ -64,6 +65,33 @@ class ControlSettingsFragment() : AbstractSettingsFragment(R.layout.settings_fra
             AllSettings.buttonAllCaps,
             binding.buttonAllCapsLayout,
             binding.buttonAllCaps
+        )
+
+        SwitchSettingsWrapper(
+            context,
+            AllSettings.volumeKeysEnabled,
+            binding.volumeKeysLayout,
+            binding.volumeKeys
+        )
+
+        ListSettingsWrapper(
+            context,
+            AllSettings.volumeUpKey,
+            binding.volumeUpKeyLayout,
+            binding.volumeUpKeyTitle,
+            binding.volumeUpKeyValue,
+            R.array.volume_key_entries,
+            R.array.volume_key_values
+        )
+
+        ListSettingsWrapper(
+            context,
+            AllSettings.volumeDownKey,
+            binding.volumeDownKeyLayout,
+            binding.volumeDownKeyTitle,
+            binding.volumeDownKeyValue,
+            R.array.volume_key_entries,
+            R.array.volume_key_values
         )
 
         SwitchSettingsWrapper(
@@ -173,6 +201,8 @@ class ControlSettingsFragment() : AbstractSettingsFragment(R.layout.settings_fra
             setViewVisibility(gyroInvertXLayout, AllSettings.enableGyro.getValue())
             setViewVisibility(gyroInvertYLayout, AllSettings.enableGyro.getValue())
             setViewVisibility(gyroSmoothingLayout, AllSettings.enableGyro.getValue())
+            setViewVisibility(volumeUpKeyLayout, AllSettings.volumeKeysEnabled.getValue())
+            setViewVisibility(volumeDownKeyLayout, AllSettings.volumeKeysEnabled.getValue())
         }
     }
 
