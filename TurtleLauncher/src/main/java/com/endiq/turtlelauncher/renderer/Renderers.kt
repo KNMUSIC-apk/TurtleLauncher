@@ -5,6 +5,7 @@ import com.endiq.turtlelauncher.feature.log.Logging
 import com.endiq.turtlelauncher.renderer.renderers.FreedrenoRenderer
 import com.endiq.turtlelauncher.renderer.renderers.GL4ES115Renderer
 import com.endiq.turtlelauncher.renderer.renderers.HolyGL4ESRenderer
+import com.endiq.turtlelauncher.renderer.renderers.KryptonRenderer
 import com.endiq.turtlelauncher.renderer.renderers.PanfrostRenderer
 import com.endiq.turtlelauncher.renderer.renderers.VirGLRenderer
 import com.endiq.turtlelauncher.renderer.renderers.ZinkRenderer
@@ -33,7 +34,8 @@ object Renderers {
             VirGLRenderer(),
             FreedrenoRenderer(),
             PanfrostRenderer(),
-            GL4ES115Renderer()
+            GL4ES115Renderer(),
+            KryptonRenderer()
         )
     }
 
