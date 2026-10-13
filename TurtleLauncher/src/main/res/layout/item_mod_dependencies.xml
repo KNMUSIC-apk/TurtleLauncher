@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:strokeColor="@android:color/transparent"
         app:shapeAppearanceOverlay="@style/RoundedCornersImageView"
-        tools:src="@mipmap/ic_launcher_foreground" />
+        tools:src="@drawable/ic_launcher_foreground" />
 
     <LinearLayout
         android:id="@+id/source_layout"

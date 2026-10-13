@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Turtle silhouette used for Android 13+ themed (monochrome) launcher icons -->
+<!-- Turtle silhouette for Android 13+ themed (monochrome) launcher icons; same shape as the full-colour foreground -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="36dp"
-    android:height="24dp"
-    android:viewportWidth="36"
-    android:viewportHeight="24">
-    <path
-        android:fillColor="#FFFFFFFF"
-        android:pathData="M10 3h8v1h-8zM8 4h11v1h-11zM7 5h14v1h-14zM6 6h15v1h-15zM6 7h16v1h-16zM5 8h17v1h-17zM5 9h18v1h-18zM25 9h6v1h-6zM5 10h27v1h-27zM5 11h27v1h-27zM3 12h29v1h-29zM2 13h30v1h-30zM1 14h31v1h-31zM2 15h3v1h-3zM6 15h25v1h-25zM9 16h6v1h-6zM20 16h6v1h-6zM9 17h6v1h-6zM20 17h6v1h-6zM9 18h6v1h-6zM20 18h6v1h-6zM9 19h6v1h-6zM20 19h6v1h-6zM10 20h4v1h-4zM21 20h4v1h-4z" />
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <group android:translateY="2">
+        <path android:fillColor="#FFFFFFFF" android:pathData="M28.5,60a4.5,5 0 1,0 9,0a4.5,5 0 1,0 -9,0z" />
+        <path android:fillColor="#FFFFFFFF" android:pathData="M38.5,60a4.5,5 0 1,0 9,0a4.5,5 0 1,0 -9,0z" />
+        <path android:fillColor="#FFFFFFFF" android:pathData="M52.5,60a4.5,5 0 1,0 9,0a4.5,5 0 1,0 -9,0z" />
+        <path android:fillColor="#FFFFFFFF" android:pathData="M62.5,60a4.5,5 0 1,0 9,0a4.5,5 0 1,0 -9,0z" />
+        <path android:fillColor="#FFFFFFFF" android:pathData="M28,50 Q21,49 20,51.5 Q21,54.5 28,55 Z" />
+        <path android:fillColor="#FFFFFFFF" android:pathData="M68,42 H80 V50 H68 Z" />
+        <path android:fillColor="#FFFFFFFF" android:pathData="M72,46a7,7 0 1,0 14,0a7,7 0 1,0 -14,0z" />
+        <path android:fillColor="#FFFFFFFF"
+            android:pathData="M28,58 C28,42 38,36 50,36 C62,36 72,42 72,58 Z" />
+        <path android:fillColor="#FFFFFFFF"
+            android:pathData="M29,55 H71 Q74,55 74,58 Q74,61 71,61 H29 Q26,61 26,58 Q26,55 29,55 Z" />
+    </group>
 </vector>
