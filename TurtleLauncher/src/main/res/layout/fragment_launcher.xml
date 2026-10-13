@@ -43,7 +43,7 @@
             android:textColor="@color/turtle_text_secondary"
             app:layout_constraintTop_toBottomOf="@id/home_top_bar_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/top_bar_account_button"
+            app:layout_constraintEnd_toStartOf="@id/top_bar_account_name"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
         <!-- Quick-action icons, directly after the title -->
@@ -143,6 +143,22 @@
                 android:tint="@color/turtle_text_secondary"
                 android:contentDescription="@string/main_nav_assistant"/>
         </LinearLayout>
+
+        <!-- In-game name of the current account, shown right beside its avatar tile -->
+        <TextView
+            android:id="@+id/top_bar_account_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/space_xs"
+            android:maxWidth="112dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="@color/turtle_primary_text"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/top_bar_account_button"/>
 
         <!-- Account / skin tile: shows the current avatar and opens the account and wardrobe screen -->
         <ImageButton
@@ -357,18 +373,6 @@
                     android:orientation="vertical"
                     android:paddingHorizontal="@dimen/space_m"
                     android:paddingBottom="@dimen/space_l">
-
-                    <!-- TODAY'S STATISTICS header -->
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/main_section_statistics"
-                        android:textSize="11sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/turtle_text_secondary"
-                        android:letterSpacing="0.08"
-                        android:layout_marginBottom="@dimen/space_s"
-                        android:paddingHorizontal="4dp"/>
 
                     <!-- Row 1: weekly playtime chart + community links -->
                     <LinearLayout

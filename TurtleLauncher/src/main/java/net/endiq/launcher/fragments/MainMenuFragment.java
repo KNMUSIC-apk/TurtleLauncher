@@ -149,6 +149,7 @@ public class MainMenuFragment extends FragmentWithAnim {
         binding.homeTopBarTitle.setText(com.endiq.turtlelauncher.InfoDistributor.LAUNCHER_NAME);
         binding.topBarAccountButton.setOnClickListener(v ->
             ZHTools.swapFragmentWithAnim(this, AccountFragment.class, AccountFragment.TAG, null));
+        binding.topBarAccountName.setOnClickListener(v -> binding.topBarAccountButton.performClick());
         refreshAccountButton();
         binding.topBarStorageButton.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
@@ -324,8 +325,7 @@ public class MainMenuFragment extends FragmentWithAnim {
     /**
      * Loads the current account's avatar into the top bar's account button, same source
      * (SkinLoader) and fallback (ic_add when no account is set yet) as the old view_account
-     * card's AccountViewWrapper used, just without the name/type text an icon-only top-bar
-     * button has no room for.
+     * card's AccountViewWrapper used, with the in-game name shown right beside the avatar.
      */
     private void refreshAccountButton() {
         if (binding == null) return;
@@ -334,6 +334,7 @@ public class MainMenuFragment extends FragmentWithAnim {
             binding.topBarAccountButton.setImageTintList(
                 ContextCompat.getColorStateList(requireContext(), R.color.turtle_text_secondary));
             binding.topBarAccountButton.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_add));
+            binding.topBarAccountName.setText("");
             return;
         }
         try {
@@ -344,6 +345,7 @@ public class MainMenuFragment extends FragmentWithAnim {
         } catch (Exception e) {
             Logging.e("MainMenuFragment", "Failed to load avatar.", e);
         }
+        binding.topBarAccountName.setText(account.username);
     }
 
     @Override

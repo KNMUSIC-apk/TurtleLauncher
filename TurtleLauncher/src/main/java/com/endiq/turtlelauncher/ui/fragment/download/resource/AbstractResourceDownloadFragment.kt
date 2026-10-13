@@ -225,6 +225,28 @@ abstract class AbstractResourceDownloadFragment(
         EventBus.getDefault().register(this)
     }
 
+    override fun onResume() {
+        super.onResume()
+        resetPageTransforms()
+    }
+
+    /**
+     * Coming back from a resource's detail page could leave the list and the filter column
+     * pushed up under the tab bar when a slide was cut short. Put both back at rest here; the
+     * page's own enter slide still plays after this when the page is selected.
+     */
+    private fun resetPageTransforms() {
+        binding.apply {
+            listOf(operateLayout, downloadLayout).forEach { view ->
+                view.translationX = 0f
+                view.translationY = 0f
+                view.scaleX = 1f
+                view.scaleY = 1f
+                view.alpha = 1f
+            }
+        }
+    }
+
     override fun onStop() {
         closeSpinner()
         super.onStop()

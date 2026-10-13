@@ -16,6 +16,8 @@ import com.endiq.turtlelauncher.databinding.FragmentDownloadBinding
 import com.endiq.turtlelauncher.event.value.DownloadPageEvent
 import com.endiq.turtlelauncher.event.value.DownloadPageEvent.PageSwapEvent.Companion.IN
 import com.endiq.turtlelauncher.event.value.DownloadPageEvent.PageSwapEvent.Companion.OUT
+import com.endiq.turtlelauncher.feature.download.enums.Classify
+import com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
 import com.endiq.turtlelauncher.ui.fragment.download.resource.ModDownloadFragment
 import com.endiq.turtlelauncher.ui.fragment.download.resource.ModPackDownloadFragment
 import com.endiq.turtlelauncher.ui.fragment.download.resource.ResourcePackDownloadFragment
@@ -57,6 +59,7 @@ class DownloadFragment : FragmentWithAnim(R.layout.fragment_download) {
             binding.downloadViewpager.setCurrentItem(initialTab, false)
             binding.classifyTab.onPageSelected(initialTab)
         }
+        updateTabStyles(binding.classifyTab.currentItemIndex)
     }
 
     private fun initViewPager() {
@@ -69,7 +72,7 @@ class DownloadFragment : FragmentWithAnim(R.layout.fragment_download) {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
                     onFragmentSelect(position)
-                    EventBus.getDefault().post(DownloadPageEvent.PageSwapEvent(position, IN))
+                    EventBus.getDefault().post(DownloadPageEvent.PageSwapEvent(classifyTypeAt(position), IN))
                 }
             })
         }
@@ -77,6 +80,33 @@ class DownloadFragment : FragmentWithAnim(R.layout.fragment_download) {
 
     private fun onFragmentSelect(position: Int) {
         binding.classifyTab.onPageSelected(position)
+        updateTabStyles(position)
+    }
+
+    /**
+     * The Classify type of the page shown at a tab position. Pages listen for PageSwapEvent by
+     * Classify.type, so events must use it rather than the raw tab position.
+     */
+    private fun classifyTypeAt(position: Int): Int = when (position) {
+        1 -> Classify.MODPACK.type
+        2 -> Classify.RESOURCE_PACK.type
+        3 -> Classify.SHADER_PACK.type
+        4 -> Classify.WORLD.type
+        else -> Classify.MOD.type
+    }
+
+    /** Frames every section tab and fills the open one, so the current section is easy to see. */
+    private fun updateTabStyles(selected: Int) {
+        val tabs = binding.classifyTab
+        var position = 0
+        for (i in 0 until tabs.childCount) {
+            val tab = tabs.getChildAt(i) as? AnimRelativeLayout ?: continue
+            tab.setBackgroundResource(
+                if (position == selected) R.drawable.background_download_tab_selected
+                else R.drawable.background_download_tab
+            )
+            position++
+        }
     }
 
     override fun slideIn(animPlayer: AnimPlayer) {
@@ -85,7 +115,7 @@ class DownloadFragment : FragmentWithAnim(R.layout.fragment_download) {
 
     override fun slideOut(animPlayer: AnimPlayer) {
         animPlayer.apply(AnimPlayer.Entry(binding.classifyLayout, TurtleTransitions.exit()))
-        EventBus.getDefault().post(DownloadPageEvent.PageSwapEvent(binding.classifyTab.currentItemIndex, OUT))
+        EventBus.getDefault().post(DownloadPageEvent.PageSwapEvent(classifyTypeAt(binding.classifyTab.currentItemIndex), OUT))
     }
 
     override fun onDestroyView() {
@@ -104,8 +134,8 @@ class DownloadFragment : FragmentWithAnim(R.layout.fragment_download) {
                     }
                 }
                 2 -> ResourcePackDownloadFragment(hostFragment)
-                3 -> WorldDownloadFragment(hostFragment)
-                4 -> ShaderPackDownloadFragment(hostFragment)
+                3 -> ShaderPackDownloadFragment(hostFragment)
+                4 -> WorldDownloadFragment(hostFragment)
                 else -> ModDownloadFragment(hostFragment)
             }
         }

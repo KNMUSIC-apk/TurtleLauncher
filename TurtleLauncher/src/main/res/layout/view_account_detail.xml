@@ -105,57 +105,96 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Action buttons -->
+    <!-- Action buttons: Chơi on its own row, then three compact tiles with the icon above the label -->
     <LinearLayout
         android:id="@+id/action_row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/space_l"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/detail_skin_preview">
 
         <com.endiq.turtlelauncher.ui.view.AnimButton
             android:id="@+id/detail_play"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1.4"
-            android:layout_marginEnd="@dimen/space_xs"
             android:background="@drawable/bg_launch_button"
             android:text="@string/account_detail_play"
             android:textColor="@color/turtle_text_primary"
             android:textStyle="bold"
             android:textAllCaps="true" />
 
-        <com.endiq.turtlelauncher.ui.view.AnimButton
-            android:id="@+id/detail_refresh"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="@dimen/space_xs"
-            android:background="@drawable/background_grid_card"
-            android:text="@string/generic_refresh" />
+            android:layout_marginTop="@dimen/space_s"
+            android:orientation="horizontal">
 
-        <com.endiq.turtlelauncher.ui.view.AnimButton
-            android:id="@+id/detail_wardrobe"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="@dimen/space_xs"
-            android:background="@drawable/background_grid_card"
-            android:drawableStart="@drawable/ic_skin_changer"
-            android:drawablePadding="@dimen/space_xs"
-            android:drawableTint="@color/turtle_success"
-            android:text="@string/account_wardrobe" />
+            <com.endiq.turtlelauncher.ui.view.AnimButton
+                android:id="@+id/detail_refresh"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="@dimen/space_xs"
+                android:background="@drawable/background_grid_card"
+                android:drawableTop="@drawable/ic_refresh"
+                android:drawableTint="@color/turtle_text_secondary"
+                android:drawablePadding="@dimen/space_xs"
+                android:gravity="center"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:maxLines="1"
+                android:paddingVertical="@dimen/space_s"
+                android:paddingHorizontal="@dimen/space_xs"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="9sp"
+                android:autoSizeMaxTextSize="12sp"
+                android:text="@string/generic_refresh" />
 
-        <com.endiq.turtlelauncher.ui.view.AnimButton
-            android:id="@+id/detail_remove"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="@dimen/space_xs"
-            android:background="@drawable/background_grid_card"
-            android:textColor="@color/turtle_error"
-            android:text="@string/generic_delete" />
+            <com.endiq.turtlelauncher.ui.view.AnimButton
+                android:id="@+id/detail_wardrobe"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="@dimen/space_xs"
+                android:background="@drawable/background_grid_card"
+                android:drawableTop="@drawable/ic_skin_changer"
+                android:drawableTint="@color/turtle_success"
+                android:drawablePadding="@dimen/space_xs"
+                android:gravity="center"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:maxLines="1"
+                android:paddingVertical="@dimen/space_s"
+                android:paddingHorizontal="@dimen/space_xs"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="9sp"
+                android:autoSizeMaxTextSize="12sp"
+                android:text="@string/account_wardrobe" />
+
+            <com.endiq.turtlelauncher.ui.view.AnimButton
+                android:id="@+id/detail_remove"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/space_xs"
+                android:background="@drawable/background_grid_card"
+                android:drawableTop="@drawable/ic_menu_delete_forever"
+                android:drawableTint="@color/turtle_error"
+                android:drawablePadding="@dimen/space_xs"
+                android:gravity="center"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:maxLines="1"
+                android:paddingVertical="@dimen/space_s"
+                android:paddingHorizontal="@dimen/space_xs"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="9sp"
+                android:autoSizeMaxTextSize="12sp"
+                android:textColor="@color/turtle_error"
+                android:text="@string/generic_delete" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
