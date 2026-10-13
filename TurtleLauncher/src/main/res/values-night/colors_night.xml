@@ -69,6 +69,7 @@
     <color name="turtle_accent_ripple">#33FFFFFF</color>
     <color name="turtle_bg_surface">#1A1A1A</color>
     <color name="turtle_bg_elevated">#1E1E1E</color>
+    <color name="turtle_popup_bg">#2A2A2A</color>
     <color name="turtle_bg_navbar">#1A1A1A</color>
     <color name="turtle_bg_sidebar">#1A1A1A</color>
     <color name="turtle_bg_terminal">#1E1E1E</color>

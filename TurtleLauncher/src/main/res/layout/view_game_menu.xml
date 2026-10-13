@@ -1192,9 +1192,9 @@
                 android:paddingVertical="@dimen/_12sdp"
                 android:paddingHorizontal="@dimen/padding_heavy"
                 app:spinner_arrow_tint="@color/turtle_primary_text"
-                app:spinner_item_height="@dimen/_40sdp"
+                app:spinner_item_height="@dimen/_48sdp"
                 app:spinner_popup_max_height="@dimen/_240sdp"
-                app:spinner_popup_background="@drawable/background_edit_box" />
+                app:spinner_popup_background="@drawable/background_spinner_popup" />
 
             <LinearLayout
                 android:id="@+id/hotbar_width_layout"

@@ -67,9 +67,9 @@
                         android:padding="@dimen/padding_heavy"
                         app:layout_constraintTop_toBottomOf="@id/isolation_type_title"
                         app:spinner_arrow_tint="@color/turtle_primary_text"
-                        app:spinner_item_height="@dimen/_40sdp"
-                        app:spinner_popup_background="@drawable/background_edit_box"
+                        app:spinner_item_height="@dimen/_48sdp"
                         app:spinner_popup_max_height="@dimen/_240sdp"
+                        app:spinner_popup_background="@drawable/background_spinner_popup"
                         tools:paddingVertical="@dimen/_12sdp" />
 
                     <TextView
@@ -160,9 +160,9 @@
                         android:padding="@dimen/padding_heavy"
                         app:layout_constraintTop_toBottomOf="@+id/renderer_title"
                         app:spinner_arrow_tint="@color/turtle_primary_text"
-                        app:spinner_item_height="@dimen/_40sdp"
-                        app:spinner_popup_background="@drawable/background_edit_box"
+                        app:spinner_item_height="@dimen/_48sdp"
                         app:spinner_popup_max_height="@dimen/_240sdp"
+                        app:spinner_popup_background="@drawable/background_spinner_popup"
                         tools:paddingVertical="@dimen/_12sdp" />
 
                     <TextView
@@ -182,9 +182,9 @@
                         android:padding="@dimen/padding_heavy"
                         app:layout_constraintTop_toBottomOf="@+id/driver_title"
                         app:spinner_arrow_tint="@color/turtle_primary_text"
-                        app:spinner_item_height="@dimen/_40sdp"
-                        app:spinner_popup_background="@drawable/background_edit_box"
+                        app:spinner_item_height="@dimen/_48sdp"
                         app:spinner_popup_max_height="@dimen/_240sdp"
+                        app:spinner_popup_background="@drawable/background_spinner_popup"
                         tools:paddingVertical="@dimen/_12sdp" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -294,9 +294,9 @@
                         android:background="@drawable/background_item"
                         android:padding="@dimen/padding_heavy"
                         app:spinner_arrow_tint="@color/turtle_primary_text"
-                        app:spinner_item_height="@dimen/_40sdp"
-                        app:spinner_popup_background="@drawable/background_edit_box"
+                        app:spinner_item_height="@dimen/_48sdp"
                         app:spinner_popup_max_height="@dimen/_240sdp"
+                        app:spinner_popup_background="@drawable/background_spinner_popup"
                         tools:paddingVertical="@dimen/_12sdp" />
 
                 </LinearLayout>

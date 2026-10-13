@@ -2,9 +2,11 @@ package com.endiq.turtlelauncher.ui.subassembly.adapter
 
 import android.annotation.SuppressLint
 import android.util.TypedValue
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.endiq.turtlelauncher.R
 import com.skydoves.powerspinner.OnSpinnerItemSelectedListener
 import com.skydoves.powerspinner.PowerSpinnerInterface
 import com.skydoves.powerspinner.PowerSpinnerView
@@ -83,22 +85,21 @@ class ObjectSpinnerAdapter<T>(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         internal fun bind(spinnerView: PowerSpinnerView, item: T, isSelectedItem: Boolean) {
+            val resources = binding.root.context.resources
             binding.itemDefaultText.apply {
                 text = itemNameProvider(item)
                 typeface = spinnerView.typeface
-                gravity = spinnerView.gravity
+                gravity = spinnerView.gravity or Gravity.CENTER_VERTICAL
                 setTextSize(TypedValue.COMPLEX_UNIT_PX, spinnerView.textSize)
                 setTextColor(spinnerView.currentTextColor)
             }
-            binding.root.setPadding(
-                spinnerView.paddingLeft,
-                spinnerView.paddingTop,
-                spinnerView.paddingRight,
-                spinnerView.paddingBottom
-            )
-            if (spinnerView.spinnerItemHeight != NO_INT_VALUE) {
-                binding.root.height = spinnerView.spinnerItemHeight
-            }
+            // Rows get their own roomy padding and height. Copying the closed box's padding made
+            // the rows too tight to read, so the popup items are spaced here instead.
+            val horizontalPadding = resources.getDimensionPixelSize(R.dimen._16sdp)
+            binding.root.setPadding(horizontalPadding, 0, horizontalPadding, 0)
+            binding.root.height = spinnerView.spinnerItemHeight
+                .takeIf { it != NO_INT_VALUE }
+                ?: resources.getDimensionPixelSize(R.dimen._48sdp)
             if (spinnerView.spinnerSelectedItemBackground != null && isSelectedItem) {
                 binding.root.background = spinnerView.spinnerSelectedItemBackground
             } else {
