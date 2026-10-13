@@ -67,12 +67,17 @@ class ModListAdapter(
                     modloaderName.visibility = View.GONE
                 }
 
+                // Every row shares one background drawable, so a tint set on it leaks into the other
+                // rows and the next row to bind clears it. Mutate it so this row owns its highlight.
+                val rowBackground = root.background?.mutate()
+                if (rowBackground !== root.background) root.background = rowBackground
+
                 val visibility = if (item.isAdapt) run {
                     mIconUtils.value?.start(currentVersionIcon)
-                    root.background.setTint(DependencyType.OPTIONAL.color)
+                    rowBackground?.setTint(DependencyType.OPTIONAL.color)
                     View.VISIBLE
                 } else run {
-                    root.background.setTintList(null)
+                    rowBackground?.setTintList(null)
                     View.GONE
                 }
 

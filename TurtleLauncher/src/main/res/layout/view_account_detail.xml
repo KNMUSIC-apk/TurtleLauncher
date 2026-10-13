@@ -179,7 +179,7 @@
                 android:layout_weight="1"
                 android:layout_marginStart="@dimen/space_xs"
                 android:background="@drawable/background_grid_card"
-                android:drawableTop="@drawable/ic_menu_delete_forever"
+                android:drawableTop="@drawable/ic_delete_tile"
                 android:drawableTint="@color/turtle_error"
                 android:drawablePadding="@dimen/space_xs"
                 android:gravity="center"

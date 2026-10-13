@@ -1011,7 +1011,7 @@
     <string name="download_install_dependencies_tool">Công cụ</string>
     <string name="download_install_dependencies_include">Bao gồm</string>
     <string name="download_install">Tải xuống %s</string>
-    <string name="download_install_is_adapt">Có phiên bản %s hiện tại</string>
+    <string name="download_install_is_adapt">Phiên bản hiện tại %s có sẵn</string>
     <string name="download_install_unpack_world_error">Không thể nhận diện cấu trúc tệp nên giải nén tự động thất bại. Vui lòng xử lý tệp thủ công!</string>
     <string name="select_modpack_local_tip">Vui lòng chọn tệp modpack mà trình khởi chạy hỗ trợ nhập!</string>
     <string name="select_modpack_local_not_supported">Tệp này có vẻ không phải modpack được trình khởi chạy nhận diện. Các định dạng hỗ trợ: Modrinth (.mrpack), CurseForge (manifest.json), MCBBS, bản xuất phiên bản MultiMC/PrismLauncher và tệp ZIP thông thường chứa thư mục mod/config.</string>
