@@ -999,6 +999,7 @@
     <string name="download_search_failed">Không thể tìm kiếm tài nguyên!</string>
     <string name="download_search_no_result">Không tìm thấy tài nguyên liên quan!</string>
     <string name="download_search_platform_not_supported">Nền tảng hiện tại không hỗ trợ tải loại tài nguyên này hoặc không hỗ trợ bộ lọc danh mục đã chọn!</string>
+    <string name="download_search_curseforge_key_missing">Chưa có khóa API CurseForge nên không tải được thế giới. Bạn hãy thêm khóa CurseForge trong Cài đặt rồi thử lại.</string>
     <string name="download_install_custom_name">Tên tệp tùy chỉnh</string>
     <string name="download_install_download_file">Đang tải tệp tài nguyên (%.2fMB / %.2fMB, tốc độ: %s/s)</string>
     <string name="download_install_dependencies">%s có các mod phụ thuộc hoặc không tương thích sau đây</string>

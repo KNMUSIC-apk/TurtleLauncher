@@ -135,6 +135,33 @@ android {
                 "BUILD: GEMINI_API_KEY provided (${geminiApiKey.length} chars) - built into the APK"
             }
         )
+
+        // The CurseForge key for the world download tab. Same lookup order as the Gemini key:
+        // -PCURSEFORGE_API_KEY=..., the CURSEFORGE_API_KEY environment variable (the CI secret),
+        // then CURSEFORGE_API_KEY=... in local.properties. The key a person enters in Settings
+        // takes priority at runtime, so an empty value here just means "ask the user".
+        val curseForgeApiKey = (
+            (project.findProperty("CURSEFORGE_API_KEY") as String?)
+                ?: System.getenv("CURSEFORGE_API_KEY")
+                ?: rootProject.file("local.properties")
+                    .takeIf { it.isFile }
+                    ?.let { localProperties ->
+                        Properties().apply { localProperties.inputStream().use { load(it) } }
+                            .getProperty("CURSEFORGE_API_KEY")
+                    }
+            ).orEmpty().trim()
+        buildConfigField(
+            "String",
+            "CURSEFORGE_API_KEY",
+            "\"" + curseForgeApiKey.replace("\\", "\\\\").replace("\"", "\\\"") + "\""
+        )
+        logger.lifecycle(
+            if (curseForgeApiKey.isEmpty()) {
+                "BUILD: no CURSEFORGE_API_KEY - the world tab asks the user for a CurseForge key in Settings"
+            } else {
+                "BUILD: CURSEFORGE_API_KEY provided - built into the APK"
+            }
+        )
     }
 
     buildTypes {

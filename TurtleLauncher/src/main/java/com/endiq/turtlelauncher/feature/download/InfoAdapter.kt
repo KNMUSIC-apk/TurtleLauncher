@@ -170,6 +170,8 @@ class InfoAdapter(
         private fun getPlatformIcon(platform: Platform): Drawable? {
             return when (platform) {
                 Platform.MODRINTH -> ContextCompat.getDrawable(mContext, R.drawable.ic_modrinth)
+                // No CurseForge logo is bundled, so its rows show the name without an icon.
+                Platform.CURSEFORGE -> null
             }
         }
 

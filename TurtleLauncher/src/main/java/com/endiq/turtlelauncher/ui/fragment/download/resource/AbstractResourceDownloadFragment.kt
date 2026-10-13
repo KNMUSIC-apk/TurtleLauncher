@@ -29,6 +29,7 @@ import com.endiq.turtlelauncher.feature.download.enums.Sort
 import com.endiq.turtlelauncher.feature.download.item.InfoItem
 import com.endiq.turtlelauncher.feature.download.item.SearchResult
 import com.endiq.turtlelauncher.feature.download.platform.PlatformNotSupportedException
+import com.endiq.turtlelauncher.feature.download.platform.curseforge.CurseForgeApiKeyMissingException
 import com.endiq.turtlelauncher.feature.log.Logging
 import com.endiq.turtlelauncher.task.TaskExecutors
 import com.endiq.turtlelauncher.ui.dialog.SelectVersionDialog
@@ -49,7 +50,7 @@ abstract class AbstractResourceDownloadFragment(
     private val classify: Classify,
     private val categoryList: List<Category>,
     private val showModloader: Boolean,
-    private val recommendedPlatform: Platform = Platform.MODRINTH
+    private val recommendedPlatform: Platform = Platform.defaultFor(classify)
 ) : FragmentWithAnim(R.layout.fragment_download_resource) {
     private lateinit var binding: FragmentDownloadResourceBinding
 
@@ -57,7 +58,7 @@ abstract class AbstractResourceDownloadFragment(
     private lateinit var mSortAdapter: ObjectSpinnerAdapter<Sort>
     private lateinit var mCategoryAdapter: ObjectSpinnerAdapter<Category>
     private lateinit var mModLoaderAdapter: ObjectSpinnerAdapter<ModLoader>
-    private var mCurrentPlatform: Platform = Platform.MODRINTH
+    private var mCurrentPlatform: Platform = recommendedPlatform
     private val mFilters: Filters = Filters()
 
     private val mInfoAdapter = InfoAdapter(parentFragment,
@@ -145,7 +146,7 @@ abstract class AbstractResourceDownloadFragment(
         }
 
         // Initialise the spinner.
-        mPlatformAdapter.setItems(Platform.entries)
+        mPlatformAdapter.setItems(Platform.forClassify(classify))
         mSortAdapter.setItems(Sort.entries)
         mCategoryAdapter.setItems(categoryList)
         mModLoaderAdapter.setItems(ModLoader.entries)
@@ -213,7 +214,8 @@ abstract class AbstractResourceDownloadFragment(
 
     private fun initSpinnerIndex() {
         binding.apply {
-            platformSpinner.selectItemByIndex(recommendedPlatform.ordinal)
+            // The spinner only lists the sources for this tab, so pick the index within that list.
+            platformSpinner.selectItemByIndex(Platform.forClassify(classify).indexOf(recommendedPlatform).coerceAtLeast(0))
             sortSpinner.selectItemByIndex(0)
             categorySpinner.selectItemByIndex(0)
             if (showModloader) modloaderSpinner.selectItemByIndex(0)
@@ -266,6 +268,7 @@ abstract class AbstractResourceDownloadFragment(
             statusText.text = when (error) {
                 ERROR_INTERNAL -> getString(R.string.download_search_failed)
                 ERROR_PLATFORM_NOT_SUPPORTED -> getString(R.string.download_search_platform_not_supported)
+                ERROR_API_KEY_MISSING -> getString(R.string.download_search_curseforge_key_missing)
                 else -> getString(R.string.download_search_no_result)
             }
         }
@@ -406,10 +409,10 @@ abstract class AbstractResourceDownloadFragment(
                 TaskExecutors.runInUIThread {
                     mInfoAdapter.setItems(MOD_ITEMS_EMPTY)
                     Logging.e("SearchTask", Tools.printToString(e))
-                    if (e is PlatformNotSupportedException) {
-                        onSearchError(ERROR_PLATFORM_NOT_SUPPORTED)
-                    } else {
-                        onSearchError(ERROR_NO_RESULTS)
+                    when (e) {
+                        is PlatformNotSupportedException -> onSearchError(ERROR_PLATFORM_NOT_SUPPORTED)
+                        is CurseForgeApiKeyMissingException -> onSearchError(ERROR_API_KEY_MISSING)
+                        else -> onSearchError(ERROR_NO_RESULTS)
                     }
                 }
             }
@@ -422,5 +425,6 @@ abstract class AbstractResourceDownloadFragment(
         const val ERROR_INTERNAL: Int = 0
         const val ERROR_NO_RESULTS: Int = 1
         const val ERROR_PLATFORM_NOT_SUPPORTED: Int = 2
+        const val ERROR_API_KEY_MISSING: Int = 3
     }
 }
