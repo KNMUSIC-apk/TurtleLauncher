@@ -37,6 +37,7 @@
             <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/space_xs"
                 android:padding="@dimen/_8sdp">
 
                 <ImageView
@@ -63,6 +64,7 @@
             <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/space_xs"
                 android:padding="@dimen/_8sdp">
 
                 <ImageView
@@ -89,6 +91,7 @@
             <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/space_xs"
                 android:padding="@dimen/_8sdp">
 
                 <ImageView
@@ -115,6 +118,7 @@
             <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/space_xs"
                 android:padding="@dimen/_8sdp">
 
                 <ImageView
@@ -141,6 +145,7 @@
             <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/space_xs"
                 android:padding="@dimen/_8sdp">
 
                 <ImageView
