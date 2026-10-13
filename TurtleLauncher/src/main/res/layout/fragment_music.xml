@@ -336,7 +336,7 @@
             android:text="@string/music_empty_hint"
             android:textColor="@color/turtle_text_secondary"
             android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@id/music_playlist_title"
+            app:layout_constraintTop_toBottomOf="@id/music_add_group"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:visibility="visible" />
@@ -347,7 +347,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/space_m"
             android:clipToPadding="false"
-            app:layout_constraintTop_toBottomOf="@id/music_playlist_title"
+            app:layout_constraintTop_toBottomOf="@id/music_add_group"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
