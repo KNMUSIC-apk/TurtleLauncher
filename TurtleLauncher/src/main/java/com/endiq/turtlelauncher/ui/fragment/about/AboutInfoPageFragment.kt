@@ -82,10 +82,19 @@ class AboutInfoPageFragment() : Fragment(R.layout.fragment_about_info_page) {
     private fun loadAboutData(resources: Resources) {
         mAboutData.clear()
 
+        // Cyplix's own card links to its source, as the GPL requires for a modified version.
         mAboutData.add(
             AboutItemBean(
                 resources.getDrawable(R.drawable.ic_turtle_full, requireContext().theme),
                 "Cyplix Launcher",
+                getString(R.string.about_cyplix_desc),
+                AboutItemButtonBean(requireActivity(), "Github", UrlManager.URL_CYPLIX_SOURCE)
+            )
+        )
+        mAboutData.add(
+            AboutItemBean(
+                resources.getDrawable(R.drawable.ic_launch_link, requireContext().theme),
+                "Turtle Launcher",
                 getString(R.string.about_TurtleLauncher_desc),
                 AboutItemButtonBean(requireActivity(), "Github", UrlManager.URL_HOME)
             )
@@ -99,6 +108,18 @@ class AboutInfoPageFragment() : Fragment(R.layout.fragment_about_info_page) {
                     requireActivity(),
                     getString(R.string.about_access_link),
                     UrlManager.URL_HOME
+                )
+            )
+        )
+        mAboutData.add(
+            AboutItemBean(
+                resources.getDrawable(R.drawable.ic_launch_link, requireContext().theme),
+                "HMCL (Hello Minecraft! Launcher)",
+                getString(R.string.about_hmcl_desc),
+                AboutItemButtonBean(
+                    requireActivity(),
+                    "Github",
+                    "https://github.com/HMCL-dev/HMCL"
                 )
             )
         )

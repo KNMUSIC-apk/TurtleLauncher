@@ -1080,9 +1080,9 @@
     <string name="splash_screen_jre25">Môi trường Java 25; Minecraft 26.1 trở lên cần Java 25.</string>
     <string name="splash_screen_apply">Đồng ý và cài đặt</string>
     <string name="about_tab">Giới thiệu về %s</string>
-    <string name="about_dec1">%s là trình khởi chạy Minecraft do Endiq phát triển, cho phép chạy Minecraft: Java Edition trên thiết bị Android.</string>
+    <string name="about_dec1">%s là trình khởi chạy Minecraft: Java Edition trên thiết bị Android, được phát triển trên nền dự án Turtle Launcher mã nguồn mở do Endiq, MovTery và cộng đồng đóng góp xây dựng.</string>
     <string name="about_dec2">%s tập trung tối ưu trải nghiệm người dùng, thiết kế lại giao diện ứng dụng và bổ sung nhiều tính năng thiết thực, nhằm giảm rào cản khi chơi và giúp nhiều người dễ dàng tận hưởng Minecraft hơn.</string>
-    <string name="about_dec3">%s sử dụng giấy phép mã nguồn mở GPL 3.0, là giấy phép có tính kế thừa. Mọi mã nguồn sử dụng, chỉnh sửa hoặc phát triển dựa trên thư viện/phần mềm GPL cũng phải áp dụng giấy phép GPL khi công bố mã nguồn. Nếu phân phối phần mềm này, vui lòng tuân thủ các điều khoản liên quan của giấy phép GPL 3.0.</string>
+    <string name="about_dec3">%s là phần mềm mã nguồn mở theo giấy phép GPL 3.0. Các phần mã kế thừa từ Turtle Launcher và HMCL, cùng thư viện đi kèm, giữ nguyên bản quyền và giấy phép gốc. Mọi chỉnh sửa và phát triển thêm đều được công bố theo GPL 3.0. Nếu phân phối phần mềm này, vui lòng tuân thủ các điều khoản của GPL 3.0.</string>
     <string name="about_contributors">Những người đóng góp và ghi nhận:</string>
     <string name="about_sponsors">Lời cảm ơn tới các nhà tài trợ:</string>
     <string name="about_sponsors_list">Xem danh sách nhà tài trợ</string>
@@ -1090,7 +1090,9 @@
     <string name="about_sponsors_amount">Thời gian và tổng số tiền</string>
     <string name="about_button_support_development">Tài trợ phát triển</string>
     <string name="about_MovTery_desc">Nhà phát triển chính của Cyplix Launcher (Endiq)</string>
-    <string name="about_TurtleLauncher_desc">Dựa trên dự án Turtle Launcher mã nguồn mở, hiện do Endiq duy trì và phát triển</string>
+    <string name="about_TurtleLauncher_desc">Dự án gốc mã nguồn mở (GPL 3.0), do Endiq, MovTery và những người đóng góp phát triển</string>
+    <string name="about_cyplix_desc">Bản phát triển trên nền Turtle Launcher, được Cyplix tối ưu giao diện, trải nghiệm và bổ sung nhiều tính năng mới</string>
+    <string name="about_hmcl_desc">Một số thành phần tiện ích được kế thừa từ HMCL (GPL 3.0) của tác giả huangyuhui</string>
     <string name="about_mcmod_desc">Trình khởi chạy sử dụng bản dịch tiếng Trung của mod và modpack từ MC Wiki</string>
     <string name="about_VeraFirefly_desc">Hỗ trợ kỹ thuật về kết xuất cho trình khởi chạy</string>
     <string name="about_LingMuQiuZhu_desc">Hỗ trợ kỹ thuật cho trình khởi chạy</string>
