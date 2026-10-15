@@ -35,7 +35,6 @@ class SettingsFragment : FragmentWithAnim(R.layout.fragment_settings) {
             Triple(binding.shizukuSettingsRow, binding.generalSectionContainer, R.string.settings_row_shizuku_title),
             Triple(binding.discordSettingsRow, binding.generalSectionContainer, R.string.discord_settings_title),
             Triple(binding.videoSettingsRow, binding.performanceSectionContainer, R.string.settings_row_video_title),
-            Triple(binding.gameSettingsRow, binding.performanceSectionContainer, R.string.settings_row_game_title),
             Triple(binding.javaSettingsRow, binding.performanceSectionContainer, R.string.settings_row_java_title),
             Triple(binding.hudSettingsRow, binding.performanceSectionContainer, R.string.settings_row_hud_title),
             Triple(binding.controlsSettingsRow, binding.performanceSectionContainer, R.string.settings_row_controls_title),
@@ -84,9 +83,6 @@ class SettingsFragment : FragmentWithAnim(R.layout.fragment_settings) {
         }
         binding.videoSettingsRow.setOnClickListener {
             ZHTools.swapFragmentWithAnim(this, VideoSettingsFragment::class.java, VideoSettingsFragment.TAG, null)
-        }
-        binding.gameSettingsRow.setOnClickListener {
-            ZHTools.swapFragmentWithAnim(this, GameSettingsFragment::class.java, GameSettingsFragment.TAG, null)
         }
         binding.javaSettingsRow.setOnClickListener {
             ZHTools.swapFragmentWithAnim(this, JavaSettingsFragment::class.java, JavaSettingsFragment.TAG, null)

@@ -19,10 +19,12 @@ import com.endiq.turtlelauncher.setting.AllSettings
 import com.endiq.turtlelauncher.ui.fragment.CustomBackgroundFragment
 import com.endiq.turtlelauncher.ui.fragment.FragmentWithAnim
 import com.endiq.turtlelauncher.ui.fragment.settings.wrapper.BaseSettingsWrapper
+import com.endiq.turtlelauncher.ui.fragment.settings.wrapper.EditTextSettingsWrapper
 import com.endiq.turtlelauncher.ui.fragment.settings.wrapper.ListSettingsWrapper
 import com.endiq.turtlelauncher.ui.fragment.settings.wrapper.SeekBarSettingsWrapper
 import com.endiq.turtlelauncher.ui.fragment.settings.wrapper.SwitchSettingsWrapper
 import com.endiq.turtlelauncher.utils.CleanUpCache.Companion.start
+import com.endiq.turtlelauncher.utils.WarningTooltip
 import com.endiq.turtlelauncher.utils.ZHTools
 import net.endiq.launcher.LauncherActivity
 import org.greenrobot.eventbus.EventBus
@@ -275,6 +277,52 @@ class LauncherSettingsFragment() : AbstractSettingsFragment(R.layout.settings_fr
             binding.notificationPermissionRequest
         )
         setupNotificationRequestPreference(notificationPermissionRequest)
+
+        // Controls that used to live on the removed "Trò chơi" page.
+        SwitchSettingsWrapper(context, AllSettings.useAngle, binding.useAngleLayout, binding.useAngle)
+        WarningTooltip.attach(binding.useAngleWarning, getString(R.string.setting_warning_angle))
+
+        SwitchSettingsWrapper(
+            context,
+            AllSettings.versionIsolation,
+            binding.versionIsolationLayout,
+            binding.versionIsolation
+        )
+
+        EditTextSettingsWrapper(
+            AllSettings.versionCustomInfo,
+            binding.versionCustomInfoLayout,
+            binding.versionCustomInfoEdittext
+        )
+
+        EditTextSettingsWrapper(
+            AllSettings.curseForgeApiKey,
+            binding.curseForgeApiKeyLayout,
+            binding.curseForgeApiKeyEdittext
+        )
+
+        SwitchSettingsWrapper(
+            context,
+            AllSettings.autoSetGameLanguage,
+            binding.autoSetGameLanguageLayout,
+            binding.autoSetGameLanguage
+        )
+
+        SwitchSettingsWrapper(
+            context,
+            AllSettings.gameLanguageOverridden,
+            binding.gameLanguageOverriddenLayout,
+            binding.gameLanguageOverridden
+        )
+
+        ListSettingsWrapper(
+            context,
+            AllSettings.setGameLanguage,
+            binding.setGameLanguageLayout,
+            binding.setGameLanguageTitle,
+            binding.setGameLanguageValue,
+            R.array.all_game_language, R.array.all_game_language_value
+        )
     }
 
     override fun slideIn(animPlayer: AnimPlayer) {
