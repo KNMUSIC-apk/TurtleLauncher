@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Play button: Cyplix violet-to-blue gradient. Pressed and hovered states use solid tones. -->
+<!-- Play button: solid Cyplix green, matching the reference launcher. -->
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="@color/launch_button_ripple">
     <item>
@@ -18,11 +18,7 @@
             </item>
             <item>
                 <shape android:shape="rectangle">
-                    <gradient
-                        android:angle="0"
-                        android:startColor="@color/accent_primary"
-                        android:endColor="@color/accent_cyan"
-                        android:type="linear"/>
+                    <solid android:color="@color/launch_button_color"/>
                     <corners android:radius="@dimen/radius_dialog"/>
                 </shape>
             </item>

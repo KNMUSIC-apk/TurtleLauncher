@@ -1,29 +1,21 @@
 package com.endiq.turtlelauncher.ui.subassembly.view
 
 import android.app.Activity
-import android.content.Intent
-import android.content.IntentFilter
-import android.os.BatteryManager
 import android.view.View
 import android.widget.TextView
 import com.getkeepsafe.taptargetview.TapTargetView
 import com.endiq.turtlelauncher.R
-import com.endiq.turtlelauncher.feature.inputstats.InputStatsTracker
-import com.endiq.turtlelauncher.feature.inputstats.SessionStatsTracker
 import com.endiq.turtlelauncher.setting.AllSettings
 import com.endiq.turtlelauncher.task.TaskExecutors
 import com.endiq.turtlelauncher.utils.NewbieGuideUtils
-import com.endiq.turtlelauncher.utils.file.FileTools.Companion.formatFileSize
 import com.endiq.turtlelauncher.utils.platform.MemoryUtils
 import com.petterp.floatingx.assist.FxGravity
 import com.petterp.floatingx.assist.helper.FxScopeHelper
 import com.petterp.floatingx.listener.IFxViewLifecycle
 import com.petterp.floatingx.listener.control.IFxScopeControl
 import com.petterp.floatingx.view.FxViewHolder
-import net.endiq.launcher.LwjglGlfwKeycode
 import org.lwjgl.glfw.CallbackBridge
 import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Locale
 import java.util.Timer
 import java.util.TimerTask
@@ -176,6 +168,7 @@ class GameMenuViewWrapper(
         val recordTimerText: TextView = view.findViewById(R.id.record_timer_text)
 
         card.setRows(showCpuRow, showGpuRow, showRamRow, showFpsRow, showPingRow)
+        card.setScalePercent(AllSettings.hudModuleScale.getValue())
 
         fun tick() {
             pushHudFrame(card)

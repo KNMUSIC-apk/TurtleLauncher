@@ -125,6 +125,11 @@ class FileRecyclerViewCreator(
                         }
                     }
                     itemBean.image = getIcon(context, file, fileIcon, resources)
+                    if (fileIcon == FileIcon.MOD && file.isFile &&
+                        (file.name.endsWith(ModUtils.JAR_FILE_SUFFIX) || file.name.endsWith(ModUtils.DISABLE_JAR_FILE_SUFFIX))
+                    ) {
+                        itemBean.iconFile = com.endiq.turtlelauncher.feature.mod.ModIconExtractor.iconFileFor(context, file)
+                    }
                     itemBeans.add(itemBean)
                 }
             }

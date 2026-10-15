@@ -759,6 +759,12 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
 
             // Initialise the switch state.
             this.binding.showScreenshotButtonHud.setChecked(AllSettings.getShowScreenshotButtonHud().getValue());
+            this.binding.hudShowCpu.setChecked(AllSettings.getHudShowCpu().getValue());
+            this.binding.hudShowGpu.setChecked(AllSettings.getHudShowGpu().getValue());
+            this.binding.hudShowRam.setChecked(AllSettings.getHudShowRam().getValue());
+            this.binding.hudShowFps.setChecked(AllSettings.getHudShowFps().getValue());
+            this.binding.hudShowPing.setChecked(AllSettings.getHudShowPing().getValue());
+            MenuUtils.initSeekBarValue(this.binding.hudModuleScale, AllSettings.getHudModuleScale().getValue(), this.binding.hudModuleScaleValue, "%");
             this.binding.disableGestures.setChecked(AllSettings.getDisableGestures().getValue());
             this.binding.disableDoubleTap.setChecked(AllSettings.getDisableDoubleTap().getValue());
             this.binding.controlSwitcher.setChecked(AllSettings.getControlSwitcherEnabled().getValue());
@@ -776,6 +782,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             this.binding.tabBtnRecording.setOnClickListener(v -> selectTab(this.binding.tabBtnRecording));
             this.binding.tabBtnControl.setOnClickListener(v -> selectTab(this.binding.tabBtnControl));
             this.binding.tabBtnHotbar.setOnClickListener(v -> selectTab(this.binding.tabBtnHotbar));
+            this.binding.tabBtnHud.setOnClickListener(v -> selectTab(this.binding.tabBtnHud));
             selectTab(this.binding.tabBtnDebug);
 
             // Initialise the click listener.
@@ -788,6 +795,17 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
 
             this.binding.showScreenshotButtonHud.setOnCheckedChangeListener(this);
             this.binding.showScreenshotButtonHudLayout.setOnClickListener(this);
+            this.binding.hudShowCpu.setOnCheckedChangeListener(this);
+            this.binding.hudShowCpuLayout.setOnClickListener(this);
+            this.binding.hudShowGpu.setOnCheckedChangeListener(this);
+            this.binding.hudShowGpuLayout.setOnClickListener(this);
+            this.binding.hudShowRam.setOnCheckedChangeListener(this);
+            this.binding.hudShowRamLayout.setOnClickListener(this);
+            this.binding.hudShowFps.setOnCheckedChangeListener(this);
+            this.binding.hudShowFpsLayout.setOnClickListener(this);
+            this.binding.hudShowPing.setOnCheckedChangeListener(this);
+            this.binding.hudShowPingLayout.setOnClickListener(this);
+            this.binding.hudModuleScale.setOnSeekBarChangeListener(this);
 
             this.binding.resolutionScaler.setOnSeekBarChangeListener(this);
             this.binding.resolutionScalerRemove.setOnClickListener(this);
@@ -910,6 +928,11 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
                 refreshRecordingButtons();
             }
             else if (v == binding.showScreenshotButtonHudLayout) MenuUtils.toggleSwitchState(binding.showScreenshotButtonHud);
+            else if (v == binding.hudShowCpuLayout) MenuUtils.toggleSwitchState(binding.hudShowCpu);
+            else if (v == binding.hudShowGpuLayout) MenuUtils.toggleSwitchState(binding.hudShowGpu);
+            else if (v == binding.hudShowRamLayout) MenuUtils.toggleSwitchState(binding.hudShowRam);
+            else if (v == binding.hudShowFpsLayout) MenuUtils.toggleSwitchState(binding.hudShowFps);
+            else if (v == binding.hudShowPingLayout) MenuUtils.toggleSwitchState(binding.hudShowPing);
             else if (v == binding.resolutionScalerRemove) MenuUtils.adjustSeekbar(binding.resolutionScaler, -1);
             else if (v == binding.resolutionScalerAdd) MenuUtils.adjustSeekbar(binding.resolutionScaler, 1);
             else if (v == binding.disableGesturesLayout) MenuUtils.toggleSwitchState(binding.disableGestures);
@@ -976,6 +999,11 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
 
                 MenuUtils.updateSeekbarValue(progress, binding.hotbarWidthValue, "px");
                 EventBus.getDefault().post(new HotbarChangeEvent(progress, binding.hotbarHeight.getProgress()));
+            } else if (seekbar == binding.hudModuleScale) {
+                if (saveValue) AllSettings.getHudModuleScale().put(progress).save();
+
+                MenuUtils.updateSeekbarValue(progress, binding.hudModuleScaleValue, "%");
+                mGameMenuWrapper.refreshSettingsState();
             } else if (seekbar == binding.hotbarHeight) {
                 if (saveValue) AllSettings.getHotbarHeight().getValue().put(progress).save();
 
@@ -987,6 +1015,21 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         @Override public void onCheckedChanged(CompoundButton v, boolean isChecked) {
             if (v == binding.showScreenshotButtonHud) {
                 AllSettings.getShowScreenshotButtonHud().put(isChecked).save();
+                mGameMenuWrapper.refreshSettingsState();
+            } else if (v == binding.hudShowCpu) {
+                AllSettings.getHudShowCpu().put(isChecked).save();
+                mGameMenuWrapper.refreshSettingsState();
+            } else if (v == binding.hudShowGpu) {
+                AllSettings.getHudShowGpu().put(isChecked).save();
+                mGameMenuWrapper.refreshSettingsState();
+            } else if (v == binding.hudShowRam) {
+                AllSettings.getHudShowRam().put(isChecked).save();
+                mGameMenuWrapper.refreshSettingsState();
+            } else if (v == binding.hudShowFps) {
+                AllSettings.getHudShowFps().put(isChecked).save();
+                mGameMenuWrapper.refreshSettingsState();
+            } else if (v == binding.hudShowPing) {
+                AllSettings.getHudShowPing().put(isChecked).save();
                 mGameMenuWrapper.refreshSettingsState();
             } else if (v == binding.disableGestures) {
                 refreshLayoutVisible(binding.timeLongPressTriggerLayout, !isChecked);
@@ -1057,8 +1100,8 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         }
 
         private void selectTab(TextView selected) {
-            TextView[] buttons = { binding.tabBtnDebug, binding.tabBtnRecording, binding.tabBtnControl, binding.tabBtnHotbar };
-            View[] pages = { binding.tabPageDebug, binding.tabPageRecording, binding.tabPageControl, binding.tabPageHotbar };
+            TextView[] buttons = { binding.tabBtnDebug, binding.tabBtnRecording, binding.tabBtnControl, binding.tabBtnHotbar, binding.tabBtnHud };
+            View[] pages = { binding.tabPageDebug, binding.tabPageRecording, binding.tabPageControl, binding.tabPageHotbar, binding.tabPageHud };
             for (int i = 0; i < buttons.length; i++) {
                 boolean isSelected = buttons[i] == selected;
                 buttons[i].setTypeface(null, isSelected ? android.graphics.Typeface.BOLD : android.graphics.Typeface.NORMAL);

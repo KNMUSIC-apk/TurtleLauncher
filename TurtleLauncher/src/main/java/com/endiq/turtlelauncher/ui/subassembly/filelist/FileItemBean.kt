@@ -13,6 +13,8 @@ class FileItemBean(
     @JvmField val size: Long?
 ) : Comparable<FileItemBean?> {
     @JvmField var image: Drawable? = null
+    /** A mod's logo file (PNG from its jar), shown instead of the generic icon. */
+    @JvmField var iconFile: File? = null
     @JvmField var file: File? = null
     @JvmField var isHighlighted: Boolean = false
     @JvmField var isCanCheck: Boolean = true

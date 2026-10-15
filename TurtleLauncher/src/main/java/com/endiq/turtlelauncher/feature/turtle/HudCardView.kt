@@ -11,9 +11,9 @@ import android.util.AttributeSet
 import android.view.View
 
 /**
- * In-game HUD card: FPS with ping on top and a sparkline, then CPU, GPU and RAM rows with rings.
- * Drawn on a Canvas (no child views) so an update costs one invalidate instead of many setText calls.
- * Each row is shown or hidden by its own switch in Settings > HUD.
+ * In-game HUD strip, laid out horizontally: FPS | CPU | GPU | RAM | PING.
+ * Each cell is shown only when its switch is on in the in-game HUD tab. The whole strip is scaled
+ * by the "HUD size" slider. Drawn on a Canvas so an update is one invalidate, not many setText calls.
  */
 class HudCardView @JvmOverloads constructor(
     context: Context,
@@ -32,62 +32,77 @@ class HudCardView @JvmOverloads constructor(
         val ramTotalGb: Float
     )
 
+    private enum class Cell { FPS, CPU, GPU, RAM, PING }
+
     private var showCpu = true
     private var showGpu = true
     private var showRam = true
     private var showFps = true
     private var showPing = true
+    private var scale = 1f
 
     private var snapshot: Snapshot? = null
-    private val fpsHistory = FloatArray(HISTORY) { 0f }
+    private val fpsHistory = FloatArray(HISTORY)
     private var historyCount = 0
 
     private val density = resources.displayMetrics.density
+    private val scaledDensity = resources.displayMetrics.scaledDensity
     private fun dp(v: Float) = v * density
+    private fun sp(v: Float) = v * scaledDensity
 
-    private val cardBg = Color.parseColor("#D9080A12")
-    private val cardStroke = Color.parseColor("#1FFFFFFF")
-    private val textPrimary = Color.parseColor("#F2F5F0")
-    private val textMuted = Color.parseColor("#A8B0A6")
-    private val ringTrack = Color.parseColor("#26FFFFFF")
-    private val good = Color.parseColor("#22C55E")
+    private val cardBg = Color.parseColor("#D90B1A12")
+    private val cardStroke = Color.parseColor("#33FFFFFF")
+    private val divider = Color.parseColor("#26FFFFFF")
+    private val textPrimary = Color.parseColor("#F2F7F3")
+    private val textMuted = Color.parseColor("#A8B8AE")
+    private val ringTrack = Color.parseColor("#2AFFFFFF")
+    private val good = Color.parseColor("#4ADE80")
     private val warn = Color.parseColor("#FBBF24")
-    private val bad = Color.parseColor("#EF4444")
-    private val accent = Color.parseColor("#A78BFA")
+    private val bad = Color.parseColor("#F87171")
+    private val accent = Color.parseColor("#7FD6B0")
 
     private val bgPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = cardBg; style = Paint.Style.FILL }
     private val strokePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = cardStroke; style = Paint.Style.STROKE; strokeWidth = dp(1f)
     }
+    private val dividerPaint = Paint().apply { color = divider; strokeWidth = dp(1f) }
     private val labelPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = textMuted; textSize = sp(10f); typeface = Typeface.create("sans-serif-medium", Typeface.NORMAL)
-        letterSpacing = 0.12f
+        color = textMuted; textSize = sp(8f); typeface = Typeface.create("sans-serif-medium", Typeface.NORMAL)
+        letterSpacing = 0.1f
     }
     private val valuePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = textPrimary; textSize = sp(13f); typeface = Typeface.create("sans-serif-medium", Typeface.NORMAL)
+        color = textPrimary; textSize = sp(12f); typeface = Typeface.create("sans-serif-medium", Typeface.NORMAL)
     }
     private val bigPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = textPrimary; textSize = sp(24f); typeface = Typeface.create("sans-serif-medium", Typeface.NORMAL)
+        color = textPrimary; textSize = sp(16f); typeface = Typeface.create("sans-serif-medium", Typeface.NORMAL)
     }
-    private val smallPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = textMuted; textSize = sp(10f) }
     private val ringPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        style = Paint.Style.STROKE; strokeWidth = dp(3f); strokeCap = Paint.Cap.ROUND
+        style = Paint.Style.STROKE; strokeWidth = dp(2.5f); strokeCap = Paint.Cap.ROUND
     }
     private val linePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = accent; style = Paint.Style.STROKE; strokeWidth = dp(1.5f)
+        color = accent; style = Paint.Style.STROKE; strokeWidth = dp(1.2f)
     }
-    private val dividerPaint = Paint().apply { color = cardStroke; strokeWidth = dp(1f) }
     private val rect = RectF()
     private val path = Path()
 
-    private val cardWidth = dp(184f)
-    private val pad = dp(14f)
+    private val rowHeight = dp(44f)
+    private val edgePad = dp(8f)
 
-    /** Which rows are visible. Called when the switches change. */
+    /** Which cells are visible. Called when the switches change. */
     fun setRows(cpu: Boolean, gpu: Boolean, ram: Boolean, fps: Boolean, ping: Boolean) {
         showCpu = cpu; showGpu = gpu; showRam = ram; showFps = fps; showPing = ping
         requestLayout()
         invalidate()
+    }
+
+    /** Size of the strip as a percentage (50..150). */
+    fun setScalePercent(percent: Int) {
+        val next = percent.coerceIn(50, 150) / 100f
+        if (next != scale) {
+            scale = next
+            requestLayout()
+            invalidate()
+        }
     }
 
     /** Push a new frame of numbers. */
@@ -102,86 +117,103 @@ class HudCardView @JvmOverloads constructor(
         invalidate()
     }
 
-    /** Whether any row is enabled; the wrapper hides the whole card when none are. */
     fun hasVisibleRows(): Boolean = showCpu || showGpu || showRam || showFps || showPing
 
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        setMeasuredDimension(cardWidth.toInt(), measureHeight().toInt())
+    private fun visibleCells(): List<Cell> = buildList {
+        if (showFps) add(Cell.FPS)
+        if (showCpu) add(Cell.CPU)
+        if (showGpu) add(Cell.GPU)
+        if (showRam) add(Cell.RAM)
+        if (showPing) add(Cell.PING)
     }
 
-    private fun measureHeight(): Float {
-        var h = pad * 2
-        if (showFps) h += dp(58f)
-        if (showCpu) h += dp(48f)
-        if (showGpu) h += dp(48f)
-        if (showRam) h += dp(48f)
-        if (!hasVisibleRows()) h = 0f
-        return h
+    private fun cellWidth(c: Cell): Float = dp(when (c) {
+        Cell.FPS -> 64f
+        Cell.CPU, Cell.GPU -> 112f
+        Cell.RAM -> 80f
+        Cell.PING -> 56f
+    })
+
+    private fun contentWidth(): Float {
+        val cells = visibleCells()
+        if (cells.isEmpty()) return 0f
+        return cells.sumOf { cellWidth(it).toDouble() }.toFloat() + edgePad * 2
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        val w = if (hasVisibleRows()) contentWidth() * scale else 0f
+        val h = if (hasVisibleRows()) (rowHeight + edgePad) * scale else 0f
+        setMeasuredDimension(w.toInt(), h.toInt())
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        val h = measureHeight()
-        if (h <= 0f) return
-        rect.set(0.5f, 0.5f, width - 0.5f, h - 0.5f)
-        val radius = dp(14f)
+        if (!hasVisibleRows()) return
+        canvas.save()
+        canvas.scale(scale, scale)
+
+        val h = rowHeight + edgePad
+        val w = contentWidth()
+        rect.set(0.5f, 0.5f, w - 0.5f, h - 0.5f)
+        val radius = dp(12f)
         canvas.drawRoundRect(rect, radius, radius, bgPaint)
         canvas.drawRoundRect(rect, radius, radius, strokePaint)
 
-        val s = snapshot
-        var y = pad
-        val left = pad
-        val right = width - pad
-
-        if (showFps) {
-            canvas.drawText("FPS", left, y + dp(10f), labelPaint)
-            val fpsText = (s?.fps ?: 0).toString()
-            canvas.drawText(fpsText, left, y + dp(40f), bigPaint)
-            if (showPing) {
-                val pingText = s?.pingMs?.let { "$it ms" } ?: "-- ms"
-                val w = smallPaint.measureText(pingText)
-                canvas.drawText(pingText, right - w, y + dp(10f), smallPaint)
+        var x = edgePad
+        val cells = visibleCells()
+        cells.forEachIndexed { index, cell ->
+            val cw = cellWidth(cell)
+            when (cell) {
+                Cell.FPS -> drawFps(canvas, x, cw)
+                Cell.CPU -> drawTempUsage(canvas, x, "CPU", snapshot?.cpuTempC, snapshot?.cpuPercent)
+                Cell.GPU -> drawTempUsage(canvas, x, "GPU", snapshot?.gpuTempC, snapshot?.gpuPercent)
+                Cell.RAM -> drawRam(canvas, x)
+                Cell.PING -> drawPing(canvas, x)
             }
-            drawSparkline(canvas, left, right, y + dp(44f), y + dp(56f))
-            y += dp(58f)
-            if (showCpu || showGpu || showRam) canvas.drawLine(left, y - dp(1f), right, y - dp(1f), dividerPaint)
+            x += cw
+            if (index < cells.lastIndex) {
+                canvas.drawLine(x, dp(8f), x, h - dp(8f), dividerPaint)
+            }
         }
-
-        if (showCpu) {
-            drawLabelRow(canvas, "CPU", y)
-            val temp = s?.cpuTempC
-            drawRing(canvas, left + dp(64f), y + dp(24f), tempColor(temp), tempFraction(temp))
-            canvas.drawText(temp?.let { "$it°C" } ?: "--", left + dp(84f), y + dp(29f), valuePaint)
-            drawRing(canvas, right - dp(44f), y + dp(24f), usageColor(s?.cpuPercent), (s?.cpuPercent ?: 0) / 100f)
-            canvas.drawText(s?.cpuPercent?.let { "$it%" } ?: "--", right - dp(24f), y + dp(29f), valuePaint)
-            y += dp(48f)
-        }
-
-        if (showGpu) {
-            drawLabelRow(canvas, "GPU", y)
-            val temp = s?.gpuTempC
-            drawRing(canvas, left + dp(64f), y + dp(24f), tempColor(temp), tempFraction(temp))
-            canvas.drawText(temp?.let { "$it°C" } ?: "--", left + dp(84f), y + dp(29f), valuePaint)
-            drawRing(canvas, right - dp(44f), y + dp(24f), usageColor(s?.gpuPercent), (s?.gpuPercent ?: 0) / 100f)
-            canvas.drawText(s?.gpuPercent?.let { "$it%" } ?: "--", right - dp(24f), y + dp(29f), valuePaint)
-            y += dp(48f)
-        }
-
-        if (showRam) {
-            drawLabelRow(canvas, "RAM", y)
-            val frac = if (s != null && s.ramTotalGb > 0f) (s.ramUsedGb / s.ramTotalGb).coerceIn(0f, 1f) else 0f
-            drawRing(canvas, left + dp(64f), y + dp(24f), usageColor((frac * 100).toInt()), frac)
-            val text = s?.let { String.format("%.1fGB", it.ramUsedGb) } ?: "--"
-            canvas.drawText(text, left + dp(84f), y + dp(29f), valuePaint)
-        }
+        canvas.restore()
     }
 
-    private fun drawLabelRow(canvas: Canvas, label: String, top: Float) {
-        canvas.drawText(label, pad, top + dp(28f), labelPaint)
+    private fun drawFps(canvas: Canvas, x: Float, cw: Float) {
+        canvas.drawText("FPS", x + dp(4f), dp(14f), labelPaint)
+        canvas.drawText((snapshot?.fps ?: 0).toString(), x + dp(4f), dp(34f), bigPaint)
+        drawSparkline(canvas, x + dp(4f), x + cw - dp(6f), dp(30f), dp(40f))
     }
 
-    private fun drawRing(canvas: Canvas, cx: Float, cy: Float, color: Int, fraction: Float) {
-        val r = dp(11f)
+    private fun drawPing(canvas: Canvas, x: Float) {
+        canvas.drawText("PING", x + dp(6f), dp(14f), labelPaint)
+        val ms = snapshot?.pingMs
+        canvas.drawText(ms?.let { "$it ms" } ?: "-- ms", x + dp(6f), dp(34f), valuePaint)
+    }
+
+    /** Temperature ring then usage ring, each with its value. */
+    private fun drawTempUsage(canvas: Canvas, x: Float, label: String, tempC: Int?, usage: Int?) {
+        canvas.drawText(label, x + dp(4f), dp(14f), labelPaint)
+        val cy = dp(29f)
+        val r = dp(8f)
+        drawRing(canvas, x + dp(12f) + r, cy, r, tempColor(tempC), tempFraction(tempC))
+        canvas.drawText(tempC?.let { "$it°" } ?: "--", x + dp(34f), dp(33f), valuePaint)
+        val ucx = x + dp(70f) + r
+        drawRing(canvas, ucx, cy, r, usageColor(usage), (usage ?: 0) / 100f)
+        canvas.drawText(usage?.let { "$it%" } ?: "--", ucx + r + dp(4f), dp(33f), valuePaint)
+    }
+
+    private fun drawRam(canvas: Canvas, x: Float) {
+        canvas.drawText("RAM", x + dp(4f), dp(14f), labelPaint)
+        val s = snapshot
+        val frac = if (s != null && s.ramTotalGb > 0f) (s.ramUsedGb / s.ramTotalGb).coerceIn(0f, 1f) else 0f
+        val cy = dp(29f)
+        val r = dp(8f)
+        drawRing(canvas, x + dp(12f) + r, cy, r, usageColor((frac * 100).toInt()), frac)
+        val text = s?.let { String.format("%.1fGB", it.ramUsedGb) } ?: "--"
+        canvas.drawText(text, x + dp(34f), dp(33f), valuePaint)
+    }
+
+    private fun drawRing(canvas: Canvas, cx: Float, cy: Float, r: Float, color: Int, fraction: Float) {
         rect.set(cx - r, cy - r, cx + r, cy + r)
         ringPaint.color = ringTrack
         canvas.drawArc(rect, 0f, 360f, false, ringPaint)
@@ -190,13 +222,12 @@ class HudCardView @JvmOverloads constructor(
     }
 
     private fun drawSparkline(canvas: Canvas, left: Float, right: Float, top: Float, bottom: Float) {
-        if (historyCount < 2) return
+        if (historyCount < 2 || right <= left) return
         val maxFps = (0 until historyCount).maxOf { fpsHistory[it] }.coerceAtLeast(1f)
-        val n = historyCount
         val stepX = (right - left) / (HISTORY - 1)
         path.reset()
-        for (i in 0 until n) {
-            val x = left + stepX * (HISTORY - n + i)
+        for (i in 0 until historyCount) {
+            val x = left + stepX * (HISTORY - historyCount + i)
             val y = bottom - (bottom - top) * (fpsHistory[i] / maxFps)
             if (i == 0) path.moveTo(x, y) else path.lineTo(x, y)
         }
@@ -218,8 +249,6 @@ class HudCardView @JvmOverloads constructor(
         p >= 65 -> warn
         else -> accent
     }
-
-    private fun sp(v: Float) = v * resources.displayMetrics.scaledDensity
 
     companion object {
         private const val HISTORY = 40

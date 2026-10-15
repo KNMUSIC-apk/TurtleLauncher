@@ -268,6 +268,11 @@ public class FileRecyclerAdapter extends RecyclerView.Adapter<FileRecyclerAdapte
                         .override(binding.image.getWidth(), binding.image.getHeight())
                         .centerCrop()
                         .into(new DrawableImageViewTarget(binding.image));
+            } else if (fileItemBean.iconFile != null) {
+                Glide.with(context).load(fileItemBean.iconFile)
+                        .override(binding.image.getWidth(), binding.image.getHeight())
+                        .centerCrop()
+                        .into(new DrawableImageViewTarget(binding.image));
             } else {
                 binding.image.setImageDrawable(fileItemBean.image);
             }
