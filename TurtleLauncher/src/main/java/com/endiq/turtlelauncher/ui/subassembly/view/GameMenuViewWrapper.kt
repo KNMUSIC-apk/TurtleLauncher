@@ -36,23 +36,16 @@ class GameMenuViewWrapper(
     companion object {
         private const val TAG = "GameMenuViewWrapper"
         private val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+        private const val BYTES_PER_GB = 1024f * 1024f * 1024f
     }
 
     private var timer: Timer? = null
-    private val memoryText: String = AllSettings.gameMenuMemoryText.getValue()
 
-    private var showMemory: Boolean = false
-    private var showNativeMemory: Boolean = false
-    private var showFPS: Boolean = false
-    private var showCps: Boolean = false
-    private var showKeystrokes: Boolean = false
-    private var showMousestrokes: Boolean = false
-    private var showStopwatch: Boolean = false
-    private var showPlaytime: Boolean = false
-    private var showSystemResources: Boolean = false
-    private var showTime: Boolean = false
-    private var showRamGraph: Boolean = false
-    private var showPing: Boolean = false
+    private var showCpuRow: Boolean = false
+    private var showGpuRow: Boolean = false
+    private var showRamRow: Boolean = false
+    private var showFpsRow: Boolean = false
+    private var showPingRow: Boolean = false
     private var showScreenshotButton: Boolean = false
     private var showRecordButton: Boolean = false
     private var buttonVisible: Boolean = false
@@ -139,9 +132,8 @@ class GameMenuViewWrapper(
     }
 
     private fun thinkForHudVisibility() {
-        val shouldShow = showMemory || showFPS || showCps || showKeystrokes || showMousestrokes ||
-            showStopwatch || showPlaytime || showSystemResources || showTime ||
-            showRamGraph || showPing || showScreenshotButton || showRecordButton
+        val shouldShow = showCpuRow || showGpuRow || showRamRow || showFpsRow || showPingRow ||
+            showScreenshotButton || showRecordButton
 
         if (shouldShow) {
             if (hudScopeFx != null) {
@@ -160,18 +152,11 @@ class GameMenuViewWrapper(
     }
 
     private fun refreshState() {
-        showMemory = AllSettings.gameMenuShowMemory.getValue()
-        showNativeMemory = AllSettings.gameMenuShowNativeMemory.getValue()
-        showFPS = AllSettings.gameMenuShowFPS.getValue()
-        showCps = AllSettings.showCpsHud.getValue()
-        showKeystrokes = AllSettings.showKeystrokesHud.getValue()
-        showMousestrokes = AllSettings.showMousestrokesHud.getValue()
-        showStopwatch = AllSettings.showStopwatchHud.getValue()
-        showPlaytime = AllSettings.showPlaytimeHud.getValue()
-        showSystemResources = AllSettings.showSystemResourcesHud.getValue()
-        showTime = AllSettings.showTimeHud.getValue()
-        showRamGraph = AllSettings.showRamGraphHud.getValue()
-        showPing = AllSettings.showPingHud.getValue()
+        showCpuRow = AllSettings.hudShowCpu.getValue()
+        showGpuRow = AllSettings.hudShowGpu.getValue()
+        showRamRow = AllSettings.hudShowRam.getValue()
+        showFpsRow = AllSettings.hudShowFps.getValue()
+        showPingRow = AllSettings.hudShowPing.getValue()
         showScreenshotButton = AllSettings.showScreenshotButtonHud.getValue()
         showRecordButton = AllSettings.showRecordButtonHud.getValue()
     }
@@ -185,136 +170,20 @@ class GameMenuViewWrapper(
     private fun updateInfoText(view: View) {
         cancelInfoTimer()
 
-        val memoryText: TextView = view.findViewById(R.id.memory_text)
-        val fpsText: TextView = view.findViewById(R.id.fps_text)
-        val cpsText: TextView = view.findViewById(R.id.cps_text)
-        val systemResourcesText: TextView = view.findViewById(R.id.system_resources_text)
-        val timeText: TextView = view.findViewById(R.id.time_text)
-        val stopwatchText: TextView = view.findViewById(R.id.stopwatch_text)
-        val playtimeText: TextView = view.findViewById(R.id.playtime_text)
-        val pingText: TextView = view.findViewById(R.id.ping_text)
-        val ramGraphView: com.endiq.turtlelauncher.feature.turtle.RamGraphView = view.findViewById(R.id.ram_graph_view)
+        val card: com.endiq.turtlelauncher.feature.turtle.HudCardView = view.findViewById(R.id.hud_card)
         val screenshotButton: TextView = view.findViewById(R.id.screenshot_button)
         val recordButton: TextView = view.findViewById(R.id.record_button)
         val recordTimerText: TextView = view.findViewById(R.id.record_timer_text)
 
-        val keystrokesBlock: View = view.findViewById(R.id.keystrokes_block)
-        val keyW: TextView = view.findViewById(R.id.key_w)
-        val keyA: TextView = view.findViewById(R.id.key_a)
-        val keyS: TextView = view.findViewById(R.id.key_s)
-        val keyD: TextView = view.findViewById(R.id.key_d)
-        val keySpace: TextView = view.findViewById(R.id.key_space)
+        card.setRows(showCpuRow, showGpuRow, showRamRow, showFpsRow, showPingRow)
 
-        val mousestrokesBlock: View = view.findViewById(R.id.mousestrokes_block)
-        val mouseLeft: TextView = view.findViewById(R.id.mouse_left)
-        val mouseRight: TextView = view.findViewById(R.id.mouse_right)
-
-        val heldColor = android.graphics.Color.parseColor("#9CCF93") // Status: Success, when held
-        val idleColor = android.graphics.Color.parseColor("#33F2F5F0") // faint white when idle
-
-        fun setKeyColor(key: TextView, held: Boolean) {
-            key.setBackgroundColor(if (held) heldColor else idleColor)
+        fun tick() {
+            pushHudFrame(card)
+            updateRecordButton(recordButton, recordTimerText)
         }
-
-        fun updateInfoText() {
-            if (showMemory) {
-                val nativeSuffix = if (showNativeMemory) {
-                    val nativeMb = MemoryUtils.getNativeHeapAllocated() / (1024 * 1024)
-                    " (N: ${nativeMb}M)"
-                } else ""
-                val memoryString = "${this@GameMenuViewWrapper.memoryText} ${getUsedDeviceMemory()}/${getTotalDeviceMemory()}$nativeSuffix".let { string ->
-                    if (string.length > 40) return@let string.take(40)
-                    string
-                }
-                TaskExecutors.runInUIThread { memoryText.text = memoryString }
-            }
-            if (showFPS) {
-                val fpsString = "FPS: ${CallbackBridge.getCurrentFps()}"
-                TaskExecutors.runInUIThread { fpsText.text = fpsString }
-            }
-            if (showCps) {
-                val cpsString = "CPS: ${InputStatsTracker.getCps()}"
-                TaskExecutors.runInUIThread { cpsText.text = cpsString }
-            }
-            if (showSystemResources) {
-                val batteryPercent = getBatteryPercent()
-                val batteryString = if (batteryPercent >= 0) "Battery: $batteryPercent%" else "Battery: --"
-                TaskExecutors.runInUIThread { systemResourcesText.text = batteryString }
-            }
-            if (showTime) {
-                val timeString = timeFormat.format(Date())
-                TaskExecutors.runInUIThread { timeText.text = timeString }
-            }
-            if (showStopwatch) {
-                val stopwatchString = "Session: ${SessionStatsTracker.formatDuration(SessionStatsTracker.getSessionElapsedMs())}"
-                TaskExecutors.runInUIThread { stopwatchText.text = stopwatchString }
-            }
-            if (showPlaytime) {
-                val playtimeString = "Playtime: ${SessionStatsTracker.formatDuration(SessionStatsTracker.getTotalPlaytimeMs())}"
-                TaskExecutors.runInUIThread { playtimeText.text = playtimeString }
-            }
-            if (showKeystrokes) {
-                val wHeld = InputStatsTracker.isKeyHeld(LwjglGlfwKeycode.GLFW_KEY_W.toInt())
-                val aHeld = InputStatsTracker.isKeyHeld(LwjglGlfwKeycode.GLFW_KEY_A.toInt())
-                val sHeld = InputStatsTracker.isKeyHeld(LwjglGlfwKeycode.GLFW_KEY_S.toInt())
-                val dHeld = InputStatsTracker.isKeyHeld(LwjglGlfwKeycode.GLFW_KEY_D.toInt())
-                val spaceHeld = InputStatsTracker.isKeyHeld(LwjglGlfwKeycode.GLFW_KEY_SPACE.toInt())
-                TaskExecutors.runInUIThread {
-                    setKeyColor(keyW, wHeld)
-                    setKeyColor(keyA, aHeld)
-                    setKeyColor(keyS, sHeld)
-                    setKeyColor(keyD, dHeld)
-                    setKeyColor(keySpace, spaceHeld)
-                }
-            }
-            if (showMousestrokes) {
-                val leftHeld = InputStatsTracker.isLeftMouseHeld()
-                val rightHeld = InputStatsTracker.isRightMouseHeld()
-                TaskExecutors.runInUIThread {
-                    setKeyColor(mouseLeft, leftHeld)
-                    setKeyColor(mouseRight, rightHeld)
-                }
-            }
-            if (showPing) {
-                val ms = com.endiq.turtlelauncher.feature.turtle.PingTracker.getPingMs()
-                val pingString = if (ms >= 0) "Ping: $ms ms" else "Ping: -- ms"
-                TaskExecutors.runInUIThread { pingText.text = pingString }
-            }
-            if (showRamGraph) {
-                val usedMb = MemoryUtils.getUsedDeviceMemory(activity) / (1024 * 1024)
-                val totalMb = MemoryUtils.getTotalDeviceMemory(activity) / (1024 * 1024)
-                TaskExecutors.runInUIThread { ramGraphView.pushSample(usedMb, totalMb) }
-            }
-            if (showRecordButton) {
-                val recording = com.endiq.turtlelauncher.feature.turtle.ScreenRecorder.isRecording()
-                TaskExecutors.runInUIThread {
-                    recordButton.visibility = if (recording) View.VISIBLE else View.GONE
-                    recordButton.text = if (recording) "⏹" else "⏺"
-                    if (recording && AllSettings.recordingShowTimer.getValue()) {
-                        val elapsed = com.endiq.turtlelauncher.feature.turtle.ScreenRecorder.getElapsedSeconds()
-                        recordTimerText.text = String.format(Locale.US, "%02d:%02d", elapsed / 60, elapsed % 60)
-                        recordTimerText.visibility = View.VISIBLE
-                    } else {
-                        recordTimerText.visibility = View.GONE
-                    }
-                }
-            }
-        }
-
-        updateInfoText()
 
         if (showInfo) {
-            memoryText.visibility = if (showMemory) View.VISIBLE else View.GONE
-            fpsText.visibility = if (showFPS) View.VISIBLE else View.GONE
-            cpsText.visibility = if (showCps) View.VISIBLE else View.GONE
-            systemResourcesText.visibility = if (showSystemResources) View.VISIBLE else View.GONE
-            timeText.visibility = if (showTime) View.VISIBLE else View.GONE
-            stopwatchText.visibility = if (showStopwatch) View.VISIBLE else View.GONE
-            playtimeText.visibility = if (showPlaytime) View.VISIBLE else View.GONE
-            keystrokesBlock.visibility = if (showKeystrokes) View.VISIBLE else View.GONE
-            mousestrokesBlock.visibility = if (showMousestrokes) View.VISIBLE else View.GONE
-            pingText.visibility = if (showPing) View.VISIBLE else View.GONE
-            ramGraphView.visibility = if (showRamGraph) View.VISIBLE else View.GONE
+            card.visibility = if (card.hasVisibleRows()) View.VISIBLE else View.GONE
             screenshotButton.visibility = if (showScreenshotButton) View.VISIBLE else View.GONE
             screenshotButton.setOnClickListener {
                 com.endiq.turtlelauncher.feature.turtle.ScreenshotHelper.takeScreenshot(activity)
@@ -327,18 +196,18 @@ class GameMenuViewWrapper(
                 com.endiq.turtlelauncher.feature.turtle.ScreenRecorder.toggle(activity)
             }
 
-            if (showPing) {
+            if (showPingRow) {
                 com.endiq.turtlelauncher.feature.turtle.PingTracker.start()
             }
 
-            val needsTimer = showMemory || showFPS || showCps || showKeystrokes || showMousestrokes ||
-                showStopwatch || showPlaytime || showSystemResources || showTime || showPing || showRamGraph ||
-                showRecordButton
+            tick()
+
+            val needsTimer = showCpuRow || showGpuRow || showRamRow || showFpsRow || showPingRow || showRecordButton
             if (needsTimer) {
                 timer = Timer().apply {
                     schedule(object : TimerTask() {
                         override fun run() {
-                            updateInfoText()
+                            tick()
                         }
                     }, 0, AllSettings.gameMenuInfoRefreshRate.getValue().toLong())
                 }
@@ -346,19 +215,36 @@ class GameMenuViewWrapper(
         }
     }
 
-    private fun getUsedDeviceMemory(): String = formatFileSize(MemoryUtils.getUsedDeviceMemory(activity))
+    /** Samples every enabled number once and pushes it to the card. Runs on the timer thread. */
+    private fun pushHudFrame(card: com.endiq.turtlelauncher.feature.turtle.HudCardView) {
+        val used = MemoryUtils.getUsedDeviceMemory(activity).toFloat()
+        val total = MemoryUtils.getTotalDeviceMemory(activity).toFloat()
+        val frame = com.endiq.turtlelauncher.feature.turtle.HudCardView.Snapshot(
+            fps = CallbackBridge.getCurrentFps(),
+            pingMs = com.endiq.turtlelauncher.feature.turtle.PingTracker.getPingMs().takeIf { it >= 0 },
+            cpuPercent = com.endiq.turtlelauncher.feature.turtle.HudStatsReader.cpuUsagePercent(),
+            cpuTempC = com.endiq.turtlelauncher.feature.turtle.HudStatsReader.cpuTempC(),
+            gpuPercent = com.endiq.turtlelauncher.feature.turtle.HudStatsReader.gpuUsagePercent(),
+            gpuTempC = com.endiq.turtlelauncher.feature.turtle.HudStatsReader.gpuTempC(),
+            ramUsedGb = used / BYTES_PER_GB,
+            ramTotalGb = total / BYTES_PER_GB
+        )
+        TaskExecutors.runInUIThread { card.update(frame) }
+    }
 
-    private fun getTotalDeviceMemory(): String = formatFileSize(MemoryUtils.getTotalDeviceMemory(activity))
-
-    /** Reads the current battery intent synchronously (sticky intent, no receiver actually registered). */
-    private fun getBatteryPercent(): Int {
-        return try {
-            val intent = activity.applicationContext.registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
-            val level = intent?.getIntExtra(BatteryManager.EXTRA_LEVEL, -1) ?: -1
-            val scale = intent?.getIntExtra(BatteryManager.EXTRA_SCALE, -1) ?: -1
-            if (level >= 0 && scale > 0) (level * 100) / scale else -1
-        } catch (e: Exception) {
-            -1
+    private fun updateRecordButton(recordButton: TextView, recordTimerText: TextView) {
+        if (!showRecordButton) return
+        val recording = com.endiq.turtlelauncher.feature.turtle.ScreenRecorder.isRecording()
+        TaskExecutors.runInUIThread {
+            recordButton.visibility = if (recording) View.VISIBLE else View.GONE
+            recordButton.text = if (recording) "⏹" else "⏺"
+            if (recording && AllSettings.recordingShowTimer.getValue()) {
+                val elapsed = com.endiq.turtlelauncher.feature.turtle.ScreenRecorder.getElapsedSeconds()
+                recordTimerText.text = String.format(Locale.US, "%02d:%02d", elapsed / 60, elapsed % 60)
+                recordTimerText.visibility = View.VISIBLE
+            } else {
+                recordTimerText.visibility = View.GONE
+            }
         }
     }
 

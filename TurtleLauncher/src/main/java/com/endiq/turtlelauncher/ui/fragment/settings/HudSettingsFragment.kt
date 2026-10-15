@@ -1,22 +1,24 @@
 package com.endiq.turtlelauncher.ui.fragment.settings
 
-import com.endiq.turtlelauncher.utils.anim.TurtleTransitions
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.endiq.anim.AnimPlayer
-import com.endiq.anim.animations.Animations
 import com.endiq.turtlelauncher.R
 import com.endiq.turtlelauncher.databinding.SettingsFragmentHudBinding
+import com.endiq.turtlelauncher.feature.turtle.HudCardView
 import com.endiq.turtlelauncher.setting.AllSettings
-import com.endiq.turtlelauncher.ui.fragment.settings.wrapper.EditTextSettingsWrapper
 import com.endiq.turtlelauncher.ui.fragment.settings.wrapper.ListSettingsWrapper
 import com.endiq.turtlelauncher.ui.fragment.settings.wrapper.SeekBarSettingsWrapper
 import com.endiq.turtlelauncher.ui.fragment.settings.wrapper.SwitchSettingsWrapper
 import com.endiq.turtlelauncher.utils.ZHTools
+import com.endiq.turtlelauncher.utils.anim.TurtleTransitions
 
-
+/**
+ * Settings > HUD. The in-game HUD is one card with five switchable rows: CPU, GPU, RAM, FPS and
+ * ping. The preview under the title draws the same card with sample numbers.
+ */
 class HudSettingsFragment : AbstractSettingsFragment(R.layout.settings_fragment_hud, SettingCategory.HUD) {
     companion object {
         const val TAG: String = "HudSettingsFragment"
@@ -37,40 +39,26 @@ class HudSettingsFragment : AbstractSettingsFragment(R.layout.settings_fragment_
         val context = requireContext()
         binding.subSettingsBackButton.setOnClickListener { ZHTools.onBackPressed(requireActivity()) }
 
-        SwitchSettingsWrapper(
-            context,
-            AllSettings.gameMenuShowMemory,
-            binding.gameMenuShowMemoryLayout,
-            binding.gameMenuShowMemory
-        ).setOnCheckedChangeListener { _, _, listener ->
-            listener.onSave()
-            openGameMenuMemory()
+        // The five HUD switches. Each one redraws the preview so the change is visible at once.
+        listOf(
+            Triple(AllSettings.hudShowCpu, binding.hudShowCpuLayout, binding.hudShowCpu),
+            Triple(AllSettings.hudShowGpu, binding.hudShowGpuLayout, binding.hudShowGpu),
+            Triple(AllSettings.hudShowRam, binding.hudShowRamLayout, binding.hudShowRam),
+            Triple(AllSettings.hudShowFps, binding.hudShowFpsLayout, binding.hudShowFps),
+            Triple(AllSettings.hudShowPing, binding.hudShowPingLayout, binding.hudShowPing),
+        ).forEach { (setting, layout, switch) ->
+            SwitchSettingsWrapper(context, setting, layout, switch).setOnCheckedChangeListener { _, _, listener ->
+                listener.onSave()
+                updatePreview()
+            }
         }
 
         SwitchSettingsWrapper(
             context,
-            AllSettings.gameMenuShowNativeMemory,
-            binding.gameMenuShowNativeMemoryLayout,
-            binding.gameMenuShowNativeMemory
+            AllSettings.showScreenshotButtonHud,
+            binding.showScreenshotButtonHudLayout,
+            binding.showScreenshotButtonHud
         )
-
-        SwitchSettingsWrapper(
-            context,
-            AllSettings.gameMenuShowFPS,
-            binding.gameMenuShowFPSLayout,
-            binding.gameMenuShowFPS
-        ).setOnCheckedChangeListener { _, _, listener ->
-            listener.onSave()
-            openGameMenuFPS()
-        }
-
-        EditTextSettingsWrapper(
-            AllSettings.gameMenuMemoryText,
-            binding.gameMenuMemoryTextLayout,
-            binding.gameMenuMemoryText
-        ).setOnTextChangedListener {
-            updateGameMenuMemoryText()
-        }.setMaxLength(40)
 
         ListSettingsWrapper(
             context,
@@ -105,23 +93,6 @@ class HudSettingsFragment : AbstractSettingsFragment(R.layout.settings_fragment_
             setGameMenuAlpha(progress.toFloat() / 100F)
         }
 
-        openGameMenuMemory()
-        openGameMenuFPS()
-        updateGameMenuMemoryText()
-        setGameMenuAlpha(AllSettings.gameMenuAlpha.getValue().toFloat() / 100F)
-
-        SwitchSettingsWrapper(context, AllSettings.showCpsHud, binding.showCpsHudLayout, binding.showCpsHud)
-        SwitchSettingsWrapper(context, AllSettings.showKeystrokesHud, binding.showKeystrokesHudLayout, binding.showKeystrokesHud)
-        SwitchSettingsWrapper(context, AllSettings.showMousestrokesHud, binding.showMousestrokesHudLayout, binding.showMousestrokesHud)
-        SwitchSettingsWrapper(context, AllSettings.showStopwatchHud, binding.showStopwatchHudLayout, binding.showStopwatchHud)
-        SwitchSettingsWrapper(context, AllSettings.showPlaytimeHud, binding.showPlaytimeHudLayout, binding.showPlaytimeHud)
-        SwitchSettingsWrapper(context, AllSettings.showSystemResourcesHud, binding.showSystemResourcesHudLayout, binding.showSystemResourcesHud)
-        SwitchSettingsWrapper(context, AllSettings.showTimeHud, binding.showTimeHudLayout, binding.showTimeHud)
-        SwitchSettingsWrapper(context, AllSettings.showRamGraphHud, binding.showRamGraphHudLayout, binding.showRamGraphHud)
-        SwitchSettingsWrapper(context, AllSettings.showPingHud, binding.showPingHudLayout, binding.showPingHud)
-        SwitchSettingsWrapper(context, AllSettings.showScreenshotButtonHud, binding.showScreenshotButtonHudLayout, binding.showScreenshotButtonHud)
-        // showRecordButtonHud lives only in RecordingSettingsFragment now - see that file.
-        // Independent HUD Dragging removed outright (was here) - see GameMenuViewWrapper.kt
         SeekBarSettingsWrapper(
             context,
             AllSettings.hudModuleScale,
@@ -133,24 +104,6 @@ class HudSettingsFragment : AbstractSettingsFragment(R.layout.settings_fragment_
             suffix = "%"
         )
 
-        // PvP overlay preset: one toggle that flips CPS + Keystrokes + Mousestrokes together.
-        // It mirrors its own state from those three on load (checked only if all three are
-        // already on) and, when tapped, pushes the new state down to all three switches.
-        binding.pvpOverlayPreset.isChecked = AllSettings.showCpsHud.getValue() &&
-            AllSettings.showKeystrokesHud.getValue() && AllSettings.showMousestrokesHud.getValue()
-        binding.pvpOverlayPresetLayout.setOnClickListener {
-            binding.pvpOverlayPreset.isChecked = !binding.pvpOverlayPreset.isChecked
-        }
-        binding.pvpOverlayPreset.setOnCheckedChangeListener { _, isChecked ->
-            AllSettings.pvpOverlayPreset.put(isChecked).save()
-            AllSettings.showCpsHud.put(isChecked).save()
-            AllSettings.showKeystrokesHud.put(isChecked).save()
-            AllSettings.showMousestrokesHud.put(isChecked).save()
-            binding.showCpsHud.isChecked = isChecked
-            binding.showKeystrokesHud.isChecked = isChecked
-            binding.showMousestrokesHud.isChecked = isChecked
-        }
-
         SeekBarSettingsWrapper(
             context,
             AllSettings.hudAlpha,
@@ -161,26 +114,41 @@ class HudSettingsFragment : AbstractSettingsFragment(R.layout.settings_fragment_
             binding.hudAlpha,
             "%"
         )
+
+        setGameMenuAlpha(AllSettings.gameMenuAlpha.getValue().toFloat() / 100F)
+        updatePreview()
     }
 
     override fun slideIn(animPlayer: AnimPlayer) {
         animPlayer.apply(AnimPlayer.Entry(binding.root, TurtleTransitions.enter()))
     }
 
-    private fun openGameMenuMemory() {
-        binding.gameMenuPreview.memoryText.visibility = if (AllSettings.gameMenuShowMemory.getValue()) View.VISIBLE else View.GONE
-    }
-
-    private fun openGameMenuFPS() {
-        binding.gameMenuPreview.fpsText.visibility = if (AllSettings.gameMenuShowFPS.getValue()) View.VISIBLE else View.GONE
-    }
-
     private fun setGameMenuAlpha(alpha: Float) {
         binding.gameMenuPreview.root.alpha = alpha
     }
 
-    private fun updateGameMenuMemoryText() {
-        val text = "${AllSettings.gameMenuMemoryText.getValue()} 0MB/0MB"
-        binding.gameMenuPreview.memoryText.text = text.trim()
+    /** Draws the card with the current switch states and fixed sample numbers. */
+    private fun updatePreview() {
+        val card = binding.gameMenuPreview.hudCard
+        card.setRows(
+            AllSettings.hudShowCpu.getValue(),
+            AllSettings.hudShowGpu.getValue(),
+            AllSettings.hudShowRam.getValue(),
+            AllSettings.hudShowFps.getValue(),
+            AllSettings.hudShowPing.getValue()
+        )
+        card.update(
+            HudCardView.Snapshot(
+                fps = 120,
+                pingMs = 24,
+                cpuPercent = 54,
+                cpuTempC = 85,
+                gpuPercent = 60,
+                gpuTempC = 75,
+                ramUsedGb = 4.3f,
+                ramTotalGb = 8f
+            )
+        )
+        card.visibility = if (card.hasVisibleRows()) View.VISIBLE else View.GONE
     }
 }

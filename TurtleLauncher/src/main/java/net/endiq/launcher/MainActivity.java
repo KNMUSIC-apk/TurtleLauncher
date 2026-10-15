@@ -758,17 +758,6 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             MenuUtils.initSeekBarValue(this.binding.hotbarWidth, AllSettings.getHotbarWidth().getValue().getValue(), this.binding.hotbarWidthValue, "px");
 
             // Initialise the switch state.
-            this.binding.openMemoryInfo.setChecked(AllSettings.getGameMenuShowMemory().getValue());
-            this.binding.openFpsInfo.setChecked(AllSettings.getGameMenuShowFPS().getValue());
-            this.binding.showCpsHud.setChecked(AllSettings.getShowCpsHud().getValue());
-            this.binding.showKeystrokesHud.setChecked(AllSettings.getShowKeystrokesHud().getValue());
-            this.binding.showMousestrokesHud.setChecked(AllSettings.getShowMousestrokesHud().getValue());
-            this.binding.showStopwatchHud.setChecked(AllSettings.getShowStopwatchHud().getValue());
-            this.binding.showPlaytimeHud.setChecked(AllSettings.getShowPlaytimeHud().getValue());
-            this.binding.showSystemResourcesHud.setChecked(AllSettings.getShowSystemResourcesHud().getValue());
-            this.binding.showTimeHud.setChecked(AllSettings.getShowTimeHud().getValue());
-            this.binding.showRamGraphHud.setChecked(AllSettings.getShowRamGraphHud().getValue());
-            this.binding.showPingHud.setChecked(AllSettings.getShowPingHud().getValue());
             this.binding.showScreenshotButtonHud.setChecked(AllSettings.getShowScreenshotButtonHud().getValue());
             this.binding.disableGestures.setChecked(AllSettings.getDisableGestures().getValue());
             this.binding.disableDoubleTap.setChecked(AllSettings.getDisableDoubleTap().getValue());
@@ -795,30 +784,8 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             this.binding.sendCustomKey.setOnClickListener(this);
             this.binding.startRecording.setOnClickListener(this);
             this.binding.stopRecording.setOnClickListener(this);
-            this.binding.openMemoryInfo.setOnCheckedChangeListener(this);
-            this.binding.openMemoryInfoLayout.setOnClickListener(this);
-            this.binding.openFpsInfo.setOnCheckedChangeListener(this);
-            this.binding.openFpsInfoLayout.setOnClickListener(this);
 
-            this.binding.showCpsHud.setOnCheckedChangeListener(this);
-            this.binding.showCpsHudLayout.setOnClickListener(this);
-            this.binding.showKeystrokesHud.setOnCheckedChangeListener(this);
-            this.binding.showKeystrokesHudLayout.setOnClickListener(this);
-            this.binding.showMousestrokesHud.setOnCheckedChangeListener(this);
-            this.binding.showMousestrokesHudLayout.setOnClickListener(this);
-            this.binding.showStopwatchHud.setOnCheckedChangeListener(this);
-            this.binding.showStopwatchHudLayout.setOnClickListener(this);
-            this.binding.showPlaytimeHud.setOnCheckedChangeListener(this);
-            this.binding.showPlaytimeHudLayout.setOnClickListener(this);
-            this.binding.showSystemResourcesHud.setOnCheckedChangeListener(this);
-            this.binding.showSystemResourcesHudLayout.setOnClickListener(this);
-            this.binding.showTimeHud.setOnCheckedChangeListener(this);
-            this.binding.showTimeHudLayout.setOnClickListener(this);
 
-            this.binding.showRamGraphHud.setOnCheckedChangeListener(this);
-            this.binding.showRamGraphHudLayout.setOnClickListener(this);
-            this.binding.showPingHud.setOnCheckedChangeListener(this);
-            this.binding.showPingHudLayout.setOnClickListener(this);
             this.binding.showScreenshotButtonHud.setOnCheckedChangeListener(this);
             this.binding.showScreenshotButtonHudLayout.setOnClickListener(this);
 
@@ -942,17 +909,6 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
                 com.endiq.turtlelauncher.feature.turtle.ScreenRecorder.INSTANCE.stop(MainActivity.this);
                 refreshRecordingButtons();
             }
-            else if (v == binding.openMemoryInfoLayout) MenuUtils.toggleSwitchState(binding.openMemoryInfo);
-            else if (v == binding.openFpsInfoLayout) MenuUtils.toggleSwitchState(binding.openFpsInfo);
-            else if (v == binding.showCpsHudLayout) MenuUtils.toggleSwitchState(binding.showCpsHud);
-            else if (v == binding.showKeystrokesHudLayout) MenuUtils.toggleSwitchState(binding.showKeystrokesHud);
-            else if (v == binding.showMousestrokesHudLayout) MenuUtils.toggleSwitchState(binding.showMousestrokesHud);
-            else if (v == binding.showStopwatchHudLayout) MenuUtils.toggleSwitchState(binding.showStopwatchHud);
-            else if (v == binding.showPlaytimeHudLayout) MenuUtils.toggleSwitchState(binding.showPlaytimeHud);
-            else if (v == binding.showSystemResourcesHudLayout) MenuUtils.toggleSwitchState(binding.showSystemResourcesHud);
-            else if (v == binding.showTimeHudLayout) MenuUtils.toggleSwitchState(binding.showTimeHud);
-            else if (v == binding.showRamGraphHudLayout) MenuUtils.toggleSwitchState(binding.showRamGraphHud);
-            else if (v == binding.showPingHudLayout) MenuUtils.toggleSwitchState(binding.showPingHud);
             else if (v == binding.showScreenshotButtonHudLayout) MenuUtils.toggleSwitchState(binding.showScreenshotButtonHud);
             else if (v == binding.resolutionScalerRemove) MenuUtils.adjustSeekbar(binding.resolutionScaler, -1);
             else if (v == binding.resolutionScalerAdd) MenuUtils.adjustSeekbar(binding.resolutionScaler, 1);
@@ -1029,40 +985,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         }
 
         @Override public void onCheckedChanged(CompoundButton v, boolean isChecked) {
-            if (v == binding.openMemoryInfo) {
-                AllSettings.getGameMenuShowMemory().put(isChecked).save();
-                mGameMenuWrapper.refreshSettingsState();
-            } else if (v == binding.openFpsInfo) {
-                AllSettings.getGameMenuShowFPS().put(isChecked).save();
-                mGameMenuWrapper.refreshSettingsState();
-            } else if (v == binding.showCpsHud) {
-                AllSettings.getShowCpsHud().put(isChecked).save();
-                mGameMenuWrapper.refreshSettingsState();
-            } else if (v == binding.showKeystrokesHud) {
-                AllSettings.getShowKeystrokesHud().put(isChecked).save();
-                mGameMenuWrapper.refreshSettingsState();
-            } else if (v == binding.showMousestrokesHud) {
-                AllSettings.getShowMousestrokesHud().put(isChecked).save();
-                mGameMenuWrapper.refreshSettingsState();
-            } else if (v == binding.showStopwatchHud) {
-                AllSettings.getShowStopwatchHud().put(isChecked).save();
-                mGameMenuWrapper.refreshSettingsState();
-            } else if (v == binding.showPlaytimeHud) {
-                AllSettings.getShowPlaytimeHud().put(isChecked).save();
-                mGameMenuWrapper.refreshSettingsState();
-            } else if (v == binding.showSystemResourcesHud) {
-                AllSettings.getShowSystemResourcesHud().put(isChecked).save();
-                mGameMenuWrapper.refreshSettingsState();
-            } else if (v == binding.showTimeHud) {
-                AllSettings.getShowTimeHud().put(isChecked).save();
-                mGameMenuWrapper.refreshSettingsState();
-            } else if (v == binding.showRamGraphHud) {
-                AllSettings.getShowRamGraphHud().put(isChecked).save();
-                mGameMenuWrapper.refreshSettingsState();
-            } else if (v == binding.showPingHud) {
-                AllSettings.getShowPingHud().put(isChecked).save();
-                mGameMenuWrapper.refreshSettingsState();
-            } else if (v == binding.showScreenshotButtonHud) {
+            if (v == binding.showScreenshotButtonHud) {
                 AllSettings.getShowScreenshotButtonHud().put(isChecked).save();
                 mGameMenuWrapper.refreshSettingsState();
             } else if (v == binding.disableGestures) {
