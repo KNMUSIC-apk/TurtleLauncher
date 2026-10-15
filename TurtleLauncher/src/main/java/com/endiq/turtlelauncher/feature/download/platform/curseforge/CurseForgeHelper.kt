@@ -32,7 +32,10 @@ import java.util.Date
 
 private const val CURSEFORGE_API_URL = "https://api.curseforge.com/v1"
 private const val CURSEFORGE_MINECRAFT_GAME_ID = 432
+private const val CURSEFORGE_MODS_CLASS_ID = 6
+private const val CURSEFORGE_RESOURCE_PACKS_CLASS_ID = 12
 private const val CURSEFORGE_WORLDS_CLASS_ID = 17
+private const val CURSEFORGE_SHADERS_CLASS_ID = 6552
 private const val CURSEFORGE_SEARCH_PAGE_SIZE = 20
 private const val CURSEFORGE_FILE_PAGE_SIZE = 50
 private const val CURSEFORGE_TAG = "CurseForgeHelper"
@@ -41,8 +44,8 @@ private const val CURSEFORGE_TAG = "CurseForgeHelper"
 class CurseForgeApiKeyMissingException : RuntimeException("No CurseForge API key is configured")
 
 /**
- * CurseForge source for downloadable Minecraft worlds. Modrinth has no world archives, so this
- * platform only serves the world tab; every other resource type stays on Modrinth.
+ * CurseForge source for mods, resource packs, shader packs and worlds. Modpacks stay on Modrinth
+ * for now: their install path (ModLoader setup) is not wired for CurseForge yet.
  *
  * CurseForge's v1 API needs a key on every request. The key entered in Settings is used first;
  * the build-time key (CURSEFORGE_API_KEY, from the CI secret) is the fallback.
@@ -53,11 +56,14 @@ class CurseForgeHelper : AbstractPlatformHelper(ApiHandler(CURSEFORGE_API_URL)) 
     }
 
     override fun getWebUrl(infoItem: InfoItem): String? {
-        return if (infoItem.classify == Classify.WORLD) {
-            "https://www.curseforge.com/minecraft/worlds/${infoItem.slug}"
-        } else {
-            null
+        val section = when (infoItem.classify) {
+            Classify.MOD -> "mc-mods"
+            Classify.RESOURCE_PACK -> "texture-packs"
+            Classify.SHADER_PACK -> "shaders"
+            Classify.WORLD -> "worlds"
+            else -> return null
         }
+        return "https://www.curseforge.com/minecraft/$section/${infoItem.slug}"
     }
 
     // The world list does not show a screenshot gallery yet.
@@ -66,10 +72,30 @@ class CurseForgeHelper : AbstractPlatformHelper(ApiHandler(CURSEFORGE_API_URL)) 
     }
 
     @Throws(Throwable::class)
-    override fun searchWorld(filters: Filters, lastResult: SearchResult): SearchResult? {
+    override fun searchWorld(filters: Filters, lastResult: SearchResult): SearchResult? =
+        searchByClass(CURSEFORGE_WORLDS_CLASS_ID, Classify.WORLD, filters, lastResult)
+
+    @Throws(Throwable::class)
+    override fun searchMod(filters: Filters, lastResult: SearchResult): SearchResult? =
+        searchByClass(CURSEFORGE_MODS_CLASS_ID, Classify.MOD, filters, lastResult)
+
+    @Throws(Throwable::class)
+    override fun searchResourcePack(filters: Filters, lastResult: SearchResult): SearchResult? =
+        searchByClass(CURSEFORGE_RESOURCE_PACKS_CLASS_ID, Classify.RESOURCE_PACK, filters, lastResult)
+
+    @Throws(Throwable::class)
+    override fun searchShaderPack(filters: Filters, lastResult: SearchResult): SearchResult? =
+        searchByClass(CURSEFORGE_SHADERS_CLASS_ID, Classify.SHADER_PACK, filters, lastResult)
+
+    private fun searchByClass(
+        classId: Int,
+        classify: Classify,
+        filters: Filters,
+        lastResult: SearchResult
+    ): SearchResult? {
         val params = HashMap<String, Any>()
         params["gameId"] = CURSEFORGE_MINECRAFT_GAME_ID
-        params["classId"] = CURSEFORGE_WORLDS_CLASS_ID
+        params["classId"] = classId
         filters.category.curseforgeID?.let { params["categoryId"] = it }
         if (filters.name.isNotBlank()) params["searchFilter"] = filters.name.trim()
         filters.mcVersion?.let { params["gameVersion"] = it }
@@ -81,7 +107,7 @@ class CurseForgeHelper : AbstractPlatformHelper(ApiHandler(CURSEFORGE_API_URL)) 
         val response = client().get("mods/search", params, JsonObject::class.java) ?: return null
         val hits = response.arrOrNull("data") ?: return null
 
-        val infoItems = hits.mapNotNull { element -> toWorldInfoItem(element) }
+        val infoItems = hits.mapNotNull { element -> toInfoItem(element, classify) }
         return lastResult.apply {
             this.infoItems.addAll(infoItems)
             previousCount += hits.size()
@@ -91,7 +117,22 @@ class CurseForgeHelper : AbstractPlatformHelper(ApiHandler(CURSEFORGE_API_URL)) 
     }
 
     @Throws(Throwable::class)
-    override fun getWorldVersions(infoItem: InfoItem, force: Boolean): List<VersionItem>? {
+    override fun getWorldVersions(infoItem: InfoItem, force: Boolean): List<VersionItem>? =
+        getFileVersions(infoItem)
+
+    @Throws(Throwable::class)
+    override fun getModVersions(infoItem: InfoItem, force: Boolean): List<VersionItem>? =
+        getFileVersions(infoItem)
+
+    @Throws(Throwable::class)
+    override fun getResourcePackVersions(infoItem: InfoItem, force: Boolean): List<VersionItem>? =
+        getFileVersions(infoItem)
+
+    @Throws(Throwable::class)
+    override fun getShaderPackVersions(infoItem: InfoItem, force: Boolean): List<VersionItem>? =
+        getFileVersions(infoItem)
+
+    private fun getFileVersions(infoItem: InfoItem): List<VersionItem>? {
         val params = HashMap<String, Any>()
         params["index"] = 0
         params["pageSize"] = CURSEFORGE_FILE_PAGE_SIZE
@@ -126,35 +167,15 @@ class CurseForgeHelper : AbstractPlatformHelper(ApiHandler(CURSEFORGE_API_URL)) 
         })
     }
 
-    // Only worlds are served here. The spinner only offers this platform for the world tab, so
-    // the resource types below are never requested from it.
-    @Throws(Throwable::class)
-    override fun searchMod(filters: Filters, lastResult: SearchResult): SearchResult? = unsupported()
-
     @Throws(Throwable::class)
     override fun searchModPack(filters: Filters, lastResult: SearchResult): SearchResult? = unsupported()
-
-    @Throws(Throwable::class)
-    override fun searchResourcePack(filters: Filters, lastResult: SearchResult): SearchResult? = unsupported()
-
-    @Throws(Throwable::class)
-    override fun searchShaderPack(filters: Filters, lastResult: SearchResult): SearchResult? = unsupported()
-
-    @Throws(Throwable::class)
-    override fun getModVersions(infoItem: InfoItem, force: Boolean): List<VersionItem>? = unsupported()
 
     @Throws(Throwable::class)
     override fun getModPackVersions(infoItem: InfoItem, force: Boolean): List<VersionItem>? = unsupported()
 
     @Throws(Throwable::class)
-    override fun getResourcePackVersions(infoItem: InfoItem, force: Boolean): List<VersionItem>? = unsupported()
-
-    @Throws(Throwable::class)
-    override fun getShaderPackVersions(infoItem: InfoItem, force: Boolean): List<VersionItem>? = unsupported()
-
-    @Throws(Throwable::class)
     override fun installMod(infoItem: InfoItem, version: VersionItem, targetPath: File, progressKey: String) {
-        unsupported()
+        InstallHelper.downloadFile(version, targetPath, progressKey)
     }
 
     @Throws(Throwable::class)
@@ -162,16 +183,16 @@ class CurseForgeHelper : AbstractPlatformHelper(ApiHandler(CURSEFORGE_API_URL)) 
 
     @Throws(Throwable::class)
     override fun installResourcePack(infoItem: InfoItem, version: VersionItem, targetPath: File, progressKey: String) {
-        unsupported()
+        InstallHelper.downloadFile(version, targetPath, progressKey)
     }
 
     @Throws(Throwable::class)
     override fun installShaderPack(infoItem: InfoItem, version: VersionItem, targetPath: File, progressKey: String) {
-        unsupported()
+        InstallHelper.downloadFile(version, targetPath, progressKey)
     }
 
     private fun unsupported(): Nothing {
-        throw PlatformNotSupportedException("CurseForge is only used for worlds in TurtleLauncher.")
+        throw PlatformNotSupportedException("CurseForge modpacks are not supported in TurtleLauncher yet.")
     }
 
     /** A client for one request, so a key changed in Settings applies to the next search. */
@@ -187,7 +208,7 @@ class CurseForgeHelper : AbstractPlatformHelper(ApiHandler(CURSEFORGE_API_URL)) 
         return BuildConfig.CURSEFORGE_API_KEY.trim()
     }
 
-    private fun toWorldInfoItem(element: JsonElement): InfoItem? {
+    private fun toInfoItem(element: JsonElement, classify: Classify): InfoItem? {
         val mod = element.takeIf { it.isJsonObject }?.asJsonObject ?: return null
         val id = mod.longOrNull("id") ?: return null
         val slug = mod.strOrNull("slug") ?: return null
@@ -195,7 +216,7 @@ class CurseForgeHelper : AbstractPlatformHelper(ApiHandler(CURSEFORGE_API_URL)) 
         val logo = mod.objOrNull("logo")
 
         return InfoItem(
-            Classify.WORLD,
+            classify,
             Platform.CURSEFORGE,
             id.toString(),
             slug,
@@ -207,13 +228,13 @@ class CurseForgeHelper : AbstractPlatformHelper(ApiHandler(CURSEFORGE_API_URL)) 
             mod.longOrNull("downloadCount") ?: 0L,
             parseDate(mod.strOrNull("dateReleased") ?: mod.strOrNull("dateCreated")),
             logo?.strOrNull("thumbnailUrl") ?: logo?.strOrNull("url"),
-            mod.arrOrNull("categories")?.mapNotNull { category -> toWorldCategory(category) } ?: emptyList()
+            mod.arrOrNull("categories")?.mapNotNull { category -> toCategory(category, classify) } ?: emptyList()
         )
     }
 
-    private fun toWorldCategory(element: JsonElement): Category? {
+    private fun toCategory(element: JsonElement, classify: Classify): Category? {
         val id = element.takeIf { it.isJsonObject }?.asJsonObject?.longOrNull("id")?.toString() ?: return null
-        return Category.entries.firstOrNull { it.classify == Classify.WORLD && it.curseforgeID == id }
+        return Category.entries.firstOrNull { it.classify == classify && it.curseforgeID == id }
     }
 
     private fun toVersionItem(infoItem: InfoItem, file: JsonObject): VersionItem? {

@@ -11,7 +11,7 @@ enum class Platform(val pName: String, val helper: AbstractPlatformHelper) {
     /** Whether this source can search and install the given resource type. */
     fun supports(classify: Classify): Boolean = when (this) {
         MODRINTH -> classify != Classify.WORLD // Modrinth has no world archives
-        CURSEFORGE -> classify == Classify.WORLD // CurseForge is used for worlds only
+        CURSEFORGE -> classify != Classify.MODPACK // Modpack install is not wired for CurseForge yet
     }
 
     companion object {
