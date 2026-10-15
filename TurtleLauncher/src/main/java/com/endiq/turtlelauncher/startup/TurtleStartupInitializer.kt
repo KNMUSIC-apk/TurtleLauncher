@@ -15,7 +15,7 @@ class TurtleStartupInitializer : Initializer<Unit> {
     }
 
     override fun create(context: Context) {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         // Material You dynamic color: on supported devices (Android 12+), derives the theme
         // from the system wallpaper; a no-op safe fallback to the static theme elsewhere.

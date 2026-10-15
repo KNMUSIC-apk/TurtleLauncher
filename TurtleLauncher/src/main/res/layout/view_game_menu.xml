@@ -923,6 +923,77 @@
 
             </LinearLayout>
 
+
+
+            <LinearLayout
+                android:id="@+id/hotbar_height_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/option_hotbar_height"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/hotbar_height_remove"
+                        android:layout_width="@dimen/_16sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_4sdp"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_horizontal"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:text="-"
+                        android:textSize="@dimen/_16sdp"
+                        tools:ignore="HardcodedText" />
+
+                    <SeekBar
+                        android:id="@+id/hotbar_height"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/hotbar_height_remove"
+                        android:layout_toStartOf="@id/hotbar_height_add"
+                        android:min="20"/>
+
+                    <TextView
+                        android:id="@+id/hotbar_height_add"
+                        android:layout_width="@dimen/_16sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_4sdp"
+                        android:layout_centerVertical="true"
+                        android:layout_toStartOf="@id/hotbar_height_value"
+                        android:gravity="center_horizontal"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:text="+"
+                        android:textSize="@dimen/_16sdp"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:id="@+id/hotbar_height_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_8sdp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/background_text"
+                        tools:text="0"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/tab_page_hud"
                 android:layout_width="match_parent"
@@ -1186,75 +1257,6 @@
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true" />
                 </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/hotbar_height_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/option_hotbar_height"/>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/hotbar_height_remove"
-                        android:layout_width="@dimen/_16sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:layout_marginEnd="@dimen/_4sdp"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:gravity="center_horizontal"
-                        android:background="?android:attr/selectableItemBackgroundBorderless"
-                        android:text="-"
-                        android:textSize="@dimen/_16sdp"
-                        tools:ignore="HardcodedText" />
-
-                    <SeekBar
-                        android:id="@+id/hotbar_height"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_8sdp"
-                        android:layout_centerVertical="true"
-                        android:layout_toEndOf="@id/hotbar_height_remove"
-                        android:layout_toStartOf="@id/hotbar_height_add"
-                        android:min="20"/>
-
-                    <TextView
-                        android:id="@+id/hotbar_height_add"
-                        android:layout_width="@dimen/_16sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/_4sdp"
-                        android:layout_centerVertical="true"
-                        android:layout_toStartOf="@id/hotbar_height_value"
-                        android:gravity="center_horizontal"
-                        android:background="?android:attr/selectableItemBackgroundBorderless"
-                        android:text="+"
-                        android:textSize="@dimen/_16sdp"
-                        tools:ignore="HardcodedText" />
-
-                    <TextView
-                        android:id="@+id/hotbar_height_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/_8sdp"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentEnd="true"
-                        android:background="@drawable/background_text"
-                        tools:text="0"/>
-
-                </RelativeLayout>
-
-            </LinearLayout>
 
             </LinearLayout>
 
