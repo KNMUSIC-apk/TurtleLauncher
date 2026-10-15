@@ -105,157 +105,25 @@ class ExperimentalSettingsFragment :
             binding.autoCheckPluginUpdates
         )
 
-        // ── Advanced Tools ──────────────────────────────────────────────────
-        SwitchSettingsWrapper(context, AllSettings.offlineModeFallback, binding.offlineModeFallbackLayout, binding.offlineModeFallback)
-        SwitchSettingsWrapper(context, AllSettings.anrDetectorEnabled, binding.anrDetectorEnabledLayout, binding.anrDetectorEnabled)
 
-        BaseSettingsWrapper(context, binding.exportSettingsLayout) {
-            val destFile = java.io.File(
-                android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS),
-                "TurtleLauncher_settings_backup.json"
-            )
-            val ok = com.endiq.turtlelauncher.feature.turtle.SettingsBackupManager.exportToFile(destFile)
-            Toast.makeText(
-                context,
-                getString(if (ok) R.string.export_settings_success else R.string.export_settings_failure),
-                Toast.LENGTH_LONG
-            ).show()
-        }
 
-        BaseSettingsWrapper(context, binding.importSettingsLayout) {
-            val srcFile = java.io.File(
-                android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS),
-                "TurtleLauncher_settings_backup.json"
-            )
-            val ok = com.endiq.turtlelauncher.feature.turtle.SettingsBackupManager.importFromFile(srcFile)
-            Toast.makeText(
-                context,
-                getString(if (ok) R.string.import_settings_success else R.string.import_settings_failure),
-                Toast.LENGTH_LONG
-            ).show()
-            if (ok) {
-                // Settings were replaced under this fragment's feet — reload it so every
-                // switch/seekbar reflects the freshly imported values instead of stale UI state.
-                parentFragmentManager.beginTransaction().detach(this@ExperimentalSettingsFragment).attach(this@ExperimentalSettingsFragment).commit()
-            }
-        }
 
-        BaseSettingsWrapper(context, binding.crashHistoryLayout) {
-            val history = com.endiq.turtlelauncher.feature.log.CrashAnalyzer.getCrashHistory()
-            val formatter = java.text.SimpleDateFormat("yyyy-MM-dd HH:mm", java.util.Locale.getDefault())
-            val message = if (history.isEmpty()) {
-                getString(R.string.crash_diagnostics_dialog_empty)
-            } else {
-                history.joinToString("\n\n") { entry ->
-                    "${formatter.format(java.util.Date(entry.timestampMs))} (exit ${entry.exitCode})\n${entry.summary}"
-                }
-            }
-            com.endiq.turtlelauncher.ui.dialog.TipDialog.Builder(context)
-                .setTitle(R.string.setting_crash_history_title)
-                .setMessage(message)
-                .setCenterMessage(false)
-                .setSelectable(true)
-                .setShowCancel(history.isNotEmpty())
-                .setCancel(R.string.generic_clear)
-                .setCancelClickListener { com.endiq.turtlelauncher.feature.log.CrashAnalyzer.clearCrashHistory() }
-                .setConfirm(R.string.generic_ok)
-                .showDialog()
-        }
 
-        BaseSettingsWrapper(context, binding.crashRuleEditorLayout) {
-            showCrashRuleEditor(context)
-        }
 
-        SwitchSettingsWrapper(
-            context,
-            com.endiq.turtlelauncher.setting.AllSettings.aiCrashHelpEnabled,
-            binding.aiCrashHelpLayout,
-            binding.aiCrashHelp
-        )
 
-        BaseSettingsWrapper(context, binding.aiCrashHelpApiKeyLayout) {
-            promptSetAiCrashHelpApiKey(context)
-        }
 
-        SwitchSettingsWrapper(
-            context,
-            AllSettings.aiSkinFilterEnabled,
-            binding.aiSkinFilterLayout,
-            binding.aiSkinFilter
-        )
 
         // Turtle AI: language, optional cloud brain, optional web search. See
         // feature/ai/TurtleAiLanguage.kt, TurtleAiGemini.kt and TurtleAiWebSearch.kt.
-        BaseSettingsWrapper(context, binding.aiLanguageLayout) {
-            promptSetAssistantLanguage(context)
-        }
 
-        SwitchSettingsWrapper(
-            context,
-            AllSettings.aiAssistantCloudBrain,
-            binding.aiBrainLayout,
-            binding.aiBrain
-        )
 
-        BaseSettingsWrapper(context, binding.aiModelLayout) {
-            promptSetAiModels(context)
-        }
 
-        BaseSettingsWrapper(context, binding.aiVoiceLayout) {
-            promptSetAiVoice(context)
-        }
 
-        SwitchSettingsWrapper(
-            context,
-            AllSettings.aiWebSearchEnabled,
-            binding.aiWebSearchLayout,
-            binding.aiWebSearch
-        )
 
-        BaseSettingsWrapper(context, binding.aiSearchProviderLayout) {
-            promptSetSearchProvider(context)
-        }
 
-        BaseSettingsWrapper(context, binding.aiSearchUrlLayout) {
-            promptSetSearchUrl(context)
-        }
 
-        BaseSettingsWrapper(context, binding.aiSearchKeyLayout) {
-            promptSetSearchApiKey(context)
-        }
 
-        BaseSettingsWrapper(context, binding.dependencyGraphLayout) {
-            val version = com.endiq.turtlelauncher.feature.version.VersionsManager.getCurrentVersion()
-            if (version == null) {
-                Toast.makeText(context, R.string.dependency_graph_no_version, Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(context, R.string.setting_dependency_graph_title, Toast.LENGTH_SHORT).show()
-                Thread {
-                    val graphText = com.endiq.turtlelauncher.feature.turtle.DependencyGraphExporter.buildTextTree(version)
-                    com.endiq.turtlelauncher.task.TaskExecutors.runInUIThread {
-                        com.endiq.turtlelauncher.ui.dialog.TipDialog.Builder(context)
-                            .setTitle(R.string.setting_dependency_graph_title)
-                            .setMessage(graphText)
-                            .setCenterMessage(false)
-                            .setSelectable(true)
-                            .setShowCancel(false)
-                            .setConfirm(R.string.generic_ok)
-                            .showDialog()
-                    }
-                }.start()
-            }
-        }
 
-        BaseSettingsWrapper(context, binding.configEditorLayout) {
-            val version = com.endiq.turtlelauncher.feature.version.VersionsManager.getCurrentVersion()
-            if (version == null) {
-                Toast.makeText(context, R.string.dependency_graph_no_version, Toast.LENGTH_SHORT).show()
-            } else {
-                val intent = android.content.Intent(context, com.endiq.turtlelauncher.ui.activity.ConfigEditorActivity::class.java)
-                intent.putExtra(com.endiq.turtlelauncher.ui.activity.ConfigEditorActivity.EXTRA_VERSION_NAME, version.getVersionName())
-                startActivity(intent)
-            }
-        }
 
         BaseSettingsWrapper(
             context,

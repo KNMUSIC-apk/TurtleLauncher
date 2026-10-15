@@ -1079,6 +1079,7 @@
     <string name="splash_screen_jre21">Môi trường Java 21; Minecraft 1.20.5 trở lên cần Java 21.</string>
     <string name="splash_screen_jre25">Môi trường Java 25; Minecraft 26.1 trở lên cần Java 25.</string>
     <string name="splash_screen_apply">Đồng ý và cài đặt</string>
+    <string name="about_title_cyplix">Cyplix Launcher</string>
     <string name="about_tab">Giới thiệu về %s</string>
     <string name="about_dec1">%s là trình khởi chạy Minecraft: Java Edition trên thiết bị Android, được phát triển trên nền dự án Turtle Launcher mã nguồn mở do Endiq, MovTery và cộng đồng đóng góp xây dựng.</string>
     <string name="about_dec2">%s tập trung tối ưu trải nghiệm người dùng, thiết kế lại giao diện ứng dụng và bổ sung nhiều tính năng thiết thực, nhằm giảm rào cản khi chơi và giúp nhiều người dễ dàng tận hưởng Minecraft hơn.</string>

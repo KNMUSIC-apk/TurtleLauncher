@@ -31,17 +31,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
+                <TextView
                     android:id="@+id/title"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/_28sdp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_16sdp"
-                    android:src="@drawable/app_name_title"
-                    android:scaleType="centerInside"
+                    android:gravity="center"
+                    android:text="@string/about_title_cyplix"
+                    android:textColor="@color/new_text_primary"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_20ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="ContentDescription" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/dec1"
