@@ -51,6 +51,18 @@
                 app:ripple_for_text="true"/>
 
             <com.cyplixlauncher.mc.ui.view.AnimTextView
+                android:id="@+id/add_command_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/background_item"
+                android:text="@string/customctrl_addcommandbutton"
+                android:gravity="center_horizontal"
+                android:paddingVertical="@dimen/_12sdp"
+                android:paddingHorizontal="@dimen/_8sdp"
+                app:ripple_for_text="true"/>
+
+            <com.cyplixlauncher.mc.ui.view.AnimTextView
                 android:id="@+id/add_drawer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

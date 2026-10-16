@@ -1,4 +1,4 @@
-package com.endiq.turtlelauncher.launch
+package com.cyplixlauncher.mc.launch
 
 import com.cyplixlauncher.mc.feature.log.Logging
 import com.cyplixlauncher.mc.utils.path.PathManager

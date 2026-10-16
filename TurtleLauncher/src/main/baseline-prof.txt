@@ -18,21 +18,21 @@
 # a real device or emulator, which this environment doesn't have.
 
 # App entry points
-Lcom/endiq/turtlelauncher/ui/activity/SplashActivity;
+Lcom/cyplixlauncher/mc/ui/activity/SplashActivity;
 Lnet/endiq/launcher/TurtleApplication;
 Lnet/endiq/launcher/LauncherActivity;
 
 # Startup sequencing (this session's addition)
-Lcom/endiq/turtlelauncher/startup/TurtleStartupInitializer;
+Lcom/cyplixlauncher/mc/startup/TurtleStartupInitializer;
 
 # Touched on every cold start regardless of which screen the user lands on
-Lcom/endiq/turtlelauncher/setting/AllSettings;
-Lcom/endiq/turtlelauncher/setting/AllSettings$Companion;
-Lcom/endiq/turtlelauncher/feature/log/Logging;
-Lcom/endiq/turtlelauncher/task/TaskExecutors;
-Lcom/endiq/turtlelauncher/utils/path/PathManager;
-Lcom/endiq/turtlelauncher/context/ContextExecutor;
+Lcom/cyplixlauncher/mc/setting/AllSettings;
+Lcom/cyplixlauncher/mc/setting/AllSettings$Companion;
+Lcom/cyplixlauncher/mc/feature/log/Logging;
+Lcom/cyplixlauncher/mc/task/TaskExecutors;
+Lcom/cyplixlauncher/mc/utils/path/PathManager;
+Lcom/cyplixlauncher/mc/context/ContextExecutor;
 
 # Home screen (first thing rendered after splash in the common case)
 Lnet/endiq/launcher/fragments/MainMenuFragment;
-Lcom/endiq/turtlelauncher/feature/turtle/AssetPrefetcher;
+Lcom/cyplixlauncher/mc/feature/turtle/AssetPrefetcher;

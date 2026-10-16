@@ -1,4 +1,4 @@
-package com.endiq.turtlelauncher.launch
+package com.cyplixlauncher.mc.launch
 
 import android.app.Activity
 import android.content.Context

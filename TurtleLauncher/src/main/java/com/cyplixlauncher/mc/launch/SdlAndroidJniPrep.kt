@@ -1,9 +1,9 @@
-package com.endiq.turtlelauncher.launch
+package com.cyplixlauncher.mc.launch
 
 import android.app.Activity
 import android.util.Log
 import android.view.ViewGroup
-import com.endiq.turtlelauncher.game.sdl.SdlBridge
+import com.cyplixlauncher.mc.game.sdl.SdlBridge
 import com.cyplixlauncher.mc.utils.path.PathManager
 import org.libsdl.app.SDLActivity
 import org.lwjgl.glfw.CallbackBridge

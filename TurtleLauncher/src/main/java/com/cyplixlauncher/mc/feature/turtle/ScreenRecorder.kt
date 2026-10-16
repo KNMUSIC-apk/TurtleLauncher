@@ -263,7 +263,7 @@ object ScreenRecorder {
                     throw IOException("Cannot create recordings directory in either location")
                 }
             }
-            val file = File(actualDir, "turtle_${nameFormat.format(Date())}.mp4")
+            val file = File(actualDir, "cyplix_${nameFormat.format(Date())}.mp4")
             Logging.i(TAG, "Recording to: ${file.absolutePath}")
             val mediaMuxer = MediaMuxer(file.absolutePath, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4)
 

@@ -1,4 +1,4 @@
-package com.endiq.turtlelauncher.game.sdl
+package com.cyplixlauncher.mc.game.sdl
 
 import android.app.Activity
 import android.os.Looper

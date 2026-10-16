@@ -543,9 +543,9 @@ public final class JREUtils {
         chdir(gameVersion == null ? ProfilePathHome.getGameHome() : gameVersion.getGameDir().getAbsolutePath());
         userArgs.add(0,"java");
         if (gameVersion != null && Tools.resolveLwjglMode(Tools.getVersionInfo(gameVersion)) == Tools.LwjglMode.NEW_SDL) {
-            com.endiq.turtlelauncher.launch.SdlAndroidJniPrep.ensureSingleSdl3Source(gameVersion.getVersionName());
-            com.endiq.turtlelauncher.launch.SdlAndroidJniPrep.ensureMobileGluesShaderErrorIgnore();
-            com.endiq.turtlelauncher.launch.SdlAndroidJniPrep.setup(activity);
+            com.cyplixlauncher.mc.launch.SdlAndroidJniPrep.ensureSingleSdl3Source(gameVersion.getVersionName());
+            com.cyplixlauncher.mc.launch.SdlAndroidJniPrep.ensureMobileGluesShaderErrorIgnore();
+            com.cyplixlauncher.mc.launch.SdlAndroidJniPrep.setup(activity);
         }
 
         com.cyplixlauncher.mc.feature.log.GameLogcat.start();
@@ -556,7 +556,7 @@ public final class JREUtils {
         // SDL launches: tear down the ART-side SDL state (posted to the UI thread,
         // fire-and-forget) so a later launch in the same process starts clean.
         // No-op for GLFW launches.
-        com.endiq.turtlelauncher.launch.SdlAndroidJniPrep.resetAfterJvmExit(activity);
+        com.cyplixlauncher.mc.launch.SdlAndroidJniPrep.resetAfterJvmExit(activity);
         // Reached only on a graceful JVM exit - on a signal the process is already gone and
         // the drain dies with it, which is exactly the case the captured file exists for.
         com.cyplixlauncher.mc.feature.log.GameOutputCapture.uninstall();

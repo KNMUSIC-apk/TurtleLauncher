@@ -8,7 +8,7 @@ Configure TurtleLauncher to achieve maximum FPS in Minecraft by:
 
 ## Files Modified
 
-### 1. `/TurtleLauncher/src/main/java/com/endiq/turtlelauncher/setting/AllSettings.kt`
+### 1. `/TurtleLauncher/src/main/java/com/cyplixlauncher/mc/setting/AllSettings.kt`
 
 #### Changed Default JVM Arguments (javaArgs)
 **Before:**

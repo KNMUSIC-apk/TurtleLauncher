@@ -88,7 +88,8 @@ public class EditControlPopup {
     };
     protected EditText mNameEditText, mWidthEditText, mHeightEditText;
     @SuppressLint("UseSwitchCompatOrMaterialCode")
-    protected Switch mToggleSwitch, mPassthroughSwitch, mSwipeableSwitch, mForwardLockSwitch, mAbsoluteTrackingSwitch;
+    protected EditText mCommandEditText;
+    protected Switch mPassthroughSwitch, mSwipeableSwitch, mForwardLockSwitch, mAbsoluteTrackingSwitch;
     protected Spinner mOrientationSpinner;
     protected TextView[] mKeycodeTextviews = new TextView[4];
     protected SeekBar mStrokeWidthSeekbar, mCornerRadiusSeekbar, mAlphaSeekbar;
@@ -413,7 +414,6 @@ public class EditControlPopup {
         setPercentageText(mStrokePercentTextView, (int) data.strokeWidth * 10);
         setPercentageText(mCornerRadiusPercentTextView, (int) data.cornerRadius);
 
-        mToggleSwitch.setChecked(data.isToggle);
         mPassthroughSwitch.setChecked(data.passThruEnabled);
         mSwipeableSwitch.setChecked(data.isSwipeable);
 
@@ -428,6 +428,18 @@ public class EditControlPopup {
                 mKeycodeSpinners[i].setSelection(EfficientAndroidLWJGLKeycode.getIndexByValue(data.keycodes[i]) + mSpecialArray.size());
             }
         }
+
+        // Command buttons replace the key mapping with a command text input
+        boolean isCommand = data.command != null;
+        mCommandEditText.setText(isCommand ? data.command : "");
+        mCommandEditText.setVisibility(isCommand ? VISIBLE : GONE);
+        mMappingTextView.setText(isCommand ? R.string.customctrl_command : R.string.customctrl_mapping);
+        int keyVisibility = isCommand ? GONE : VISIBLE;
+        for (int i = 0; i < mKeycodeSpinners.length; i++) {
+            mKeycodeTextviews[i].setVisibility(keyVisibility);
+        }
+        mScrollView.findViewById(R.id.editMapping_plus_1).setVisibility(keyVisibility);
+        mScrollView.findViewById(R.id.editMapping_plus_3).setVisibility(keyVisibility);
     }
 
     /**
@@ -450,7 +462,6 @@ public class EditControlPopup {
 
         mSwipeableSwitch.setVisibility(View.GONE);
         mPassthroughSwitch.setVisibility(View.GONE);
-        mToggleSwitch.setVisibility(View.GONE);
     }
 
     /**
@@ -474,7 +485,6 @@ public class EditControlPopup {
 
         mSwipeableSwitch.setVisibility(View.GONE);
         mPassthroughSwitch.setVisibility(View.GONE);
-        mToggleSwitch.setVisibility(View.GONE);
 
         mForwardLockSwitch.setVisibility(VISIBLE);
         mForwardLockSwitch.setChecked(data.forwardLock);
@@ -507,9 +517,9 @@ public class EditControlPopup {
     private void bindLayout() {
         mRootView = mScrollView.findViewById(R.id.edit_layout);
         mNameEditText = mScrollView.findViewById(R.id.editName_editText);
+        mCommandEditText = mScrollView.findViewById(R.id.editCommand_editText);
         mWidthEditText = mScrollView.findViewById(R.id.editSize_editTextX);
         mHeightEditText = mScrollView.findViewById(R.id.editSize_editTextY);
-        mToggleSwitch = mScrollView.findViewById(R.id.checkboxToggle);
         mPassthroughSwitch = mScrollView.findViewById(R.id.checkboxPassThrough);
         mSwipeableSwitch = mScrollView.findViewById(R.id.checkboxSwipeable);
         mForwardLockSwitch = mScrollView.findViewById(R.id.checkboxForwardLock);
@@ -560,6 +570,12 @@ public class EditControlPopup {
      * @noinspection SuspiciousNameCombination
      */
     public void setupRealTimeListeners() {
+        mCommandEditText.addTextChangedListener((SimpleTextWatcher) s -> {
+            if (internalChanges) return;
+            if (mCurrentlyEditedButton.getProperties().command != null) {
+                mCurrentlyEditedButton.getProperties().command = s.toString();
+            }
+        });
         mNameEditText.addTextChangedListener((SimpleTextWatcher) s -> {
             if (internalChanges) return;
 
@@ -604,10 +620,6 @@ public class EditControlPopup {
         mSwipeableSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (internalChanges) return;
             mCurrentlyEditedButton.getProperties().isSwipeable = isChecked;
-        });
-        mToggleSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (internalChanges) return;
-            mCurrentlyEditedButton.getProperties().isToggle = isChecked;
         });
         mPassthroughSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (internalChanges) return;

@@ -31,16 +31,18 @@ class HudCardView @JvmOverloads constructor(
         val gpuPercent: Int?,
         val gpuTempC: Int?,
         val ramUsedGb: Float,
-        val ramTotalGb: Float
+        val ramTotalGb: Float,
+        val deviceTempC: Int? = null
     )
 
-    private enum class Cell { FPS, CPU, GPU, RAM, PING }
+    private enum class Cell { FPS, CPU, GPU, RAM, PING, TEMP }
 
     private var showCpu = true
     private var showGpu = true
     private var showRam = true
     private var showFps = true
     private var showPing = true
+    private var showTemp = true
     private var scale = 1f
 
     private var snapshot: Snapshot? = null
@@ -91,8 +93,8 @@ class HudCardView @JvmOverloads constructor(
     private val edgePad = dp(8f)
 
     /** Which cells are visible. Called when the switches change. */
-    fun setRows(cpu: Boolean, gpu: Boolean, ram: Boolean, fps: Boolean, ping: Boolean) {
-        showCpu = cpu; showGpu = gpu; showRam = ram; showFps = fps; showPing = ping
+    fun setRows(cpu: Boolean, gpu: Boolean, ram: Boolean, fps: Boolean, ping: Boolean, temp: Boolean) {
+        showCpu = cpu; showGpu = gpu; showRam = ram; showFps = fps; showPing = ping; showTemp = temp
         requestLayout()
         invalidate()
     }
@@ -119,7 +121,7 @@ class HudCardView @JvmOverloads constructor(
         invalidate()
     }
 
-    fun hasVisibleRows(): Boolean = showCpu || showGpu || showRam || showFps || showPing
+    fun hasVisibleRows(): Boolean = showCpu || showGpu || showRam || showFps || showPing || showTemp
 
     private fun visibleCells(): List<Cell> = buildList {
         if (showFps) add(Cell.FPS)
@@ -127,6 +129,7 @@ class HudCardView @JvmOverloads constructor(
         if (showGpu) add(Cell.GPU)
         if (showRam) add(Cell.RAM)
         if (showPing) add(Cell.PING)
+        if (showTemp) add(Cell.TEMP)
     }
 
     private fun cellWidth(c: Cell): Float = dp(when (c) {
@@ -134,6 +137,7 @@ class HudCardView @JvmOverloads constructor(
         Cell.CPU, Cell.GPU -> 72f
         Cell.RAM -> 80f
         Cell.PING -> 56f
+        Cell.TEMP -> 64f
     })
 
     private fun contentWidth(): Float {
@@ -171,6 +175,7 @@ class HudCardView @JvmOverloads constructor(
                 Cell.GPU -> drawTemp(canvas, x, "GPU", snapshot?.gpuTempC)
                 Cell.RAM -> drawRam(canvas, x)
                 Cell.PING -> drawPing(canvas, x)
+                Cell.TEMP -> drawDeviceTemp(canvas, x)
             }
             x += cw
             if (index < cells.lastIndex) {
@@ -184,6 +189,12 @@ class HudCardView @JvmOverloads constructor(
         canvas.drawText("FPS", x + dp(4f), dp(14f), labelPaint)
         canvas.drawText((snapshot?.fps ?: 0).toString(), x + dp(4f), dp(34f), bigPaint)
         drawSparkline(canvas, x + dp(4f), x + cw - dp(6f), dp(30f), dp(40f))
+    }
+
+    private fun drawDeviceTemp(canvas: Canvas, x: Float) {
+        canvas.drawText("TEMP", x + dp(6f), dp(14f), labelPaint)
+        val c = snapshot?.deviceTempC
+        canvas.drawText(c?.let { "$it°C" } ?: "-- °C", x + dp(6f), dp(34f), valuePaint)
     }
 
     private fun drawPing(canvas: Canvas, x: Float) {

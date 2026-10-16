@@ -45,18 +45,6 @@
                 android:focusable="true"
                 android:text="@string/option_category_debug"/>
 
-            <TextView
-                android:id="@+id/tab_btn_recording"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_4sdp"
-                android:background="@drawable/background_item"
-                android:paddingVertical="@dimen/_8sdp"
-                android:paddingHorizontal="@dimen/_12sdp"
-                android:textColor="@color/turtle_primary_text"
-                android:clickable="true"
-                android:focusable="true"
-                android:text="@string/option_category_recording"/>
 
             <TextView
                 android:id="@+id/tab_btn_control"
@@ -165,35 +153,6 @@
                 android:paddingVertical="@dimen/_12sdp"
                 android:paddingHorizontal="@dimen/_8sdp"
                 app:ripple_for_text="true"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:background="@color/game_panel_overlay"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/tab_page_recording"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:textStyle="bold"
-                android:textColor="@color/turtle_primary_text"
-                android:text="@string/option_category_recording"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:background="@color/game_panel_overlay"/>
-
             <com.cyplixlauncher.mc.ui.view.AnimTextView
                 android:id="@+id/start_recording"
                 android:layout_width="match_parent"
@@ -205,7 +164,6 @@
                 android:paddingVertical="@dimen/_12sdp"
                 android:paddingHorizontal="@dimen/_8sdp"
                 app:ripple_for_text="true"/>
-
             <com.cyplixlauncher.mc.ui.view.AnimTextView
                 android:id="@+id/stop_recording"
                 android:layout_width="match_parent"
@@ -218,9 +176,6 @@
                 android:paddingHorizontal="@dimen/_8sdp"
                 android:visibility="gone"
                 app:ripple_for_text="true"/>
-
-
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/resolution_scaler_layout"
                 android:layout_width="match_parent"
@@ -304,7 +259,14 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@color/game_panel_overlay"/>
+
             </LinearLayout>
+
 
             <LinearLayout
                 android:id="@+id/tab_page_control"
@@ -1169,6 +1131,37 @@
                         android:text="@string/setting_hud_stat_ping_desc" />
                     <Switch
                         android:id="@+id/hudShowPing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true" />
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
+                    android:id="@+id/hudShowTemp_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:padding="@dimen/_12sdp">
+                    <TextView
+                        android:id="@+id/hudShowTemp_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_toStartOf="@+id/hudShowTemp"
+                        android:text="@string/setting_hud_stat_temp_title"
+                        android:textColor="@color/turtle_primary_text" />
+                    <TextView
+                        android:id="@+id/hudShowTemp_summary"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/hudShowTemp_title"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_toStartOf="@+id/hudShowTemp"
+                        android:text="@string/setting_hud_stat_temp_desc" />
+                    <Switch
+                        android:id="@+id/hudShowTemp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"

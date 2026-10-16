@@ -294,6 +294,7 @@ class AllSettings {
         @JvmStatic val hudShowRam               = BooleanSettingUnit("hudShowRam", true)
         @JvmStatic val hudShowFps               = BooleanSettingUnit("hudShowFps", true)
         @JvmStatic val hudShowPing              = BooleanSettingUnit("hudShowPing", true)
+        @JvmStatic val hudShowTemp              = BooleanSettingUnit("hudShowTemp", true)
         /** Persisted cumulative playtime in milliseconds, across all sessions. */
         @JvmStatic val totalPlaytimeMs           = LongSettingUnit("totalPlaytimeMs", 0L)
         /** Per-day playtime buckets (JSON, "yyyy-MM-dd" -> ms) backing the home screen's weekly chart. */

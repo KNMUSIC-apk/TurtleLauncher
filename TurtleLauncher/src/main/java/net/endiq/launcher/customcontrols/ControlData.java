@@ -61,6 +61,8 @@ public class ControlData {
     public boolean displayInGame;
     public boolean displayInMenu;
     public String customImagePath;
+    /** Non-null means this is a command button: pressing it opens chat and sends this text. */
+    public String command;
     private float width;         //Dp instead of Px now
     private float height;        //Dp instead of Px now
 
@@ -148,6 +150,7 @@ public class ControlData {
                 controlData.passThruEnabled
         );
         this.customImagePath = controlData.customImagePath;
+        this.command = controlData.command;
     }
 
     public static ControlData[] getSpecialButtons(Context context) {

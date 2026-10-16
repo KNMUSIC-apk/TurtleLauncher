@@ -34,7 +34,7 @@ import net.endiq.launcher.customcontrols.mouse.InGUIEventProcessor;
 import net.endiq.launcher.customcontrols.mouse.InGameEventProcessor;
 import net.endiq.launcher.customcontrols.mouse.TouchEventProcessor;
 import net.endiq.launcher.utils.JREUtils;
-import com.endiq.turtlelauncher.game.sdl.SdlBridge;
+import com.cyplixlauncher.mc.game.sdl.SdlBridge;
 import org.libsdl.app.SDLActivity;
 import org.libsdl.app.SDLSurface;
 import org.greenrobot.eventbus.EventBus;

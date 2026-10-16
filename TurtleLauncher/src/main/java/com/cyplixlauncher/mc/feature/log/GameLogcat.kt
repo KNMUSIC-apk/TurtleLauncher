@@ -89,8 +89,23 @@ object GameLogcat {
         }
     }
 
+    /** Splits raw logcat bytes into lines and hands each one to the game-server watcher. */
+    private fun feedLines(pending: StringBuilder, buffer: ByteArray, read: Int) {
+        runCatching {
+            pending.append(String(buffer, 0, read, Charsets.UTF_8))
+            var newline = pending.indexOf("\n")
+            while (newline >= 0) {
+                com.cyplixlauncher.mc.feature.turtle.PingTracker.onGameLogLine(pending.substring(0, newline))
+                pending.delete(0, newline + 1)
+                newline = pending.indexOf("\n")
+            }
+            if (pending.length > 16 * 1024) pending.setLength(0)
+        }
+    }
+
     private fun drainLoop(process: Process, file: File) {
         var written = 0L
+        val pending = StringBuilder()
         try {
             FileOutputStream(file, false).use { out ->
                 process.inputStream.buffered(8192).use { input ->
@@ -100,6 +115,7 @@ object GameLogcat {
                         if (read < 0) break
                         out.write(buffer, 0, read)
                         written += read
+                        feedLines(pending, buffer, read)
                         if (written >= MAX_BYTES) {
                             // Ring-ish: keep the NEWEST output rather than growing forever.
                             out.flush()

@@ -1,6 +1,6 @@
 package net.endiq.launcher;
 
-import static com.endiq.turtlelauncher.launch.LaunchGame.preLaunch;
+import static com.cyplixlauncher.mc.launch.LaunchGame.preLaunch;
 import static net.endiq.launcher.Tools.currentDisplayMetrics;
 import android.Manifest;
 import android.app.NotificationManager;
@@ -247,6 +247,7 @@ public class LauncherActivity extends BaseActivity {
         } catch (IOException e) {
             Logging.e("Account", "Failed to save the account : " + e);
         }
+        com.cyplixlauncher.mc.feature.accounts.LocalAccountUtils.assignDefaultSteveSkin(this, localAccount.getUniqueUUID());
 
         AccountsManager.INSTANCE.getDoneListener().onLoginDone(localAccount);
     }

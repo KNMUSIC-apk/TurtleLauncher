@@ -19,7 +19,7 @@ import com.cyplixlauncher.mc.databinding.ActivityJavaGuiLauncherBinding;
 import com.cyplixlauncher.mc.event.value.JvmExitEvent;
 import com.cyplixlauncher.mc.feature.log.GameWatchdog;
 import com.cyplixlauncher.mc.feature.log.Logging;
-import com.endiq.turtlelauncher.launch.LaunchArgs;
+import com.cyplixlauncher.mc.launch.LaunchArgs;
 import com.cyplixlauncher.mc.setting.AllSettings;
 import com.cyplixlauncher.mc.task.Task;
 import com.cyplixlauncher.mc.task.TaskExecutors;

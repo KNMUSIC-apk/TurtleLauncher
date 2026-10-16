@@ -217,6 +217,10 @@
     <string name="pixel_editor_undo">Hoàn tác</string>
     <string name="pixel_editor_custom_color">Tùy chỉnh</string>
     <string name="customctrl_addbutton">Thêm nút</string>
+    <string name="customctrl_addcommandbutton">Thêm nút lệnh</string>
+    <string name="customctrl_command">Lệnh</string>
+    <string name="customctrl_command_hint">Nhập nội dung lệnh, ví dụ: tp @p 0 64 0</string>
+    <string name="controls_command_button_name">Lệnh</string>
     <string name="customctrl_addbutton_drawer">Thêm ngăn kéo</string>
     <string name="customctrl_addbutton_joystick">Thêm cần điều khiển</string>
     <string name="customctrl_addsubbutton">Thêm nút phụ</string>
@@ -1263,6 +1267,8 @@
     <string name="setting_hud_stat_fps_desc">Số khung hình mỗi giây, kèm biểu đồ</string>
     <string name="setting_hud_stat_ping_title">Ping (ms)</string>
     <string name="setting_hud_stat_ping_desc">Độ trễ tới máy chủ đang chơi</string>
+    <string name="setting_hud_stat_temp_title">Nhiệt độ (°C)</string>
+    <string name="setting_hud_stat_temp_desc">Nhiệt độ pin của máy, hiển thị bằng độ C</string>
     <string name="setting_category_hud_modules">Mô-đun HUD trong trò chơi</string>
     <string name="setting_hud_cps_title">Hiển thị CPS</string>
     <string name="setting_hud_cps_desc">Hiển thị số lần nhấp mỗi giây, được tính từ nút tấn công/chuột trái ảo.</string>

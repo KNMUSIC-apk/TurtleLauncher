@@ -31,6 +31,7 @@ class ControlMenu(
             MenuUtils.initSeekBarValue(snappingDistance, AllSettings.buttonSnappingDistance.getValue(), snappingDistanceValue, "dp")
 
             addButton.setOnClickListener(listener)
+            addCommandButton.setOnClickListener(listener)
             addDrawer.setOnClickListener(listener)
             addJoystick.setOnClickListener(listener)
 
@@ -55,6 +56,7 @@ class ControlMenu(
         binding.apply {
             when (v) {
                 addButton -> controlLayout.addControlButton(ControlData(activity.getString(R.string.controls_add_control_button)))
+                addCommandButton -> controlLayout.addControlButton(ControlData(activity.getString(R.string.controls_command_button_name)).apply { command = "" })
                 addDrawer -> controlLayout.addDrawer(ControlDrawerData())
                 addJoystick -> controlLayout.addJoystickButton(ControlJoystickData())
 

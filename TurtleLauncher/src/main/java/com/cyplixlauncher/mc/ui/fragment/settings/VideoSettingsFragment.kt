@@ -209,7 +209,7 @@ class VideoSettingsFragment : AbstractSettingsFragment(R.layout.settings_fragmen
         binding.resolutionPreset75.setOnClickListener { applyResolutionPreset(75) }
         binding.resolutionPreset50.setOnClickListener { applyResolutionPreset(50) }
         binding.resolutionAutoDetectButton.setOnClickListener {
-            com.endiq.turtlelauncher.launch.AutoSettingsOptimizer.apply(context)
+            com.cyplixlauncher.mc.launch.AutoSettingsOptimizer.apply(context)
             binding.resolutionRatio.progress = AllSettings.resolutionRatio.getValue()
             changeResolutionRatioPreview(AllSettings.resolutionRatio.getValue())
             Toast.makeText(context, getString(R.string.setting_resolution_auto_detect), Toast.LENGTH_SHORT).show()

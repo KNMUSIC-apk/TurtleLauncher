@@ -35,6 +35,15 @@ object HudStatsReader {
     /** Hottest CPU-ish thermal zone in degrees Celsius, or null. */
     fun cpuTempC(): Int? = thermalTempC { it.contains("cpu") || it.contains("tsens") || it.contains("soc") }
 
+    /** Battery temperature in degrees Celsius from the sticky battery broadcast, or null. */
+    fun batteryTempC(context: android.content.Context): Int? {
+        val intent = runCatching {
+            context.registerReceiver(null, android.content.IntentFilter(android.content.Intent.ACTION_BATTERY_CHANGED))
+        }.getOrNull() ?: return null
+        val tenths = intent.getIntExtra(android.os.BatteryManager.EXTRA_TEMPERATURE, Int.MIN_VALUE)
+        return if (tenths == Int.MIN_VALUE) null else tenths / 10
+    }
+
     /** GPU thermal zone in degrees Celsius, or null. */
     fun gpuTempC(): Int? = thermalTempC { it.contains("gpu") }
 

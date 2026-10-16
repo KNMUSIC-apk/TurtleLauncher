@@ -1,4 +1,4 @@
-package com.endiq.turtlelauncher.launch
+package com.cyplixlauncher.mc.launch
 
 import androidx.collection.ArrayMap
 import com.cyplixlauncher.mc.InfoDistributor

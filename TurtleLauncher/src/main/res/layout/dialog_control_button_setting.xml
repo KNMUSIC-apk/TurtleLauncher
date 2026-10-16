@@ -255,6 +255,21 @@
             tools:text="HELLO" />
 
 
+        <!-- COMMAND SECTION (shown instead of key mapping for command buttons) -->
+        <EditText
+            android:id="@+id/editCommand_editText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_edit_box"
+            android:gravity="center"
+            android:hint="@string/customctrl_command_hint"
+            android:imeOptions="flagNoExtractUi"
+            android:maxLines="1"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mapping_3_textview" />
+
         <!-- ORIENTATION SECTION -->
         <TextView
             android:id="@+id/editOrientation_textView"
@@ -264,7 +279,7 @@
             android:gravity="center"
             android:text="@string/customctrl_orientation"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mapping_3_textview" />
+            app:layout_constraintTop_toBottomOf="@+id/editCommand_editText" />
 
         <Spinner
             android:id="@+id/editOrientation_spinner"
@@ -275,16 +290,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editOrientation_textView" />
 
-        <!-- TOGGLE SECTION -->
-        <Switch
-            android:id="@+id/checkboxToggle"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_36sdp"
-            android:text="@string/customctrl_toggle"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editOrientation_spinner"
-            tools:ignore="UseSwitchCompatOrMaterialXml" />
-
         <!-- MOUSE PASS THROUGH SECTION -->
         <Switch
             android:id="@+id/checkboxPassThrough"
@@ -292,7 +297,7 @@
             android:layout_height="@dimen/_36sdp"
             android:text="@string/customctrl_passthru"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/checkboxToggle"
+            app:layout_constraintTop_toBottomOf="@id/editOrientation_spinner"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         <!-- SWIPEABLE BUTTON SECTION -->

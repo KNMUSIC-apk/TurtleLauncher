@@ -38,6 +38,7 @@ class GameMenuViewWrapper(
     private var showRamRow: Boolean = false
     private var showFpsRow: Boolean = false
     private var showPingRow: Boolean = false
+    private var showTempRow: Boolean = false
     private var showScreenshotButton: Boolean = false
     private var showRecordButton: Boolean = false
     private var buttonVisible: Boolean = false
@@ -124,7 +125,7 @@ class GameMenuViewWrapper(
     }
 
     private fun thinkForHudVisibility() {
-        val shouldShow = showCpuRow || showGpuRow || showRamRow || showFpsRow || showPingRow ||
+        val shouldShow = showCpuRow || showGpuRow || showRamRow || showFpsRow || showPingRow || showTempRow ||
             showScreenshotButton || showRecordButton
 
         if (shouldShow) {
@@ -149,6 +150,7 @@ class GameMenuViewWrapper(
         showRamRow = AllSettings.hudShowRam.getValue()
         showFpsRow = AllSettings.hudShowFps.getValue()
         showPingRow = AllSettings.hudShowPing.getValue()
+        showTempRow = AllSettings.hudShowTemp.getValue()
         showScreenshotButton = AllSettings.showScreenshotButtonHud.getValue()
         showRecordButton = AllSettings.showRecordButtonHud.getValue()
     }
@@ -167,7 +169,7 @@ class GameMenuViewWrapper(
         val recordButton: TextView = view.findViewById(R.id.record_button)
         val recordTimerText: TextView = view.findViewById(R.id.record_timer_text)
 
-        card.setRows(showCpuRow, showGpuRow, showRamRow, showFpsRow, showPingRow)
+        card.setRows(showCpuRow, showGpuRow, showRamRow, showFpsRow, showPingRow, showTempRow)
         card.setScalePercent(AllSettings.hudModuleScale.getValue())
 
         fun tick() {
@@ -195,7 +197,7 @@ class GameMenuViewWrapper(
 
             tick()
 
-            val needsTimer = showCpuRow || showGpuRow || showRamRow || showFpsRow || showPingRow || showRecordButton
+            val needsTimer = showCpuRow || showGpuRow || showRamRow || showFpsRow || showPingRow || showTempRow || showRecordButton
             if (needsTimer) {
                 timer = Timer().apply {
                     schedule(object : TimerTask() {
@@ -220,7 +222,8 @@ class GameMenuViewWrapper(
             gpuPercent = com.cyplixlauncher.mc.feature.turtle.HudStatsReader.gpuUsagePercent(),
             gpuTempC = com.cyplixlauncher.mc.feature.turtle.HudStatsReader.gpuTempC(),
             ramUsedGb = used / BYTES_PER_GB,
-            ramTotalGb = total / BYTES_PER_GB
+            ramTotalGb = total / BYTES_PER_GB,
+            deviceTempC = com.cyplixlauncher.mc.feature.turtle.HudStatsReader.batteryTempC(activity)
         )
         TaskExecutors.runInUIThread { card.update(frame) }
     }

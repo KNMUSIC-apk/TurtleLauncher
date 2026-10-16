@@ -54,9 +54,9 @@ import com.cyplixlauncher.mc.feature.background.BackgroundManager;
 import com.cyplixlauncher.mc.feature.background.BackgroundType;
 import com.cyplixlauncher.mc.feature.log.Logging;
 import com.cyplixlauncher.mc.feature.version.Version;
-import com.endiq.turtlelauncher.game.sdl.SdlBridge;
+import com.cyplixlauncher.mc.game.sdl.SdlBridge;
 import com.cyplixlauncher.mc.feature.version.VersionInfo;
-import com.endiq.turtlelauncher.launch.LaunchGame;
+import com.cyplixlauncher.mc.launch.LaunchGame;
 import com.cyplixlauncher.mc.listener.SimpleTextWatcher;
 import com.cyplixlauncher.mc.plugins.driver.DriverPluginManager;
 import com.cyplixlauncher.mc.renderer.Renderers;
@@ -779,6 +779,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             this.binding.hudShowRam.setChecked(AllSettings.getHudShowRam().getValue());
             this.binding.hudShowFps.setChecked(AllSettings.getHudShowFps().getValue());
             this.binding.hudShowPing.setChecked(AllSettings.getHudShowPing().getValue());
+            this.binding.hudShowTemp.setChecked(AllSettings.getHudShowTemp().getValue());
             MenuUtils.initSeekBarValue(this.binding.hudModuleScale, AllSettings.getHudModuleScale().getValue(), this.binding.hudModuleScaleValue, "%");
             this.binding.disableGestures.setChecked(AllSettings.getDisableGestures().getValue());
             this.binding.disableDoubleTap.setChecked(AllSettings.getDisableDoubleTap().getValue());
@@ -794,7 +795,6 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             refreshLayoutVisible(this.binding.gyroLayout, AllSettings.getEnableGyro().getValue());
 
             this.binding.tabBtnDebug.setOnClickListener(v -> selectTab(this.binding.tabBtnDebug));
-            this.binding.tabBtnRecording.setOnClickListener(v -> selectTab(this.binding.tabBtnRecording));
             this.binding.tabBtnControl.setOnClickListener(v -> selectTab(this.binding.tabBtnControl));
             this.binding.tabBtnHotbar.setOnClickListener(v -> selectTab(this.binding.tabBtnHotbar));
             this.binding.tabBtnHud.setOnClickListener(v -> selectTab(this.binding.tabBtnHud));
@@ -820,6 +820,8 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             this.binding.hudShowFpsLayout.setOnClickListener(this);
             this.binding.hudShowPing.setOnCheckedChangeListener(this);
             this.binding.hudShowPingLayout.setOnClickListener(this);
+            this.binding.hudShowTemp.setOnCheckedChangeListener(this);
+            this.binding.hudShowTempLayout.setOnClickListener(this);
             this.binding.hudModuleScale.setOnSeekBarChangeListener(this);
 
             this.binding.resolutionScaler.setOnSeekBarChangeListener(this);
@@ -948,6 +950,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             else if (v == binding.hudShowRamLayout) MenuUtils.toggleSwitchState(binding.hudShowRam);
             else if (v == binding.hudShowFpsLayout) MenuUtils.toggleSwitchState(binding.hudShowFps);
             else if (v == binding.hudShowPingLayout) MenuUtils.toggleSwitchState(binding.hudShowPing);
+            else if (v == binding.hudShowTempLayout) MenuUtils.toggleSwitchState(binding.hudShowTemp);
             else if (v == binding.resolutionScalerRemove) MenuUtils.adjustSeekbar(binding.resolutionScaler, -1);
             else if (v == binding.resolutionScalerAdd) MenuUtils.adjustSeekbar(binding.resolutionScaler, 1);
             else if (v == binding.disableGesturesLayout) MenuUtils.toggleSwitchState(binding.disableGestures);
@@ -1046,6 +1049,9 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             } else if (v == binding.hudShowPing) {
                 AllSettings.getHudShowPing().put(isChecked).save();
                 mGameMenuWrapper.refreshSettingsState();
+            } else if (v == binding.hudShowTemp) {
+                AllSettings.getHudShowTemp().put(isChecked).save();
+                mGameMenuWrapper.refreshSettingsState();
             } else if (v == binding.disableGestures) {
                 refreshLayoutVisible(binding.timeLongPressTriggerLayout, !isChecked);
                 AllSettings.getDisableGestures().put(isChecked).save();
@@ -1115,8 +1121,8 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         }
 
         private void selectTab(TextView selected) {
-            TextView[] buttons = { binding.tabBtnDebug, binding.tabBtnRecording, binding.tabBtnControl, binding.tabBtnHotbar, binding.tabBtnHud };
-            View[] pages = { binding.tabPageDebug, binding.tabPageRecording, binding.tabPageControl, binding.tabPageHotbar, binding.tabPageHud };
+            TextView[] buttons = { binding.tabBtnDebug, binding.tabBtnControl, binding.tabBtnHotbar, binding.tabBtnHud };
+            View[] pages = { binding.tabPageDebug, binding.tabPageControl, binding.tabPageHotbar, binding.tabPageHud };
             for (int i = 0; i < buttons.length; i++) {
                 boolean isSelected = buttons[i] == selected;
                 buttons[i].setTypeface(null, isSelected ? android.graphics.Typeface.BOLD : android.graphics.Typeface.NORMAL);
