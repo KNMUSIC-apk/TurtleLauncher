@@ -37,6 +37,7 @@
 
     <!-- ely.by quick-fill hint -->
     <TextView
+        android:fontFamily="@font/exo2"
         android:id="@+id/elyby_hint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

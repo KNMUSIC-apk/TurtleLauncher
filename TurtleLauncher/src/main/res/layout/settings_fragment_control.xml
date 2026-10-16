@@ -92,6 +92,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/buttonscale_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -141,6 +142,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/buttonAllCaps_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -196,6 +198,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/enableGyro_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -231,6 +234,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/gyroSensitivity_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -280,6 +284,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/gyroSampleRate_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -329,6 +334,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/gyroSmoothing_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -365,6 +371,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/gyroInvertX_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -400,6 +407,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/gyroInvertY_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -453,6 +461,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/changeControllerBindings_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -479,6 +488,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/resetControllerBindings_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -506,6 +516,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/gamepad_deadzone_scale_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

@@ -1030,6 +1030,7 @@
                         android:text="@string/setting_hud_stat_cpu_title"
                         android:textColor="@color/turtle_primary_text" />
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/hudShowCpu_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1061,6 +1062,7 @@
                         android:text="@string/setting_hud_stat_gpu_title"
                         android:textColor="@color/turtle_primary_text" />
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/hudShowGpu_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1092,6 +1094,7 @@
                         android:text="@string/setting_hud_stat_ram_title"
                         android:textColor="@color/turtle_primary_text" />
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/hudShowRam_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1123,6 +1126,7 @@
                         android:text="@string/setting_hud_stat_fps_title"
                         android:textColor="@color/turtle_primary_text" />
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/hudShowFps_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1154,6 +1158,7 @@
                         android:text="@string/setting_hud_stat_ping_title"
                         android:textColor="@color/turtle_primary_text" />
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/hudShowPing_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1242,6 +1247,7 @@
                         android:text="@string/setting_hud_screenshot_button_title"
                         android:textColor="@color/turtle_primary_text" />
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/showScreenshotButtonHud_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

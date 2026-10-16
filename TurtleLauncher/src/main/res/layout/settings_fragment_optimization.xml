@@ -96,6 +96,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/unlimitedFps_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -132,6 +133,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/lowLatencyRendering_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -168,6 +170,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/framePacing_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -204,6 +207,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/frameSkipping_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -240,6 +244,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/adaptiveFrameTiming_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -276,6 +281,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/autoMemoryCleanup_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -311,6 +317,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/rendererShaderCache_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -346,6 +353,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/rendererDebugLogging_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

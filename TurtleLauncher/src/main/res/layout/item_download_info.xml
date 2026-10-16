@@ -79,6 +79,7 @@
         app:layout_constraintTop_toBottomOf="@+id/title_textview"/>
 
     <TextView
+        android:fontFamily="@font/exo2"
         android:id="@+id/description_textview"
         style="@style/TextAppearance.AppCompat.Body1"
         android:layout_width="0dp"

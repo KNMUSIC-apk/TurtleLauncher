@@ -212,6 +212,7 @@
                         android:text="@string/setting_version_custom_info_title" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/custom_info_desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -237,6 +238,7 @@
                         android:text="@string/setting_java_args_title" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/jvm_args_desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -262,6 +264,7 @@
                         android:text="@string/setting_cpu_core_override_title" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/cpu_core_override_desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

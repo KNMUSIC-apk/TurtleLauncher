@@ -9,6 +9,8 @@ import android.graphics.RectF
 import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
+import com.endiq.turtlelauncher.R
 
 /**
  * In-game HUD strip, laid out horizontally: FPS | CPU | GPU | RAM | PING.
@@ -67,14 +69,14 @@ class HudCardView @JvmOverloads constructor(
     }
     private val dividerPaint = Paint().apply { color = divider; strokeWidth = dp(1f) }
     private val labelPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = textMuted; textSize = sp(8f); typeface = Typeface.create("sans-serif-medium", Typeface.NORMAL)
+        color = textMuted; textSize = sp(8f); typeface = hudFont(context, R.font.oxanium_medium)
         letterSpacing = 0.1f
     }
     private val valuePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = textPrimary; textSize = sp(12f); typeface = Typeface.create("sans-serif-medium", Typeface.NORMAL)
+        color = textPrimary; textSize = sp(12f); typeface = hudFont(context, R.font.oxanium_medium)
     }
     private val bigPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = textPrimary; textSize = sp(16f); typeface = Typeface.create("sans-serif-medium", Typeface.NORMAL)
+        color = textPrimary; textSize = sp(16f); typeface = hudFont(context, R.font.oxanium_medium)
     }
     private val ringPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.STROKE; strokeWidth = dp(2.5f); strokeCap = Paint.Cap.ROUND
@@ -246,6 +248,9 @@ class HudCardView @JvmOverloads constructor(
         p >= 65 -> warn
         else -> accent
     }
+
+    private fun hudFont(context: Context, res: Int): Typeface =
+        ResourcesCompat.getFont(context, res) ?: Typeface.DEFAULT
 
     companion object {
         private const val HISTORY = 40

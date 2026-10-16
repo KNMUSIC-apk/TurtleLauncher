@@ -38,6 +38,7 @@
         tools:ignore="HardcodedText" />
 
     <TextView
+        android:fontFamily="@font/exo2"
         android:id="@+id/desc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

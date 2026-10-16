@@ -90,6 +90,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/physical_mouse_mode_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -125,6 +126,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/mouse_capture_sensitivity_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -174,6 +176,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/hide_mouse_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -209,6 +212,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/mousescale_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -258,6 +262,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/mousespeed_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -304,6 +309,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/mouse_start_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -339,6 +345,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/custom_mouse_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -385,6 +392,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/disableGestures_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -420,6 +428,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/disableDoubleTap_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -455,6 +464,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/timeLongPressTrigger_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -504,6 +514,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/gesture_tap_action_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -543,6 +554,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/gesture_long_press_action_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -601,6 +613,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/physical_key_ime_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

@@ -130,6 +130,7 @@
                         android:textColor="@color/turtle_primary_text"/>
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/shizuku_enabled_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -165,6 +166,7 @@
                         android:textColor="@color/turtle_primary_text"/>
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/shizuku_auto_perf_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -218,6 +220,7 @@
                         android:textColor="@color/turtle_primary_text"/>
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/shizuku_grant_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -254,6 +257,7 @@
                         android:textColor="@color/turtle_primary_text"/>
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/shizuku_perf_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -290,6 +294,7 @@
                         android:textColor="@color/turtle_primary_text"/>
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/shizuku_logcat_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

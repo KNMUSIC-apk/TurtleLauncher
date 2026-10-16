@@ -91,6 +91,7 @@
                         tools:text="Connected as endiq" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/discord_status_desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -145,6 +146,7 @@
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <TextView
+        android:fontFamily="@font/exo2"
                     android:id="@+id/discord_activity_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -184,6 +186,7 @@
                     android:textColor="@color/turtle_text_primary" />
 
                 <TextView
+        android:fontFamily="@font/exo2"
                     android:id="@+id/discord_rpc_customization_summary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

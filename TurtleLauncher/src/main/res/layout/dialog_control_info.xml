@@ -152,6 +152,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/desc_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

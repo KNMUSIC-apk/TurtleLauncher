@@ -181,6 +181,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/renderer_local_import_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -259,6 +260,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/ignoreNotch_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -296,6 +298,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/ignoreNotchLauncher_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -333,6 +336,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/resolutionRatio_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -444,6 +448,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/sustainedPerformance_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -480,6 +485,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/alternate_surface_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -529,6 +535,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/force_vsync_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -565,6 +572,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/vsync_in_zink_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -601,6 +609,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/adaptive_vsync_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -637,6 +646,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/low_latency_front_buffer_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -673,6 +683,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/zinkPreferSystemDriver_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -731,6 +742,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/autoSettingsOptimizer_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

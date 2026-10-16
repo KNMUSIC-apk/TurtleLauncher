@@ -83,6 +83,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/install_jre_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -109,6 +110,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/selectRuntimeMode_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -144,6 +146,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/javaArgs_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -180,6 +183,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/allocation_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -237,6 +241,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/java_sandbox_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

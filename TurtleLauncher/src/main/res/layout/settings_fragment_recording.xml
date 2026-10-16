@@ -82,6 +82,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/showRecordButtonHud_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -118,6 +119,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/recordingCaptureAudio_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -154,6 +156,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/recordingShowTimer_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -190,6 +193,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/recordingFrameRate_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -240,6 +244,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/recordingBitrateMbps_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -290,6 +295,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/recordingResolutionScale_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -340,6 +346,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/recordingMaxDurationMin_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

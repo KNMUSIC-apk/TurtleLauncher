@@ -100,6 +100,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/autoDetectCores_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -135,6 +136,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/manualCoreOverride_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -170,6 +172,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/manualCoreCount_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -219,6 +222,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/perInstanceCpuOverride_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -254,6 +258,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/advancedCpuTuning_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -290,6 +295,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/bigCoreAffinity_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -326,6 +332,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/schedulerTuning_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -380,6 +387,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/autoRamCalculator_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -415,6 +423,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/equalHeapSizes_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -501,6 +510,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/memoryPressureMonitor_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -536,6 +546,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/gcStatistics_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -598,6 +609,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/jniBatching_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -633,6 +645,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/jniCachedReferences_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -668,6 +681,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/nativeObjectPooling_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -703,6 +717,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/reducedJniCalls_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

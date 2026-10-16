@@ -91,6 +91,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/checkLibraries_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -127,6 +128,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/verifyManifest_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -163,6 +165,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/resourceImageCache_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -198,6 +201,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/addFullResourceName_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -233,6 +237,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/downloadSource_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -268,6 +273,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/dnsServer_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -304,6 +310,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/maxDownloadThreads_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -423,6 +430,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/custom_background_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -449,6 +457,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/video_background_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -476,6 +485,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/animation_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -511,6 +521,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/animationEnter_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -547,6 +558,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/animationExit_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -584,6 +596,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/animationSpeed_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -633,6 +646,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/pageOpacity_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -701,6 +715,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/enableLogOutput_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -736,6 +751,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/quitLauncher_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -771,6 +787,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/clean_up_cache_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -797,6 +814,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/check_update_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -824,6 +842,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/acceptPreReleaseUpdates_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -860,6 +879,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/notification_permission_request_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -895,6 +915,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/aiAssistantEnabled_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -931,6 +952,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/aiAssistantHistoryEnabled_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -986,6 +1008,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/version_isolation_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1020,6 +1043,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/versionCustomInfo_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1055,6 +1079,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/curseForgeApiKey_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1111,6 +1136,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/autoSetGameLanguage_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1147,6 +1173,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/gameLanguageOverridden_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1227,6 +1254,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/use_angle_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
