@@ -30,7 +30,7 @@
     <color name="turtle_primary_text">#FF15241A</color>
     <color name="turtle_text_primary">#FF15241A</color>
     <color name="bg_deep">#FFEAF0E9</color>
-    <color name="bg_card">#FFF6FCF5</color>
+    <color name="bg_card">#FFFFFFFF</color>
     <color name="turtle_surface">#FFFFFFFF</color>
     <color name="turtle_surface_variant">#C8DBEAE0</color>
     <color name="turtle_divider">#FFC1D5CA</color>
@@ -72,7 +72,7 @@
     <color name="turtle_highlight_subtle">#2215241A</color>
     <color name="new_background_main">#FFEAF0E9</color>
     <color name="new_background_secondary">#FFF6FCF5</color>
-    <color name="new_background_cards_panels">#FFF6FCF5</color>
+    <color name="new_background_cards_panels">#FFFFFFFF</color>
     <color name="new_background_elevated_cards">#FFDBEAE0</color>
     <color name="new_background_sidebar_topbar">#FFF6FCF5</color>
     <color name="new_primary_blue">#FF2F7D5C</color>
