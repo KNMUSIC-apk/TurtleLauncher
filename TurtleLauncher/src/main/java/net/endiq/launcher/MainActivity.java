@@ -466,6 +466,8 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
 
     @Override
     protected void onPause() {
+        // Stop adapting and restore the chosen resolution while the game is in the background.
+        com.endiq.turtlelauncher.feature.turtle.AdaptiveResolution.stop();
         mGyroControl.disable();
         if (CallbackBridge.isGrabbing()){
             sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_ESCAPE);
@@ -707,6 +709,8 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     public void onServiceConnected(ComponentName name, IBinder service) {
         binding.mainGameRenderView.start(GameService.isActive(), binding.mainTouchpad);
         GameService.setActive(true);
+        com.endiq.turtlelauncher.feature.turtle.AdaptiveResolution.start(
+                () -> binding.mainGameRenderView.refreshSize());
     }
 
     @Override

@@ -63,6 +63,8 @@ class AllSettings {
         @JvmStatic val ignoreNotch              = BooleanSettingUnit("ignoreNotch", true)
         @JvmStatic val ignoreNotchLauncher      = BooleanSettingUnit("ignoreNotchLauncher", true)
         @JvmStatic val resolutionRatio          = IntSettingUnit("resolutionRatio", 100)
+        /** Lower the render scale in-game while FPS is low, and restore the chosen one once it recovers. */
+        @JvmStatic val adaptiveResolution       = BooleanSettingUnit("adaptiveResolution", false)
         @JvmStatic val sustainedPerformance     = BooleanSettingUnit("sustainedPerformance", false)
         @JvmStatic val alternateSurface         = BooleanSettingUnit("alternate_surface", false)
         @JvmStatic val forceVsync               = BooleanSettingUnit("force_vsync", false)
