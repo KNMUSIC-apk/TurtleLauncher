@@ -78,40 +78,6 @@
                 android:tint="@color/turtle_text_secondary"
                 android:contentDescription="@string/main_nav_download"/>
 
-            <FrameLayout
-                android:layout_width="40dp"
-                android:layout_height="40dp">
-
-                <ImageButton
-                    android:id="@+id/top_bar_tasks_button"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_tasks"
-                    android:padding="9dp"
-                    android:tint="@color/turtle_text_secondary"
-                    android:contentDescription="@string/main_nav_tasks"/>
-
-                <TextView
-                    android:id="@+id/top_bar_tasks_badge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top|end"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:minWidth="14dp"
-                    android:minHeight="14dp"
-                    android:background="@drawable/background_task_badge"
-                    android:gravity="center"
-                    android:includeFontPadding="false"
-                    android:textSize="9sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/turtle_text_on_accent"
-                    android:paddingHorizontal="3dp"
-                    android:visibility="gone"
-                    tools:text="2"/>
-
-            </FrameLayout>
 
             <ImageButton
                 android:id="@+id/top_bar_music_button"

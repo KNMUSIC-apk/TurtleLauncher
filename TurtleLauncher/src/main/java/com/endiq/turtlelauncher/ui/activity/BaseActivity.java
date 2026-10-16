@@ -10,7 +10,6 @@ import android.os.SystemClock;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.endiq.turtlelauncher.context.AccessibilityHelper;
 import com.endiq.turtlelauncher.context.ContextExecutor;
 import com.endiq.turtlelauncher.context.LocaleHelper;
 import com.endiq.turtlelauncher.event.single.LauncherIgnoreNotchEvent;
@@ -36,15 +35,13 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(AccessibilityHelper.wrapContext(LocaleHelper.Companion.setLocale(newBase)));
+        super.attachBaseContext(LocaleHelper.Companion.setLocale(newBase));
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LocaleHelper.Companion.setLocale(this);
-        AccessibilityHelper.applyHighContrastOverlay(this);
-        AccessibilityHelper.applyFontFamilyOverride(this);
         Tools.setFullscreen(this);
         Tools.updateWindowSize(this);
 

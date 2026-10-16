@@ -67,7 +67,6 @@ public class MainMenuFragment extends FragmentWithAnim {
     public static final String TAG = "MainMenuFragment";
     private FragmentLauncherBinding binding;
     private ActivityResultLauncher<Object> modpackImportLauncher;
-    private final net.endiq.launcher.progresskeeper.TaskCountListener tasksBadgeListener = this::updateTasksBadge;
 
     public MainMenuFragment() {
         super(R.layout.fragment_launcher);
@@ -174,8 +173,6 @@ public class MainMenuFragment extends FragmentWithAnim {
         binding.topBarAiButton.setOnClickListener(v -> ZHTools.swapFragmentWithAnim(this,
             com.endiq.turtlelauncher.ui.fragment.AiChatFragment.class,
             com.endiq.turtlelauncher.ui.fragment.AiChatFragment.TAG, null));
-        binding.topBarTasksButton.setOnClickListener(v -> showRunningTasksDialog());
-        updateTasksBadge(ProgressKeeper.getTaskCount());
 
         // Today's Statistics dashboard
         refreshStatistics();
@@ -352,94 +349,12 @@ public class MainMenuFragment extends FragmentWithAnim {
     public void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
-        ProgressKeeper.addTaskCountListener(tasksBadgeListener);
     }
 
     @Override
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
-        ProgressKeeper.removeTaskCountListener(tasksBadgeListener);
-    }
-
-    private void updateTasksBadge(int taskCount) {
-        TaskExecutors.runInUIThread(() -> {
-            if (binding == null) return;
-            android.widget.TextView badge = binding.topBarTasksBadge;
-            if (taskCount > 0) {
-                badge.setText(String.valueOf(taskCount));
-                badge.setVisibility(View.VISIBLE);
-            } else {
-                badge.setVisibility(View.GONE);
-            }
-        });
-    }
-
-    /**
-     * Shows every task ProgressKeeper currently knows about (downloads, login, mod
-     * checking, JRE/runtime unpacking, etc - anything routed through ProgressKeeper.submitProgress,
-     * regardless of which fixed key it uses) in a simple on-demand dialog, replacing the
-     * old always-visible bottom ProgressLayout bar.
-     */
-    private void showRunningTasksDialog() {
-        com.endiq.turtlelauncher.databinding.DialogRunningTasksBinding dialogBinding =
-                com.endiq.turtlelauncher.databinding.DialogRunningTasksBinding.inflate(getLayoutInflater());
-
-        java.util.Map<String, com.endiq.mcgui.TextProgressBar> rowsByKey = new java.util.HashMap<>();
-        android.os.Handler refreshHandler = TaskExecutors.getUIHandler();
-        Runnable[] refreshRunnableHolder = new Runnable[1];
-
-        refreshRunnableHolder[0] = () -> {
-            if (!isAdded()) return; // fragment detached - stop polling, dialog will be dismissed with it
-
-            java.util.List<ProgressKeeper.Snapshot> snapshots = ProgressKeeper.getSnapshots();
-            dialogBinding.tasksDialogEmpty.setVisibility(snapshots.isEmpty() ? View.VISIBLE : View.GONE);
-
-            java.util.Set<String> stillRunning = new java.util.HashSet<>();
-            for (ProgressKeeper.Snapshot snapshot : snapshots) {
-                stillRunning.add(snapshot.progressKey);
-                com.endiq.mcgui.TextProgressBar row = rowsByKey.get(snapshot.progressKey);
-                if (row == null) {
-                    row = new com.endiq.mcgui.TextProgressBar(requireContext());
-                    row.setTextPadding(getResources().getDimensionPixelOffset(R.dimen._6sdp));
-                    android.widget.LinearLayout.LayoutParams params = new android.widget.LinearLayout.LayoutParams(
-                            android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
-                            getResources().getDimensionPixelOffset(R.dimen._24sdp));
-                    params.bottomMargin = getResources().getDimensionPixelOffset(R.dimen._6sdp);
-                    dialogBinding.tasksDialogList.addView(row, params);
-                    rowsByKey.put(snapshot.progressKey, row);
-                }
-                row.setProgress(Math.max(snapshot.progress, 0));
-                row.setText(describeSnapshot(snapshot));
-            }
-
-            java.util.Iterator<java.util.Map.Entry<String, com.endiq.mcgui.TextProgressBar>> it = rowsByKey.entrySet().iterator();
-            while (it.hasNext()) {
-                java.util.Map.Entry<String, com.endiq.mcgui.TextProgressBar> entry = it.next();
-                if (!stillRunning.contains(entry.getKey())) {
-                    dialogBinding.tasksDialogList.removeView(entry.getValue());
-                    it.remove();
-                }
-            }
-
-            refreshHandler.postDelayed(refreshRunnableHolder[0], 400);
-        };
-        refreshRunnableHolder[0].run();
-
-        new AlertDialog.Builder(requireContext(), R.style.CustomAlertDialogTheme)
-                .setView(dialogBinding.getRoot())
-                .setPositiveButton(android.R.string.ok, null)
-                .setOnDismissListener(d -> refreshHandler.removeCallbacks(refreshRunnableHolder[0]))
-                .show();
-    }
-
-    private String describeSnapshot(ProgressKeeper.Snapshot snapshot) {
-        try {
-            if (snapshot.resid != -1) return getString(snapshot.resid, snapshot.varArg);
-            if (snapshot.varArg.length > 0 && snapshot.varArg[0] != null) return (String) snapshot.varArg[0];
-        } catch (Throwable ignored) {
-        }
-        return "";
     }
 
     private void openUrl(String url) {

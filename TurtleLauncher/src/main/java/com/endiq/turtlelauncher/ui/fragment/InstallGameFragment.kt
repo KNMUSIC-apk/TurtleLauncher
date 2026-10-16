@@ -28,7 +28,6 @@ import com.endiq.turtlelauncher.feature.version.install.InstallTask
 import com.endiq.turtlelauncher.feature.version.install.InstallTaskItem
 import com.endiq.turtlelauncher.feature.version.VersionsManager
 import com.endiq.turtlelauncher.setting.AllSettings
-import com.endiq.turtlelauncher.ui.dialog.InstallExtrasDialog
 import com.endiq.turtlelauncher.ui.dialog.TipDialog
 import com.endiq.turtlelauncher.ui.fragment.download.addon.DownloadFabricApiFragment
 import com.endiq.turtlelauncher.ui.fragment.download.addon.DownloadFabricFragment
@@ -202,12 +201,6 @@ class InstallGameFragment : FragmentWithAnim(R.layout.fragment_install_game), Vi
         checkIncompatible()
     }
 
-    private fun showInstallExtrasDialog(activity: FragmentActivity, customVersionName: String) {
-        InstallExtrasDialog(activity) { includeTurtleClient, includeFpsBoost ->
-            proceedWithInstall(activity, customVersionName, includeTurtleClient, includeFpsBoost)
-        }.show()
-    }
-
     private fun proceedWithInstall(
         activity: FragmentActivity,
         customVersionName: String,
@@ -289,7 +282,7 @@ class InstallGameFragment : FragmentWithAnim(R.layout.fragment_install_game), Vi
                         return
                     }
 
-                    showInstallExtrasDialog(activity, string)
+                    proceedWithInstall(activity, string, includeTurtleClient = false, includeFpsBoost = false)
                 }
                 back -> ZHTools.onBackPressed(activity)
                 else -> {}

@@ -519,10 +519,25 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     @Override
     protected void onPostResume() {
         super.onPostResume();
-        TaskExecutors.getUIHandler().postDelayed(() -> {
-            ActivityGameBinding b = binding;
-            if (b != null) b.mainGameRenderView.refreshSize();
-        }, 500);
+        TaskExecutors.getUIHandler().postDelayed(this::refreshGameLayout, 500);
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (!hasFocus) return;
+        // Coming back from the home screen can re-show the system bars without a configuration
+        // change, which left the game surface and touch controls laid out for the old window.
+        Tools.updateWindowSize(this);
+        refreshGameLayout();
+        TaskExecutors.getUIHandler().postDelayed(this::refreshGameLayout, 500);
+    }
+
+    private void refreshGameLayout() {
+        ActivityGameBinding b = binding;
+        if (b == null) return;
+        b.mainGameRenderView.refreshSize();
+        b.mainControlLayout.refreshControlButtonPositions();
     }
 
     @Override
