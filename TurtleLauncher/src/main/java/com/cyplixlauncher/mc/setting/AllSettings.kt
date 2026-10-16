@@ -293,7 +293,6 @@ class AllSettings {
         @JvmStatic val hudShowGpu               = BooleanSettingUnit("hudShowGpu", true)
         @JvmStatic val hudShowRam               = BooleanSettingUnit("hudShowRam", true)
         @JvmStatic val hudShowFps               = BooleanSettingUnit("hudShowFps", true)
-        @JvmStatic val hudShowPing              = BooleanSettingUnit("hudShowPing", true)
         @JvmStatic val hudShowTemp              = BooleanSettingUnit("hudShowTemp", true)
         /** Persisted cumulative playtime in milliseconds, across all sessions. */
         @JvmStatic val totalPlaytimeMs           = LongSettingUnit("totalPlaytimeMs", 0L)
@@ -334,7 +333,6 @@ class AllSettings {
         @JvmStatic val autoCheckForUpdates      = BooleanSettingUnit("autoCheckForUpdates", true)
         @JvmStatic val hudModuleScale           = IntSettingUnit("hudModuleScale", 100)
         @JvmStatic val showRamGraphHud          = BooleanSettingUnit("showRamGraphHud", false)
-        @JvmStatic val showPingHud              = BooleanSettingUnit("showPingHud", false)
         @JvmStatic val showScreenshotButtonHud  = BooleanSettingUnit("showScreenshotButtonHud", true)
         @JvmStatic val hudModulePositions       = StringSettingUnit("hudModulePositions", "{}")
 

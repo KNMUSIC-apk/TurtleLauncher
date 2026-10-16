@@ -54,8 +54,7 @@
     <color name="turtle_text_terminal">#FF3F4A44</color>
     <color name="turtle_border_subtle">#88C1D5CA</color>
     <color name="switch_track_off">#FF2A4337</color>
-    <color name="switch_thumb_on">#FF4FB58A</color>
-    <color name="switch_thumb_off">#FF6B7F76</color>
+    <color name="switch_track_on">#FF4FB58A</color>
     <color name="turtle_border_default">#FFC1D5CA</color>
     <color name="turtle_hc_border">#FF15241A</color>
     <color name="turtle_hc_text_secondary">#FF15241A</color>

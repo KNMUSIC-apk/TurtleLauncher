@@ -44,6 +44,10 @@ object HudStatsReader {
         return if (tenths == Int.MIN_VALUE) null else tenths / 10
     }
 
+    /** Device surface temperature in °C: the skin thermal zone when present, otherwise battery. */
+    fun deviceTempC(context: android.content.Context): Int? =
+        thermalTempC { it.contains("skin") } ?: batteryTempC(context)
+
     /** GPU thermal zone in degrees Celsius, or null. */
     fun gpuTempC(): Int? = thermalTempC { it.contains("gpu") }
 

@@ -13,7 +13,7 @@ import androidx.core.content.res.ResourcesCompat
 import com.cyplixlauncher.mc.R
 
 /**
- * In-game HUD strip, laid out horizontally: FPS | CPU | GPU | RAM | PING.
+ * In-game HUD strip, laid out horizontally: FPS | CPU | GPU | RAM | TEMP.
  * Each cell is shown only when its switch is on in the in-game HUD tab. The whole strip is scaled
  * by the "HUD size" slider. Drawn on a Canvas so an update is one invalidate, not many setText calls.
  */
@@ -25,7 +25,6 @@ class HudCardView @JvmOverloads constructor(
     /** One frame of numbers. Null means "not available on this device" and is drawn as "--". */
     data class Snapshot(
         val fps: Int,
-        val pingMs: Int?,
         val cpuPercent: Int?,
         val cpuTempC: Int?,
         val gpuPercent: Int?,
@@ -35,13 +34,12 @@ class HudCardView @JvmOverloads constructor(
         val deviceTempC: Int? = null
     )
 
-    private enum class Cell { FPS, CPU, GPU, RAM, PING, TEMP }
+    private enum class Cell { FPS, CPU, GPU, RAM, TEMP }
 
     private var showCpu = true
     private var showGpu = true
     private var showRam = true
     private var showFps = true
-    private var showPing = true
     private var showTemp = true
     private var scale = 1f
 
@@ -93,8 +91,8 @@ class HudCardView @JvmOverloads constructor(
     private val edgePad = dp(8f)
 
     /** Which cells are visible. Called when the switches change. */
-    fun setRows(cpu: Boolean, gpu: Boolean, ram: Boolean, fps: Boolean, ping: Boolean, temp: Boolean) {
-        showCpu = cpu; showGpu = gpu; showRam = ram; showFps = fps; showPing = ping; showTemp = temp
+    fun setRows(cpu: Boolean, gpu: Boolean, ram: Boolean, fps: Boolean, temp: Boolean) {
+        showCpu = cpu; showGpu = gpu; showRam = ram; showFps = fps; showTemp = temp
         requestLayout()
         invalidate()
     }
@@ -121,14 +119,13 @@ class HudCardView @JvmOverloads constructor(
         invalidate()
     }
 
-    fun hasVisibleRows(): Boolean = showCpu || showGpu || showRam || showFps || showPing || showTemp
+    fun hasVisibleRows(): Boolean = showCpu || showGpu || showRam || showFps || showTemp
 
     private fun visibleCells(): List<Cell> = buildList {
         if (showFps) add(Cell.FPS)
         if (showCpu) add(Cell.CPU)
         if (showGpu) add(Cell.GPU)
         if (showRam) add(Cell.RAM)
-        if (showPing) add(Cell.PING)
         if (showTemp) add(Cell.TEMP)
     }
 
@@ -136,7 +133,6 @@ class HudCardView @JvmOverloads constructor(
         Cell.FPS -> 64f
         Cell.CPU, Cell.GPU -> 72f
         Cell.RAM -> 80f
-        Cell.PING -> 56f
         Cell.TEMP -> 64f
     })
 
@@ -174,7 +170,6 @@ class HudCardView @JvmOverloads constructor(
                 Cell.CPU -> drawTemp(canvas, x, "CPU", snapshot?.cpuTempC)
                 Cell.GPU -> drawTemp(canvas, x, "GPU", snapshot?.gpuTempC)
                 Cell.RAM -> drawRam(canvas, x)
-                Cell.PING -> drawPing(canvas, x)
                 Cell.TEMP -> drawDeviceTemp(canvas, x)
             }
             x += cw
@@ -195,12 +190,6 @@ class HudCardView @JvmOverloads constructor(
         canvas.drawText("TEMP", x + dp(6f), dp(14f), labelPaint)
         val c = snapshot?.deviceTempC
         canvas.drawText(c?.let { "$it°C" } ?: "-- °C", x + dp(6f), dp(34f), valuePaint)
-    }
-
-    private fun drawPing(canvas: Canvas, x: Float) {
-        canvas.drawText("PING", x + dp(6f), dp(14f), labelPaint)
-        val ms = snapshot?.pingMs
-        canvas.drawText(ms?.let { "$it ms" } ?: "-- ms", x + dp(6f), dp(34f), valuePaint)
     }
 
     /** Temperature ring with its value. */

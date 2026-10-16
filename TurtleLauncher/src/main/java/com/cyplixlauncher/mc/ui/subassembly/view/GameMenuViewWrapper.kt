@@ -37,7 +37,6 @@ class GameMenuViewWrapper(
     private var showGpuRow: Boolean = false
     private var showRamRow: Boolean = false
     private var showFpsRow: Boolean = false
-    private var showPingRow: Boolean = false
     private var showTempRow: Boolean = false
     private var showScreenshotButton: Boolean = false
     private var showRecordButton: Boolean = false
@@ -125,7 +124,7 @@ class GameMenuViewWrapper(
     }
 
     private fun thinkForHudVisibility() {
-        val shouldShow = showCpuRow || showGpuRow || showRamRow || showFpsRow || showPingRow || showTempRow ||
+        val shouldShow = showCpuRow || showGpuRow || showRamRow || showFpsRow || showTempRow ||
             showScreenshotButton || showRecordButton
 
         if (shouldShow) {
@@ -149,7 +148,6 @@ class GameMenuViewWrapper(
         showGpuRow = AllSettings.hudShowGpu.getValue()
         showRamRow = AllSettings.hudShowRam.getValue()
         showFpsRow = AllSettings.hudShowFps.getValue()
-        showPingRow = AllSettings.hudShowPing.getValue()
         showTempRow = AllSettings.hudShowTemp.getValue()
         showScreenshotButton = AllSettings.showScreenshotButtonHud.getValue()
         showRecordButton = AllSettings.showRecordButtonHud.getValue()
@@ -169,7 +167,7 @@ class GameMenuViewWrapper(
         val recordButton: TextView = view.findViewById(R.id.record_button)
         val recordTimerText: TextView = view.findViewById(R.id.record_timer_text)
 
-        card.setRows(showCpuRow, showGpuRow, showRamRow, showFpsRow, showPingRow, showTempRow)
+        card.setRows(showCpuRow, showGpuRow, showRamRow, showFpsRow, showTempRow)
         card.setScalePercent(AllSettings.hudModuleScale.getValue())
 
         fun tick() {
@@ -191,13 +189,9 @@ class GameMenuViewWrapper(
                 com.cyplixlauncher.mc.feature.turtle.ScreenRecorder.toggle(activity)
             }
 
-            if (showPingRow) {
-                com.cyplixlauncher.mc.feature.turtle.PingTracker.start()
-            }
-
             tick()
 
-            val needsTimer = showCpuRow || showGpuRow || showRamRow || showFpsRow || showPingRow || showTempRow || showRecordButton
+            val needsTimer = showCpuRow || showGpuRow || showRamRow || showFpsRow || showTempRow || showRecordButton
             if (needsTimer) {
                 timer = Timer().apply {
                     schedule(object : TimerTask() {
@@ -216,14 +210,13 @@ class GameMenuViewWrapper(
         val total = MemoryUtils.getTotalDeviceMemory(activity).toFloat()
         val frame = com.cyplixlauncher.mc.feature.turtle.HudCardView.Snapshot(
             fps = CallbackBridge.getCurrentFps(),
-            pingMs = com.cyplixlauncher.mc.feature.turtle.PingTracker.getPingMs().takeIf { it >= 0 },
             cpuPercent = com.cyplixlauncher.mc.feature.turtle.HudStatsReader.cpuUsagePercent(),
             cpuTempC = com.cyplixlauncher.mc.feature.turtle.HudStatsReader.cpuTempC(),
             gpuPercent = com.cyplixlauncher.mc.feature.turtle.HudStatsReader.gpuUsagePercent(),
             gpuTempC = com.cyplixlauncher.mc.feature.turtle.HudStatsReader.gpuTempC(),
             ramUsedGb = used / BYTES_PER_GB,
             ramTotalGb = total / BYTES_PER_GB,
-            deviceTempC = com.cyplixlauncher.mc.feature.turtle.HudStatsReader.batteryTempC(activity)
+            deviceTempC = com.cyplixlauncher.mc.feature.turtle.HudStatsReader.deviceTempC(activity)
         )
         TaskExecutors.runInUIThread { card.update(frame) }
     }

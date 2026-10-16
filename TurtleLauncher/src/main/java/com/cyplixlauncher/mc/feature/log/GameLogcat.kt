@@ -95,7 +95,6 @@ object GameLogcat {
             pending.append(String(buffer, 0, read, Charsets.UTF_8))
             var newline = pending.indexOf("\n")
             while (newline >= 0) {
-                com.cyplixlauncher.mc.feature.turtle.PingTracker.onGameLogLine(pending.substring(0, newline))
                 pending.delete(0, newline + 1)
                 newline = pending.indexOf("\n")
             }

@@ -4,5 +4,5 @@
     <size android:width="48dp" android:height="28dp" />
     <corners android:radius="14dp" />
     <padding android:left="3dp" android:top="3dp" android:right="3dp" android:bottom="3dp" />
-    <solid android:color="@color/switch_track_off" />
+    <solid android:color="@color/switch_track_on" />
 </shape>
