@@ -1,6 +1,6 @@
 package net.endiq.launcher.utils;
 
-import static com.endiq.turtlelauncher.utils.path.PathManager.DIR_NATIVE_LIB;
+import static com.cyplixlauncher.mc.utils.path.PathManager.DIR_NATIVE_LIB;
 import static net.endiq.launcher.Architecture.ARCH_X86;
 import static net.endiq.launcher.Architecture.is64BitsDevice;
 import static net.endiq.launcher.Tools.currentDisplayMetrics;
@@ -15,26 +15,26 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.endiq.turtlelauncher.InfoDistributor;
-import com.endiq.turtlelauncher.R;
-import com.endiq.turtlelauncher.event.value.JvmExitEvent;
-import com.endiq.turtlelauncher.feature.customprofilepath.ProfilePathHome;
-import com.endiq.turtlelauncher.feature.customprofilepath.ProfilePathManager;
-import com.endiq.turtlelauncher.feature.log.Logging;
-import com.endiq.turtlelauncher.feature.version.Version;
-import com.endiq.turtlelauncher.feature.version.VersionInfo;
-import com.endiq.turtlelauncher.plugins.driver.DriverPluginManager;
-import com.endiq.turtlelauncher.plugins.renderer.RendererPluginManager;
-import com.endiq.turtlelauncher.plugins.renderer.RendererPlugin;
-import com.endiq.turtlelauncher.renderer.RendererInterface;
-import com.endiq.turtlelauncher.renderer.Renderers;
-import com.endiq.turtlelauncher.renderer.renderers.HolyGL4ESRenderer;
-import com.endiq.turtlelauncher.renderer.renderers.ZinkRenderer;
-import com.endiq.turtlelauncher.setting.AllSettings;
-import com.endiq.turtlelauncher.ui.activity.ErrorActivity;
-import com.endiq.turtlelauncher.utils.ZHTools;
-import com.endiq.turtlelauncher.utils.path.LibPath;
-import com.endiq.turtlelauncher.utils.path.PathManager;
+import com.cyplixlauncher.mc.InfoDistributor;
+import com.cyplixlauncher.mc.R;
+import com.cyplixlauncher.mc.event.value.JvmExitEvent;
+import com.cyplixlauncher.mc.feature.customprofilepath.ProfilePathHome;
+import com.cyplixlauncher.mc.feature.customprofilepath.ProfilePathManager;
+import com.cyplixlauncher.mc.feature.log.Logging;
+import com.cyplixlauncher.mc.feature.version.Version;
+import com.cyplixlauncher.mc.feature.version.VersionInfo;
+import com.cyplixlauncher.mc.plugins.driver.DriverPluginManager;
+import com.cyplixlauncher.mc.plugins.renderer.RendererPluginManager;
+import com.cyplixlauncher.mc.plugins.renderer.RendererPlugin;
+import com.cyplixlauncher.mc.renderer.RendererInterface;
+import com.cyplixlauncher.mc.renderer.Renderers;
+import com.cyplixlauncher.mc.renderer.renderers.HolyGL4ESRenderer;
+import com.cyplixlauncher.mc.renderer.renderers.ZinkRenderer;
+import com.cyplixlauncher.mc.setting.AllSettings;
+import com.cyplixlauncher.mc.ui.activity.ErrorActivity;
+import com.cyplixlauncher.mc.utils.ZHTools;
+import com.cyplixlauncher.mc.utils.path.LibPath;
+import com.cyplixlauncher.mc.utils.path.PathManager;
 import com.oracle.dalvik.VMLauncher;
 
 import net.endiq.launcher.Architecture;
@@ -278,13 +278,13 @@ public final class JREUtils {
             envMap.put("LIBGL_NOINTOVLHACK", "1");
             envMap.put("LIBGL_NORMALIZE", "1");
 
-            if (com.endiq.turtlelauncher.setting.AllSettings.getJniBatching().getValue())
+            if (com.cyplixlauncher.mc.setting.AllSettings.getJniBatching().getValue())
                 envMap.put("LIBGL_BATCH", "1"); // batch GL calls instead of dispatching each one immediately
-            if (com.endiq.turtlelauncher.setting.AllSettings.getJniCachedReferences().getValue())
+            if (com.cyplixlauncher.mc.setting.AllSettings.getJniCachedReferences().getValue())
                 envMap.put("LIBGL_USEVBO", "1"); // keep vertex data in VBOs instead of re-uploading client-side arrays
-            if (com.endiq.turtlelauncher.setting.AllSettings.getReducedJniCalls().getValue())
+            if (com.cyplixlauncher.mc.setting.AllSettings.getReducedJniCalls().getValue())
                 envMap.put("LIBGL_SKIPTEXCOPIES", "1"); // skip a redundant texture copy on upload
-            if (com.endiq.turtlelauncher.setting.AllSettings.getNativeObjectPooling().getValue())
+            if (com.cyplixlauncher.mc.setting.AllSettings.getNativeObjectPooling().getValue())
                 envMap.put("LIBGL_RECYCLEFBO", "1"); // reuse framebuffer objects instead of recreating them
         }
 
@@ -296,7 +296,7 @@ public final class JREUtils {
         // "Use ANGLE" game setting: swap the system EGL/GLES driver for the bundled ANGLE libs.
         // Only for renderers that ride the system EGL ("libEGL.so"); renderers shipping their own
         // EGL (Zink, MobileGlues, ANGLE renderer itself) and plugin renderers are left untouched.
-        if (com.endiq.turtlelauncher.setting.AllSettings.getUseAngle().getValue()
+        if (com.cyplixlauncher.mc.setting.AllSettings.getUseAngle().getValue()
                 && "libEGL.so".equals(eglName)
                 && RendererPluginManager.getSelectedRendererPlugin() == null) {
             java.io.File angleEgl = new java.io.File(DIR_NATIVE_LIB, "libEGL_angle.so");
@@ -315,7 +315,7 @@ public final class JREUtils {
         if (RendererPluginManager.getSelectedRendererPlugin() != null) return;
 
         boolean isZinkRenderer = rendererId.equals(ZinkRenderer.ID);
-        boolean shaderCacheEnabled = com.endiq.turtlelauncher.setting.AllSettings.getRendererShaderCacheEnabled().getValue();
+        boolean shaderCacheEnabled = com.cyplixlauncher.mc.setting.AllSettings.getRendererShaderCacheEnabled().getValue();
 
         if (isZinkRenderer) {
             envMap.put("MESA_LOADER_DRIVER_OVERRIDE", "zink");
@@ -336,13 +336,13 @@ public final class JREUtils {
             envMap.put("LIB_MESA_NAME", loadGraphicsLibrary());
         }
 
-        if (com.endiq.turtlelauncher.setting.AllSettings.getRendererDebugLogging().getValue()) {
+        if (com.cyplixlauncher.mc.setting.AllSettings.getRendererDebugLogging().getValue()) {
             Logging.i("RendererDebug", "renderer=" + rendererId + " gl4esFamily=" + isGl4esRenderer +
                     " zink=" + isZinkRenderer + " shaderCache=" + shaderCacheEnabled +
-                    " jni=[batch=" + com.endiq.turtlelauncher.setting.AllSettings.getJniBatching().getValue() +
-                    ",cache=" + com.endiq.turtlelauncher.setting.AllSettings.getJniCachedReferences().getValue() +
-                    ",pool=" + com.endiq.turtlelauncher.setting.AllSettings.getNativeObjectPooling().getValue() +
-                    ",reduced=" + com.endiq.turtlelauncher.setting.AllSettings.getReducedJniCalls().getValue() + "]" +
+                    " jni=[batch=" + com.cyplixlauncher.mc.setting.AllSettings.getJniBatching().getValue() +
+                    ",cache=" + com.cyplixlauncher.mc.setting.AllSettings.getJniCachedReferences().getValue() +
+                    ",pool=" + com.cyplixlauncher.mc.setting.AllSettings.getNativeObjectPooling().getValue() +
+                    ",reduced=" + com.cyplixlauncher.mc.setting.AllSettings.getReducedJniCalls().getValue() + "]" +
                     " env=" + envMap);
         }
 
@@ -498,7 +498,7 @@ public final class JREUtils {
         // TurtleLauncher Memory Optimizer: Equal Heap Sizes (-Xms = -Xmx) reserves the whole
         // heap up front, trading a bigger initial commit for fewer heap-resize GC pauses mid
         // game. Off instead starts small (half of -Xmx) and lets the JVM grow it on demand.
-        boolean equalHeapSizes = com.endiq.turtlelauncher.setting.AllSettings.getEqualHeapSizes().getValue();
+        boolean equalHeapSizes = com.cyplixlauncher.mc.setting.AllSettings.getEqualHeapSizes().getValue();
         int xmsMb = equalHeapSizes ? ramAllocationMb : Math.max(256, ramAllocationMb / 2);
         userArgs.add("-Xms" + xmsMb + "M");
         userArgs.add("-Xmx" + ramAllocationMb + "M");
@@ -509,12 +509,12 @@ public final class JREUtils {
         userArgs.add("-Dorg.lwjgl.freetype.libname="+ DIR_NATIVE_LIB +"/libfreetype.so");
 
         int coreCount;
-        int perInstanceCores = (gameVersion != null && com.endiq.turtlelauncher.setting.AllSettings.getPerInstanceCpuOverride().getValue())
+        int perInstanceCores = (gameVersion != null && com.cyplixlauncher.mc.setting.AllSettings.getPerInstanceCpuOverride().getValue())
                 ? gameVersion.getVersionConfig().getCpuCoreOverride() : -1;
         if (perInstanceCores > 0) {
             coreCount = perInstanceCores;
-        } else if (com.endiq.turtlelauncher.setting.AllSettings.getManualCoreOverride().getValue()) {
-            coreCount = com.endiq.turtlelauncher.setting.AllSettings.getManualCoreCount().getValue();
+        } else if (com.cyplixlauncher.mc.setting.AllSettings.getManualCoreOverride().getValue()) {
+            coreCount = com.cyplixlauncher.mc.setting.AllSettings.getManualCoreCount().getValue();
         } else {
             coreCount = java.lang.Runtime.getRuntime().availableProcessors();
         }
@@ -523,7 +523,7 @@ public final class JREUtils {
 
         // TurtleLauncher Phone Settings: GC Statistics - JDK unified logging of every GC
         // pause to the launcher log, so a slow session can be diagnosed after the fact.
-        if (com.endiq.turtlelauncher.setting.AllSettings.getGcStatistics().getValue()) {
+        if (com.cyplixlauncher.mc.setting.AllSettings.getGcStatistics().getValue()) {
             userArgs.add("-Xlog:gc:file=" + PathManager.DIR_CACHE.getAbsolutePath() + "/gc.log::filecount=0");
         }
 
@@ -548,9 +548,9 @@ public final class JREUtils {
             com.endiq.turtlelauncher.launch.SdlAndroidJniPrep.setup(activity);
         }
 
-        com.endiq.turtlelauncher.feature.log.GameLogcat.start();
+        com.cyplixlauncher.mc.feature.log.GameLogcat.start();
 
-        com.endiq.turtlelauncher.feature.log.GameOutputCapture.install();
+        com.cyplixlauncher.mc.feature.log.GameOutputCapture.install();
 
         final int exitCode = VMLauncher.launchJVM(userArgs.toArray(new String[0]));
         // SDL launches: tear down the ART-side SDL state (posted to the UI thread,
@@ -559,15 +559,15 @@ public final class JREUtils {
         com.endiq.turtlelauncher.launch.SdlAndroidJniPrep.resetAfterJvmExit(activity);
         // Reached only on a graceful JVM exit - on a signal the process is already gone and
         // the drain dies with it, which is exactly the case the captured file exists for.
-        com.endiq.turtlelauncher.feature.log.GameOutputCapture.uninstall();
-        com.endiq.turtlelauncher.feature.log.GameLogcat.stop();
+        com.cyplixlauncher.mc.feature.log.GameOutputCapture.uninstall();
+        com.cyplixlauncher.mc.feature.log.GameLogcat.stop();
         Logger.appendToLog("Java Exit code: " + exitCode);
         if (exitCode != 0) {
-            if (com.endiq.turtlelauncher.setting.AllSettings.getFastBoot().getValue()) {
-                com.endiq.turtlelauncher.setting.AllSettings.getFastBoot().put(false).save();
+            if (com.cyplixlauncher.mc.setting.AllSettings.getFastBoot().getValue()) {
+                com.cyplixlauncher.mc.setting.AllSettings.getFastBoot().put(false).save();
                 Logger.appendToLog("Fast Boot auto-disabled after a crash, so the next launch re-verifies files.");
             }
-            String diagnosis = com.endiq.turtlelauncher.feature.log.CrashAnalyzer.analyzeGameExit(gameVersion, exitCode);
+            String diagnosis = com.cyplixlauncher.mc.feature.log.CrashAnalyzer.analyzeGameExit(gameVersion, exitCode);
             ErrorActivity.showExitMessage(activity, exitCode, false, diagnosis);
         }
         EventBus.getDefault().post(new JvmExitEvent(exitCode));

@@ -1,7 +1,7 @@
 package com.endiq.turtlelauncher.launch
 
-import com.endiq.turtlelauncher.feature.log.Logging
-import com.endiq.turtlelauncher.utils.path.PathManager
+import com.cyplixlauncher.mc.feature.log.Logging
+import com.cyplixlauncher.mc.utils.path.PathManager
 import java.io.File
 
 object CdsArchiveManager {

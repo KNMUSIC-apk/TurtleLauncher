@@ -7,7 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import com.endiq.turtlelauncher.R;
+import com.cyplixlauncher.mc.R;
 import net.endiq.launcher.lifecycle.ContextExecutorTask;
 import net.endiq.launcher.utils.NotificationUtils;
 import java.io.Serializable;

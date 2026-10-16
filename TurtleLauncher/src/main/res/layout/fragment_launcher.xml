@@ -196,7 +196,7 @@
                     android:paddingHorizontal="@dimen/space_xs">
 
                     <!-- Browse Mods -->
-                    <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                    <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                         android:id="@+id/about_button"
                         android:layout_width="44dp"
                         android:layout_height="44dp"
@@ -218,10 +218,10 @@
                             android:textSize="13sp"
                             android:textStyle="bold"
                             android:textColor="@color/turtle_primary_text"/>
-                    </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                    </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
                     <!-- Custom Controls -->
-                    <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                    <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                         android:id="@+id/custom_control_button"
                         android:layout_width="44dp"
                         android:layout_height="44dp"
@@ -243,10 +243,10 @@
                             android:textSize="13sp"
                             android:textStyle="bold"
                             android:textColor="@color/turtle_primary_text"/>
-                    </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                    </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
                     <!-- Install JAR -->
-                    <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                    <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                         android:id="@+id/install_jar_button"
                         android:layout_width="44dp"
                         android:layout_height="44dp"
@@ -268,10 +268,10 @@
                             android:textSize="13sp"
                             android:textStyle="bold"
                             android:textColor="@color/turtle_primary_text"/>
-                    </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                    </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
                     <!-- Share Logs -->
-                    <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                    <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                         android:id="@+id/share_logs_button"
                         android:layout_width="44dp"
                         android:layout_height="44dp"
@@ -293,10 +293,10 @@
                             android:textSize="13sp"
                             android:textStyle="bold"
                             android:textColor="@color/turtle_primary_text"/>
-                    </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                    </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
                     <!-- Modpack Importer -->
-                    <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                    <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                         android:id="@+id/modpack_import_button"
                         android:layout_width="44dp"
                         android:layout_height="44dp"
@@ -318,7 +318,7 @@
                             android:textSize="13sp"
                             android:textStyle="bold"
                             android:textColor="@color/turtle_primary_text"/>
-                    </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                    </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
                 </LinearLayout>
 
@@ -360,7 +360,7 @@
                             android:padding="@dimen/space_m"
                             android:background="@drawable/background_grid_card">
 
-                            <com.endiq.turtlelauncher.feature.turtle.WeeklyPlaytimeChartView
+                            <com.cyplixlauncher.mc.feature.turtle.WeeklyPlaytimeChartView
                                 android:id="@+id/stats_chart"
                                 android:layout_width="match_parent"
                                 android:layout_height="90dp"/>
@@ -622,7 +622,7 @@
                 app:layout_constraintTop_toBottomOf="@id/terracotta_button"/>
 
             <!-- Version selector -->
-            <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+            <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                 android:id="@+id/version"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
@@ -676,7 +676,7 @@
                         android:textColor="@color/turtle_text_secondary"
                         android:visibility="gone"/>
                 </LinearLayout>
-            </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+            </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
             <ImageButton
                 android:id="@+id/manager_profile_button"
@@ -692,7 +692,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/version"/>
 
-            <com.endiq.turtlelauncher.ui.view.AnimButton
+            <com.cyplixlauncher.mc.ui.view.AnimButton
                 android:id="@+id/play_button"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"

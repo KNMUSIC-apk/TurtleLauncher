@@ -229,7 +229,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <com.endiq.turtlelauncher.ui.view.AnimTextView
+                <com.cyplixlauncher.mc.ui.view.AnimTextView
                     android:id="@+id/mcmod_link"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -254,7 +254,7 @@
 
             </LinearLayout>
 
-            <com.endiq.turtlelauncher.ui.view.AnimButton
+            <com.cyplixlauncher.mc.ui.view.AnimButton
                 android:id="@+id/return_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -266,7 +266,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <com.endiq.turtlelauncher.ui.view.AnimButton
+            <com.cyplixlauncher.mc.ui.view.AnimButton
                 android:id="@+id/refresh_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -278,7 +278,7 @@
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <com.endiq.turtlelauncher.ui.view.AnimCheckBox
+            <com.cyplixlauncher.mc.ui.view.AnimCheckBox
                 android:id="@+id/release_version"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

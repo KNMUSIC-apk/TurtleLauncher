@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 import androidx.annotation.StringRes;
 import androidx.core.content.res.ResourcesCompat;
 
-import com.endiq.turtlelauncher.R;
+import com.cyplixlauncher.mc.R;
 
 public class TextProgressBar extends ProgressBar {
 

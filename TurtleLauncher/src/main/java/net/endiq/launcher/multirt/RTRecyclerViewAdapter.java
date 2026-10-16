@@ -14,11 +14,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.endiq.turtlelauncher.R;
-import com.endiq.turtlelauncher.setting.AllSettings;
-import com.endiq.turtlelauncher.task.Task;
-import com.endiq.turtlelauncher.ui.dialog.SelectRuntimeDialog;
-import com.endiq.turtlelauncher.utils.runtime.RuntimeSelectedListener;
+import com.cyplixlauncher.mc.R;
+import com.cyplixlauncher.mc.setting.AllSettings;
+import com.cyplixlauncher.mc.task.Task;
+import com.cyplixlauncher.mc.ui.dialog.SelectRuntimeDialog;
+import com.cyplixlauncher.mc.utils.runtime.RuntimeSelectedListener;
 
 import net.endiq.launcher.Architecture;
 import net.endiq.launcher.Tools;

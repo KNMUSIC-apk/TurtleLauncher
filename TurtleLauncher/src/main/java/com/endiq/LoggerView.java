@@ -11,9 +11,9 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.endiq.anim.animations.Animations;
-import com.endiq.turtlelauncher.databinding.ViewLoggerBinding;
-import com.endiq.turtlelauncher.setting.AllSettings;
-import com.endiq.turtlelauncher.utils.anim.ViewAnimUtils;
+import com.cyplixlauncher.mc.databinding.ViewLoggerBinding;
+import com.cyplixlauncher.mc.setting.AllSettings;
+import com.cyplixlauncher.mc.utils.anim.ViewAnimUtils;
 
 import net.endiq.launcher.Logger;
 

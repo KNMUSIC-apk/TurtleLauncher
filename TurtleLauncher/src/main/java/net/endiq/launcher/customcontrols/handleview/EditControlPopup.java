@@ -29,12 +29,12 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.endiq.DefocusableScrollView;
-import com.endiq.turtlelauncher.R;
-import com.endiq.turtlelauncher.feature.log.Logging;
-import com.endiq.turtlelauncher.listener.SimpleTextWatcher;
-import com.endiq.turtlelauncher.ui.dialog.KeyboardDialog;
-import com.endiq.turtlelauncher.ui.dialog.PixelEditorDialog;
-import com.endiq.turtlelauncher.utils.path.PathManager;
+import com.cyplixlauncher.mc.R;
+import com.cyplixlauncher.mc.feature.log.Logging;
+import com.cyplixlauncher.mc.listener.SimpleTextWatcher;
+import com.cyplixlauncher.mc.ui.dialog.KeyboardDialog;
+import com.cyplixlauncher.mc.ui.dialog.PixelEditorDialog;
+import com.cyplixlauncher.mc.utils.path.PathManager;
 
 import net.endiq.launcher.EfficientAndroidLWJGLKeycode;
 import net.endiq.launcher.colorselector.ColorSelector;

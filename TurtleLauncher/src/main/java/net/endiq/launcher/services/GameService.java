@@ -17,8 +17,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
-import com.endiq.turtlelauncher.InfoCenter;
-import com.endiq.turtlelauncher.R;
+import com.cyplixlauncher.mc.InfoCenter;
+import com.cyplixlauncher.mc.R;
 
 import net.endiq.launcher.MainActivity;
 import net.endiq.launcher.Tools;

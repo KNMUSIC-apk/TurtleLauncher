@@ -7,11 +7,11 @@ import androidx.annotation.Nullable;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.stream.JsonReader;
-import com.endiq.turtlelauncher.feature.log.Logging;
-import com.endiq.turtlelauncher.task.Task;
-import com.endiq.turtlelauncher.utils.path.PathManager;
-import com.endiq.turtlelauncher.utils.ZHTools;
-import com.endiq.turtlelauncher.utils.path.UrlManager;
+import com.cyplixlauncher.mc.feature.log.Logging;
+import com.cyplixlauncher.mc.task.Task;
+import com.cyplixlauncher.mc.utils.path.PathManager;
+import com.cyplixlauncher.mc.utils.ZHTools;
+import com.cyplixlauncher.mc.utils.path.UrlManager;
 
 import net.endiq.launcher.JMinecraftVersionList;
 import net.endiq.launcher.Tools;
@@ -32,7 +32,7 @@ public class AsyncVersionList {
             try {
                 // TurtleLauncher Fast Boot: skip the network refresh entirely and use
                 // whatever cached version list we have on disk, however stale.
-                boolean fastBoot = com.endiq.turtlelauncher.setting.AllSettings.getFastBoot().getValue();
+                boolean fastBoot = com.cyplixlauncher.mc.setting.AllSettings.getFastBoot().getValue();
                 if (!versionFile.exists() || (!fastBoot && ZHTools.getCurrentTimeMillis() > versionFile.lastModified() + 86400000)) {
                     versionList = downloadVersionList(UrlManager.URL_MINECRAFT_VERSION_REPOS);
                 }

@@ -43,11 +43,11 @@ val getBuildType = {
 
 val nameId = "com.endiq.turtlelauncher"
 // namespace controls where the generated R/BuildConfig classes land, and must match
-// the Kotlin/Java source package (com.endiq.turtlelauncher.*) or every implicit "R"
+// the Kotlin/Java source package (com.cyplixlauncher.mc.*) or every implicit "R"
 // reference and "import ...BuildConfig" across the codebase breaks. Since the full
-// Turtle rebrand renamed the source tree to com.endiq.turtlelauncher.*, namespace and
+// Turtle rebrand renamed the source tree to com.cyplixlauncher.mc.*, namespace and
 // applicationId now coincide.
-val namespaceId = "com.endiq.turtlelauncher"
+val namespaceId = "com.cyplixlauncher.mc"
 val generatedTurtleDir = file("$buildDir/generated/source/turtle/java")
 val launcherAPPName = project.findProperty("launcher_app_name") as? String ?: error("The \"launcher_app_name\" property is not set in gradle.properties.")
 val launcherName = project.findProperty("launcher_name") as? String ?: error("The \"launcher_name\" property is not set in gradle.properties.")
@@ -326,7 +326,7 @@ tasks.register("generateInfoDistributor") {
             "APP_NAME" to appName,
             "BUILD_TYPE" to buildType
         )
-        InfoDistributorGenerator.generate(outputDir, "com.endiq.turtlelauncher", "InfoDistributor", constantMap)
+        InfoDistributorGenerator.generate(outputDir, "com.cyplixlauncher.mc", "InfoDistributor", constantMap)
     }
 }
 

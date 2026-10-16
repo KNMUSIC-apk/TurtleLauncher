@@ -3,12 +3,12 @@ package com.endiq.turtlelauncher.launch
 import android.content.Context
 import android.opengl.EGL14
 import android.os.Build
-import com.endiq.turtlelauncher.feature.log.Logging
-import com.endiq.turtlelauncher.renderer.renderers.FreedrenoRenderer
-import com.endiq.turtlelauncher.renderer.renderers.ZinkRenderer
-import com.endiq.turtlelauncher.setting.AllSettings
-import com.endiq.turtlelauncher.utils.platform.BatterySaverManager
-import com.endiq.turtlelauncher.utils.platform.ThermalManager
+import com.cyplixlauncher.mc.feature.log.Logging
+import com.cyplixlauncher.mc.renderer.renderers.FreedrenoRenderer
+import com.cyplixlauncher.mc.renderer.renderers.ZinkRenderer
+import com.cyplixlauncher.mc.setting.AllSettings
+import com.cyplixlauncher.mc.utils.platform.BatterySaverManager
+import com.cyplixlauncher.mc.utils.platform.ThermalManager
 import net.endiq.launcher.Tools
 import net.endiq.launcher.prefs.LauncherPreferences
 

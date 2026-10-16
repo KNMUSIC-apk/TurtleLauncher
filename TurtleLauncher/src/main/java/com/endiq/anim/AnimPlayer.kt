@@ -5,7 +5,7 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.view.View
 import com.endiq.anim.animations.Animations
-import com.endiq.turtlelauncher.setting.AllSettings
+import com.cyplixlauncher.mc.setting.AllSettings
 
 
 class AnimPlayer {

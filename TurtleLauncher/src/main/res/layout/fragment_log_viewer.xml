@@ -87,7 +87,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <com.endiq.turtlelauncher.ui.view.AnimEditText
+        <com.cyplixlauncher.mc.ui.view.AnimEditText
             android:id="@+id/log_search_edit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

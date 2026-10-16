@@ -51,7 +51,7 @@
         app:layout_constraintTop_toBottomOf="@+id/title_view"
         tools:ignore="HardcodedText" />
 
-    <com.endiq.turtlelauncher.ui.view.AnimButton
+    <com.cyplixlauncher.mc.ui.view.AnimButton
         android:id="@+id/button_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

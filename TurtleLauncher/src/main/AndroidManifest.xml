@@ -50,7 +50,7 @@
             android:name="android.max_aspect"
             android:value="ratio_float" />
         <activity
-            android:name="com.endiq.turtlelauncher.ui.activity.SplashActivity"
+            android:name="com.cyplixlauncher.mc.ui.activity.SplashActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation"
@@ -73,7 +73,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation"
             android:screenOrientation="sensorLandscape" />
         <activity
-            android:name="com.endiq.turtlelauncher.ui.activity.ShareReceiverActivity"
+            android:name="com.cyplixlauncher.mc.ui.activity.ShareReceiverActivity"
             android:exported="true"
             android:excludeFromRecents="true"
             android:launchMode="singleTop"
@@ -98,12 +98,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.endiq.turtlelauncher.ui.activity.ErrorActivity"
+            android:name="com.cyplixlauncher.mc.ui.activity.ErrorActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation"
             android:theme="@style/AppTheme"
             android:screenOrientation="sensorLandscape" />
         <activity
-            android:name="com.endiq.turtlelauncher.ui.activity.ConfigEditorActivity"
+            android:name="com.cyplixlauncher.mc.ui.activity.ConfigEditorActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name="net.endiq.launcher.ShowErrorActivity"
@@ -185,7 +185,7 @@
              Android's own guidance for VPN foreground services (it was specialUse here,
              which is a Play-policy grey zone and not the designated VPN type). -->
         <service
-            android:name="com.endiq.turtlelauncher.feature.terracotta.TerracottaVpnService"
+            android:name="com.cyplixlauncher.mc.feature.terracotta.TerracottaVpnService"
             android:permission="android.permission.BIND_VPN_SERVICE"
             android:foregroundServiceType="connectedDevice"
             android:exported="false">

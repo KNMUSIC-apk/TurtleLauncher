@@ -13,7 +13,7 @@ import android.view.inputmethod.InputMethodManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.endiq.turtlelauncher.R;
+import com.cyplixlauncher.mc.R;
 import com.endiq.turtlelauncher.game.sdl.SdlBridge;
 
 import net.endiq.launcher.MainActivity;

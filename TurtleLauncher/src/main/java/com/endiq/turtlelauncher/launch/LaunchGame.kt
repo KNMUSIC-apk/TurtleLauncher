@@ -6,24 +6,24 @@ import android.os.Build
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.endiq.mcgui.ProgressLayout
-import com.endiq.turtlelauncher.R
-import com.endiq.turtlelauncher.event.single.AccountUpdateEvent
-import com.endiq.turtlelauncher.feature.accounts.AccountType
-import com.endiq.turtlelauncher.feature.accounts.AccountUtils
-import com.endiq.turtlelauncher.feature.accounts.AccountsManager
-import com.endiq.turtlelauncher.feature.log.Logging
-import com.endiq.turtlelauncher.feature.mod.NanoVGNativesFix
-import com.endiq.turtlelauncher.feature.version.Version
-import com.endiq.turtlelauncher.renderer.Renderers
-import com.endiq.turtlelauncher.setting.AllSettings
-import com.endiq.turtlelauncher.setting.AllStaticSettings
-import com.endiq.turtlelauncher.support.touch_controller.ControllerProxy
-import com.endiq.turtlelauncher.task.TaskExecutors
-import com.endiq.turtlelauncher.ui.dialog.LifecycleAwareTipDialog
-import com.endiq.turtlelauncher.ui.dialog.TipDialog
-import com.endiq.turtlelauncher.utils.ZHTools
-import com.endiq.turtlelauncher.utils.http.NetworkUtils
-import com.endiq.turtlelauncher.utils.stringutils.StringUtils
+import com.cyplixlauncher.mc.R
+import com.cyplixlauncher.mc.event.single.AccountUpdateEvent
+import com.cyplixlauncher.mc.feature.accounts.AccountType
+import com.cyplixlauncher.mc.feature.accounts.AccountUtils
+import com.cyplixlauncher.mc.feature.accounts.AccountsManager
+import com.cyplixlauncher.mc.feature.log.Logging
+import com.cyplixlauncher.mc.feature.mod.NanoVGNativesFix
+import com.cyplixlauncher.mc.feature.version.Version
+import com.cyplixlauncher.mc.renderer.Renderers
+import com.cyplixlauncher.mc.setting.AllSettings
+import com.cyplixlauncher.mc.setting.AllStaticSettings
+import com.cyplixlauncher.mc.support.touch_controller.ControllerProxy
+import com.cyplixlauncher.mc.task.TaskExecutors
+import com.cyplixlauncher.mc.ui.dialog.LifecycleAwareTipDialog
+import com.cyplixlauncher.mc.ui.dialog.TipDialog
+import com.cyplixlauncher.mc.utils.ZHTools
+import com.cyplixlauncher.mc.utils.http.NetworkUtils
+import com.cyplixlauncher.mc.utils.stringutils.StringUtils
 import net.endiq.launcher.Architecture
 import net.endiq.launcher.JMinecraftVersionList
 import net.endiq.launcher.Logger
@@ -55,7 +55,7 @@ class LaunchGame {
         fun preLaunch(context: Context, version: Version) {
             runCatching {
                 val loader = version.getVersionInfo()?.loaderInfo?.firstNotNullOfOrNull {
-                    com.endiq.turtlelauncher.feature.download.utils.ModLoaderUtils.getModLoader(it.name)
+                    com.cyplixlauncher.mc.feature.download.utils.ModLoaderUtils.getModLoader(it.name)
                 }
                 NanoVGNativesFix.ensureInstalled(context, loader, File(version.getGameDir(), "mods"))
             }.onFailure { e -> Logging.e("LaunchGame", "NanoVGNativesFix check failed", e) }
@@ -63,17 +63,17 @@ class LaunchGame {
             runCatching {
                 val rendererUniqueId = version.getRenderer()
                 val rendererInstance = runCatching {
-                    com.endiq.turtlelauncher.renderer.Renderers.getCompatibleRenderers(context).second
+                    com.cyplixlauncher.mc.renderer.Renderers.getCompatibleRenderers(context).second
                         .firstOrNull { it.getUniqueIdentifier() == rendererUniqueId }
                 }.getOrNull()
-                val catalogEntry = com.endiq.turtlelauncher.renderer.RendererCatalog.get(
+                val catalogEntry = com.cyplixlauncher.mc.renderer.RendererCatalog.get(
                     rendererInstance?.getRendererId() ?: rendererUniqueId
                 )
                 // Renderer plugin apps ship their own supported range in their manifest
                 // meta-data (minMCVer/maxMCVer - e.g. the MobileGlues plugin declares
                 // 1.17+); honor it exactly like a catalog range so an installed plugin is
                 // treated like any first-class renderer.
-                val plugin = com.endiq.turtlelauncher.plugins.renderer.RendererPluginManager.getRendererList()
+                val plugin = com.cyplixlauncher.mc.plugins.renderer.RendererPluginManager.getRendererList()
                     .find { it.uniqueIdentifier == rendererUniqueId }
                 val maxVersion = catalogEntry?.maxMinecraftVersion
                     ?: plugin?.maxMinecraftVersion?.takeIf { it.isNotBlank() }
@@ -370,10 +370,10 @@ class LaunchGame {
 
                 androidx.tracing.Trace.beginSection("LaunchGame.launchWithUtils")
                 try {
-                    com.endiq.turtlelauncher.feature.discord.DiscordRpcManager.start(minecraftVersion.getVersionName())
+                    com.cyplixlauncher.mc.feature.discord.DiscordRpcManager.start(minecraftVersion.getVersionName())
                     JREUtils.launchWithUtils(activity, runtime, minecraftVersion, launchArgs, customArgs)
                 } finally {
-                    com.endiq.turtlelauncher.feature.discord.DiscordRpcManager.stop()
+                    com.cyplixlauncher.mc.feature.discord.DiscordRpcManager.stop()
                     androidx.tracing.Trace.endSection()
                 }
             } finally {
@@ -526,7 +526,7 @@ class LaunchGame {
          *  worth it when the heap is a small share of physical RAM. */
         private fun isPreTouchSafe(): Boolean = runCatching {
             val heapMb = AllSettings.ramAllocation.value.getValue()
-            val totalMb = Tools.getTotalDeviceMemory(com.endiq.turtlelauncher.context.ContextExecutor.getApplication())
+            val totalMb = Tools.getTotalDeviceMemory(com.cyplixlauncher.mc.context.ContextExecutor.getApplication())
             totalMb > 0 && heapMb * 100L <= totalMb * 35L
         }.getOrDefault(false)
 

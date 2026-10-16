@@ -1128,7 +1128,7 @@
     <string name="cancel">Hủy</string>
     <string name="copy">Sao chép</string>
     <string name="ok">OK</string>
-    <string name="storageProviderAuthorities">com.endiq.turtlelauncher.storageprovider</string>
+    <string name="storageProviderAuthorities">com.cyplixlauncher.mc.storageprovider</string>
     <string name="downloading_java_runtime_uni">Đang tải môi trường chạy Java (bản phổ dụng)…</string>
     <string name="downloading_java_runtime_platform">Đang tải môi trường chạy Java (tệp nhị phân theo nền tảng)…</string>
     <string name="turtle_java_autoinstall_start">Đang tự động cài đặt Java %d, vui lòng chờ…</string>

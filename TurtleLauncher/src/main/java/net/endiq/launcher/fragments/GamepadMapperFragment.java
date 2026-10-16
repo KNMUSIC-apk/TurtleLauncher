@@ -1,5 +1,5 @@
 package net.endiq.launcher.fragments;
-import com.endiq.turtlelauncher.utils.anim.TurtleTransitions;
+import com.cyplixlauncher.mc.utils.anim.TurtleTransitions;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -20,10 +20,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.endiq.anim.AnimPlayer;
 import com.endiq.anim.animations.Animations;
-import com.endiq.turtlelauncher.R;
-import com.endiq.turtlelauncher.databinding.FragmentControllerRemapperBinding;
-import com.endiq.turtlelauncher.ui.fragment.FragmentWithAnim;
-import com.endiq.turtlelauncher.utils.ZHTools;
+import com.cyplixlauncher.mc.R;
+import com.cyplixlauncher.mc.databinding.FragmentControllerRemapperBinding;
+import com.cyplixlauncher.mc.ui.fragment.FragmentWithAnim;
+import com.cyplixlauncher.mc.utils.ZHTools;
 
 import net.endiq.launcher.customcontrols.gamepad.Gamepad;
 import net.endiq.launcher.customcontrols.gamepad.GamepadMapperAdapter;

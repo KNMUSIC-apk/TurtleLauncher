@@ -11,11 +11,11 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.endiq.turtlelauncher.setting.AllSettings;
-import com.endiq.turtlelauncher.setting.AllStaticSettings;
-import com.endiq.turtlelauncher.utils.ZHTools;
-import com.endiq.turtlelauncher.utils.image.Dimension;
-import com.endiq.turtlelauncher.utils.image.ImageUtils;
+import com.cyplixlauncher.mc.setting.AllSettings;
+import com.cyplixlauncher.mc.setting.AllStaticSettings;
+import com.cyplixlauncher.mc.utils.ZHTools;
+import com.cyplixlauncher.mc.utils.image.Dimension;
+import com.cyplixlauncher.mc.utils.image.ImageUtils;
 
 import net.endiq.launcher.GrabListener;
 

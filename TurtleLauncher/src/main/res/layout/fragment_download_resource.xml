@@ -132,7 +132,7 @@
                 android:text="@string/download_ui_search"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.endiq.turtlelauncher.ui.view.AnimEditText
+            <com.cyplixlauncher.mc.ui.view.AnimEditText
                 android:id="@+id/name_edit"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_40sdp"
@@ -172,7 +172,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <com.endiq.turtlelauncher.ui.view.AnimButton
+                    <com.cyplixlauncher.mc.ui.view.AnimButton
                         android:id="@+id/install_button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -193,7 +193,7 @@
                             android:text="@string/download_ui_mc_version"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <com.endiq.turtlelauncher.ui.view.AnimTextView
+                        <com.cyplixlauncher.mc.ui.view.AnimTextView
                             android:id="@+id/selected_mc_version_view"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/_40sdp"
@@ -333,7 +333,7 @@
                 </LinearLayout>
             </ScrollView>
 
-            <com.endiq.turtlelauncher.ui.view.AnimButton
+            <com.cyplixlauncher.mc.ui.view.AnimButton
                 android:id="@+id/reset"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -344,7 +344,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/return_button"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <com.endiq.turtlelauncher.ui.view.AnimButton
+            <com.cyplixlauncher.mc.ui.view.AnimButton
                 android:id="@+id/return_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

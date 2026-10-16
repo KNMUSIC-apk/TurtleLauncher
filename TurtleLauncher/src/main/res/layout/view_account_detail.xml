@@ -114,7 +114,7 @@
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/detail_skin_preview">
 
-        <com.endiq.turtlelauncher.ui.view.AnimButton
+        <com.cyplixlauncher.mc.ui.view.AnimButton
             android:id="@+id/detail_play"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -130,7 +130,7 @@
             android:layout_marginTop="@dimen/space_s"
             android:orientation="horizontal">
 
-            <com.endiq.turtlelauncher.ui.view.AnimButton
+            <com.cyplixlauncher.mc.ui.view.AnimButton
                 android:id="@+id/detail_refresh"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -151,7 +151,7 @@
                 android:autoSizeMaxTextSize="12sp"
                 android:text="@string/generic_refresh" />
 
-            <com.endiq.turtlelauncher.ui.view.AnimButton
+            <com.cyplixlauncher.mc.ui.view.AnimButton
                 android:id="@+id/detail_wardrobe"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -172,7 +172,7 @@
                 android:autoSizeMaxTextSize="12sp"
                 android:text="@string/account_wardrobe" />
 
-            <com.endiq.turtlelauncher.ui.view.AnimButton
+            <com.cyplixlauncher.mc.ui.view.AnimButton
                 android:id="@+id/detail_remove"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

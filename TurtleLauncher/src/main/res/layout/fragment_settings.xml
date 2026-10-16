@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_app"
-    tools:context="com.endiq.turtlelauncher.ui.fragment.SettingsFragment">
+    tools:context="com.cyplixlauncher.mc.ui.fragment.SettingsFragment">
 
     <LinearLayout
         android:id="@+id/settings_header"
@@ -142,7 +142,7 @@
                 android:dividerPadding="64dp"
                 android:showDividers="middle">
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/account_settings_row"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -208,9 +208,9 @@
                             android:alpha="0.6"
                             android:tint="@color/turtle_text_secondary"/>
                     </LinearLayout>
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/launcher_settings_row"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -276,9 +276,9 @@
                             android:alpha="0.6"
                             android:tint="@color/turtle_text_secondary"/>
                     </LinearLayout>
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/discord_settings_row"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -344,9 +344,9 @@
                             android:alpha="0.6"
                             android:tint="@color/turtle_text_secondary"/>
                     </LinearLayout>
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/shizuku_settings_row"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -412,7 +412,7 @@
                             android:alpha="0.6"
                             android:tint="@color/turtle_text_secondary"/>
                     </LinearLayout>
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
             </LinearLayout>
 
@@ -433,7 +433,7 @@
                 android:dividerPadding="64dp"
                 android:showDividers="middle">
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/video_settings_row"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -499,9 +499,9 @@
                             android:alpha="0.6"
                             android:tint="@color/turtle_text_secondary"/>
                     </LinearLayout>
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/optimization_settings_row"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -567,9 +567,9 @@
                             android:alpha="0.6"
                             android:tint="@color/turtle_text_secondary"/>
                     </LinearLayout>
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/java_settings_row"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -635,9 +635,9 @@
                             android:alpha="0.6"
                             android:tint="@color/turtle_text_secondary"/>
                     </LinearLayout>
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/phone_settings_row"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -703,10 +703,10 @@
                             android:alpha="0.6"
                             android:tint="@color/turtle_text_secondary"/>
                     </LinearLayout>
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/controls_settings_row"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -772,9 +772,9 @@
                             android:alpha="0.6"
                             android:tint="@color/turtle_text_secondary"/>
                     </LinearLayout>
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/mouse_keyboard_settings_row"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -840,10 +840,10 @@
                             android:alpha="0.6"
                             android:tint="@color/turtle_text_secondary"/>
                     </LinearLayout>
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/recording_settings_row"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -909,7 +909,7 @@
                             android:alpha="0.6"
                             android:tint="@color/turtle_text_secondary"/>
                     </LinearLayout>
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
             </LinearLayout>
 
@@ -930,7 +930,7 @@
                 android:dividerPadding="64dp"
                 android:showDividers="middle">
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/emotes_settings_row"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -996,9 +996,9 @@
                             android:alpha="0.6"
                             android:tint="@color/turtle_text_secondary"/>
                     </LinearLayout>
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/experimental_settings_row"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -1064,9 +1064,9 @@
                             android:alpha="0.6"
                             android:tint="@color/turtle_text_secondary"/>
                     </LinearLayout>
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/about_settings_row"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -1132,7 +1132,7 @@
                             android:alpha="0.6"
                             android:tint="@color/turtle_text_secondary"/>
                     </LinearLayout>
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
             </LinearLayout>
 

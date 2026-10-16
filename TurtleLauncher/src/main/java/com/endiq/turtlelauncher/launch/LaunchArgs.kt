@@ -1,16 +1,16 @@
 package com.endiq.turtlelauncher.launch
 
 import androidx.collection.ArrayMap
-import com.endiq.turtlelauncher.InfoDistributor
-import com.endiq.turtlelauncher.feature.accounts.AccountType
-import com.endiq.turtlelauncher.feature.accounts.AccountUtils
-import com.endiq.turtlelauncher.feature.customprofilepath.ProfilePathHome
-import com.endiq.turtlelauncher.feature.customprofilepath.ProfilePathHome.Companion.getLibrariesHome
-import com.endiq.turtlelauncher.feature.log.Logging
-import com.endiq.turtlelauncher.feature.version.Version
-import com.endiq.turtlelauncher.utils.ZHTools
-import com.endiq.turtlelauncher.utils.path.LibPath
-import com.endiq.turtlelauncher.utils.path.PathManager
+import com.cyplixlauncher.mc.InfoDistributor
+import com.cyplixlauncher.mc.feature.accounts.AccountType
+import com.cyplixlauncher.mc.feature.accounts.AccountUtils
+import com.cyplixlauncher.mc.feature.customprofilepath.ProfilePathHome
+import com.cyplixlauncher.mc.feature.customprofilepath.ProfilePathHome.Companion.getLibrariesHome
+import com.cyplixlauncher.mc.feature.log.Logging
+import com.cyplixlauncher.mc.feature.version.Version
+import com.cyplixlauncher.mc.utils.ZHTools
+import com.cyplixlauncher.mc.utils.path.LibPath
+import com.cyplixlauncher.mc.utils.path.PathManager
 import net.endiq.launcher.AWTCanvasView
 import net.endiq.launcher.JMinecraftVersionList
 import net.endiq.launcher.Tools
@@ -94,14 +94,14 @@ class LaunchArgs(
             } else {
                 argsList.add("-javaagent:${LibPath.AUTHLIB_INJECTOR.absolutePath}=$baseUrl")
             }
-        } else if (account.accountType == com.endiq.turtlelauncher.feature.accounts.AccountType.LOCAL.type &&
-            com.endiq.turtlelauncher.setting.AllSettings.localSkinServerEnabled.getValue()
+        } else if (account.accountType == com.cyplixlauncher.mc.feature.accounts.AccountType.LOCAL.type &&
+            com.cyplixlauncher.mc.setting.AllSettings.localSkinServerEnabled.getValue()
         ) {
-            val port = com.endiq.turtlelauncher.feature.skin.TurtleSkinServer.ensureStarted(
-                com.endiq.turtlelauncher.setting.AllSettings.localSkinServerLanVisible.getValue()
+            val port = com.cyplixlauncher.mc.feature.skin.TurtleSkinServer.ensureStarted(
+                com.cyplixlauncher.mc.setting.AllSettings.localSkinServerLanVisible.getValue()
             )
             if (port > 0 && LibPath.AUTHLIB_INJECTOR.isFile) {
-                val apiRoot = com.endiq.turtlelauncher.feature.skin.TurtleSkinServer.apiRootUrl()
+                val apiRoot = com.cyplixlauncher.mc.feature.skin.TurtleSkinServer.apiRootUrl()
                 argsList.add("-javaagent:${LibPath.AUTHLIB_INJECTOR.absolutePath}=$apiRoot")
             } else {
                 Logging.e("LaunchArgs", "Local skin server unavailable (port=$port, authlib present=${LibPath.AUTHLIB_INJECTOR.isFile}) - local account will show the default skin")

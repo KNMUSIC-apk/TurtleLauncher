@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <!-- In-game HUD card (CPU, GPU, RAM, FPS, ping). Rows are toggled in Settings > HUD. -->
-    <com.endiq.turtlelauncher.feature.turtle.HudCardView
+    <com.cyplixlauncher.mc.feature.turtle.HudCardView
         android:id="@+id/hud_card"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

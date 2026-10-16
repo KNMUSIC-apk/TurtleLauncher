@@ -34,7 +34,7 @@
             android:layout_marginStart="@dimen/_4sdp"
             android:src="@drawable/ic_move" />
 
-        <com.endiq.turtlelauncher.ui.view.AnimTextView
+        <com.cyplixlauncher.mc.ui.view.AnimTextView
             android:id="@+id/goto_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
             android:scaleY="0.95"
             android:src="@drawable/ic_profile_saves" />
 
-        <com.endiq.turtlelauncher.ui.view.AnimTextView
+        <com.cyplixlauncher.mc.ui.view.AnimTextView
             android:id="@+id/game_path"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -92,7 +92,7 @@
             android:scaleY="1.1"
             android:src="@drawable/ic_edit" />
 
-        <com.endiq.turtlelauncher.ui.view.AnimTextView
+        <com.cyplixlauncher.mc.ui.view.AnimTextView
             android:id="@+id/rename"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -121,7 +121,7 @@
             android:scaleY="1.1"
             android:src="@drawable/ic_copy" />
 
-        <com.endiq.turtlelauncher.ui.view.AnimTextView
+        <com.cyplixlauncher.mc.ui.view.AnimTextView
             android:id="@+id/copy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -150,7 +150,7 @@
             android:scaleY="1.1"
             android:src="@drawable/ic_share" />
 
-        <com.endiq.turtlelauncher.ui.view.AnimTextView
+        <com.cyplixlauncher.mc.ui.view.AnimTextView
             android:id="@+id/exportModpack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -179,7 +179,7 @@
             android:scaleY="1.1"
             android:src="@drawable/ic_share" />
 
-        <com.endiq.turtlelauncher.ui.view.AnimTextView
+        <com.cyplixlauncher.mc.ui.view.AnimTextView
             android:id="@+id/exportMrpack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -208,7 +208,7 @@
             android:scaleY="1.1"
             android:src="@drawable/ic_profile_mods" />
 
-        <com.endiq.turtlelauncher.ui.view.AnimTextView
+        <com.cyplixlauncher.mc.ui.view.AnimTextView
             android:id="@+id/depGraph"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -237,7 +237,7 @@
             android:scaleY="1.2"
             android:src="@drawable/ic_menu_delete_forever" />
 
-        <com.endiq.turtlelauncher.ui.view.AnimTextView
+        <com.cyplixlauncher.mc.ui.view.AnimTextView
             android:id="@+id/delete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

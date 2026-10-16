@@ -1,0 +1,162 @@
+package com.cyplixlauncher.mc.ui.fragment.about
+
+import android.annotation.SuppressLint
+import android.content.res.Resources
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
+import com.cyplixlauncher.mc.InfoCenter
+import com.cyplixlauncher.mc.InfoDistributor
+import com.cyplixlauncher.mc.R
+import com.cyplixlauncher.mc.databinding.FragmentAboutInfoPageBinding
+import com.cyplixlauncher.mc.ui.dialog.TipDialog
+import com.cyplixlauncher.mc.ui.subassembly.about.AboutItemBean
+import com.cyplixlauncher.mc.ui.subassembly.about.AboutItemBean.AboutItemButtonBean
+import com.cyplixlauncher.mc.ui.subassembly.about.AboutRecyclerAdapter
+import com.cyplixlauncher.mc.utils.ZHTools
+import com.cyplixlauncher.mc.utils.anim.TurtleTransitions
+import com.cyplixlauncher.mc.utils.path.UrlManager
+
+class AboutInfoPageFragment() : Fragment(R.layout.fragment_about_info_page) {
+    private lateinit var binding: FragmentAboutInfoPageBinding
+    private val mAboutData: MutableList<AboutItemBean> = ArrayList()
+    private var parentPager2: ViewPager2? = null
+
+    constructor(parentPager: ViewPager2): this() {
+        this.parentPager2 = parentPager
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentAboutInfoPageBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        loadAboutData(requireContext().resources)
+
+        val context = requireActivity()
+
+        binding.apply {
+            dec1.text = InfoCenter.replaceName(context, R.string.about_dec1)
+            dec2.text = InfoCenter.replaceName(context, R.string.about_dec2)
+            dec3.text = InfoCenter.replaceName(context, R.string.about_dec3)
+
+            githubButton.setOnClickListener { ZHTools.openLink(requireActivity(), UrlManager.URL_HOME) }
+            licenseButton.setOnClickListener { ZHTools.openLink(requireActivity(), "https://www.gnu.org/licenses/gpl-3.0.html") }
+
+            val aboutAdapter = AboutRecyclerAdapter(this@AboutInfoPageFragment.mAboutData)
+            aboutRecycler.apply {
+                layoutManager = LinearLayoutManager(requireContext())
+                adapter = aboutAdapter
+                post { TurtleTransitions.animateList(this) }
+            }
+
+            if (ZHTools.isChinese(requireActivity())) {
+                qqGroupButton.visibility = View.VISIBLE
+                qqGroupButton.setOnClickListener {
+                    TipDialog.Builder(context)
+                        .setTitle("QQ")
+                        .setMessage("Thanks for using ${InfoDistributor.APP_NAME}! If you enjoy the launcher, tap the \"Sponsor development\" button on the right.")
+                        .setSelectable(true)
+                        .setConfirm(R.string.generic_confirm)
+                        .setShowCancel(false)
+                        .showDialog()
+                }
+            } else {
+                qqGroupButton.visibility = View.GONE
+            }
+
+            discordButton.setOnClickListener { ZHTools.openLink(requireActivity(), "https://discord.gg/8TfuMhM8tD") }
+        }
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private fun loadAboutData(resources: Resources) {
+        mAboutData.clear()
+
+        // Cyplix's own card links to its source, as the GPL requires for a modified version.
+        mAboutData.add(
+            AboutItemBean(
+                resources.getDrawable(R.drawable.ic_turtle_full, requireContext().theme),
+                "Cyplix Launcher",
+                getString(R.string.about_cyplix_desc),
+                AboutItemButtonBean(requireActivity(), "Github", UrlManager.URL_CYPLIX_SOURCE)
+            )
+        )
+        mAboutData.add(
+            AboutItemBean(
+                resources.getDrawable(R.drawable.ic_launch_link, requireContext().theme),
+                "Turtle Launcher",
+                getString(R.string.about_TurtleLauncher_desc),
+                AboutItemButtonBean(requireActivity(), "Github", UrlManager.URL_HOME)
+            )
+        )
+        mAboutData.add(
+            AboutItemBean(
+                resources.getDrawable(R.drawable.image_about_developer, requireContext().theme),
+                "Zenkairux",
+                "Developer",
+                AboutItemButtonBean(
+                    requireActivity(),
+                    getString(R.string.about_access_link),
+                    UrlManager.URL_HOME
+                )
+            )
+        )
+        mAboutData.add(
+            AboutItemBean(
+                resources.getDrawable(R.drawable.ic_launch_link, requireContext().theme),
+                "HMCL (Hello Minecraft! Launcher)",
+                getString(R.string.about_hmcl_desc),
+                AboutItemButtonBean(
+                    requireActivity(),
+                    "Github",
+                    "https://github.com/HMCL-dev/HMCL"
+                )
+            )
+        )
+        // SDL3 backend (Minecraft 26.3+) credits. License texts ship in res/raw
+        // (sdl3_license.txt, sdl2_compat_license.txt, bhook_license.txt).
+        mAboutData.add(
+            AboutItemBean(
+                resources.getDrawable(R.drawable.ic_launch_link, requireContext().theme),
+                "SDL (Simple DirectMedia Layer)",
+                "SDL2/SDL3 native libraries (zlib license)",
+                AboutItemButtonBean(requireActivity(), "libsdl.org", "https://www.libsdl.org")
+            )
+        )
+        mAboutData.add(
+            AboutItemBean(
+                resources.getDrawable(R.drawable.ic_launch_link, requireContext().theme),
+                "Zalith Launcher 2",
+                "SDL3 integration this port is based on (GPL-3.0)",
+                AboutItemButtonBean(
+                    requireActivity(),
+                    "Github",
+                    "https://github.com/ZalithLauncher/ZalithLauncher2"
+                )
+            )
+        )
+        mAboutData.add(
+            AboutItemBean(
+                resources.getDrawable(R.drawable.ic_launch_link, requireContext().theme),
+                "ByteHook",
+                "Native hook framework used by libsdlhook (MIT license)",
+                AboutItemButtonBean(
+                    requireActivity(),
+                    "Github",
+                    "https://github.com/bytedance/bhook"
+                )
+            )
+        )
+    }
+}
+

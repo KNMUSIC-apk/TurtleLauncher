@@ -41,45 +41,45 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.endiq.anim.AnimPlayer;
 import com.endiq.anim.animations.Animations;
-import com.endiq.turtlelauncher.R;
-import com.endiq.turtlelauncher.context.ContextExecutor;
-import com.endiq.turtlelauncher.databinding.ActivityGameBinding;
-import com.endiq.turtlelauncher.databinding.ViewControlMenuBinding;
-import com.endiq.turtlelauncher.databinding.ViewGameMenuBinding;
-import com.endiq.turtlelauncher.event.single.RefreshHotbarEvent;
-import com.endiq.turtlelauncher.event.value.HotbarChangeEvent;
-import com.endiq.turtlelauncher.feature.MCOptions;
-import com.endiq.turtlelauncher.feature.ProfileLanguageSelector;
-import com.endiq.turtlelauncher.feature.background.BackgroundManager;
-import com.endiq.turtlelauncher.feature.background.BackgroundType;
-import com.endiq.turtlelauncher.feature.log.Logging;
-import com.endiq.turtlelauncher.feature.version.Version;
+import com.cyplixlauncher.mc.R;
+import com.cyplixlauncher.mc.context.ContextExecutor;
+import com.cyplixlauncher.mc.databinding.ActivityGameBinding;
+import com.cyplixlauncher.mc.databinding.ViewControlMenuBinding;
+import com.cyplixlauncher.mc.databinding.ViewGameMenuBinding;
+import com.cyplixlauncher.mc.event.single.RefreshHotbarEvent;
+import com.cyplixlauncher.mc.event.value.HotbarChangeEvent;
+import com.cyplixlauncher.mc.feature.MCOptions;
+import com.cyplixlauncher.mc.feature.ProfileLanguageSelector;
+import com.cyplixlauncher.mc.feature.background.BackgroundManager;
+import com.cyplixlauncher.mc.feature.background.BackgroundType;
+import com.cyplixlauncher.mc.feature.log.Logging;
+import com.cyplixlauncher.mc.feature.version.Version;
 import com.endiq.turtlelauncher.game.sdl.SdlBridge;
-import com.endiq.turtlelauncher.feature.version.VersionInfo;
+import com.cyplixlauncher.mc.feature.version.VersionInfo;
 import com.endiq.turtlelauncher.launch.LaunchGame;
-import com.endiq.turtlelauncher.listener.SimpleTextWatcher;
-import com.endiq.turtlelauncher.plugins.driver.DriverPluginManager;
-import com.endiq.turtlelauncher.renderer.Renderers;
-import com.endiq.turtlelauncher.setting.AllSettings;
-import com.endiq.turtlelauncher.setting.AllStaticSettings;
-import com.endiq.turtlelauncher.task.Task;
-import com.endiq.turtlelauncher.task.TaskExecutors;
-import com.endiq.turtlelauncher.ui.activity.BaseActivity;
-import com.endiq.turtlelauncher.ui.dialog.KeyboardDialog;
-import com.endiq.turtlelauncher.ui.dialog.SelectControlsDialog;
-import com.endiq.turtlelauncher.ui.dialog.SelectMouseDialog;
-import com.endiq.turtlelauncher.ui.fragment.settings.VideoSettingsFragment;
-import com.endiq.turtlelauncher.ui.subassembly.adapter.ObjectSpinnerAdapter;
-import com.endiq.turtlelauncher.ui.subassembly.hotbar.HotbarType;
-import com.endiq.turtlelauncher.ui.subassembly.hotbar.HotbarUtils;
-import com.endiq.turtlelauncher.ui.subassembly.menu.ControlMenu;
-import com.endiq.turtlelauncher.ui.subassembly.menu.MenuUtils;
-import com.endiq.turtlelauncher.ui.subassembly.view.GameMenuViewWrapper;
-import com.endiq.turtlelauncher.utils.path.PathManager;
-import com.endiq.turtlelauncher.utils.ZHTools;
-import com.endiq.turtlelauncher.utils.anim.AnimUtils;
-import com.endiq.turtlelauncher.utils.file.FileTools;
-import com.endiq.turtlelauncher.utils.stringutils.StringUtils;
+import com.cyplixlauncher.mc.listener.SimpleTextWatcher;
+import com.cyplixlauncher.mc.plugins.driver.DriverPluginManager;
+import com.cyplixlauncher.mc.renderer.Renderers;
+import com.cyplixlauncher.mc.setting.AllSettings;
+import com.cyplixlauncher.mc.setting.AllStaticSettings;
+import com.cyplixlauncher.mc.task.Task;
+import com.cyplixlauncher.mc.task.TaskExecutors;
+import com.cyplixlauncher.mc.ui.activity.BaseActivity;
+import com.cyplixlauncher.mc.ui.dialog.KeyboardDialog;
+import com.cyplixlauncher.mc.ui.dialog.SelectControlsDialog;
+import com.cyplixlauncher.mc.ui.dialog.SelectMouseDialog;
+import com.cyplixlauncher.mc.ui.fragment.settings.VideoSettingsFragment;
+import com.cyplixlauncher.mc.ui.subassembly.adapter.ObjectSpinnerAdapter;
+import com.cyplixlauncher.mc.ui.subassembly.hotbar.HotbarType;
+import com.cyplixlauncher.mc.ui.subassembly.hotbar.HotbarUtils;
+import com.cyplixlauncher.mc.ui.subassembly.menu.ControlMenu;
+import com.cyplixlauncher.mc.ui.subassembly.menu.MenuUtils;
+import com.cyplixlauncher.mc.ui.subassembly.view.GameMenuViewWrapper;
+import com.cyplixlauncher.mc.utils.path.PathManager;
+import com.cyplixlauncher.mc.utils.ZHTools;
+import com.cyplixlauncher.mc.utils.anim.AnimUtils;
+import com.cyplixlauncher.mc.utils.file.FileTools;
+import com.cyplixlauncher.mc.utils.stringutils.StringUtils;
 import com.skydoves.powerspinner.OnSpinnerItemSelectedListener;
 import net.endiq.launcher.customcontrols.ControlButtonMenuListener;
 import net.endiq.launcher.customcontrols.ControlLayout;
@@ -183,7 +183,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         // MenuSettingsInitListener below. Icon is the keyboard's Tab key.
         refreshControlSwitcherButton();
         binding.controlSwitcherButton.setOnClickListener(v -> {
-            String switchedTo = com.endiq.turtlelauncher.feature.turtle.ControlSwitcher
+            String switchedTo = com.cyplixlauncher.mc.feature.turtle.ControlSwitcher
                     .cycleToNext(MainActivity.this, binding.mainControlLayout);
             // Only re-evaluate the menu button when the layout actually changed: a layout can
             // bring its own menu button, which is what hides the launcher's own.
@@ -361,7 +361,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
                 Logging.i("Rendering Game", "The game rendering has started, " +
                         "and the background image has been cleared to prevent certain issues from occurring.");
 
-                com.endiq.turtlelauncher.feature.inputstats.SessionStatsTracker.start();
+                com.cyplixlauncher.mc.feature.inputstats.SessionStatsTracker.start();
             });
 
             if (AllSettings.getEnableLogOutput().getValue()) binding.mainLoggerView.setVisibilityWithAnim(true);
@@ -468,7 +468,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
 
     @Override
     protected void onPause() {
-        com.endiq.turtlelauncher.feature.turtle.FpsMonitor.stop();
+        com.cyplixlauncher.mc.feature.turtle.FpsMonitor.stop();
         mGyroControl.disable();
         if (CallbackBridge.isGrabbing()){
             sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_ESCAPE);
@@ -492,16 +492,16 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        com.endiq.turtlelauncher.feature.inputstats.SessionStatsTracker.stop();
-        com.endiq.turtlelauncher.feature.inputstats.InputStatsTracker.reset();
+        com.cyplixlauncher.mc.feature.inputstats.SessionStatsTracker.stop();
+        com.cyplixlauncher.mc.feature.inputstats.InputStatsTracker.reset();
         if (mMenuSettingsInitListener != null) mMenuSettingsInitListener.closeSpinner();
         if (binding != null) {
             CallbackBridge.removeGrabListener(binding.mainTouchpad);
             CallbackBridge.removeGrabListener(binding.mainGameRenderView);
         }
         if (mKeyboardOffsetAnimator != null) mKeyboardOffsetAnimator.cancel();
-        if (com.endiq.turtlelauncher.feature.turtle.ScreenRecorder.INSTANCE.isRecording()) {
-            com.endiq.turtlelauncher.feature.turtle.ScreenRecorder.INSTANCE.stop(null);
+        if (com.cyplixlauncher.mc.feature.turtle.ScreenRecorder.INSTANCE.isRecording()) {
+            com.cyplixlauncher.mc.feature.turtle.ScreenRecorder.INSTANCE.stop(null);
         }
         ContextExecutor.clearActivity();
     }
@@ -550,8 +550,8 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             } catch (IOException e) {
                 Logging.e("LoadLayout", Tools.printToString(e));
             }
-        } else if (requestCode == com.endiq.turtlelauncher.feature.turtle.ScreenRecorder.REQUEST_CODE_AUDIO_CAPTURE) {
-            com.endiq.turtlelauncher.feature.turtle.ScreenRecorder.INSTANCE.onActivityResult(this, requestCode, resultCode, data);
+        } else if (requestCode == com.cyplixlauncher.mc.feature.turtle.ScreenRecorder.REQUEST_CODE_AUDIO_CAPTURE) {
+            com.cyplixlauncher.mc.feature.turtle.ScreenRecorder.INSTANCE.onActivityResult(this, requestCode, resultCode, data);
         }
     }
 
@@ -724,7 +724,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     public void onServiceConnected(ComponentName name, IBinder service) {
         binding.mainGameRenderView.start(GameService.isActive(), binding.mainTouchpad);
         GameService.setActive(true);
-        com.endiq.turtlelauncher.feature.turtle.FpsMonitor.start(() ->
+        com.cyplixlauncher.mc.feature.turtle.FpsMonitor.start(() ->
                 android.widget.Toast.makeText(this, getString(R.string.fps_low_hint), android.widget.Toast.LENGTH_LONG).show());
     }
 
@@ -935,11 +935,11 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             else if (v == binding.logOutput) MainActivity.binding.mainLoggerView.toggleViewWithAnim();
             else if (v == binding.sendCustomKey) dialogSendCustomKey();
             else if (v == binding.startRecording) {
-                com.endiq.turtlelauncher.feature.turtle.ScreenRecorder.INSTANCE.start(MainActivity.this);
+                com.cyplixlauncher.mc.feature.turtle.ScreenRecorder.INSTANCE.start(MainActivity.this);
                 refreshRecordingButtons();
             }
             else if (v == binding.stopRecording) {
-                com.endiq.turtlelauncher.feature.turtle.ScreenRecorder.INSTANCE.stop(MainActivity.this);
+                com.cyplixlauncher.mc.feature.turtle.ScreenRecorder.INSTANCE.stop(MainActivity.this);
                 refreshRecordingButtons();
             }
             else if (v == binding.showScreenshotButtonHudLayout) MenuUtils.toggleSwitchState(binding.showScreenshotButtonHud);
@@ -1108,7 +1108,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         private void openEmoteWebsite() {
             try {
                 MainActivity.binding.mainDrawerOptions.closeDrawers();
-                ZHTools.openLink(MainActivity.this, com.endiq.turtlelauncher.feature.emotes.Emotes.EMOTE_SITE_URL);
+                ZHTools.openLink(MainActivity.this, com.cyplixlauncher.mc.feature.emotes.Emotes.EMOTE_SITE_URL);
             } catch (Throwable t) {
                 Logging.w("MainActivity", "Could not open the emote website", t);
             }
@@ -1152,7 +1152,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         }
 
         public void refreshRecordingButtons() {
-            boolean recording = com.endiq.turtlelauncher.feature.turtle.ScreenRecorder.INSTANCE.isRecording();
+            boolean recording = com.cyplixlauncher.mc.feature.turtle.ScreenRecorder.INSTANCE.isRecording();
             binding.startRecording.setVisibility(recording ? View.GONE : View.VISIBLE);
             binding.stopRecording.setVisibility(recording ? View.VISIBLE : View.GONE);
         }

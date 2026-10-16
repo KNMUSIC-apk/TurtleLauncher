@@ -2,7 +2,7 @@ package net.endiq.launcher.customcontrols.gamepad;
 
 import android.content.Context;
 
-import com.endiq.turtlelauncher.R;
+import com.cyplixlauncher.mc.R;
 
 import net.endiq.launcher.LwjglGlfwKeycode;
 

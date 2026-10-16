@@ -2,9 +2,9 @@ package com.endiq.turtlelauncher.launch
 
 import android.content.Context
 import com.endiq.mcgui.ProgressLayout
-import com.endiq.turtlelauncher.R
-import com.endiq.turtlelauncher.feature.log.Logging
-import com.endiq.turtlelauncher.utils.path.PathManager
+import com.cyplixlauncher.mc.R
+import com.cyplixlauncher.mc.feature.log.Logging
+import com.cyplixlauncher.mc.utils.path.PathManager
 import net.endiq.launcher.Architecture
 import net.endiq.launcher.Tools
 import net.endiq.launcher.multirt.MultiRTUtils

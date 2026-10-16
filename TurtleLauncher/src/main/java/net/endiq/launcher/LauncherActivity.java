@@ -26,64 +26,64 @@ import androidx.palette.graphics.Palette;
 import com.endiq.mcgui.ProgressLayout;
 import com.endiq.anim.AnimPlayer;
 import com.endiq.anim.animations.Animations;
-import com.endiq.turtlelauncher.InfoDistributor;
-import com.endiq.turtlelauncher.R;
-import com.endiq.turtlelauncher.context.ContextExecutor;
-import com.endiq.turtlelauncher.databinding.ActivityLauncherBinding;
-import com.endiq.turtlelauncher.event.single.LaunchGameEvent;
-import com.endiq.turtlelauncher.event.single.MainBackgroundChangeEvent;
-import com.endiq.turtlelauncher.event.single.PageOpacityChangeEvent;
-import com.endiq.turtlelauncher.event.single.SwapToLoginEvent;
-import com.endiq.turtlelauncher.event.sticky.MinecraftVersionValueEvent;
-import com.endiq.turtlelauncher.event.value.AddFragmentEvent;
-import com.endiq.turtlelauncher.event.value.DownloadProgressKeyEvent;
-import com.endiq.turtlelauncher.event.value.InstallGameEvent;
-import com.endiq.turtlelauncher.event.value.InstallLocalModpackEvent;
-import com.endiq.turtlelauncher.event.value.LocalLoginEvent;
-import com.endiq.turtlelauncher.event.value.MicrosoftLoginEvent;
-import com.endiq.turtlelauncher.event.value.OtherLoginEvent;
-import com.endiq.turtlelauncher.feature.accounts.AccountType;
-import com.endiq.turtlelauncher.feature.accounts.AccountsManager;
-import com.endiq.turtlelauncher.feature.accounts.LocalAccountUtils;
-import com.endiq.turtlelauncher.feature.background.BackgroundManager;
-import com.endiq.turtlelauncher.feature.background.BackgroundType;
-import com.endiq.turtlelauncher.feature.download.item.ModLoaderWrapper;
-import com.endiq.turtlelauncher.feature.log.Logging;
-import com.endiq.turtlelauncher.feature.mod.modpack.install.InstallExtra;
-import com.endiq.turtlelauncher.feature.mod.modpack.install.InstallLocalModPack;
-import com.endiq.turtlelauncher.feature.mod.modpack.install.ModPackInfo;
-import com.endiq.turtlelauncher.feature.mod.modpack.install.ModPackUtils;
-import com.endiq.turtlelauncher.feature.notice.CheckNewNotice;
-import com.endiq.turtlelauncher.feature.notice.NoticeInfo;
-import com.endiq.turtlelauncher.feature.update.UpdateUtils;
-import com.endiq.turtlelauncher.feature.version.Version;
-import com.endiq.turtlelauncher.feature.version.VersionsManager;
-import com.endiq.turtlelauncher.feature.version.install.GameInstaller;
-import com.endiq.turtlelauncher.feature.version.install.InstallTask;
-import com.endiq.turtlelauncher.plugins.renderer.RendererPlugin;
-import com.endiq.turtlelauncher.plugins.renderer.RendererPluginManager;
-import com.endiq.turtlelauncher.setting.AllSettings;
-import com.endiq.turtlelauncher.task.Task;
-import com.endiq.turtlelauncher.task.TaskExecutors;
-import com.endiq.turtlelauncher.ui.activity.BaseActivity;
-import com.endiq.turtlelauncher.ui.activity.ErrorActivity;
-import com.endiq.turtlelauncher.ui.dialog.EditTextDialog;
-import com.endiq.turtlelauncher.ui.dialog.TipDialog;
-import com.endiq.turtlelauncher.ui.fragment.AccountFragment;
-import com.endiq.turtlelauncher.ui.fragment.BaseFragment;
-import com.endiq.turtlelauncher.ui.fragment.DownloadFragment;
-import com.endiq.turtlelauncher.ui.fragment.DownloadModFragment;
-import com.endiq.turtlelauncher.ui.fragment.settings.SettingsFragment;
-import com.endiq.turtlelauncher.ui.subassembly.settingsbutton.ButtonType;
-import com.endiq.turtlelauncher.ui.subassembly.settingsbutton.SettingsButtonWrapper;
-import com.endiq.turtlelauncher.ui.subassembly.view.DraggableViewWrapper;
-import com.endiq.turtlelauncher.utils.StoragePermissionsUtils;
-import com.endiq.turtlelauncher.utils.ZHTools;
-import com.endiq.turtlelauncher.utils.anim.ViewAnimUtils;
-import com.endiq.turtlelauncher.utils.file.FileTools;
-import com.endiq.turtlelauncher.utils.image.ImageUtils;
-import com.endiq.turtlelauncher.utils.stringutils.ShiftDirection;
-import com.endiq.turtlelauncher.utils.stringutils.StringUtils;
+import com.cyplixlauncher.mc.InfoDistributor;
+import com.cyplixlauncher.mc.R;
+import com.cyplixlauncher.mc.context.ContextExecutor;
+import com.cyplixlauncher.mc.databinding.ActivityLauncherBinding;
+import com.cyplixlauncher.mc.event.single.LaunchGameEvent;
+import com.cyplixlauncher.mc.event.single.MainBackgroundChangeEvent;
+import com.cyplixlauncher.mc.event.single.PageOpacityChangeEvent;
+import com.cyplixlauncher.mc.event.single.SwapToLoginEvent;
+import com.cyplixlauncher.mc.event.sticky.MinecraftVersionValueEvent;
+import com.cyplixlauncher.mc.event.value.AddFragmentEvent;
+import com.cyplixlauncher.mc.event.value.DownloadProgressKeyEvent;
+import com.cyplixlauncher.mc.event.value.InstallGameEvent;
+import com.cyplixlauncher.mc.event.value.InstallLocalModpackEvent;
+import com.cyplixlauncher.mc.event.value.LocalLoginEvent;
+import com.cyplixlauncher.mc.event.value.MicrosoftLoginEvent;
+import com.cyplixlauncher.mc.event.value.OtherLoginEvent;
+import com.cyplixlauncher.mc.feature.accounts.AccountType;
+import com.cyplixlauncher.mc.feature.accounts.AccountsManager;
+import com.cyplixlauncher.mc.feature.accounts.LocalAccountUtils;
+import com.cyplixlauncher.mc.feature.background.BackgroundManager;
+import com.cyplixlauncher.mc.feature.background.BackgroundType;
+import com.cyplixlauncher.mc.feature.download.item.ModLoaderWrapper;
+import com.cyplixlauncher.mc.feature.log.Logging;
+import com.cyplixlauncher.mc.feature.mod.modpack.install.InstallExtra;
+import com.cyplixlauncher.mc.feature.mod.modpack.install.InstallLocalModPack;
+import com.cyplixlauncher.mc.feature.mod.modpack.install.ModPackInfo;
+import com.cyplixlauncher.mc.feature.mod.modpack.install.ModPackUtils;
+import com.cyplixlauncher.mc.feature.notice.CheckNewNotice;
+import com.cyplixlauncher.mc.feature.notice.NoticeInfo;
+import com.cyplixlauncher.mc.feature.update.UpdateUtils;
+import com.cyplixlauncher.mc.feature.version.Version;
+import com.cyplixlauncher.mc.feature.version.VersionsManager;
+import com.cyplixlauncher.mc.feature.version.install.GameInstaller;
+import com.cyplixlauncher.mc.feature.version.install.InstallTask;
+import com.cyplixlauncher.mc.plugins.renderer.RendererPlugin;
+import com.cyplixlauncher.mc.plugins.renderer.RendererPluginManager;
+import com.cyplixlauncher.mc.setting.AllSettings;
+import com.cyplixlauncher.mc.task.Task;
+import com.cyplixlauncher.mc.task.TaskExecutors;
+import com.cyplixlauncher.mc.ui.activity.BaseActivity;
+import com.cyplixlauncher.mc.ui.activity.ErrorActivity;
+import com.cyplixlauncher.mc.ui.dialog.EditTextDialog;
+import com.cyplixlauncher.mc.ui.dialog.TipDialog;
+import com.cyplixlauncher.mc.ui.fragment.AccountFragment;
+import com.cyplixlauncher.mc.ui.fragment.BaseFragment;
+import com.cyplixlauncher.mc.ui.fragment.DownloadFragment;
+import com.cyplixlauncher.mc.ui.fragment.DownloadModFragment;
+import com.cyplixlauncher.mc.ui.fragment.settings.SettingsFragment;
+import com.cyplixlauncher.mc.ui.subassembly.settingsbutton.ButtonType;
+import com.cyplixlauncher.mc.ui.subassembly.settingsbutton.SettingsButtonWrapper;
+import com.cyplixlauncher.mc.ui.subassembly.view.DraggableViewWrapper;
+import com.cyplixlauncher.mc.utils.StoragePermissionsUtils;
+import com.cyplixlauncher.mc.utils.ZHTools;
+import com.cyplixlauncher.mc.utils.anim.ViewAnimUtils;
+import com.cyplixlauncher.mc.utils.file.FileTools;
+import com.cyplixlauncher.mc.utils.image.ImageUtils;
+import com.cyplixlauncher.mc.utils.stringutils.ShiftDirection;
+import com.cyplixlauncher.mc.utils.stringutils.StringUtils;
 import net.endiq.launcher.authenticator.microsoft.MicrosoftBackgroundLogin;
 import net.endiq.launcher.contracts.OpenDocumentWithExtension;
 import net.endiq.launcher.fragments.MainMenuFragment;
@@ -366,7 +366,7 @@ public class LauncherActivity extends BaseActivity {
         // Startup/background music (see the Music screen's "Enable Startup Music" +
         // playback scope). Gated internally on AllSettings.musicEnabled and a track
         // actually being set, so this is a no-op otherwise.
-        com.endiq.turtlelauncher.feature.music.MusicManager.INSTANCE.onLauncherStarted();
+        com.cyplixlauncher.mc.feature.music.MusicManager.INSTANCE.onLauncherStarted();
 
         // Show What's New dialog on first launch of this version
         //showWhatsNewIfNeeded();
@@ -428,15 +428,15 @@ public class LauncherActivity extends BaseActivity {
             if (sharedLogPath != null || sharedAudioPath != null) {
                 bundle = new Bundle();
                 if (sharedLogPath != null) {
-                    bundle.putString(com.endiq.turtlelauncher.ui.fragment.AiChatFragment.ARG_SHARED_LOG_PATH, sharedLogPath);
+                    bundle.putString(com.cyplixlauncher.mc.ui.fragment.AiChatFragment.ARG_SHARED_LOG_PATH, sharedLogPath);
                 }
                 if (sharedAudioPath != null) {
-                    bundle.putString(com.endiq.turtlelauncher.ui.fragment.AiChatFragment.ARG_SHARED_AUDIO_PATH, sharedAudioPath);
+                    bundle.putString(com.cyplixlauncher.mc.ui.fragment.AiChatFragment.ARG_SHARED_AUDIO_PATH, sharedAudioPath);
                 }
             }
             ZHTools.swapFragmentWithAnim(currentFragment,
-                com.endiq.turtlelauncher.ui.fragment.AiChatFragment.class,
-                com.endiq.turtlelauncher.ui.fragment.AiChatFragment.TAG, bundle);
+                com.cyplixlauncher.mc.ui.fragment.AiChatFragment.class,
+                com.cyplixlauncher.mc.ui.fragment.AiChatFragment.TAG, bundle);
         });
     }
 
@@ -490,11 +490,11 @@ public class LauncherActivity extends BaseActivity {
                 if (storageFragment != null) {
                     ViewAnimUtils.setViewAnim(binding.storageButton, Animations.Pulse);
                     Bundle bundle = new Bundle();
-                    bundle.putString(com.endiq.turtlelauncher.ui.fragment.FilesFragment.BUNDLE_LIST_PATH,
-                        com.endiq.turtlelauncher.utils.path.PathManager.DIR_GAME_HOME);
+                    bundle.putString(com.cyplixlauncher.mc.ui.fragment.FilesFragment.BUNDLE_LIST_PATH,
+                        com.cyplixlauncher.mc.utils.path.PathManager.DIR_GAME_HOME);
                     ZHTools.swapFragmentWithAnim(storageFragment,
-                        com.endiq.turtlelauncher.ui.fragment.FilesFragment.class,
-                        com.endiq.turtlelauncher.ui.fragment.FilesFragment.TAG, bundle);
+                        com.cyplixlauncher.mc.ui.fragment.FilesFragment.class,
+                        com.cyplixlauncher.mc.ui.fragment.FilesFragment.TAG, bundle);
                 }
             });
         }
@@ -570,15 +570,15 @@ public class LauncherActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        com.endiq.turtlelauncher.plugins.PluginLoader.rescanIfPluginsChanged(this);
-        com.endiq.turtlelauncher.utils.anim.TurtleTransitions.onResume();
-        com.endiq.turtlelauncher.task.TaskExecutors.setGameSessionActive(false);
-        com.endiq.turtlelauncher.feature.turtle.BackgroundServiceManager.onGameSessionEnd();
+        com.cyplixlauncher.mc.plugins.PluginLoader.rescanIfPluginsChanged(this);
+        com.cyplixlauncher.mc.utils.anim.TurtleTransitions.onResume();
+        com.cyplixlauncher.mc.task.TaskExecutors.setGameSessionActive(false);
+        com.cyplixlauncher.mc.feature.turtle.BackgroundServiceManager.onGameSessionEnd();
         setPageOpacity(AllSettings.getPageOpacity().getValue());
         VersionsManager.INSTANCE.refresh("LauncherActivity:onResume", false);
-        com.endiq.turtlelauncher.feature.turtle.AssetPrefetcher.prefetch(this);
-        com.endiq.turtlelauncher.feature.turtle.LauncherWarmStart.warmStart(this);
-        com.endiq.turtlelauncher.feature.maintenance.AutoCleanup.runIfDue();
+        com.cyplixlauncher.mc.feature.turtle.AssetPrefetcher.prefetch(this);
+        com.cyplixlauncher.mc.feature.turtle.LauncherWarmStart.warmStart(this);
+        com.cyplixlauncher.mc.feature.maintenance.AutoCleanup.runIfDue();
         startVideoBackground();
 
         Task.runTask(() -> {
@@ -591,7 +591,7 @@ public class LauncherActivity extends BaseActivity {
     protected void onPause() {
         super.onPause();
         // Free the video decoder while the launcher is in the background or a game is running.
-        com.endiq.turtlelauncher.feature.background.VideoBackground.release();
+        com.cyplixlauncher.mc.feature.background.VideoBackground.release();
     }
 
     @Override
@@ -603,8 +603,8 @@ public class LauncherActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == com.endiq.turtlelauncher.feature.terracotta.TerracottaVpnService.VPN_PERMISSION_REQUEST_CODE) {
-            com.endiq.turtlelauncher.feature.terracotta.Terracotta.onVpnPermissionResult(this, resultCode == RESULT_OK);
+        if (requestCode == com.cyplixlauncher.mc.feature.terracotta.TerracottaVpnService.VPN_PERMISSION_REQUEST_CODE) {
+            com.cyplixlauncher.mc.feature.terracotta.Terracotta.onVpnPermissionResult(this, resultCode == RESULT_OK);
         }
     }
 
@@ -626,7 +626,7 @@ public class LauncherActivity extends BaseActivity {
 
     private void launchGame(Version version) {
         // Stop launcher music unless the scope is set to keep playing into the game too.
-        com.endiq.turtlelauncher.feature.music.MusicManager.INSTANCE.onGameLaunching();
+        com.cyplixlauncher.mc.feature.music.MusicManager.INSTANCE.onGameLaunching();
         LocalAccountUtils.checkUsageAllowed(new LocalAccountUtils.CheckResultListener() {
             @Override
             public void onUsageAllowed() {
@@ -696,7 +696,7 @@ public class LauncherActivity extends BaseActivity {
     }
 
     private void refreshBackground() {
-        if (com.endiq.turtlelauncher.feature.background.VideoBackground.hasVideo()) {
+        if (com.cyplixlauncher.mc.feature.background.VideoBackground.hasVideo()) {
             binding.backgroundView.setImageDrawable(null);
             binding.videoBackgroundView.setVisibility(android.view.View.VISIBLE);
             return;
@@ -711,12 +711,12 @@ public class LauncherActivity extends BaseActivity {
 
     /** Plays the chosen video behind the menu, or shows the still background if there is none. */
     private void startVideoBackground() {
-        if (!com.endiq.turtlelauncher.feature.background.VideoBackground.hasVideo()) {
+        if (!com.cyplixlauncher.mc.feature.background.VideoBackground.hasVideo()) {
             showStillBackground();
             return;
         }
         refreshBackground();
-        com.endiq.turtlelauncher.feature.background.VideoBackground.start(
+        com.cyplixlauncher.mc.feature.background.VideoBackground.start(
                 this, binding.videoBackgroundView, this::showStillBackground);
     }
 
@@ -834,7 +834,7 @@ public class LauncherActivity extends BaseActivity {
         String shownVersion = AllSettings.getWhatsNewShownVersion().getValue();
         if (!CURRENT_VERSION.equals(shownVersion)) {
             AllSettings.getWhatsNewShownVersion().put(CURRENT_VERSION).save();
-            new com.endiq.turtlelauncher.ui.dialog.WhatsNewDialog(this).show();
+            new com.cyplixlauncher.mc.ui.dialog.WhatsNewDialog(this).show();
         }
     }
 }

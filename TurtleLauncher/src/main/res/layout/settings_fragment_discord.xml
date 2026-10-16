@@ -102,7 +102,7 @@
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
-                <com.endiq.turtlelauncher.ui.view.AnimButton
+                <com.cyplixlauncher.mc.ui.view.AnimButton
                     android:id="@+id/discord_link_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -156,7 +156,7 @@
                     android:lineSpacingExtra="2dp"
                     android:textColor="@color/turtle_text_secondary" />
 
-                <com.endiq.turtlelauncher.ui.view.AnimButton
+                <com.cyplixlauncher.mc.ui.view.AnimButton
                     android:id="@+id/discord_rpc_configure_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -196,7 +196,7 @@
                     android:lineSpacingExtra="2dp"
                     android:textColor="@color/turtle_text_secondary" />
 
-                <com.endiq.turtlelauncher.ui.view.AnimButton
+                <com.cyplixlauncher.mc.ui.view.AnimButton
                     android:id="@+id/discord_rpc_customize_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

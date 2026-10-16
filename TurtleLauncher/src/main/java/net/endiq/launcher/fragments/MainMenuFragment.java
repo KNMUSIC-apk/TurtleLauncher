@@ -1,7 +1,7 @@
 package net.endiq.launcher.fragments;
-import com.endiq.turtlelauncher.utils.anim.TurtleTransitions;
+import com.cyplixlauncher.mc.utils.anim.TurtleTransitions;
 
-import static com.endiq.turtlelauncher.event.single.RefreshVersionsEvent.MODE.END;
+import static com.cyplixlauncher.mc.event.single.RefreshVersionsEvent.MODE.END;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -18,40 +18,40 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.endiq.anim.AnimPlayer;
 import com.endiq.anim.animations.Animations;
-import com.endiq.turtlelauncher.InfoCenter;
-import com.endiq.turtlelauncher.R;
-import com.endiq.turtlelauncher.databinding.FragmentLauncherBinding;
-import com.endiq.turtlelauncher.event.single.AccountUpdateEvent;
-import com.endiq.turtlelauncher.event.single.LaunchGameEvent;
-import com.endiq.turtlelauncher.event.single.RefreshVersionsEvent;
-import com.endiq.turtlelauncher.event.value.InstallLocalModpackEvent;
-import com.endiq.turtlelauncher.feature.mod.modpack.install.InstallExtra;
-import com.endiq.turtlelauncher.feature.log.CrashAnalyzer;
-import com.endiq.turtlelauncher.feature.turtle.DailyPlaytimeStats;
-import com.endiq.turtlelauncher.feature.version.Version;
-import com.endiq.turtlelauncher.feature.version.utils.VersionIconUtils;
-import com.endiq.turtlelauncher.feature.version.VersionInfo;
-import com.endiq.turtlelauncher.feature.version.VersionsManager;
-import com.endiq.turtlelauncher.task.TaskExecutors;
-import com.endiq.turtlelauncher.ui.fragment.AboutFragment;
-import com.endiq.turtlelauncher.ui.fragment.ControlButtonFragment;
-import com.endiq.turtlelauncher.ui.fragment.FilesFragment;
-import com.endiq.turtlelauncher.ui.fragment.FragmentWithAnim;
-import com.endiq.turtlelauncher.ui.fragment.LogViewerFragment;
-import com.endiq.turtlelauncher.ui.fragment.AccountFragment;
-import com.endiq.turtlelauncher.ui.fragment.VersionsListFragment;
-import com.endiq.turtlelauncher.ui.subassembly.version.VersionManagerDropdown;
-import com.endiq.turtlelauncher.feature.accounts.AccountsManager;
-import com.endiq.turtlelauncher.feature.log.Logging;
-import com.endiq.turtlelauncher.utils.skin.SkinLoader;
+import com.cyplixlauncher.mc.InfoCenter;
+import com.cyplixlauncher.mc.R;
+import com.cyplixlauncher.mc.databinding.FragmentLauncherBinding;
+import com.cyplixlauncher.mc.event.single.AccountUpdateEvent;
+import com.cyplixlauncher.mc.event.single.LaunchGameEvent;
+import com.cyplixlauncher.mc.event.single.RefreshVersionsEvent;
+import com.cyplixlauncher.mc.event.value.InstallLocalModpackEvent;
+import com.cyplixlauncher.mc.feature.mod.modpack.install.InstallExtra;
+import com.cyplixlauncher.mc.feature.log.CrashAnalyzer;
+import com.cyplixlauncher.mc.feature.turtle.DailyPlaytimeStats;
+import com.cyplixlauncher.mc.feature.version.Version;
+import com.cyplixlauncher.mc.feature.version.utils.VersionIconUtils;
+import com.cyplixlauncher.mc.feature.version.VersionInfo;
+import com.cyplixlauncher.mc.feature.version.VersionsManager;
+import com.cyplixlauncher.mc.task.TaskExecutors;
+import com.cyplixlauncher.mc.ui.fragment.AboutFragment;
+import com.cyplixlauncher.mc.ui.fragment.ControlButtonFragment;
+import com.cyplixlauncher.mc.ui.fragment.FilesFragment;
+import com.cyplixlauncher.mc.ui.fragment.FragmentWithAnim;
+import com.cyplixlauncher.mc.ui.fragment.LogViewerFragment;
+import com.cyplixlauncher.mc.ui.fragment.AccountFragment;
+import com.cyplixlauncher.mc.ui.fragment.VersionsListFragment;
+import com.cyplixlauncher.mc.ui.subassembly.version.VersionManagerDropdown;
+import com.cyplixlauncher.mc.feature.accounts.AccountsManager;
+import com.cyplixlauncher.mc.feature.log.Logging;
+import com.cyplixlauncher.mc.utils.skin.SkinLoader;
 
 import androidx.core.content.ContextCompat;
 
 import net.endiq.launcher.value.MinecraftAccount;
-import com.endiq.turtlelauncher.utils.file.FileTools;
-import com.endiq.turtlelauncher.utils.path.PathManager;
-import com.endiq.turtlelauncher.utils.ZHTools;
-import com.endiq.turtlelauncher.utils.anim.ViewAnimUtils;
+import com.cyplixlauncher.mc.utils.file.FileTools;
+import com.cyplixlauncher.mc.utils.path.PathManager;
+import com.cyplixlauncher.mc.utils.ZHTools;
+import com.cyplixlauncher.mc.utils.anim.ViewAnimUtils;
 
 import net.endiq.launcher.Tools;
 import net.endiq.launcher.contracts.OpenDocumentWithExtension;
@@ -92,7 +92,7 @@ public class MainMenuFragment extends FragmentWithAnim {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         binding.aboutText.setText(InfoCenter.replaceName(requireActivity(), R.string.about_tab));
         binding.aboutButton.setOnClickListener(v -> ZHTools.swapFragmentWithAnim(this, AboutFragment.class, AboutFragment.TAG, null));
-        com.endiq.turtlelauncher.utils.anim.TurtleTransitions.attachPressFeedback(binding.terracottaButton);
+        com.cyplixlauncher.mc.utils.anim.TurtleTransitions.attachPressFeedback(binding.terracottaButton);
         binding.customControlButton.setOnClickListener(v -> ZHTools.swapFragmentWithAnim(this, ControlButtonFragment.class, ControlButtonFragment.TAG, null));
         binding.installJarButton.setOnClickListener(v -> runInstallerWithConfirmation(false));
         binding.installJarButton.setOnLongClickListener(v -> {
@@ -100,9 +100,9 @@ public class MainMenuFragment extends FragmentWithAnim {
             return true;
         });
         binding.terracottaButton.setOnClickListener(v -> ZHTools.swapFragmentWithAnim(this,
-            com.endiq.turtlelauncher.ui.fragment.TerracottaFragment.class,
-            com.endiq.turtlelauncher.ui.fragment.TerracottaFragment.TAG, null));
-        binding.shareLogsButton.setOnClickListener(v -> ZHTools.swapFragmentWithAnim(this, com.endiq.turtlelauncher.ui.fragment.ShareLogsFragment.class, com.endiq.turtlelauncher.ui.fragment.ShareLogsFragment.TAG, null));
+            com.cyplixlauncher.mc.ui.fragment.TerracottaFragment.class,
+            com.cyplixlauncher.mc.ui.fragment.TerracottaFragment.TAG, null));
+        binding.shareLogsButton.setOnClickListener(v -> ZHTools.swapFragmentWithAnim(this, com.cyplixlauncher.mc.ui.fragment.ShareLogsFragment.class, com.cyplixlauncher.mc.ui.fragment.ShareLogsFragment.TAG, null));
         binding.modpackImportButton.setOnClickListener(v -> {
             if (ProgressKeeper.getTaskCount() == 0) {
                 modpackImportLauncher.launch(null);
@@ -111,10 +111,10 @@ public class MainMenuFragment extends FragmentWithAnim {
             }
         });
         // Footer: launcher name, version string, and GitHub link
-        binding.footerAppName.setText(com.endiq.turtlelauncher.InfoDistributor.LAUNCHER_NAME);
-        binding.footerVersionText.setText("v" + com.endiq.turtlelauncher.BuildConfig.VERSION_NAME);
+        binding.footerAppName.setText(com.cyplixlauncher.mc.InfoDistributor.LAUNCHER_NAME);
+        binding.footerVersionText.setText("v" + com.cyplixlauncher.mc.BuildConfig.VERSION_NAME);
         binding.footerGithubButton.setOnClickListener(v ->
-            ZHTools.openLink(requireActivity(), com.endiq.turtlelauncher.utils.path.UrlManager.URL_HOME));
+            ZHTools.openLink(requireActivity(), com.cyplixlauncher.mc.utils.path.UrlManager.URL_HOME));
 
         binding.version.setOnClickListener(v -> {
             if (!isTaskRunning()) {
@@ -145,7 +145,7 @@ public class MainMenuFragment extends FragmentWithAnim {
         binding.versionInfo.setSelected(true);
 
         // Top app bar: title/subtitle + quick-action icon row
-        binding.homeTopBarTitle.setText(com.endiq.turtlelauncher.InfoDistributor.LAUNCHER_NAME);
+        binding.homeTopBarTitle.setText(com.cyplixlauncher.mc.InfoDistributor.LAUNCHER_NAME);
         binding.topBarAccountButton.setOnClickListener(v ->
             ZHTools.swapFragmentWithAnim(this, AccountFragment.class, AccountFragment.TAG, null));
         binding.topBarAccountName.setOnClickListener(v -> binding.topBarAccountButton.performClick());
@@ -156,23 +156,23 @@ public class MainMenuFragment extends FragmentWithAnim {
             ZHTools.swapFragmentWithAnim(this, FilesFragment.class, FilesFragment.TAG, bundle);
         });
         binding.topBarDownloadButton.setOnClickListener(v -> ZHTools.swapFragmentWithAnim(this,
-            com.endiq.turtlelauncher.ui.fragment.DownloadFragment.class,
-            com.endiq.turtlelauncher.ui.fragment.DownloadFragment.TAG, null));
+            com.cyplixlauncher.mc.ui.fragment.DownloadFragment.class,
+            com.cyplixlauncher.mc.ui.fragment.DownloadFragment.TAG, null));
         binding.topBarCursorButton.setOnClickListener(v -> ZHTools.swapFragmentWithAnim(this,
-            com.endiq.turtlelauncher.ui.fragment.CustomMouseFragment.class,
-            com.endiq.turtlelauncher.ui.fragment.CustomMouseFragment.TAG, null));
+            com.cyplixlauncher.mc.ui.fragment.CustomMouseFragment.class,
+            com.cyplixlauncher.mc.ui.fragment.CustomMouseFragment.TAG, null));
         binding.topBarMusicButton.setOnClickListener(v -> ZHTools.swapFragmentWithAnim(this,
-            com.endiq.turtlelauncher.ui.fragment.MusicFragment.class,
-            com.endiq.turtlelauncher.ui.fragment.MusicFragment.TAG, null));
+            com.cyplixlauncher.mc.ui.fragment.MusicFragment.class,
+            com.cyplixlauncher.mc.ui.fragment.MusicFragment.TAG, null));
         binding.topBarSettingsButton.setOnClickListener(v -> ZHTools.swapFragmentWithAnim(this,
-            com.endiq.turtlelauncher.ui.fragment.settings.SettingsFragment.class,
-            com.endiq.turtlelauncher.ui.fragment.settings.SettingsFragment.TAG, null));
+            com.cyplixlauncher.mc.ui.fragment.settings.SettingsFragment.class,
+            com.cyplixlauncher.mc.ui.fragment.settings.SettingsFragment.TAG, null));
         binding.topBarAiButton.setVisibility(
-            com.endiq.turtlelauncher.setting.AllSettings.getAiAssistantEnabled().getValue()
+            com.cyplixlauncher.mc.setting.AllSettings.getAiAssistantEnabled().getValue()
                 ? View.VISIBLE : View.GONE);
         binding.topBarAiButton.setOnClickListener(v -> ZHTools.swapFragmentWithAnim(this,
-            com.endiq.turtlelauncher.ui.fragment.AiChatFragment.class,
-            com.endiq.turtlelauncher.ui.fragment.AiChatFragment.TAG, null));
+            com.cyplixlauncher.mc.ui.fragment.AiChatFragment.class,
+            com.cyplixlauncher.mc.ui.fragment.AiChatFragment.TAG, null));
 
         // Today's Statistics dashboard
         refreshStatistics();
@@ -200,7 +200,7 @@ public class MainMenuFragment extends FragmentWithAnim {
 
     private void refreshLastGameLog() {
         String lastLogText = CrashAnalyzer.INSTANCE.getLastLogText();
-        File logFile = com.endiq.turtlelauncher.feature.log.LatestLogResolver.resolveLastGameLogFile();
+        File logFile = com.cyplixlauncher.mc.feature.log.LatestLogResolver.resolveLastGameLogFile();
 
         if ((lastLogText == null || lastLogText.isEmpty()) && logFile == null) {
             binding.lastLogPreview.setText(R.string.main_last_log_none);
@@ -222,7 +222,7 @@ public class MainMenuFragment extends FragmentWithAnim {
         binding.lastLogCard.setOnClickListener(v -> {
             File toOpen = targetLogFile != null
                     ? targetLogFile
-                    : com.endiq.turtlelauncher.feature.log.LatestLogResolver.resolveLatestLogFile();
+                    : com.cyplixlauncher.mc.feature.log.LatestLogResolver.resolveLatestLogFile();
             if (toOpen != null && toOpen.isFile()) {
                 ZHTools.swapFragmentWithAnim(this, LogViewerFragment.class, LogViewerFragment.TAG,
                     LogViewerFragment.Companion.createArgs(toOpen));
@@ -243,8 +243,8 @@ public class MainMenuFragment extends FragmentWithAnim {
     }
 
     private void populateFeaturePlugins() {
-        java.util.List<com.endiq.turtlelauncher.plugins.feature.FeaturePlugin> plugins =
-                com.endiq.turtlelauncher.plugins.feature.FeaturePluginManager.getFeaturePluginList();
+        java.util.List<com.cyplixlauncher.mc.plugins.feature.FeaturePlugin> plugins =
+                com.cyplixlauncher.mc.plugins.feature.FeaturePluginManager.getFeaturePluginList();
         binding.featurePluginsContainer.removeAllViews();
         if (plugins.isEmpty()) {
             binding.featurePluginsContainer.setVisibility(View.GONE);
@@ -252,7 +252,7 @@ public class MainMenuFragment extends FragmentWithAnim {
         }
         binding.featurePluginsContainer.setVisibility(View.VISIBLE);
         android.content.pm.PackageManager packageManager = requireContext().getPackageManager();
-        for (com.endiq.turtlelauncher.plugins.feature.FeaturePlugin plugin : plugins) {
+        for (com.cyplixlauncher.mc.plugins.feature.FeaturePlugin plugin : plugins) {
             View row = getLayoutInflater().inflate(R.layout.item_feature_plugin, binding.featurePluginsContainer, false);
             android.widget.ImageView icon = row.findViewById(R.id.feature_plugin_icon);
             android.widget.TextView title = row.findViewById(R.id.feature_plugin_title);
@@ -390,12 +390,12 @@ public class MainMenuFragment extends FragmentWithAnim {
 
     @Override
     public void slideIn(AnimPlayer animPlayer) {
-        com.endiq.turtlelauncher.utils.anim.TurtleTransitions.stagger(
+        com.cyplixlauncher.mc.utils.anim.TurtleTransitions.stagger(
                 animPlayer,
                 java.util.Arrays.asList(binding.launcherMenu, binding.playLayout),
                 55L);
         // Shortcut buttons in the side rail arrive one after another, after the menu panels.
-        com.endiq.turtlelauncher.utils.anim.TurtleTransitions.stagger(
+        com.cyplixlauncher.mc.utils.anim.TurtleTransitions.stagger(
                 animPlayer,
                 java.util.Arrays.asList(binding.aboutButton, binding.customControlButton, binding.installJarButton,
                         binding.shareLogsButton, binding.modpackImportButton),

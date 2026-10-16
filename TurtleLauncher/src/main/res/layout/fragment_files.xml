@@ -30,7 +30,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.endiq.turtlelauncher.ui.subassembly.filelist.FileRecyclerView
+            <com.cyplixlauncher.mc.ui.subassembly.filelist.FileRecyclerView
                 android:id="@+id/file_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -66,7 +66,7 @@
                      segmented pill row (External Storage / App Private). Same ids as
                      before - FilesFragment.kt's externalStorage/softwarePrivate click
                      wiring is unchanged. -->
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/external_storage"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -95,9 +95,9 @@
                         android:textColor="@color/turtle_primary_text"
                         android:textSize="@dimen/_11ssp"
                         android:text="@string/file_external_storage" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/software_private"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -125,10 +125,10 @@
                         android:textColor="@color/turtle_primary_text"
                         android:textSize="@dimen/_11ssp"
                         android:text="@string/file_software_private" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
                 <!-- Breadcrumb-style path bar (was a bare bold title) -->
-                <com.endiq.turtlelauncher.ui.view.AnimTextView
+                <com.cyplixlauncher.mc.ui.view.AnimTextView
                     android:id="@+id/current_path"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -147,7 +147,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/external_storage"
                     tools:ignore="HardcodedText" />
 
-                <com.endiq.turtlelauncher.ui.view.AnimCheckBox
+                <com.cyplixlauncher.mc.ui.view.AnimCheckBox
                     android:id="@+id/select_all"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -200,7 +200,7 @@
                 <!-- External Storage / App Private now live as a pill row in title_layout
                      above the file list (see fragment-top edit) instead of here. -->
 
-                <com.endiq.turtlelauncher.ui.view.AnimCheckBox
+                <com.cyplixlauncher.mc.ui.view.AnimCheckBox
                     android:id="@+id/multi_select_files"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

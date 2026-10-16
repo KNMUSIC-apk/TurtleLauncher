@@ -3,7 +3,7 @@ package net.endiq.launcher.customcontrols.gamepad;
 import android.util.Log;
 
 import com.google.gson.JsonParseException;
-import com.endiq.turtlelauncher.utils.path.PathManager;
+import com.cyplixlauncher.mc.utils.path.PathManager;
 
 import net.endiq.launcher.Tools;
 import net.endiq.launcher.utils.FileUtils;

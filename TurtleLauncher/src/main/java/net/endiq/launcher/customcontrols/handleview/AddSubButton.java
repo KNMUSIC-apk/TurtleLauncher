@@ -6,8 +6,8 @@ import android.util.AttributeSet;
 
 import androidx.annotation.Nullable;
 
-import com.endiq.turtlelauncher.R;
-import com.endiq.turtlelauncher.ui.view.AnimButton;
+import com.cyplixlauncher.mc.R;
+import com.cyplixlauncher.mc.ui.view.AnimButton;
 
 import net.endiq.launcher.customcontrols.ControlData;
 import net.endiq.launcher.customcontrols.buttons.ControlDrawer;

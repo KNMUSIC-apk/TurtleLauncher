@@ -5,8 +5,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.endiq.turtlelauncher.InfoCenter;
-import com.endiq.turtlelauncher.R;
+import com.cyplixlauncher.mc.InfoCenter;
+import com.cyplixlauncher.mc.R;
 
 public class MissingStorageActivity extends AppCompatActivity {
     @Override

@@ -20,8 +20,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
-import com.endiq.turtlelauncher.R;
-import com.endiq.turtlelauncher.setting.AllSettings;
+import com.cyplixlauncher.mc.R;
+import com.cyplixlauncher.mc.setting.AllSettings;
 
 import net.endiq.launcher.LauncherActivity;
 import net.endiq.launcher.LwjglGlfwKeycode;

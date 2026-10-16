@@ -7,7 +7,7 @@ import android.view.Surface
 import android.view.ViewGroup
 import androidx.annotation.Keep
 import androidx.annotation.MainThread
-import com.endiq.turtlelauncher.setting.AllSettings
+import com.cyplixlauncher.mc.setting.AllSettings
 import org.libsdl.app.SDL
 import org.libsdl.app.SDLActivity
 import org.libsdl.app.SDLSurface
