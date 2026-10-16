@@ -2,11 +2,11 @@ package com.endiq.turtlelauncher.startup
 
 import android.app.Application
 import android.content.Context
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.startup.Initializer
 import com.google.android.material.color.DynamicColors
 import com.endiq.turtlelauncher.feature.log.Logging
 import com.endiq.turtlelauncher.feature.log.NativeCrashCapture
+import com.endiq.turtlelauncher.feature.theme.LauncherTheme
 import com.endiq.turtlelauncher.feature.turtle.AnrWatchdog
 
 class TurtleStartupInitializer : Initializer<Unit> {
@@ -15,7 +15,7 @@ class TurtleStartupInitializer : Initializer<Unit> {
     }
 
     override fun create(context: Context) {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        LauncherTheme.applySaved()
 
         // Material You dynamic color: on supported devices (Android 12+), derives the theme
         // from the system wallpaper; a no-op safe fallback to the static theme elsewhere.

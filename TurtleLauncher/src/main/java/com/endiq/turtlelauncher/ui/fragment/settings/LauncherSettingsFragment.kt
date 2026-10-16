@@ -160,7 +160,9 @@ class LauncherSettingsFragment() : AbstractSettingsFragment(R.layout.settings_fr
             binding.launcherThemeTitle,
             binding.launcherThemeValue,
             R.array.launcher_theme_names, R.array.launcher_theme_values
-        ).setRequiresReboot()
+        ).apply {
+            onValueChanged = { com.endiq.turtlelauncher.feature.theme.LauncherTheme.apply(it) }
+        }
 
         BaseSettingsWrapper(
             context,

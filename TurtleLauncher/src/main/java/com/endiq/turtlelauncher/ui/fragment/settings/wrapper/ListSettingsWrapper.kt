@@ -33,6 +33,9 @@ class ListSettingsWrapper(
         context.resources.getStringArray(itemValuesId)
     )
 
+    /** Called with the new value right after the user picks an entry. */
+    var onValueChanged: ((String) -> Unit)? = null
+
     init {
         updateListViewValue()
         mainView.setOnClickListener { createAListDialog() }
@@ -47,6 +50,7 @@ class ListSettingsWrapper(
                     val selectedValue = entryValues[which]
                     unit.put(selectedValue).save()
                     updateListViewValue()
+                    onValueChanged?.invoke(selectedValue)
                     checkShowRebootDialog(context)
                 }
                 dialog.dismiss()

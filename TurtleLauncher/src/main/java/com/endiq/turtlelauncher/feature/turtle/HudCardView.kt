@@ -129,7 +129,7 @@ class HudCardView @JvmOverloads constructor(
 
     private fun cellWidth(c: Cell): Float = dp(when (c) {
         Cell.FPS -> 64f
-        Cell.CPU, Cell.GPU -> 112f
+        Cell.CPU, Cell.GPU -> 72f
         Cell.RAM -> 80f
         Cell.PING -> 56f
     })
@@ -165,8 +165,8 @@ class HudCardView @JvmOverloads constructor(
             val cw = cellWidth(cell)
             when (cell) {
                 Cell.FPS -> drawFps(canvas, x, cw)
-                Cell.CPU -> drawTempUsage(canvas, x, "CPU", snapshot?.cpuTempC, snapshot?.cpuPercent)
-                Cell.GPU -> drawTempUsage(canvas, x, "GPU", snapshot?.gpuTempC, snapshot?.gpuPercent)
+                Cell.CPU -> drawTemp(canvas, x, "CPU", snapshot?.cpuTempC)
+                Cell.GPU -> drawTemp(canvas, x, "GPU", snapshot?.gpuTempC)
                 Cell.RAM -> drawRam(canvas, x)
                 Cell.PING -> drawPing(canvas, x)
             }
@@ -190,16 +190,13 @@ class HudCardView @JvmOverloads constructor(
         canvas.drawText(ms?.let { "$it ms" } ?: "-- ms", x + dp(6f), dp(34f), valuePaint)
     }
 
-    /** Temperature ring then usage ring, each with its value. */
-    private fun drawTempUsage(canvas: Canvas, x: Float, label: String, tempC: Int?, usage: Int?) {
+    /** Temperature ring with its value. */
+    private fun drawTemp(canvas: Canvas, x: Float, label: String, tempC: Int?) {
         canvas.drawText(label, x + dp(4f), dp(14f), labelPaint)
         val cy = dp(29f)
         val r = dp(8f)
         drawRing(canvas, x + dp(12f) + r, cy, r, tempColor(tempC), tempFraction(tempC))
         canvas.drawText(tempC?.let { "$it°" } ?: "--", x + dp(34f), dp(33f), valuePaint)
-        val ucx = x + dp(70f) + r
-        drawRing(canvas, ucx, cy, r, usageColor(usage), (usage ?: 0) / 100f)
-        canvas.drawText(usage?.let { "$it%" } ?: "--", ucx + r + dp(4f), dp(33f), valuePaint)
     }
 
     private fun drawRam(canvas: Canvas, x: Float) {

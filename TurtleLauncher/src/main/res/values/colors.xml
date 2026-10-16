@@ -67,8 +67,8 @@
     <color name="turtle_stat_ram">#FF166D4B</color>
     <color name="turtle_stat_cpu">#FFB7791F</color>
     <color name="turtle_stat_ping">#FFB7791F</color>
-    <color name="panel_translucent">#F0EAF0E9</color>
-    <color name="game_panel_overlay">#CCEAF0E9</color>
+    <color name="panel_translucent">#F0FFFFFF</color>
+    <color name="game_panel_overlay">#CCFFFFFF</color>
     <color name="turtle_highlight_subtle">#2215241A</color>
     <color name="new_background_main">#FFEAF0E9</color>
     <color name="new_background_secondary">#FFF6FCF5</color>

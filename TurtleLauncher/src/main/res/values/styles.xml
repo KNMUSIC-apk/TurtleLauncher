@@ -35,7 +35,7 @@
 
     <style name="Widget.Turtle.Switch" parent="android:Widget.Material.CompoundButton.Switch">
         <item name="android:track">@drawable/switch_track_selector</item>
-        <item name="android:thumb">@drawable/switch_thumb_transparent</item>
+        <item name="android:thumb">@drawable/switch_thumb_round</item>
         <item name="android:switchMinWidth">48dp</item>
     </style>
 
