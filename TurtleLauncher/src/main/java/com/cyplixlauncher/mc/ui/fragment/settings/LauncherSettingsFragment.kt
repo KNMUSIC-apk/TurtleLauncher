@@ -15,7 +15,6 @@ import com.cyplixlauncher.mc.R
 import com.cyplixlauncher.mc.databinding.SettingsFragmentLauncherBinding
 import com.cyplixlauncher.mc.event.single.PageOpacityChangeEvent
 import com.cyplixlauncher.mc.event.single.MainBackgroundChangeEvent
-import android.view.View
 import com.cyplixlauncher.mc.feature.update.UpdateUtils
 import com.cyplixlauncher.mc.setting.AllSettings
 import com.cyplixlauncher.mc.ui.fragment.CustomBackgroundFragment
