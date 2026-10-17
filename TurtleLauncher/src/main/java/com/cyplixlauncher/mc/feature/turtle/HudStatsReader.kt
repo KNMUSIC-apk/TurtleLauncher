@@ -44,9 +44,22 @@ object HudStatsReader {
         return if (tenths == Int.MIN_VALUE) null else tenths / 10
     }
 
-    /** Device surface temperature in °C: the skin thermal zone when present, otherwise battery. */
+    /**
+     * Device temperature in °C: the hottest plausible reading across all thermal zones
+     * (CPU, GPU, skin, PMIC...), falling back to the battery sensor when no zone is readable.
+     */
     fun deviceTempC(context: android.content.Context): Int? =
-        thermalTempC { it.contains("skin") } ?: batteryTempC(context)
+        allThermalTempsC().filter { it in 10..100 }.maxOrNull() ?: batteryTempC(context)
+
+    private fun allThermalTempsC(): List<Int> {
+        val zones = File("/sys/class/thermal").listFiles { f -> f.name.startsWith("thermal_zone") } ?: return emptyList()
+        return zones.mapNotNull { zone ->
+            val raw = runCatching { File(zone, "temp").readText().trim().toLong() }.getOrNull()
+                ?: return@mapNotNull null
+            // Millidegrees on most kernels; some report whole degrees already.
+            (if (raw > 1000) raw / 1000 else raw).toInt()
+        }
+    }
 
     /** GPU thermal zone in degrees Celsius, or null. */
     fun gpuTempC(): Int? = thermalTempC { it.contains("gpu") }
