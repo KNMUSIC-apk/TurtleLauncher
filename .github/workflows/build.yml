@@ -179,3 +179,6 @@ jobs:
         with:
           name: TurtleLauncher-release-apk
           path: "**/build/outputs/apk/release/*.apk"
+          # Upload the APK as-is. Without this, GitHub wraps it in an extra zip, and some
+          # phone archive tools report "Lỗi dữ liệu" (data error) when extracting that wrapper.
+          archive: false
