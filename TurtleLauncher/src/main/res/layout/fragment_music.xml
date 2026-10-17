@@ -91,7 +91,7 @@
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
-                <Switch
+                <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                     android:id="@+id/music_enable_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />

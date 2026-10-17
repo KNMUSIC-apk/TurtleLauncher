@@ -92,7 +92,7 @@
                         android:layout_toStartOf="@+id/showRecordButtonHud"
                         android:text="@string/setting_show_record_button_desc" />
 
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/showRecordButtonHud"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -129,7 +129,7 @@
                         android:layout_toStartOf="@+id/recordingCaptureAudio"
                         android:text="@string/setting_recording_capture_audio_desc" />
 
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/recordingCaptureAudio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -166,7 +166,7 @@
                         android:layout_toStartOf="@+id/recordingShowTimer"
                         android:text="@string/setting_recording_show_timer_desc" />
 
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/recordingShowTimer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

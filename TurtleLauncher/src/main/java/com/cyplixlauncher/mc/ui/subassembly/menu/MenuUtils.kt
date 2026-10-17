@@ -24,6 +24,7 @@ class MenuUtils {
         @SuppressLint("UseSwitchCompatOrMaterialCode")
         fun toggleSwitchState(switchView: Switch) {
             switchView.isChecked = !switchView.isChecked
+            com.cyplixlauncher.mc.ui.view.SwitchBurst.play(switchView, switchView.isChecked)
         }
 
         /**

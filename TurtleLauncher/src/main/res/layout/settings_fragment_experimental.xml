@@ -101,7 +101,7 @@
                         android:layout_toStartOf="@+id/dump_shaders"
                         android:text="@string/setting_shader_dump_desc" />
     
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/dump_shaders"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -137,7 +137,7 @@
                         android:layout_toStartOf="@+id/turnip_sysmem"
                         android:text="@string/setting_turnip_sysmem_desc" />
 
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/turnip_sysmem"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -173,7 +173,7 @@
                         android:layout_toStartOf="@+id/bigCoreAffinity"
                         android:text="@string/setting_force_big_core_desc" />
     
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/bigCoreAffinity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -209,7 +209,7 @@
                         android:layout_toStartOf="@+id/fastBoot"
                         android:text="@string/setting_fast_boot_desc" />
     
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/fastBoot"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -245,7 +245,7 @@
                         android:layout_toStartOf="@+id/modConflictDetection"
                         android:text="@string/setting_mod_conflict_detection_desc" />
     
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/modConflictDetection"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -317,7 +317,7 @@
                         android:layout_toStartOf="@+id/backgroundServiceOptimization"
                         android:text="@string/setting_background_service_optimization_summary" />
     
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/backgroundServiceOptimization"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -440,7 +440,7 @@
                         android:layout_marginEnd="@dimen/_8sdp"
                         android:layout_toStartOf="@+id/autoCheckPluginUpdates"
                         android:text="@string/setting_plugin_update_auto_desc" />
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/autoCheckPluginUpdates"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

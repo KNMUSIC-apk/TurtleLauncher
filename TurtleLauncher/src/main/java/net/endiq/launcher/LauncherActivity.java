@@ -358,6 +358,7 @@ public class LauncherActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityLauncherBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        if (savedInstanceState == null) com.cyplixlauncher.mc.ui.view.LaunchIntroOverlay.INSTANCE.play(this);
 
         processFragment();
         processViews();

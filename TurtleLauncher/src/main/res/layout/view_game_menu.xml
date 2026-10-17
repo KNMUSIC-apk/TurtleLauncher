@@ -308,7 +308,7 @@
                     android:text="@string/setting_disable_gestures_title"
                     android:textColor="@color/turtle_primary_text" />
 
-                <Switch
+                <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                     android:id="@+id/disableGestures"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -336,7 +336,7 @@
                     android:text="@string/setting_disable_swap_hand_title"
                     android:textColor="@color/turtle_primary_text" />
 
-                <Switch
+                <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                     android:id="@+id/disableDoubleTap"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -366,7 +366,7 @@
                     android:text="@string/setting_control_switcher_title"
                     android:textColor="@color/turtle_primary_text" />
 
-                <Switch
+                <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                     android:id="@+id/controlSwitcher"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -399,7 +399,7 @@
                     android:text="@string/setting_emotes_enabled_title"
                     android:textColor="@color/turtle_primary_text" />
 
-                <Switch
+                <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                     android:id="@+id/emotes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -637,7 +637,7 @@
                     android:text="@string/setting_enable_gyro_title"
                     android:textColor="@color/turtle_primary_text" />
 
-                <Switch
+                <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                     android:id="@+id/enableGyro"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -739,7 +739,7 @@
                         android:text="@string/setting_gyro_invert_x_axis"
                         android:textColor="@color/turtle_primary_text" />
 
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/gyroInvertX"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -767,7 +767,7 @@
                         android:text="@string/setting_gyro_invert_y_axis"
                         android:textColor="@color/turtle_primary_text" />
 
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/gyroInvertY"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -1001,7 +1001,7 @@
                         android:layout_marginEnd="@dimen/_8sdp"
                         android:layout_toStartOf="@+id/hudShowCpu"
                         android:text="@string/setting_hud_stat_cpu_desc" />
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/hudShowCpu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -1033,7 +1033,7 @@
                         android:layout_marginEnd="@dimen/_8sdp"
                         android:layout_toStartOf="@+id/hudShowGpu"
                         android:text="@string/setting_hud_stat_gpu_desc" />
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/hudShowGpu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -1065,7 +1065,7 @@
                         android:layout_marginEnd="@dimen/_8sdp"
                         android:layout_toStartOf="@+id/hudShowRam"
                         android:text="@string/setting_hud_stat_ram_desc" />
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/hudShowRam"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -1097,7 +1097,7 @@
                         android:layout_marginEnd="@dimen/_8sdp"
                         android:layout_toStartOf="@+id/hudShowFps"
                         android:text="@string/setting_hud_stat_fps_desc" />
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/hudShowFps"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -1128,7 +1128,7 @@
                         android:layout_marginEnd="@dimen/_8sdp"
                         android:layout_toStartOf="@+id/hudShowTemp"
                         android:text="@string/setting_hud_stat_temp_desc" />
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/hudShowTemp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -1217,7 +1217,7 @@
                         android:layout_marginEnd="@dimen/_8sdp"
                         android:layout_toStartOf="@+id/showScreenshotButtonHud"
                         android:text="@string/setting_hud_screenshot_button_desc" />
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/showScreenshotButtonHud"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

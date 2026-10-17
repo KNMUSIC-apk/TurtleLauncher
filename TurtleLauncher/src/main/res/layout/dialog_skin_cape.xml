@@ -425,7 +425,7 @@
                 android:background="@color/turtle_highlight_subtle"
                 android:layout_marginVertical="@dimen/_8sdp"/>
 
-            <Switch
+            <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                 android:id="@+id/switch_slim_model"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -436,7 +436,7 @@
                 android:visibility="gone"
                 tools:ignore="UseSwitchCompatOrMaterialXml"/>
 
-            <Switch
+            <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                 android:id="@+id/switch_lan_visible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

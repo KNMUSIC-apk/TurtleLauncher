@@ -137,7 +137,7 @@
                         android:textStyle="bold"
                         android:textColor="@color/turtle_text_primary" />
 
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/discord_activity_switch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

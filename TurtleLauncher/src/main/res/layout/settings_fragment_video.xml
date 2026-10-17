@@ -105,7 +105,7 @@
                         android:textSize="@dimen/_11ssp"
                         android:textColor="@color/turtle_text_secondary" />
     
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/graphics_backend_switch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -270,7 +270,7 @@
                         android:layout_toStartOf="@+id/ignoreNotch"
                         android:text="@string/setting_ignore_notch_desc" />
     
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/ignoreNotch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -308,7 +308,7 @@
                         android:layout_toStartOf="@+id/ignoreNotchLauncher"
                         android:text="@string/setting_launcher_ignore_notch_desc" />
     
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/ignoreNotchLauncher"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -458,7 +458,7 @@
                         android:layout_toStartOf="@+id/sustainedPerformance"
                         android:text="@string/setting_limit_overheating_throttling" />
     
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/sustainedPerformance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -508,7 +508,7 @@
                         android:src="@drawable/ic_warning"
                         android:tint="@color/turtle_warning" />
 
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/alternate_surface"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -545,7 +545,7 @@
                         android:layout_toStartOf="@+id/force_vsync"
                         android:text="@string/setting_limit_overheating_throttling" />
     
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/force_vsync"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -582,7 +582,7 @@
                         android:layout_toStartOf="@+id/vsync_in_zink"
                         android:text="@string/setting_vsync_in_zink_desc" />
     
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/vsync_in_zink"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -619,7 +619,7 @@
                         android:layout_toStartOf="@+id/adaptive_vsync"
                         android:text="@string/setting_adaptive_vsync_desc" />
 
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/adaptive_vsync"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -656,7 +656,7 @@
                         android:layout_toStartOf="@+id/low_latency_front_buffer"
                         android:text="@string/setting_low_latency_rendering_desc" />
 
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/low_latency_front_buffer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -693,7 +693,7 @@
                         android:layout_toStartOf="@+id/zinkPreferSystemDriver"
                         android:text="@string/setting_vulkan_driver_system_desc" />
     
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/zinkPreferSystemDriver"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -752,7 +752,7 @@
                         android:layout_toStartOf="@+id/autoSettingsOptimizer"
                         android:text="@string/setting_auto_settings_optimizer_desc" />
     
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/autoSettingsOptimizer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

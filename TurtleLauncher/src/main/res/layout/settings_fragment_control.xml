@@ -152,7 +152,7 @@
                         android:layout_toStartOf="@+id/buttonAllCaps"
                         android:text="@string/setting_button_allcaps_desc" />
     
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/buttonAllCaps"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -208,7 +208,7 @@
                         android:layout_toStartOf="@+id/enableGyro"
                         android:text="@string/setting_enable_gyro_desc" />
     
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/enableGyro"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -344,7 +344,7 @@
                         android:layout_toStartOf="@+id/gyroSmoothing"
                         android:text="@string/setting_gyro_smoothing_desc" />
     
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/gyroSmoothing"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -381,7 +381,7 @@
                         android:layout_toStartOf="@+id/gyroInvertX"
                         android:text="@string/setting_gyro_invert_x_axis_description" />
     
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/gyroInvertX"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -417,7 +417,7 @@
                         android:layout_toStartOf="@+id/gyroInvertY"
                         android:text="@string/setting_gyro_invert_y_axis_description" />
     
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/gyroInvertY"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
