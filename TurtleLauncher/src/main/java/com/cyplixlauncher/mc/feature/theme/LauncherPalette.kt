@@ -42,12 +42,16 @@ object LauncherPalette {
         val accent: Int,
         val glowA: Int,
         val glowB: Int,
-        val style: Style
+        val style: Style,
+        /** Tint for vector icons on every screen. */
+        val iconTint: Int,
+        /** Tint for card and panel backgrounds on every screen. */
+        val surface: Int
     )
 
     private val PALETTES = listOf(
-        Palette("nebula", 0xFF0B1020.toInt(), 0xFF00C8FF.toInt(), 0xFF5427A8.toInt(), 0xFF00C8FF.toInt(), Style.NEBULA),
-        Palette("cyberpunk", 0xFF09090F.toInt(), 0xFF00E5FF.toInt(), 0xFFA855F7.toInt(), 0xFF00E5FF.toInt(), Style.CYBERPUNK),
+        Palette("nebula", 0xFF0B1020.toInt(), 0xFF00C8FF.toInt(), 0xFF5427A8.toInt(), 0xFF00C8FF.toInt(), Style.NEBULA, 0xFF9ED8FF.toInt(), 0xCC141E3A.toInt()),
+        Palette("cyberpunk", 0xFF09090F.toInt(), 0xFF00E5FF.toInt(), 0xFFA855F7.toInt(), 0xFF00E5FF.toInt(), Style.CYBERPUNK, 0xFF00E5FF.toInt(), 0xCC15151F.toInt()),
         Palette("emerald", 0xFF071713.toInt(), 0xFF34D399.toInt(), 0xFF087F6B.toInt(), 0xFF34D399.toInt(), Style.EMERALD)
     )
 

@@ -130,7 +130,7 @@ object TurtleAiGemini {
     fun isConfigured(): Boolean {
         val enabled =
             runCatching { AllSettings.aiAssistantCloudBrain.getValue() }.getOrDefault(false)
-        return enabled && apiKey().isNotEmpty()
+        return enabled && (apiKey().isNotEmpty() || TurtleAiCustom.isEnabled())
     }
 
     /** True when the user asked for internet search (Google Search grounding). */
@@ -178,8 +178,9 @@ object TurtleAiGemini {
         task: TurtleAiModels.Task = TurtleAiModels.Task.CHAT
     ): Answer? {
         if (question.isBlank()) return null
+        val custom = TurtleAiCustom.isEnabled()
         val key = apiKey()
-        if (key.isEmpty()) return null
+        if (key.isEmpty() && !custom) return null
 
         val systemPrompt = buildString {
             append(TurtleAiPrompt.systemPrompt())
@@ -206,6 +207,8 @@ object TurtleAiGemini {
                 append(deviceFacts.trim())
             }
         }
+
+        if (custom) return TurtleAiCustom.chat(systemPrompt, userContent, history, 0.3, MAX_OUTPUT_TOKENS)
 
         val contents = buildContents(userContent, history)
 
@@ -260,6 +263,9 @@ object TurtleAiGemini {
         task: TurtleAiModels.Task = TurtleAiModels.Task.REASONING
     ): String? {
         if (systemPrompt.isBlank() || userText.isBlank()) return null
+        if (TurtleAiCustom.isEnabled()) {
+            return TurtleAiCustom.chat(systemPrompt, userText, emptyList(), temperature, maxOutputTokens)?.text
+        }
         val key = apiKey()
         if (key.isEmpty()) return null
 

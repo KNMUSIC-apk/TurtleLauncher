@@ -42,7 +42,7 @@ object AiCrashAdvisor {
         if (logText.isBlank()) return null
         // No key (and no key baked into the build) = no crash help; the rule engine's own
         // diagnoses are what the user sees, exactly as before this feature existed.
-        if (TurtleAiGemini.apiKey().isEmpty()) return null
+        if (TurtleAiGemini.apiKey().isEmpty() && !com.cyplixlauncher.mc.feature.ai.TurtleAiCustom.isEnabled()) return null
 
         return TurtleAiGemini.complete(
             systemPrompt = systemPromptFor(languageTag),

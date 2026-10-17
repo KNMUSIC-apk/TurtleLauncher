@@ -17,6 +17,13 @@ class CopyDefaultFromAssets {
                 Tools.copyAssetFile(context, "default.json", PathManager.DIR_CTRLMAP_PATH, false)
             }
             Tools.copyAssetFile(context, "turtle_control_presets/survival.json", PathManager.DIR_CTRLMAP_PATH, "Survival.json", false)
+
+            // One-time: replace the old bundled defaults on existing installs with the new layout.
+            if (!com.cyplixlauncher.mc.setting.AllSettings.ctrlmapDefaultsV2.getValue()) {
+                Tools.copyAssetFile(context, "default.json", PathManager.DIR_CTRLMAP_PATH, true)
+                Tools.copyAssetFile(context, "turtle_control_presets/survival.json", PathManager.DIR_CTRLMAP_PATH, "Survival.json", true)
+                com.cyplixlauncher.mc.setting.AllSettings.ctrlmapDefaultsV2.put(true).save()
+            }
         }
 
         private fun checkDirectoryEmpty(dir: String?): Boolean {

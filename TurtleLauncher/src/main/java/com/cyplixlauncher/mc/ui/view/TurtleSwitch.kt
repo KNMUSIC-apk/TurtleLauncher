@@ -23,9 +23,9 @@ class TurtleSwitch @JvmOverloads constructor(
     /** Same look in every launcher theme: dark track, teal thumb when on, grey when off. */
     private fun applyStyle() {
         val d = resources.displayMetrics.density
-        val trackW = (46 * d).toInt()
-        val trackH = (26 * d).toInt()
-        val thumb = (30 * d).toInt()
+        val trackW = (36 * d).toInt()
+        val trackH = (20 * d).toInt()
+        val thumb = (24 * d).toInt()
 
         fun track(color: Int) = GradientDrawable().apply {
             shape = GradientDrawable.RECTANGLE
