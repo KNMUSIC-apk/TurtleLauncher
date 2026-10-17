@@ -65,7 +65,7 @@ object LauncherPalette {
         val metrics = context.resources.displayMetrics
         val longSide = maxOf(metrics.widthPixels, metrics.heightPixels).toFloat()
         val base = GradientDrawable(
-            GradientDrawable.TOP_BOTTOM,
+            GradientDrawable.Orientation.TOP_BOTTOM,
             intArrayOf(p.bg, blend(p.bg, p.glowA, 0.14f))
         )
         val glowA = radialGlow(p.glowA, 0.42f, longSide * 0.75f, 0.88f, 0.12f)
