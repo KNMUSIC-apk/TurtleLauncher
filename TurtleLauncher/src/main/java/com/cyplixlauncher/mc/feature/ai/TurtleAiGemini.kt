@@ -128,6 +128,8 @@ object TurtleAiGemini {
     /** True when the AI brain is switched on *and* there is a key to use. */
     @JvmStatic
     fun isConfigured(): Boolean {
+        // Turning the custom AI on is an explicit opt-in, so it counts even when the Gemini brain switch is off.
+        if (TurtleAiCustom.isEnabled()) return true
         val enabled =
             runCatching { AllSettings.aiAssistantCloudBrain.getValue() }.getOrDefault(false)
         return enabled && (apiKey().isNotEmpty() || TurtleAiCustom.isEnabled())
