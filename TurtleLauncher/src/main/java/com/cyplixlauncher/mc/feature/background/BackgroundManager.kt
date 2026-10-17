@@ -19,6 +19,7 @@ import java.util.Properties
 object BackgroundManager {
     private val FILE_BACKGROUND_PROPERTIES: File = File(PathManager.DIR_DATA, "background.properties")
     const val NULL: String = "null"
+    private const val MAIN_MENU_IMAGE_ALPHA = 0.18f
 
     private val defaultProperties: Properties
         get() {
@@ -59,12 +60,19 @@ object BackgroundManager {
         backgroundView: ImageView,
         callback: CallbackDrawableImageViewTarget.Callback? = null
     ) {
+        val backgroundImage = getBackgroundImage(backgroundType)
+        // Palette themes (Nebula, Cyberpunk, Emerald) paint the main menu background at full strength.
+        // The menu's default image is dimmed to 18%, which would hide the theme completely.
+        val palette = if (backgroundType == BackgroundType.MAIN_MENU && backgroundImage == null)
+            com.cyplixlauncher.mc.feature.theme.LauncherPalette.backgroundDrawable(context) else null
         backgroundView.setImageDrawable(
-            com.cyplixlauncher.mc.feature.theme.LauncherPalette.backgroundDrawable(context)
-                ?: ContextCompat.getDrawable(context, R.color.background_app)
+            palette ?: ContextCompat.getDrawable(context, R.color.background_app)
         )
+        if (backgroundType == BackgroundType.MAIN_MENU) {
+            backgroundView.alpha = if (palette != null) 1f else MAIN_MENU_IMAGE_ALPHA
+        }
 
-        val backgroundImage = getBackgroundImage(backgroundType) ?: run {
+        if (backgroundImage == null) {
             callback?.callback(false)
             return
         }

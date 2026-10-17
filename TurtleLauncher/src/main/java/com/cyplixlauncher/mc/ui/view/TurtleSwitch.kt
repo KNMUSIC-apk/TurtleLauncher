@@ -1,7 +1,6 @@
 package com.cyplixlauncher.mc.ui.view
 
 import android.content.Context
-import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.StateListDrawable
 import android.util.AttributeSet
@@ -23,47 +22,35 @@ class TurtleSwitch @JvmOverloads constructor(
     }
 
     /**
-     * Material-style switch: filled accent track with a white thumb when on,
-     * outlined grey track with a grey thumb when off. Colors follow the active launcher theme.
+     * Same look for every launcher theme: a tinted dark track with a lighter thumb when on,
+     * a neutral grey track with a grey thumb when off. The accent follows the active theme.
      */
     private fun applyPaletteStyle() {
         val d = resources.displayMetrics.density
         val accent = LauncherPalette.accentOrDefault()
-        val off = 0xFF8A9A92.toInt()
+        val grey = 0xFF9E9E9E.toInt()
         val trackW = (48 * d).toInt()
         val trackH = (28 * d).toInt()
         val thumb = (22 * d).toInt()
 
-        val trackOn = GradientDrawable().apply {
+        fun track(color: Int) = GradientDrawable().apply {
             shape = GradientDrawable.RECTANGLE
             cornerRadius = 14 * d
-            setColor(accent)
+            setColor(color)
             setSize(trackW, trackH)
         }
-        val trackOff = GradientDrawable().apply {
-            shape = GradientDrawable.RECTANGLE
-            cornerRadius = 14 * d
-            setColor(Color.TRANSPARENT)
-            setStroke((2 * d).toInt(), off)
-            setSize(trackW, trackH)
-        }
-        val thumbOn = GradientDrawable().apply {
+        fun knob(color: Int) = GradientDrawable().apply {
             shape = GradientDrawable.OVAL
-            setColor(Color.WHITE)
-            setSize(thumb, thumb)
-        }
-        val thumbOff = GradientDrawable().apply {
-            shape = GradientDrawable.OVAL
-            setColor(off)
+            setColor(color)
             setSize(thumb, thumb)
         }
         setTrackDrawable(StateListDrawable().apply {
-            addState(intArrayOf(android.R.attr.state_checked), trackOn)
-            addState(intArrayOf(), trackOff)
+            addState(intArrayOf(android.R.attr.state_checked), track(LauncherPalette.tint(accent, 0.38f)))
+            addState(intArrayOf(), track(LauncherPalette.tint(grey, 0.30f)))
         })
         setThumbDrawable(StateListDrawable().apply {
-            addState(intArrayOf(android.R.attr.state_checked), thumbOn)
-            addState(intArrayOf(), thumbOff)
+            addState(intArrayOf(android.R.attr.state_checked), knob(LauncherPalette.lighten(accent, 0.35f)))
+            addState(intArrayOf(), knob(grey))
         })
     }
 

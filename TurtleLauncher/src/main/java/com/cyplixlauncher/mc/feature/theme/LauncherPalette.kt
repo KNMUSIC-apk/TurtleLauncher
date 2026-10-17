@@ -41,7 +41,7 @@ object LauncherPalette {
     )
 
     /** Accent used by switches and highlights when no palette theme is active. */
-    private val DEFAULT_ACCENT = 0xFF4FB58A.toInt()
+    private val DEFAULT_ACCENT = 0xFF4DB6AC.toInt()
 
     @Volatile
     private var active: Palette? = null
@@ -56,6 +56,10 @@ object LauncherPalette {
     }
 
     fun accentOrDefault(): Int = active?.accent ?: DEFAULT_ACCENT
+
+    fun tint(color: Int, alpha: Float): Int = withAlpha(color, alpha)
+
+    fun lighten(color: Int, t: Float): Int = blend(color, 0xFFFFFFFF.toInt(), t)
 
     /** Background drawable for the active palette theme, or null for the built-in light/dark themes. */
     fun backgroundDrawable(context: Context): Drawable? {
