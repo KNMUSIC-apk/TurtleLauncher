@@ -358,6 +358,15 @@ public class LauncherActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityLauncherBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        // Tint vector icons on every page as it is created (covers all fragments, not just the main menu).
+        getSupportFragmentManager().registerFragmentLifecycleCallbacks(
+                new androidx.fragment.app.FragmentManager.FragmentLifecycleCallbacks() {
+                    @Override
+                    public void onFragmentViewCreated(androidx.fragment.app.FragmentManager fm,
+                                                      Fragment f, View v, Bundle state) {
+                        com.cyplixlauncher.mc.feature.theme.LauncherColors.INSTANCE.tintIcons(v);
+                    }
+                }, true);
         if (savedInstanceState == null) com.cyplixlauncher.mc.ui.view.LaunchIntroOverlay.INSTANCE.play(this);
 
         processFragment();
@@ -698,6 +707,8 @@ public class LauncherActivity extends BaseActivity {
     }
 
     private void refreshBackground() {
+        com.cyplixlauncher.mc.feature.theme.LauncherColors.INSTANCE.applyBackground(binding.getRoot());
+        com.cyplixlauncher.mc.feature.theme.LauncherColors.INSTANCE.tintIcons(binding.getRoot());
         if (com.cyplixlauncher.mc.feature.background.VideoBackground.hasVideo()) {
             binding.backgroundView.setImageDrawable(null);
             binding.videoBackgroundView.setVisibility(android.view.View.VISIBLE);

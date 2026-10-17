@@ -33,6 +33,10 @@
     <string name="generic_restart">Khởi động lại</string>
     <string name="generic_reset">Đặt lại</string>
     <string name="generic_save">Lưu</string>
+    <string name="setting_launcher_bg_color">Màu nền</string>
+    <string name="setting_launcher_bg_color_desc">Màu phía sau giao diện chính (hiện rõ khi không có ảnh nền)</string>
+    <string name="setting_launcher_icon_color">Màu icon</string>
+    <string name="setting_launcher_icon_color_desc">Đổi màu các icon trong launcher</string>
     <string name="generic_unpacking">Đang giải nén %s</string>
     <string name="generic_error_field_empty">Trường này không được để trống</string>
     <string name="generic_keyboard">Bàn phím</string>

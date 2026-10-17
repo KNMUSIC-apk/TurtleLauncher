@@ -357,6 +357,8 @@ class AllSettings {
         @JvmStatic val recordingCaptureAudio    = BooleanSettingUnit("recordingCaptureAudio", true)
         @JvmStatic val customBackgroundPath     = StringSettingUnit("customBackgroundPath", "")
         @JvmStatic val customBackgroundIsVideo  = BooleanSettingUnit("customBackgroundIsVideo", false)
+        @JvmStatic val launcherBackgroundColor  = StringSettingUnit("launcherBackgroundColor", "")
+        @JvmStatic val launcherIconColor        = StringSettingUnit("launcherIconColor", "")
         @JvmStatic val iconPackPath             = StringSettingUnit("iconPackPath", "")
 
         // Diagnostics

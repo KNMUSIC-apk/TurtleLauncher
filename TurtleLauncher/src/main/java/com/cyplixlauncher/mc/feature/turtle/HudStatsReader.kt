@@ -44,45 +44,11 @@ object HudStatsReader {
         return if (tenths == Int.MIN_VALUE) null else tenths / 10
     }
 
-    /** A sensor whose raw value has not moved for this long is treated as stuck (e.g. frozen at 75 °C). */
-    private const val STUCK_MS = 60_000L
-    private val zoneChangedAt = HashMap<String, Long>()
-    private val zoneRawSeen = HashMap<String, Long>()
-
     /**
-     * Device temperature in °C: the hottest plausible thermal zone that is still changing,
-     * falling back to the battery sensor when no live zone is readable.
-     * Zones frozen at one value (a stuck sensor) are ignored so they cannot pin the reading.
+     * Device temperature in °C read from the battery sensor (BatteryManager via the sticky
+     * ACTION_BATTERY_CHANGED broadcast, EXTRA_TEMPERATURE in tenths of a degree).
      */
-    fun deviceTempC(context: android.content.Context): Int? {
-        val now = System.currentTimeMillis()
-        val zones = readAllThermalZones()
-        val live = synchronized(this) {
-            for (z in zones) {
-                if (zoneRawSeen[z.name] != z.raw) {
-                    zoneRawSeen[z.name] = z.raw
-                    zoneChangedAt[z.name] = now
-                }
-                zoneChangedAt.putIfAbsent(z.name, now)
-            }
-            zones.filter { z ->
-                z.tempC in 10..100 && now - (zoneChangedAt[z.name] ?: now) < STUCK_MS
-            }
-        }
-        return live.maxOfOrNull { it.tempC } ?: batteryTempC(context)
-    }
-
-    private data class ThermalZone(val name: String, val raw: Long, val tempC: Int)
-
-    private fun readAllThermalZones(): List<ThermalZone> {
-        val zones = File("/sys/class/thermal").listFiles { f -> f.name.startsWith("thermal_zone") } ?: return emptyList()
-        return zones.mapNotNull { zone ->
-            val raw = runCatching { File(zone, "temp").readText().trim().toLong() }.getOrNull()
-                ?: return@mapNotNull null
-            // Millidegrees on most kernels; some report whole degrees already.
-            ThermalZone(zone.name, raw, (if (raw > 1000) raw / 1000 else raw).toInt())
-        }
-    }
+    fun deviceTempC(context: android.content.Context): Int? = batteryTempC(context)
 
     /** GPU thermal zone in degrees Celsius, or null. */
     fun gpuTempC(): Int? = thermalTempC { it.contains("gpu") }
