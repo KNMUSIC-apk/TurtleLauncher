@@ -293,7 +293,6 @@ class AllSettings {
         @JvmStatic val hudShowGpu               = BooleanSettingUnit("hudShowGpu", true)
         @JvmStatic val hudShowRam               = BooleanSettingUnit("hudShowRam", true)
         @JvmStatic val hudShowFps               = BooleanSettingUnit("hudShowFps", true)
-        @JvmStatic val hudShowTemp              = BooleanSettingUnit("hudShowTemp", true)
         /** Persisted cumulative playtime in milliseconds, across all sessions. */
         @JvmStatic val totalPlaytimeMs           = LongSettingUnit("totalPlaytimeMs", 0L)
         /** Per-day playtime buckets (JSON, "yyyy-MM-dd" -> ms) backing the home screen's weekly chart. */
@@ -357,8 +356,6 @@ class AllSettings {
         @JvmStatic val recordingCaptureAudio    = BooleanSettingUnit("recordingCaptureAudio", true)
         @JvmStatic val customBackgroundPath     = StringSettingUnit("customBackgroundPath", "")
         @JvmStatic val customBackgroundIsVideo  = BooleanSettingUnit("customBackgroundIsVideo", false)
-        @JvmStatic val launcherBackgroundColor  = StringSettingUnit("launcherBackgroundColor", "")
-        @JvmStatic val launcherIconColor        = StringSettingUnit("launcherIconColor", "")
         @JvmStatic val iconPackPath             = StringSettingUnit("iconPackPath", "")
 
         // Diagnostics

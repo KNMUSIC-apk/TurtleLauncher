@@ -912,6 +912,9 @@
     <string name="setting_launcher_theme_system">Theo chủ đề hệ thống</string>
     <string name="setting_launcher_theme_light">Chế độ sáng</string>
     <string name="setting_launcher_theme_dark">Chế độ tối</string>
+    <string name="setting_launcher_theme_nebula">Dark Nebula</string>
+    <string name="setting_launcher_theme_cyberpunk">Cyberpunk</string>
+    <string name="setting_launcher_theme_emerald">Emerald Void</string>
     <string name="setting_enable_log_output_title">Mở nhật ký khi khởi chạy trò chơi</string>
     <string name="setting_enable_log_output_desc">Bật giao diện nhật ký khi ứng dụng chính thức khởi chạy trò chơi</string>
     <string name="setting_animation_title">Bật hiệu ứng chuyển động</string>

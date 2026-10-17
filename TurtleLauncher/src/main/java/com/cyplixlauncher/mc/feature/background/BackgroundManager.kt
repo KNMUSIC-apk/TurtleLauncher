@@ -60,7 +60,8 @@ object BackgroundManager {
         callback: CallbackDrawableImageViewTarget.Callback? = null
     ) {
         backgroundView.setImageDrawable(
-            ContextCompat.getDrawable(context, R.color.background_app)
+            com.cyplixlauncher.mc.feature.theme.LauncherPalette.backgroundDrawable(context)
+                ?: ContextCompat.getDrawable(context, R.color.background_app)
         )
 
         val backgroundImage = getBackgroundImage(backgroundType) ?: run {

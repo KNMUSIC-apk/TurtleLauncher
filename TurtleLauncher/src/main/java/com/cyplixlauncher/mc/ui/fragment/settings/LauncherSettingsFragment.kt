@@ -162,16 +162,7 @@ class LauncherSettingsFragment() : AbstractSettingsFragment(R.layout.settings_fr
             binding.launcherThemeValue,
             R.array.launcher_theme_names, R.array.launcher_theme_values
         ).apply {
-            onValueChanged = { com.cyplixlauncher.mc.feature.theme.LauncherTheme.apply(it) }
-        }
-
-        bindColorRow(binding.launcherBgColorLayout, binding.launcherBgColorValue,
-            AllSettings.launcherBackgroundColor, R.string.setting_launcher_bg_color) {
-            EventBus.getDefault().post(MainBackgroundChangeEvent())
-        }
-        bindColorRow(binding.launcherIconColorLayout, binding.launcherIconColorValue,
-            AllSettings.launcherIconColor, R.string.setting_launcher_icon_color) {
-            EventBus.getDefault().post(MainBackgroundChangeEvent())
+            onValueChanged = { if (com.cyplixlauncher.mc.feature.theme.LauncherTheme.apply(it)) requireActivity().recreate() }
         }
 
         BaseSettingsWrapper(
@@ -355,25 +346,4 @@ class LauncherSettingsFragment() : AbstractSettingsFragment(R.layout.settings_fr
         }
     }
 
-    private fun bindColorRow(
-        row: View,
-        valueView: android.widget.TextView,
-        setting: com.cyplixlauncher.mc.setting.unit.StringSettingUnit,
-        titleRes: Int,
-        onChanged: () -> Unit
-    ) {
-        fun refresh() {
-            valueView.text = setting.getValue().ifBlank { getString(R.string.generic_default) }
-        }
-        refresh()
-        row.setOnClickListener {
-            com.cyplixlauncher.mc.ui.dialog.ColorPickerDialog.show(
-                requireContext(), getString(titleRes), setting.getValue()
-            ) { hex ->
-                setting.put(hex ?: "").save()
-                refresh()
-                onChanged()
-            }
-        }
-    }
 }

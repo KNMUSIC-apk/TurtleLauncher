@@ -13,7 +13,7 @@ import androidx.core.content.res.ResourcesCompat
 import com.cyplixlauncher.mc.R
 
 /**
- * In-game HUD strip, laid out horizontally: FPS | CPU | GPU | RAM | TEMP.
+ * In-game HUD strip, laid out horizontally: FPS | CPU | GPU | RAM.
  * Each cell is shown only when its switch is on in the in-game HUD tab. The whole strip is scaled
  * by the "HUD size" slider. Drawn on a Canvas so an update is one invalidate, not many setText calls.
  */
@@ -30,17 +30,15 @@ class HudCardView @JvmOverloads constructor(
         val gpuPercent: Int?,
         val gpuTempC: Int?,
         val ramUsedGb: Float,
-        val ramTotalGb: Float,
-        val deviceTempC: Int? = null
+        val ramTotalGb: Float
     )
 
-    private enum class Cell { FPS, CPU, GPU, RAM, TEMP }
+    private enum class Cell { FPS, CPU, GPU, RAM }
 
     private var showCpu = true
     private var showGpu = true
     private var showRam = true
     private var showFps = true
-    private var showTemp = true
     private var scale = 1f
 
     private var snapshot: Snapshot? = null
@@ -91,8 +89,8 @@ class HudCardView @JvmOverloads constructor(
     private val edgePad = dp(8f)
 
     /** Which cells are visible. Called when the switches change. */
-    fun setRows(cpu: Boolean, gpu: Boolean, ram: Boolean, fps: Boolean, temp: Boolean) {
-        showCpu = cpu; showGpu = gpu; showRam = ram; showFps = fps; showTemp = temp
+    fun setRows(cpu: Boolean, gpu: Boolean, ram: Boolean, fps: Boolean) {
+        showCpu = cpu; showGpu = gpu; showRam = ram; showFps = fps
         requestLayout()
         invalidate()
     }
@@ -119,21 +117,19 @@ class HudCardView @JvmOverloads constructor(
         invalidate()
     }
 
-    fun hasVisibleRows(): Boolean = showCpu || showGpu || showRam || showFps || showTemp
+    fun hasVisibleRows(): Boolean = showCpu || showGpu || showRam || showFps
 
     private fun visibleCells(): List<Cell> = buildList {
         if (showFps) add(Cell.FPS)
         if (showCpu) add(Cell.CPU)
         if (showGpu) add(Cell.GPU)
         if (showRam) add(Cell.RAM)
-        if (showTemp) add(Cell.TEMP)
     }
 
     private fun cellWidth(c: Cell): Float = dp(when (c) {
         Cell.FPS -> 64f
         Cell.CPU, Cell.GPU -> 72f
         Cell.RAM -> 80f
-        Cell.TEMP -> 64f
     })
 
     private fun contentWidth(): Float {
@@ -170,7 +166,6 @@ class HudCardView @JvmOverloads constructor(
                 Cell.CPU -> drawTemp(canvas, x, "CPU", snapshot?.cpuTempC)
                 Cell.GPU -> drawTemp(canvas, x, "GPU", snapshot?.gpuTempC)
                 Cell.RAM -> drawRam(canvas, x)
-                Cell.TEMP -> drawDeviceTemp(canvas, x)
             }
             x += cw
             if (index < cells.lastIndex) {
@@ -186,11 +181,6 @@ class HudCardView @JvmOverloads constructor(
         drawSparkline(canvas, x + dp(4f), x + cw - dp(6f), dp(30f), dp(40f))
     }
 
-    private fun drawDeviceTemp(canvas: Canvas, x: Float) {
-        canvas.drawText("TEMP", x + dp(6f), dp(14f), labelPaint)
-        val c = snapshot?.deviceTempC
-        canvas.drawText(c?.let { "$it°C" } ?: "-- °C", x + dp(6f), dp(34f), valuePaint)
-    }
 
     /** Temperature ring with its value. */
     private fun drawTemp(canvas: Canvas, x: Float, label: String, tempC: Int?) {

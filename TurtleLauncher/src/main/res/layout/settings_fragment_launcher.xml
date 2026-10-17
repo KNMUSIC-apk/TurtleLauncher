@@ -413,57 +413,7 @@
                         android:text="@string/generic_default" />
                 </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
     
-                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
-                    android:id="@+id/launcherBgColor_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/_12sdp">
     
-                    <TextView
-                        android:id="@+id/launcherBgColor_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentEnd="true"
-                        android:text="@string/setting_launcher_bg_color"
-                        android:textColor="@color/turtle_primary_text" />
-    
-                    <TextView
-                        android:id="@+id/launcherBgColor_value"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/launcherBgColor_title"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentEnd="true"
-                        android:text="@string/generic_default" />
-                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
-    
-                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
-                    android:id="@+id/launcherIconColor_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/_12sdp">
-    
-                    <TextView
-                        android:id="@+id/launcherIconColor_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentEnd="true"
-                        android:text="@string/setting_launcher_icon_color"
-                        android:textColor="@color/turtle_primary_text" />
-    
-                    <TextView
-                        android:id="@+id/launcherIconColor_value"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/launcherIconColor_title"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentEnd="true"
-                        android:text="@string/generic_default" />
-                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
     
                 <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/custom_background_layout"

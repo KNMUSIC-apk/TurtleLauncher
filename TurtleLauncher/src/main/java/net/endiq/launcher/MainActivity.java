@@ -778,7 +778,6 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             this.binding.hudShowGpu.setChecked(AllSettings.getHudShowGpu().getValue());
             this.binding.hudShowRam.setChecked(AllSettings.getHudShowRam().getValue());
             this.binding.hudShowFps.setChecked(AllSettings.getHudShowFps().getValue());
-            this.binding.hudShowTemp.setChecked(AllSettings.getHudShowTemp().getValue());
             MenuUtils.initSeekBarValue(this.binding.hudModuleScale, AllSettings.getHudModuleScale().getValue(), this.binding.hudModuleScaleValue, "%");
             this.binding.disableGestures.setChecked(AllSettings.getDisableGestures().getValue());
             this.binding.disableDoubleTap.setChecked(AllSettings.getDisableDoubleTap().getValue());
@@ -817,8 +816,6 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             this.binding.hudShowRamLayout.setOnClickListener(this);
             this.binding.hudShowFps.setOnCheckedChangeListener(this);
             this.binding.hudShowFpsLayout.setOnClickListener(this);
-            this.binding.hudShowTemp.setOnCheckedChangeListener(this);
-            this.binding.hudShowTempLayout.setOnClickListener(this);
             this.binding.hudModuleScale.setOnSeekBarChangeListener(this);
 
             this.binding.resolutionScaler.setOnSeekBarChangeListener(this);
@@ -946,7 +943,6 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             else if (v == binding.hudShowGpuLayout) MenuUtils.toggleSwitchState(binding.hudShowGpu);
             else if (v == binding.hudShowRamLayout) MenuUtils.toggleSwitchState(binding.hudShowRam);
             else if (v == binding.hudShowFpsLayout) MenuUtils.toggleSwitchState(binding.hudShowFps);
-            else if (v == binding.hudShowTempLayout) MenuUtils.toggleSwitchState(binding.hudShowTemp);
             else if (v == binding.resolutionScalerRemove) MenuUtils.adjustSeekbar(binding.resolutionScaler, -1);
             else if (v == binding.resolutionScalerAdd) MenuUtils.adjustSeekbar(binding.resolutionScaler, 1);
             else if (v == binding.disableGesturesLayout) MenuUtils.toggleSwitchState(binding.disableGestures);
@@ -1041,9 +1037,6 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
                 mGameMenuWrapper.refreshSettingsState();
             } else if (v == binding.hudShowFps) {
                 AllSettings.getHudShowFps().put(isChecked).save();
-                mGameMenuWrapper.refreshSettingsState();
-            } else if (v == binding.hudShowTemp) {
-                AllSettings.getHudShowTemp().put(isChecked).save();
                 mGameMenuWrapper.refreshSettingsState();
             } else if (v == binding.disableGestures) {
                 refreshLayoutVisible(binding.timeLongPressTriggerLayout, !isChecked);

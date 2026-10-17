@@ -83,7 +83,7 @@ object LaunchIntroOverlay {
                 ObjectAnimator.ofFloat(logo, View.SCALE_X, 0.6f, 1f),
                 ObjectAnimator.ofFloat(logo, View.SCALE_Y, 0.6f, 1f)
             )
-            duration = 480
+            duration = 520
             interpolator = OvershootInterpolator(1.2f)
         }
         val textOut = AnimatorSet().apply {
@@ -91,13 +91,13 @@ object LaunchIntroOverlay {
                 ObjectAnimator.ofFloat(text, View.TRANSLATION_X, -(logoPx + gapPx).toFloat(), 0f),
                 ObjectAnimator.ofFloat(text, View.ALPHA, 0f, 1f)
             )
-            duration = 520
-            startDelay = 200
+            duration = 560
+            startDelay = 260
             interpolator = DecelerateInterpolator()
         }
         val fadeOut = ObjectAnimator.ofFloat(overlay, View.ALPHA, 1f, 0f).apply {
-            duration = 280
-            startDelay = 650
+            duration = 320
+            startDelay = 1150
             addListener(object : android.animation.AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: android.animation.Animator) {
                     content.removeView(overlay)
