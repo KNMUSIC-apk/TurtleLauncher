@@ -423,9 +423,7 @@ class AllSettings {
 
         // ── Custom AI provider: any OpenAI-compatible endpoint (Settings -> Experimental) ──
         @JvmStatic val aiCustomEnabled          = BooleanSettingUnit("aiCustomEnabled", false)
-        @JvmStatic val aiCustomBaseUrl          = StringSettingUnit("aiCustomBaseUrl", "")
         @JvmStatic val aiCustomApiKey           = StringSettingUnit("aiCustomApiKey", "")
-        @JvmStatic val aiCustomModel            = StringSettingUnit("aiCustomModel", "")
         // One-time refresh flag: the bundled default control layouts were replaced.
         @JvmStatic val ctrlmapDefaultsV2        = BooleanSettingUnit("ctrlmapDefaultsV2", false)
 

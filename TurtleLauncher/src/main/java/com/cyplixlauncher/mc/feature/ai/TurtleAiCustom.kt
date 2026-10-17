@@ -11,31 +11,45 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import java.util.concurrent.TimeUnit
 
 /**
- * Plugs any AI into the launcher: an OpenAI-compatible chat endpoint (OpenAI, OpenRouter, Groq,
- * Mistral, DeepSeek, Ollama, LM Studio, ...) with its own base URL, token and model name.
- * While it is switched on, the Assistant and the crash advisor use it for text answers instead
- * of Gemini. Images, voice and video stay on Gemini.
+ * Plugs any AI into the launcher with just its API token. The service is detected from the token's
+ * format, and each service has a default endpoint and model. While this is on, the Assistant and the
+ * crash advisor use it for text answers instead of Gemini. Images, voice and video stay on Gemini.
  */
 object TurtleAiCustom {
     private const val TAG = "TurtleAiCustom"
     private const val TIMEOUT_SECONDS = 60L
 
-    private fun read(block: () -> String): String = runCatching { block() }.getOrDefault("").trim()
+    /** An OpenAI-compatible service, its endpoint and the model used when only the token is given. */
+    private class Provider(val name: String, val baseUrl: String, val model: String)
 
-    fun baseUrl(): String = read { AllSettings.aiCustomBaseUrl.getValue() }.trimEnd('/')
-    fun apiKey(): String = read { AllSettings.aiCustomApiKey.getValue() }
-    fun model(): String = read { AllSettings.aiCustomModel.getValue() }
+    /** Token prefix -> services that issue such tokens, tried in order. The longest matching prefix wins. */
+    private val PROVIDERS: Map<String, List<Provider>> = mapOf(
+        "sk-ant-" to listOf(Provider("Anthropic", "https://api.anthropic.com/v1", "claude-haiku-5-5")),
+        "sk-or-" to listOf(Provider("OpenRouter", "https://openrouter.ai/api/v1", "openai/gpt-4o-mini")),
+        "sk-" to listOf(
+            Provider("OpenAI", "https://api.openai.com/v1", "gpt-4o-mini"),
+            Provider("DeepSeek", "https://api.deepseek.com/v1", "deepseek-chat")
+        ),
+        "gsk_" to listOf(Provider("Groq", "https://api.groq.com/openai/v1", "llama-3.3-70b-versatile")),
+        "xai-" to listOf(Provider("xAI", "https://api.x.ai/v1", "grok-3-mini")),
+        "AIza" to listOf(Provider("Gemini", "https://generativelanguage.googleapis.com/v1beta/openai", "gemini-2.5-flash"))
+    )
 
-    /** On, with a base URL and a model name. The token may be empty (local servers need none). */
+    private fun apiKey(): String = runCatching { AllSettings.aiCustomApiKey.getValue() }.getOrDefault("").trim()
+
+    /** The services to try for this token, most likely first. Empty when the token format is unknown. */
+    private fun candidates(token: String): List<Provider> {
+        val prefix = PROVIDERS.keys.filter { token.startsWith(it) }.maxByOrNull { it.length } ?: return emptyList()
+        return PROVIDERS.getValue(prefix)
+    }
+
+    /** On, and the saved token is in a format the launcher recognises. */
     @JvmStatic
     fun isEnabled(): Boolean =
         runCatching { AllSettings.aiCustomEnabled.getValue() }.getOrDefault(false) &&
-            baseUrl().isNotEmpty() && model().isNotEmpty()
+            candidates(apiKey()).isNotEmpty()
 
-    private fun endpoint(): String =
-        if (baseUrl().endsWith("/chat/completions")) baseUrl() else baseUrl() + "/chat/completions"
-
-    /** One chat turn. Returns the model's text, or null when the endpoint fails. */
+    /** One chat turn. Returns the model's text, or null when every candidate service fails. */
     @JvmStatic
     fun chat(
         systemPrompt: String,
@@ -44,6 +58,7 @@ object TurtleAiCustom {
         temperature: Double,
         maxTokens: Int
     ): TurtleAiGemini.Answer? {
+        val token = apiKey()
         val messages = JsonArray().apply {
             add(message("system", systemPrompt))
             history.takeLast(6).forEach { exchange ->
@@ -56,20 +71,33 @@ object TurtleAiCustom {
             }
             add(message("user", userContent))
         }
+        for (provider in candidates(token)) {
+            val answer = request(provider, token, messages, temperature, maxTokens)
+            if (answer != null) return answer
+        }
+        return null
+    }
+
+    private fun request(
+        provider: Provider,
+        token: String,
+        messages: JsonArray,
+        temperature: Double,
+        maxTokens: Int
+    ): TurtleAiGemini.Answer? {
         val body = JsonObject().apply {
-            addProperty("model", model())
+            addProperty("model", provider.model)
             add("messages", messages)
             addProperty("temperature", temperature)
             addProperty("max_tokens", maxTokens)
         }
         val builder = UrlManager.createRequestBuilder(
-            endpoint(),
+            provider.baseUrl + "/chat/completions",
             body.toString().toRequestBody("application/json".toMediaType())
         )
             .header("Accept", "application/json")
+            .header("Authorization", "Bearer $token")
             .addHeader("User-Agent", "TurtleLauncher-TurtleAI/1.0")
-        val token = apiKey()
-        if (token.isNotEmpty()) builder.header("Authorization", "Bearer $token")
 
         val client = UrlManager.createOkHttpClientBuilder {
             it.callTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -82,8 +110,8 @@ object TurtleAiCustom {
             client.newCall(builder.build()).execute().use { response ->
                 val text = response.body?.string().orEmpty()
                 if (!response.isSuccessful) {
-                    // The token is never logged; only the status and the start of the server message.
-                    Logging.w(TAG, "Custom AI HTTP ${response.code}: ${text.take(300)}")
+                    // The token is never logged; only the service, the status and the start of the message.
+                    Logging.w(TAG, "${provider.name} HTTP ${response.code}: ${text.take(300)}")
                     return null
                 }
                 val root = JsonParser.parseString(text).takeIf { it.isJsonObject }?.asJsonObject
@@ -92,10 +120,10 @@ object TurtleAiCustom {
                     ?.getAsJsonObject("message")?.get("content")
                     ?.takeIf { it.isJsonPrimitive }?.asString?.trim().orEmpty()
                 if (content.isEmpty()) null
-                else TurtleAiGemini.Answer(text = content, modelId = model())
+                else TurtleAiGemini.Answer(text = content, modelId = provider.model)
             }
         } catch (t: Exception) {
-            Logging.w(TAG, "Custom AI request failed", t)
+            Logging.w(TAG, "${provider.name} request failed", t)
             null
         }
     }

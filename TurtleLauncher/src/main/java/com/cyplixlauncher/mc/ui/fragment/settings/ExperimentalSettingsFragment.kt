@@ -173,35 +173,23 @@ class ExperimentalSettingsFragment :
         }
     }
 
-    /** Base URL, token and model for an OpenAI-compatible AI; used by the Assistant when enabled. */
+    /** Only a token is needed: the service and model are detected from the token's format. */
     private fun promptCustomAi(context: android.content.Context) {
-        val pad = (16 * context.resources.displayMetrics.density).toInt()
-        val column = android.widget.LinearLayout(context).apply {
-            orientation = android.widget.LinearLayout.VERTICAL
-            setPadding(pad, pad, pad, 0)
-        }
-        fun field(hint: Int, value: String, secret: Boolean) = android.widget.EditText(context).apply {
-            setHint(hint)
-            setText(value)
-            inputType = android.text.InputType.TYPE_CLASS_TEXT or if (secret)
-                android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
-            else android.text.InputType.TYPE_TEXT_VARIATION_URI
-            column.addView(this)
-        }
-        val url = field(R.string.setting_ai_custom_url_hint, AllSettings.aiCustomBaseUrl.getValue(), false)
-        val key = field(R.string.setting_ai_custom_key_hint, AllSettings.aiCustomApiKey.getValue(), true)
-        val model = field(R.string.setting_ai_custom_model_hint, AllSettings.aiCustomModel.getValue(), false)
-        android.app.AlertDialog.Builder(context)
+        val current = runCatching { AllSettings.aiCustomApiKey.getValue() }.getOrDefault("")
+        com.cyplixlauncher.mc.ui.dialog.EditTextDialog.Builder(context)
             .setTitle(R.string.setting_ai_custom_config_title)
-            .setView(column)
-            .setPositiveButton(R.string.generic_ok) { _, _ ->
-                AllSettings.aiCustomBaseUrl.put(url.text.toString().trim()).save()
-                AllSettings.aiCustomApiKey.put(key.text.toString().trim()).save()
-                AllSettings.aiCustomModel.put(model.text.toString().trim()).save()
+            .setHintText(R.string.setting_ai_custom_key_hint)
+            .setEditText(current)
+            .setInputType(
+                android.text.InputType.TYPE_CLASS_TEXT or
+                    android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            )
+            .setConfirmListener { editText, _ ->
+                AllSettings.aiCustomApiKey.put(editText.text.toString().trim()).save()
                 Toast.makeText(context, R.string.generic_ok, Toast.LENGTH_SHORT).show()
+                true
             }
-            .setNegativeButton(android.R.string.cancel, null)
-            .show()
+            .showDialog()
     }
 
     private fun promptSetAiCrashHelpApiKey(context: android.content.Context) {
