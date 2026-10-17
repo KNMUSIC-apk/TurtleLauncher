@@ -51,7 +51,7 @@ public class ControlButton extends TextView implements ControlInterface {
     private final Paint mImagePaint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
 
     protected boolean mIsPointerOutOfBounds = false;
-    private static final long COMMAND_STEP_DELAY_MS = 120;
+    private static final long COMMAND_STEP_DELAY_MS = 50;
 
     public ControlButton(ControlLayout layout, ControlData properties) {
         super(layout.getContext());

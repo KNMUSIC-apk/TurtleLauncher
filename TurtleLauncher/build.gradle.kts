@@ -41,7 +41,7 @@ val getBuildType = {
     buildType
 }
 
-val nameId = "com.endiq.turtlelauncher"
+val nameId = "com.cyplix.launcher"
 // namespace controls where the generated R/BuildConfig classes land, and must match
 // the Kotlin/Java source package (com.cyplixlauncher.mc.*) or every implicit "R"
 // reference and "import ...BuildConfig" across the codebase breaks. Since the full

@@ -5,7 +5,6 @@ import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.StateListDrawable
 import android.util.AttributeSet
 import android.widget.Switch
-import com.cyplixlauncher.mc.feature.theme.LauncherPalette
 
 /**
  * Switch that plays a light particle burst when the user flips it.
@@ -18,24 +17,19 @@ class TurtleSwitch @JvmOverloads constructor(
 ) : Switch(context, attrs, defStyleAttr) {
 
     init {
-        applyPaletteStyle()
+        applyStyle()
     }
 
-    /**
-     * Same look for every launcher theme: a tinted dark track with a lighter thumb when on,
-     * a neutral grey track with a grey thumb when off. The accent follows the active theme.
-     */
-    private fun applyPaletteStyle() {
+    /** Same look in every launcher theme: dark track, teal thumb when on, grey when off. */
+    private fun applyStyle() {
         val d = resources.displayMetrics.density
-        val accent = LauncherPalette.accentOrDefault()
-        val grey = 0xFF9E9E9E.toInt()
-        val trackW = (48 * d).toInt()
-        val trackH = (28 * d).toInt()
-        val thumb = (22 * d).toInt()
+        val trackW = (46 * d).toInt()
+        val trackH = (26 * d).toInt()
+        val thumb = (30 * d).toInt()
 
         fun track(color: Int) = GradientDrawable().apply {
             shape = GradientDrawable.RECTANGLE
-            cornerRadius = 14 * d
+            cornerRadius = trackH / 2f
             setColor(color)
             setSize(trackW, trackH)
         }
@@ -45,12 +39,12 @@ class TurtleSwitch @JvmOverloads constructor(
             setSize(thumb, thumb)
         }
         setTrackDrawable(StateListDrawable().apply {
-            addState(intArrayOf(android.R.attr.state_checked), track(LauncherPalette.tint(accent, 0.38f)))
-            addState(intArrayOf(), track(LauncherPalette.tint(grey, 0.30f)))
+            addState(intArrayOf(android.R.attr.state_checked), track(0xFF3D5C57.toInt()))
+            addState(intArrayOf(), track(0xFF3A3F3E.toInt()))
         })
         setThumbDrawable(StateListDrawable().apply {
-            addState(intArrayOf(android.R.attr.state_checked), knob(LauncherPalette.lighten(accent, 0.35f)))
-            addState(intArrayOf(), knob(grey))
+            addState(intArrayOf(android.R.attr.state_checked), knob(0xFF7FCBC4.toInt()))
+            addState(intArrayOf(), knob(0xFF8E9694.toInt()))
         })
     }
 

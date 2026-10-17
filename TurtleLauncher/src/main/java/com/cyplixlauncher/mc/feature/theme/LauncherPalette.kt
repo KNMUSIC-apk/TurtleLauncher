@@ -1,6 +1,16 @@
 package com.cyplixlauncher.mc.feature.theme
 
+import android.app.Activity
+import android.app.Application
 import android.content.Context
+import android.os.Bundle
+import android.view.View
+import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
+import com.cyplixlauncher.mc.R
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.ColorFilter
@@ -11,6 +21,7 @@ import android.graphics.Rect
 import android.graphics.RadialGradient
 import android.graphics.Shader
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import java.util.Random
@@ -96,6 +107,45 @@ object LauncherPalette {
     private fun blend(from: Int, to: Int, t: Float): Int {
         fun ch(shift: Int) = ((from shr shift) and 0xFF) + (((to shr shift) and 0xFF) - ((from shr shift) and 0xFF)) * t
         return Color.argb(255, ch(16).toInt(), ch(8).toInt(), ch(0).toInt())
+    }
+
+    /**
+     * Makes the palette cover every screen. Layouts paint their own opaque background_app,
+     * which would hide the theme, so on each new screen (activity or fragment) that color is
+     * cleared and the window shows the palette background instead.
+     */
+    fun install(app: Application) {
+        app.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
+            override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+                if (active == null) return
+                activity.window.setBackgroundDrawable(backgroundDrawable(activity))
+                clearOpaqueBackgrounds(activity.window.decorView)
+                if (activity is FragmentActivity) {
+                    activity.supportFragmentManager.registerFragmentLifecycleCallbacks(fragmentCallbacks, true)
+                }
+            }
+            override fun onActivityStarted(activity: Activity) {}
+            override fun onActivityResumed(activity: Activity) {}
+            override fun onActivityPaused(activity: Activity) {}
+            override fun onActivityStopped(activity: Activity) {}
+            override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
+            override fun onActivityDestroyed(activity: Activity) {}
+        })
+    }
+
+    private val fragmentCallbacks = object : FragmentManager.FragmentLifecycleCallbacks() {
+        override fun onFragmentViewCreated(fm: FragmentManager, f: Fragment, v: View, savedInstanceState: Bundle?) {
+            if (active != null) clearOpaqueBackgrounds(v)
+        }
+    }
+
+    private fun clearOpaqueBackgrounds(view: View) {
+        val ctx = view.context
+        val app = ContextCompat.getColor(ctx, R.color.background_app)
+        val deep = ContextCompat.getColor(ctx, R.color.bg_deep)
+        val bg = view.background
+        if (bg is ColorDrawable && (bg.color == app || bg.color == deep)) view.background = null
+        if (view is ViewGroup) for (i in 0 until view.childCount) clearOpaqueBackgrounds(view.getChildAt(i))
     }
 
     /** Static decoration: stars, hairlines or dust, placed with a fixed seed so it looks the same every time. */
