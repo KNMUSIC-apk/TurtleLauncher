@@ -1458,4 +1458,12 @@
     <string name="crash_ai_analysis_unavailable">Hiện không thể phân tích bằng AI. Hãy bật Trợ giúp sự cố bằng AI trong Cài đặt và nhập khóa API, hoặc xem nhật ký thô trong thẻ Nhật ký trò chơi.</string>
     <string name="setting_turnip_sysmem_title">Turnip: render bằng RAM hệ thống</string>
     <string name="setting_turnip_sysmem_desc">Đặt TU_DEBUG=sysmem cho driver Turnip (GPU Adreno). Thử khi gặp lỗi hiển thị trên Adreno. Không ảnh hưởng các driver khác.</string>
+    <string name="setting_ai_category_title">Trợ lý AI và tìm kiếm</string>
+    <string name="setting_ai_custom_title">AI tùy chỉnh (token)</string>
+    <string name="setting_ai_custom_desc">Đưa bất kỳ AI nào vào trình khởi chạy qua điểm cuối tương thích OpenAI (chat/completions). Khi bật, Trợ lý dùng AI này để trả lời thay cho Gemini. Token chỉ lưu trên thiết bị này. Mặc định tắt.</string>
+    <string name="setting_ai_custom_config_title">Nhập URL, token và tên mô hình</string>
+    <string name="setting_ai_custom_config_desc">URL gốc, ví dụ https://api.openai.com/v1. Dùng được với OpenAI, OpenRouter, Groq, Mistral, DeepSeek, Ollama, LM Studio và mọi máy chủ tương thích OpenAI.</string>
+    <string name="setting_ai_custom_url_hint">URL gốc, ví dụ https://api.openai.com/v1</string>
+    <string name="setting_ai_custom_key_hint">Token / API key (có thể để trống với máy chủ cục bộ)</string>
+    <string name="setting_ai_custom_model_hint">Tên mô hình, ví dụ gpt-4o-mini</string>
 </resources>

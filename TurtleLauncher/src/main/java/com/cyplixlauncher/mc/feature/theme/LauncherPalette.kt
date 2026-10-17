@@ -11,6 +11,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.cyplixlauncher.mc.R
+import android.content.res.ColorStateList
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
+import android.graphics.drawable.VectorDrawable
+import android.widget.ImageView
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.ColorFilter
@@ -52,7 +57,7 @@ object LauncherPalette {
     private val PALETTES = listOf(
         Palette("nebula", 0xFF0B1020.toInt(), 0xFF00C8FF.toInt(), 0xFF5427A8.toInt(), 0xFF00C8FF.toInt(), Style.NEBULA, 0xFF9ED8FF.toInt(), 0xCC141E3A.toInt()),
         Palette("cyberpunk", 0xFF09090F.toInt(), 0xFF00E5FF.toInt(), 0xFFA855F7.toInt(), 0xFF00E5FF.toInt(), Style.CYBERPUNK, 0xFF00E5FF.toInt(), 0xCC15151F.toInt()),
-        Palette("emerald", 0xFF071713.toInt(), 0xFF34D399.toInt(), 0xFF087F6B.toInt(), 0xFF34D399.toInt(), Style.EMERALD)
+        Palette("emerald", 0xFF071713.toInt(), 0xFF34D399.toInt(), 0xFF087F6B.toInt(), 0xFF34D399.toInt(), Style.EMERALD, 0xFF6EE7B7.toInt(), 0xCC0E2A23.toInt())
     )
 
     /** Accent used by switches and highlights when no palette theme is active. */
@@ -62,6 +67,10 @@ object LauncherPalette {
     private var active: Palette? = null
     private var cachedKey: String? = null
     private var cachedDrawable: Drawable? = null
+
+    fun iconTint(): Int? = active?.iconTint
+
+    fun surfaceColor(): Int? = active?.surface
 
     fun isPaletteKey(key: String?): Boolean = PALETTES.any { it.key == key }
 
@@ -144,11 +153,20 @@ object LauncherPalette {
     }
 
     private fun clearOpaqueBackgrounds(view: View) {
+        val p = active ?: return
         val ctx = view.context
         val app = ContextCompat.getColor(ctx, R.color.background_app)
         val deep = ContextCompat.getColor(ctx, R.color.bg_deep)
         val bg = view.background
-        if (bg is ColorDrawable && (bg.color == app || bg.color == deep)) view.background = null
+        when {
+            bg is ColorDrawable && (bg.color == app || bg.color == deep) -> { view.background = null }
+            bg != null && bg !is ColorDrawable -> {
+                bg.mutate().colorFilter = PorterDuffColorFilter(p.surface, PorterDuff.Mode.SRC_ATOP)
+            }
+        }
+        if (view is ImageView && (view.imageTintList != null || view.drawable is VectorDrawable)) {
+            view.imageTintList = ColorStateList.valueOf(p.iconTint)
+        }
         if (view is ViewGroup) for (i in 0 until view.childCount) clearOpaqueBackgrounds(view.getChildAt(i))
     }
 
