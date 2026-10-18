@@ -850,6 +850,7 @@ object TurtleAiGemini {
     /** Short, user-facing reason the most recent Gemini request failed, or null if it didn't. */
     @JvmStatic
     fun failureReason(): String? {
+        if (TurtleAiCustom.isEnabled()) return TurtleAiCustom.failureReason()
         val f = lastFailure ?: return null
         return when {
             f == "no key" -> "No Gemini API key is set (Settings -> Experimental)."

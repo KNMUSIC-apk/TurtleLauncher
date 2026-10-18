@@ -27,7 +27,9 @@ object RendererCatalog {
         ZinkRenderer.ID to Entry(badge = Badge.STABLE, supportsShaderPacks = true),
         FreedrenoRenderer.ID to Entry(badge = Badge.EXPERIMENTAL),
         VGPURenderer.ID to Entry(minMinecraftVersion = "1.16.5", badge = Badge.EXPERIMENTAL),
-        AngleRenderer.ID to Entry(badge = Badge.EXPERIMENTAL)
+        AngleRenderer.ID to Entry(badge = Badge.EXPERIMENTAL),
+        com.cyplixlauncher.mc.renderer.renderers.LTWRenderer.ID to Entry(badge = Badge.EXPERIMENTAL),
+        com.cyplixlauncher.mc.renderer.renderers.MobileGluesRenderer.ID to Entry(badge = Badge.EXPERIMENTAL)
     )
 
     fun get(rendererId: String): Entry? = entries[rendererId]

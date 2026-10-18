@@ -186,7 +186,12 @@ class ExperimentalSettingsFragment :
             )
             .setConfirmListener { editText, _ ->
                 AllSettings.aiCustomApiKey.put(editText.text.toString().trim()).save()
-                Toast.makeText(context, R.string.generic_ok, Toast.LENGTH_SHORT).show()
+                val detected = com.cyplixlauncher.mc.feature.ai.TurtleAiCustom.detectedProvider()
+                Toast.makeText(
+                    context,
+                    if (detected != null) "Đã nhận diện: $detected" else "Không nhận diện được token này",
+                    Toast.LENGTH_LONG
+                ).show()
                 true
             }
             .showDialog()

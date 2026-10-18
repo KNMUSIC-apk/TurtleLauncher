@@ -33,7 +33,12 @@ object Renderers {
             VirGLRenderer(),
             FreedrenoRenderer(),
             PanfrostRenderer(),
-            KryptonRenderer()
+            KryptonRenderer(),
+            com.cyplixlauncher.mc.renderer.renderers.LTWRenderer(),
+            com.cyplixlauncher.mc.renderer.renderers.MobileGluesRenderer(),
+            com.cyplixlauncher.mc.renderer.renderers.AngleRenderer(),
+            com.cyplixlauncher.mc.renderer.renderers.NWRenderer(),
+            com.cyplixlauncher.mc.renderer.renderers.VGPURenderer()
         )
     }
 

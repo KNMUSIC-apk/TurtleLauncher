@@ -416,6 +416,12 @@
 
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="12dp"
+                android:background="@color/turtle_divider" />
             <TextView
                 android:id="@+id/performance_section_header"
                 style="@style/SettingsSectionHeader"
@@ -913,6 +919,12 @@
 
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginVertical="12dp"
+                android:background="@color/turtle_divider" />
             <TextView
                 android:id="@+id/other_section_header"
                 style="@style/SettingsSectionHeader"
