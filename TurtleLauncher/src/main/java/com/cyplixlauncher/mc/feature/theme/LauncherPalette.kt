@@ -20,6 +20,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.ColorFilter
 import android.graphics.LinearGradient
+import android.graphics.Path
 import android.graphics.Paint
 import android.graphics.PixelFormat
 import android.graphics.Rect
@@ -39,7 +40,7 @@ import java.util.Random
  */
 object LauncherPalette {
 
-    enum class Style { NEBULA, CYBERPUNK, EMERALD }
+    enum class Style { NEBULA, CYBERPUNK, EMERALD, LIQUID }
 
     class Palette(
         val key: String,
@@ -57,7 +58,10 @@ object LauncherPalette {
     private val PALETTES = listOf(
         Palette("nebula", 0xFF0B1020.toInt(), 0xFF00C8FF.toInt(), 0xFF5427A8.toInt(), 0xFF00C8FF.toInt(), Style.NEBULA, 0xFF9ED8FF.toInt(), 0xCC141E3A.toInt()),
         Palette("cyberpunk", 0xFF09090F.toInt(), 0xFF00E5FF.toInt(), 0xFFA855F7.toInt(), 0xFF00E5FF.toInt(), Style.CYBERPUNK, 0xFF00E5FF.toInt(), 0xCC15151F.toInt()),
-        Palette("emerald", 0xFF071713.toInt(), 0xFF34D399.toInt(), 0xFF087F6B.toInt(), 0xFF34D399.toInt(), Style.EMERALD, 0xFF6EE7B7.toInt(), 0xCC0E2A23.toInt())
+        Palette("emerald", 0xFF071713.toInt(), 0xFF34D399.toInt(), 0xFF087F6B.toInt(), 0xFF34D399.toInt(), Style.EMERALD, 0xFF6EE7B7.toInt(), 0xCC0E2A23.toInt()),
+        // Liquid Glass: deep blue base, soft light blobs and a diagonal reflection, with translucent
+        // glass surfaces. Everything is static and cached, so it costs no per-frame blur.
+        Palette("liquid", 0xFF0A0F1F.toInt(), 0xFF8EC5FF.toInt(), 0xFF3B6CFF.toInt(), 0xFFB18CFF.toInt(), Style.LIQUID, 0xFFE6F0FF.toInt(), 0x2EFFFFFF)
     )
 
     /** Accent used by switches and highlights when no palette theme is active. */
@@ -184,6 +188,7 @@ object LauncherPalette {
                 Style.NEBULA -> 90
                 Style.CYBERPUNK -> 0
                 Style.EMERALD -> 120
+                Style.LIQUID -> 0
             }
             dots = FloatArray(count * 2) { random.nextFloat() }
             alphas = IntArray(count) { 40 + random.nextInt(190) }
@@ -219,6 +224,24 @@ object LauncherPalette {
                         paint.alpha = alphas[i] / 3 + 20
                         canvas.drawCircle(b.left + dots[i * 2] * w, b.top + dots[i * 2 + 1] * h, radii[i] * density, paint)
                     }
+                }
+                Style.LIQUID -> {
+                    paint.style = Paint.Style.FILL
+                    paint.color = 0xFFFFFFFF.toInt()
+                    paint.alpha = 16
+                    canvas.drawCircle(b.left + w * 0.2f, b.top + h * 0.18f, w * 0.55f, paint)
+                    paint.alpha = 10
+                    canvas.drawCircle(b.left + w * 0.9f, b.top + h * 0.75f, w * 0.45f, paint)
+                    // Diagonal reflection band across the glass.
+                    paint.alpha = 12
+                    val band = Path().apply {
+                        moveTo(b.left.toFloat(), b.top + h * 0.42f)
+                        lineTo(b.right.toFloat(), b.top + h * 0.22f)
+                        lineTo(b.right.toFloat(), b.top + h * 0.30f)
+                        lineTo(b.left.toFloat(), b.top + h * 0.52f)
+                        close()
+                    }
+                    canvas.drawPath(band, paint)
                 }
             }
         }

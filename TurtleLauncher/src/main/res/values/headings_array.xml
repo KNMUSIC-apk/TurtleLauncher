@@ -52,6 +52,7 @@
         <item>@string/setting_launcher_theme_nebula</item>
         <item>@string/setting_launcher_theme_cyberpunk</item>
         <item>@string/setting_launcher_theme_emerald</item>
+        <item>@string/setting_launcher_theme_liquid</item>
     </string-array>
 
     <string-array name="launcher_theme_values">
@@ -61,6 +62,7 @@
         <item>nebula</item>
         <item>cyberpunk</item>
         <item>emerald</item>
+        <item>liquid</item>
     </string-array>
 
     <string-array name="animation_enter_names">
