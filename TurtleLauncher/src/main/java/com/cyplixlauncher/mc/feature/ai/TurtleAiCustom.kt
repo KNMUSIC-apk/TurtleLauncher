@@ -29,7 +29,11 @@ object TurtleAiCustom {
         object NextProvider : Outcome()
     }
 
-    /** Token prefix -> services that issue such tokens, tried in order. The longest matching prefix wins. */
+    /**
+     * Token prefix -> services that issue such tokens, tried in order. The longest matching prefix wins.
+     * "sk-" is shared by several services (OpenAI, DeepSeek, Moonshot, Qwen, SiliconFlow), so each one
+     * is tried in turn until one accepts the token.
+     */
     private val PROVIDERS: Map<String, List<Provider>> = mapOf(
         "sk-ant-" to listOf(
             Provider("Anthropic", "https://api.anthropic.com/v1", listOf("claude-haiku-5-5", "claude-sonnet-5-5"))
@@ -39,7 +43,10 @@ object TurtleAiCustom {
         ),
         "sk-" to listOf(
             Provider("OpenAI", "https://api.openai.com/v1", listOf("gpt-4o-mini", "gpt-4.1-mini")),
-            Provider("DeepSeek", "https://api.deepseek.com/v1", listOf("deepseek-chat"))
+            Provider("DeepSeek", "https://api.deepseek.com/v1", listOf("deepseek-chat")),
+            Provider("Moonshot", "https://api.moonshot.cn/v1", listOf("moonshot-v1-8k")),
+            Provider("Qwen", "https://dashscope.aliyuncs.com/compatible-mode/v1", listOf("qwen-plus", "qwen-turbo")),
+            Provider("SiliconFlow", "https://api.siliconflow.cn/v1", listOf("deepseek-ai/DeepSeek-V3", "Qwen/Qwen2.5-72B-Instruct"))
         ),
         "gsk_" to listOf(
             Provider("Groq", "https://api.groq.com/openai/v1", listOf("llama-3.3-70b-versatile", "llama-3.1-8b-instant"))
@@ -50,8 +57,9 @@ object TurtleAiCustom {
         )
     )
 
+    /** Every failed attempt of the last request, in order, e.g. "OpenAI: token bị từ chối ...". */
     @Volatile
-    private var lastFailure: String? = null
+    private var lastFailures: List<String> = emptyList()
 
     private fun apiKey(): String = runCatching { AllSettings.aiCustomApiKey.getValue() }.getOrDefault("").trim()
 
@@ -67,13 +75,15 @@ object TurtleAiCustom {
         runCatching { AllSettings.aiCustomEnabled.getValue() }.getOrDefault(false) &&
             candidates(apiKey()).isNotEmpty()
 
-    /** Name of the service the saved token looks like, for the settings screen. */
+    /** Services the saved token will be tried against, in order, for the settings screen. */
     @JvmStatic
-    fun detectedProvider(): String? = candidates(apiKey()).firstOrNull()?.name
+    fun detectedProvider(): String? =
+        candidates(apiKey()).takeIf { it.isNotEmpty() }?.joinToString(", ") { it.name }
 
-    /** Why the last request failed, in words the user can act on. */
+    /** Why the last request failed: every service that was tried and what it answered. */
     @JvmStatic
-    fun failureReason(): String? = lastFailure?.let { "Trợ lý AI tùy chỉnh: $it" }
+    fun failureReason(): String? =
+        lastFailures.takeIf { it.isNotEmpty() }?.let { "Trợ lý AI tùy chỉnh: " + it.joinToString(" | ") }
 
     /** One chat turn. Returns the model's text, or null when every service and model failed. */
     @JvmStatic
@@ -85,10 +95,10 @@ object TurtleAiCustom {
         maxTokens: Int
     ): TurtleAiGemini.Answer? {
         val token = apiKey()
-        lastFailure = null
+        val failures = mutableListOf<String>()
         val providers = candidates(token)
         if (providers.isEmpty()) {
-            lastFailure = "token không đúng định dạng của nhà cung cấp nào được hỗ trợ"
+            lastFailures = listOf("token không đúng định dạng của nhà cung cấp nào được hỗ trợ")
             return null
         }
         val messages = JsonArray().apply {
@@ -105,13 +115,17 @@ object TurtleAiCustom {
         }
         for (provider in providers) {
             for (model in provider.models) {
-                when (val outcome = request(provider, model, token, messages, temperature, maxTokens)) {
-                    is Outcome.Ok -> return outcome.answer
+                when (val outcome = request(provider, model, token, messages, temperature, maxTokens, failures)) {
+                    is Outcome.Ok -> {
+                        lastFailures = emptyList()
+                        return outcome.answer
+                    }
                     Outcome.NextModel -> continue
                     Outcome.NextProvider -> break
                 }
             }
         }
+        lastFailures = failures.toList()
         return null
     }
 
@@ -121,7 +135,8 @@ object TurtleAiCustom {
         token: String,
         messages: JsonArray,
         temperature: Double,
-        maxTokens: Int
+        maxTokens: Int,
+        failures: MutableList<String>
     ): Outcome {
         val body = JsonObject().apply {
             addProperty("model", model)
@@ -150,7 +165,7 @@ object TurtleAiCustom {
                 if (!response.isSuccessful) {
                     // The token is never logged; only the service, model, status and the start of the message.
                     Logging.w(TAG, "${provider.name} $model HTTP ${response.code}: ${text.take(300)}")
-                    lastFailure = "${provider.name}: ${describe(response.code)}"
+                    failures.add("${provider.name}: ${describe(response.code)}${errorDetail(text, token)}")
                     return@use when (response.code) {
                         400, 404, 422 -> Outcome.NextModel
                         else -> Outcome.NextProvider
@@ -158,25 +173,38 @@ object TurtleAiCustom {
                 }
                 val root = JsonParser.parseString(text).takeIf { it.isJsonObject }?.asJsonObject
                 if (root == null) {
-                    lastFailure = "${provider.name} trả về dữ liệu không đọc được"
+                    failures.add("${provider.name} trả về dữ liệu không đọc được")
                     return@use Outcome.NextProvider
                 }
                 val content = root.getAsJsonArray("choices")?.firstOrNull()?.asJsonObject
                     ?.getAsJsonObject("message")?.get("content")
                     ?.takeIf { it.isJsonPrimitive }?.asString?.trim().orEmpty()
                 if (content.isEmpty()) {
-                    lastFailure = "${provider.name} ($model) trả về câu trả lời rỗng"
+                    failures.add("${provider.name} ($model) trả về câu trả lời rỗng")
                     Outcome.NextModel
                 } else {
-                    lastFailure = null
                     Outcome.Ok(TurtleAiGemini.Answer(text = content, modelId = model))
                 }
             }
         } catch (t: Exception) {
             Logging.w(TAG, "${provider.name} request failed", t)
-            lastFailure = "${provider.name}: không kết nối được (${t.javaClass.simpleName})"
+            failures.add("${provider.name}: không kết nối được (${t.javaClass.simpleName})")
             Outcome.NextProvider
         }
+    }
+
+    /** The service's own error message, e.g. " (Authentication Fails)". The token is masked if echoed back. */
+    private fun errorDetail(text: String, token: String): String {
+        val message = runCatching {
+            val error = JsonParser.parseString(text).asJsonObject.get("error")
+            when {
+                error == null -> null
+                error.isJsonObject -> error.asJsonObject.get("message")?.asString
+                error.isJsonPrimitive -> error.asString
+                else -> null
+            }
+        }.getOrNull()?.replace(token, "***")?.trim()
+        return if (message.isNullOrEmpty()) "" else " ($message)".take(160)
     }
 
     private fun describe(code: Int): String = when (code) {

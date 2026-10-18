@@ -108,7 +108,7 @@ class LaunchArgs(
             }
         }
 
-        argsList.addAll(getCacioJavaArgs(runtime.javaVersion == 8))
+        argsList.addAll(getCacioJavaArgs(runtime.javaVersion))
 
         val is7 = VersionNumber.compare(VersionNumber.asVersion(versionInfo.id ?: "0.0").canonical, "1.12") < 0
         val configFilePath = if (is7) LibPath.LOG4J_XML_1_7 else LibPath.LOG4J_XML_1_12
@@ -273,7 +273,12 @@ class LaunchArgs(
         }
 
         @JvmStatic
-        fun getCacioJavaArgs(isJava8: Boolean): List<String> {
+        fun getCacioJavaArgs(javaVersion: Int): List<String> {
+            val isJava8 = javaVersion == 8
+            // cacio-agent's premain relies on sun.java2d internals that no longer exist on
+            // JDK 25 (ClassNotFoundException: sun/java2d/SurfaceManagerFactory), and the failed
+            // agent leaves the VM unstable (SIGSEGV in libjvm on 26.x). Skip the agent there.
+            val useCacioAgent = javaVersion < 25
             val argsList: MutableList<String> = ArrayList()
 
             argsList.add("-Djava.awt.headless=false")
@@ -287,7 +292,9 @@ class LaunchArgs(
             } else {
                 argsList.add("-Dawt.toolkit=com.github.caciocavallosilano.cacio.ctc.CTCToolkit")
                 argsList.add("-Djava.awt.graphicsenv=com.github.caciocavallosilano.cacio.ctc.CTCGraphicsEnvironment")
-                argsList.add("-javaagent:" + LibPath.CACIO_17_AGENT.getAbsolutePath())
+                if (useCacioAgent) {
+                    argsList.add("-javaagent:" + LibPath.CACIO_17_AGENT.getAbsolutePath())
+                }
                 argsList.add("--add-exports=java.desktop/java.awt=ALL-UNNAMED")
                 argsList.add("--add-exports=java.desktop/java.awt.peer=ALL-UNNAMED")
                 argsList.add("--add-exports=java.desktop/sun.awt.image=ALL-UNNAMED")
