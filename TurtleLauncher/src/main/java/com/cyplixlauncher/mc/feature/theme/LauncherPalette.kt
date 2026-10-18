@@ -52,18 +52,15 @@ object LauncherPalette {
         /** Tint for vector icons on every screen. */
         val iconTint: Int,
         /** Tint for card and panel backgrounds on every screen. */
-        val surface: Int,
-        /** Hairline drawn around every card and panel: the glass edge, or the theme's neon line. */
-        val frame: Int
+        val surface: Int
     )
 
     private val PALETTES = listOf(
-        Palette("nebula", 0xFF0B1020.toInt(), 0xFF00C8FF.toInt(), 0xFF5427A8.toInt(), 0xFF00C8FF.toInt(), Style.NEBULA, 0xFF9ED8FF.toInt(), 0xCC141E3A.toInt(), 0x6600C8FF),
-        Palette("cyberpunk", 0xFF09090F.toInt(), 0xFF00E5FF.toInt(), 0xFFA855F7.toInt(), 0xFF00E5FF.toInt(), Style.CYBERPUNK, 0xFF00E5FF.toInt(), 0xCC15151F.toInt(), 0xAA00E5FF.toInt()),
-        Palette("emerald", 0xFF071713.toInt(), 0xFF34D399.toInt(), 0xFF087F6B.toInt(), 0xFF34D399.toInt(), Style.EMERALD, 0xFF6EE7B7.toInt(), 0xCC0E2A23.toInt(), 0x6634D399),
-        // Liquid Glass (light): pale frosted base with soft light blobs, translucent white glass
-        // cards and a bright glass edge. Everything is static and cached, so it costs no per-frame blur.
-        Palette("liquid", 0xFFEEF3FB.toInt(), 0xFF3B82F6.toInt(), 0xFFB9D4FF.toInt(), 0xFFD9C6FF.toInt(), Style.LIQUID, 0xFF1E3A5F.toInt(), 0xB8FFFFFF.toInt(), 0xE6FFFFFF.toInt())
+        Palette("nebula", 0xFF0B1020.toInt(), 0xFF00C8FF.toInt(), 0xFF5427A8.toInt(), 0xFF00C8FF.toInt(), Style.NEBULA, 0xFF9ED8FF.toInt(), 0xCC141E3A.toInt()),
+        Palette("cyberpunk", 0xFF09090F.toInt(), 0xFF00E5FF.toInt(), 0xFFA855F7.toInt(), 0xFF00E5FF.toInt(), Style.CYBERPUNK, 0xFF00E5FF.toInt(), 0xCC15151F.toInt()),
+        Palette("emerald", 0xFF071713.toInt(), 0xFF34D399.toInt(), 0xFF087F6B.toInt(), 0xFF34D399.toInt(), Style.EMERALD, 0xFF6EE7B7.toInt(), 0xCC0E2A23.toInt()),
+        // Liquid Glass (light): soft water-like colour blobs behind translucent glass cards.
+        Palette("liquid", 0xFFE8F1FB.toInt(), 0xFF4F9CF9.toInt(), 0xFF8CC8FF.toInt(), 0xFFD2B8FF.toInt(), Style.LIQUID, 0xFF1F3F66.toInt(), 0xB8FFFFFF.toInt())
     )
 
     /** Accent used by switches and highlights when no palette theme is active. */
@@ -169,17 +166,12 @@ object LauncherPalette {
         val bg = view.background
         when {
             bg is ColorDrawable && (bg.color == app || bg.color == deep) -> { view.background = null }
+            // Liquid Glass: cards become translucent glass with a soft top-to-bottom sheen.
+            p.style == Style.LIQUID && !isRoot && bg is GradientDrawable -> {
+                view.background = glassDrawable(ctx.resources.displayMetrics.density, bg.cornerRadius)
+            }
             bg != null && bg !is ColorDrawable -> {
                 bg.mutate().colorFilter = PorterDuffColorFilter(p.surface, PorterDuff.Mode.SRC_ATOP)
-                // Glass edge around cards and panels. Screen roots stay plain so no frame runs along the screen edge.
-                if (!isRoot && view.foreground == null) {
-                    val density = ctx.resources.displayMetrics.density
-                    val radius = (bg as? GradientDrawable)?.cornerRadius?.takeIf { it > 0f } ?: 14f * density
-                    view.foreground = GradientDrawable().apply {
-                        setStroke(maxOf(1, (density + 0.5f).toInt()), p.frame)
-                        cornerRadius = radius
-                    }
-                }
             }
         }
         if (view is ImageView && (view.imageTintList != null || view.drawable is VectorDrawable)) {
@@ -187,6 +179,16 @@ object LauncherPalette {
         }
         if (view is ViewGroup) for (i in 0 until view.childCount) clearOpaqueBackgrounds(view.getChildAt(i))
     }
+
+    /** Translucent glass card: a bright sheen at the top fading into the surface, with a faint edge. */
+    private fun glassDrawable(density: Float, radius: Float): Drawable =
+        GradientDrawable(
+            GradientDrawable.Orientation.TOP_BOTTOM,
+            intArrayOf(0xB8FFFFFF.toInt(), 0x4AFFFFFF)
+        ).apply {
+            cornerRadius = if (radius > 0f) radius else 16f * density
+            setStroke(maxOf(1, (density * 0.75f).toInt()), 0x66FFFFFF)
+        }
 
     /** Static decoration: stars, hairlines or dust, placed with a fixed seed so it looks the same every time. */
     private class DecorDrawable(private val style: Style, private val density: Float) : Drawable() {
@@ -221,17 +223,7 @@ object LauncherPalette {
                         canvas.drawCircle(b.left + dots[i * 2] * w, b.top + dots[i * 2 + 1] * h, radii[i] * density, paint)
                     }
                 }
-                Style.CYBERPUNK -> {
-                    paint.style = Paint.Style.STROKE
-                    paint.strokeWidth = density
-                    val lines = floatArrayOf(0.18f, 0.36f, 0.62f, 0.81f, 0.93f)
-                    lines.forEachIndexed { i, y ->
-                        paint.color = if (i % 2 == 0) 0xFF00E5FF.toInt() else 0xFFA855F7.toInt()
-                        paint.alpha = 45 + i * 6
-                        canvas.drawLine(b.left.toFloat(), b.top + y * h, b.right.toFloat(), b.top + y * h, paint)
-                    }
-                    paint.style = Paint.Style.FILL
-                }
+                Style.CYBERPUNK -> Unit // neon glow from the base gradient only; no scan lines
                 Style.EMERALD -> {
                     paint.color = 0xFF34D399.toInt()
                     for (i in 0 until count) {
@@ -240,25 +232,26 @@ object LauncherPalette {
                     }
                 }
                 Style.LIQUID -> {
-                    paint.style = Paint.Style.FILL
-                    paint.color = 0xFFFFFFFF.toInt()
-                    paint.alpha = 150
-                    canvas.drawCircle(b.left + w * 0.2f, b.top + h * 0.18f, w * 0.5f, paint)
-                    paint.alpha = 110
-                    canvas.drawCircle(b.left + w * 0.9f, b.top + h * 0.78f, w * 0.45f, paint)
-                    // Diagonal reflection band across the glass.
-                    paint.color = 0xFF8FB8FF.toInt()
-                    paint.alpha = 60
-                    val band = Path().apply {
-                        moveTo(b.left.toFloat(), b.top + h * 0.42f)
-                        lineTo(b.right.toFloat(), b.top + h * 0.22f)
-                        lineTo(b.right.toFloat(), b.top + h * 0.30f)
-                        lineTo(b.left.toFloat(), b.top + h * 0.52f)
-                        close()
-                    }
-                    canvas.drawPath(band, paint)
+                    // Soft, feathered colour pools that look like light moving through water.
+                    blob(canvas, b.left + w * 0.15f, b.top + h * 0.20f, w * 0.65f, 0xFF7CC4FF.toInt(), 0x90)
+                    blob(canvas, b.left + w * 0.95f, b.top + h * 0.62f, w * 0.60f, 0xFFC7A8FF.toInt(), 0x80)
+                    blob(canvas, b.left + w * 0.45f, b.top + h * 1.02f, w * 0.75f, 0xFF9FF0E0.toInt(), 0x70)
                 }
             }
+        }
+
+        /** A feathered circle: [centerAlpha] at the centre fading to fully transparent at [radius]. */
+        private fun blob(canvas: Canvas, cx: Float, cy: Float, radius: Float, color: Int, centerAlpha: Int) {
+            val rgb = color and 0x00FFFFFF
+            paint.style = Paint.Style.FILL
+            paint.shader = RadialGradient(
+                cx, cy, radius,
+                intArrayOf((centerAlpha shl 24) or rgb, rgb),
+                null,
+                Shader.TileMode.CLAMP
+            )
+            canvas.drawCircle(cx, cy, radius, paint)
+            paint.shader = null
         }
 
         override fun setAlpha(alpha: Int) {}

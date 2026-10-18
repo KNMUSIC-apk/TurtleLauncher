@@ -23,12 +23,12 @@ class TurtleSwitch @JvmOverloads constructor(
 
     /**
      * Default look (built-in themes): dark track, teal thumb when on, grey when off.
-     * Palette themes get their own switch: see [applyPaletteStyle].
+     * Palette themes use the same pill shape in their accent colour: see [applyPaletteStyle].
      */
     private fun applyStyle() {
         val palette = LauncherPalette.current()
         if (palette != null) {
-            applyPaletteStyle(palette)
+            applyPaletteStyle(palette.accent)
             return
         }
         val d = resources.displayMetrics.density
@@ -57,26 +57,17 @@ class TurtleSwitch @JvmOverloads constructor(
         })
     }
 
-    /**
-     * Switch in the active palette theme's own style:
-     *  - Liquid Glass: translucent glass track with a bright edge and a white thumb.
-     *  - Cyberpunk: square-cut track with a neon edge.
-     *  - Nebula / Emerald: accent-coloured track with a soft edge.
-     */
-    private fun applyPaletteStyle(p: LauncherPalette.Palette) {
+    /** Palette themes: a plain pill in the theme's accent when on, a soft neutral when off, white thumb. */
+    private fun applyPaletteStyle(accent: Int) {
         val d = resources.displayMetrics.density
         val trackW = (36 * d).toInt()
         val trackH = (20 * d).toInt()
         val thumb = (24 * d).toInt()
-        val edge = maxOf(1, (d + 0.5f).toInt())
-        val radius = if (p.style == LauncherPalette.Style.CYBERPUNK) 2 * d else trackH / 2f
-        val thumbOn = if (p.style == LauncherPalette.Style.LIQUID) 0xFFFFFFFF.toInt() else p.iconTint
 
-        fun track(fill: Int, stroke: Int) = GradientDrawable().apply {
+        fun track(color: Int) = GradientDrawable().apply {
             shape = GradientDrawable.RECTANGLE
-            cornerRadius = radius
-            setColor(fill)
-            setStroke(edge, stroke)
+            cornerRadius = trackH / 2f
+            setColor(color)
             setSize(trackW, trackH)
         }
         fun knob(color: Int) = GradientDrawable().apply {
@@ -84,13 +75,13 @@ class TurtleSwitch @JvmOverloads constructor(
             setColor(color)
             setSize(thumb, thumb)
         }
-        val onFill = (p.accent and 0x00FFFFFF) or (0xB3 shl 24)
+        val onTrack = (accent and 0x00FFFFFF) or (0xE0 shl 24)
         setTrackDrawable(StateListDrawable().apply {
-            addState(intArrayOf(android.R.attr.state_checked), track(onFill, p.frame))
-            addState(intArrayOf(), track(0x33808A99, p.frame and 0x00FFFFFF or (0x55 shl 24)))
+            addState(intArrayOf(android.R.attr.state_checked), track(onTrack))
+            addState(intArrayOf(), track(0x59808A99))
         })
         setThumbDrawable(StateListDrawable().apply {
-            addState(intArrayOf(android.R.attr.state_checked), knob(thumbOn))
+            addState(intArrayOf(android.R.attr.state_checked), knob(0xFFFFFFFF.toInt()))
             addState(intArrayOf(), knob(0xFFB0B8C4.toInt()))
         })
     }

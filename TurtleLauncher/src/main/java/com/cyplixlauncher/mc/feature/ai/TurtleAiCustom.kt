@@ -80,10 +80,10 @@ object TurtleAiCustom {
     fun detectedProvider(): String? =
         candidates(apiKey()).takeIf { it.isNotEmpty() }?.joinToString(", ") { it.name }
 
-    /** Why the last request failed: every service that was tried and what it answered. */
+    /** Short reason for the last failure, shown in the chat like the built-in assistant does. Full detail goes to the log. */
     @JvmStatic
     fun failureReason(): String? =
-        lastFailures.takeIf { it.isNotEmpty() }?.let { "Trợ lý AI tùy chỉnh: " + it.joinToString(" | ") }
+        lastFailures.firstOrNull()?.let { "Trợ lý AI tùy chỉnh: $it" }
 
     /** One chat turn. Returns the model's text, or null when every service and model failed. */
     @JvmStatic
