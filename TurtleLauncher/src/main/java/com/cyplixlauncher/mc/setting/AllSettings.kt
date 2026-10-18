@@ -44,6 +44,8 @@ class AllSettings {
         @JvmStatic val driver   = StringSettingUnit("driver", "Turnip")
         @JvmStatic val preferOpenGLBackend = BooleanSettingUnit("preferOpenGLBackend", true)
         @JvmStatic val lwjglCompatMode = StringSettingUnit("lwjglCompatMode", "auto")
+        // Minecraft 26.2+ graphics backend (see feature/graphics/GraphicsApiOptions.kt)
+        @JvmStatic val graphicsApi = StringSettingUnit("graphicsApi", "DEFAULT_OPENGL")
 
         // ── Advanced Renderer Settings ────────────────────────────────────────────
         @JvmStatic val rendererShaderCacheEnabled = BooleanSettingUnit("rendererShaderCacheEnabled", true)

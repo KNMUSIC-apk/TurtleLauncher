@@ -131,4 +131,16 @@
         <item>bottom_or_center</item>
     </string-array>
 
+    <string-array name="graphics_api_names">
+        <item>@string/setting_graphics_api_default</item>
+        <item>@string/setting_graphics_api_opengl</item>
+        <item>@string/setting_graphics_api_default_opengl</item>
+        <item>@string/setting_graphics_api_vulkan</item>
+    </string-array>
+    <string-array name="graphics_api_values">
+        <item>DEFAULT</item>
+        <item>OPENGL</item>
+        <item>DEFAULT_OPENGL</item>
+        <item>VULKAN</item>
+    </string-array>
 </resources>

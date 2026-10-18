@@ -117,6 +117,12 @@ class VideoSettingsFragment : AbstractSettingsFragment(R.layout.settings_fragmen
         val context = requireActivity()
         binding.subSettingsBackButton.setOnClickListener { com.cyplixlauncher.mc.utils.ZHTools.onBackPressed(requireActivity()) }
 
+        ListSettingsWrapper(
+            context, AllSettings.graphicsApi,
+            binding.graphicsApiLayout, binding.graphicsApiTitle, binding.graphicsApiValue,
+            R.array.graphics_api_names, R.array.graphics_api_values
+        )
+
         // ── Renderer & Driver ─────────────────────────────────────────────────
         val compatibleRenderers = Renderers.getCompatibleRenderers(context)
         val renderers = compatibleRenderers.first

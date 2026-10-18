@@ -499,6 +499,7 @@ public class MinecraftGLSurface extends View implements GrabListener {
         MCOptions.INSTANCE.set("fullscreen", "false");
         MCOptions.INSTANCE.set("overrideWidth", String.valueOf(windowWidth));
         MCOptions.INSTANCE.set("overrideHeight", String.valueOf(windowHeight));
+        com.cyplixlauncher.mc.feature.graphics.GraphicsApiOptions.apply();
         MCOptions.INSTANCE.save();
         MCOptions.INSTANCE.getMcScale();
 
