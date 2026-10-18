@@ -15,11 +15,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.endiq.turtlelauncher.R;
-import com.endiq.turtlelauncher.databinding.FragmentMicrosoftLoginBinding;
-import com.endiq.turtlelauncher.event.value.MicrosoftLoginEvent;
-import com.endiq.turtlelauncher.feature.log.Logging;
-import com.endiq.turtlelauncher.ui.fragment.BaseFragment;
+import com.cyplixlauncher.mc.R;
+import com.cyplixlauncher.mc.databinding.FragmentMicrosoftLoginBinding;
+import com.cyplixlauncher.mc.event.value.MicrosoftLoginEvent;
+import com.cyplixlauncher.mc.feature.log.Logging;
+import com.cyplixlauncher.mc.ui.fragment.BaseFragment;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -42,7 +42,7 @@ public class MicrosoftLoginFragment extends BaseFragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        com.endiq.turtlelauncher.utils.anim.TurtleTransitions.animateView(view, true);
+        com.cyplixlauncher.mc.utils.anim.TurtleTransitions.animateView(view, true);
         binding.returnButton.setOnClickListener(v -> forceBack());
 
         setWebViewSettings();

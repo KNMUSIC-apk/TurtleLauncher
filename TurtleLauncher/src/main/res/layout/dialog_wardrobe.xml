@@ -14,7 +14,7 @@
     android:orientation="vertical"
     android:padding="@dimen/space_l">
 
-    <com.endiq.turtlelauncher.ui.view.AnimTextView
+    <com.cyplixlauncher.mc.ui.view.AnimTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/account_wardrobe"
@@ -53,7 +53,7 @@
 
             </FrameLayout>
 
-            <com.endiq.turtlelauncher.ui.view.AnimButton
+            <com.cyplixlauncher.mc.ui.view.AnimButton
                 android:id="@+id/wardrobe_change_skin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
                 android:text="@string/skin_cape_change_skin"
                 android:textColor="@color/turtle_text_primary" />
 
-            <com.endiq.turtlelauncher.ui.view.AnimButton
+            <com.cyplixlauncher.mc.ui.view.AnimButton
                 android:id="@+id/wardrobe_change_cape"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
                 android:paddingVertical="@dimen/space_m"
                 android:text="@string/skin_cape_change_cape" />
 
-            <com.endiq.turtlelauncher.ui.view.AnimButton
+            <com.cyplixlauncher.mc.ui.view.AnimButton
                 android:id="@+id/wardrobe_close"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -73,7 +73,7 @@
             android:textColor="@color/turtle_text_secondary"
             android:layout_marginBottom="@dimen/space_l"/>
 
-        <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+        <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
             android:id="@+id/host_button"
             android:layout_width="match_parent"
             android:layout_height="64dp"
@@ -96,9 +96,9 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="@color/turtle_text_primary"/>
-        </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+        </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
-        <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+        <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
             android:id="@+id/join_button"
             android:layout_width="match_parent"
             android:layout_height="64dp"
@@ -121,7 +121,7 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="@color/turtle_text_primary"/>
-        </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+        </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
         <!-- Revealed under Join - code entry, no separate dialog -->
         <LinearLayout
@@ -185,7 +185,7 @@
                 android:text="@string/terracotta_custom_node_list"
                 android:textSize="13sp"
                 android:textColor="@color/turtle_text_primary"/>
-            <Switch
+            <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                 android:id="@+id/custom_node_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

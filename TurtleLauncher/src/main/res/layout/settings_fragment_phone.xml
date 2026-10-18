@@ -82,7 +82,7 @@
                     android:textSize="@dimen/_10ssp"
                     android:text="@string/setting_active_processor_count_desc" />
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/autoDetectCores_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -100,6 +100,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/autoDetectCores_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -109,15 +110,15 @@
                         android:layout_toStartOf="@+id/autoDetectCores"
                         android:text="@string/setting_auto_detect_cores_desc" />
 
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/autoDetectCores"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/manualCoreOverride_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -135,6 +136,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/manualCoreOverride_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -144,15 +146,15 @@
                         android:layout_toStartOf="@+id/manualCoreOverride"
                         android:text="@string/setting_manual_core_override_desc" />
 
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/manualCoreOverride"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/manualCoreCount_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -170,6 +172,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/manualCoreCount_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -199,9 +202,9 @@
                         android:layout_marginVertical="@dimen/_8sdp"
                         android:layout_marginEnd="@dimen/_12sdp"
                         tools:text="8" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/perInstanceCpuOverride_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -219,6 +222,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/perInstanceCpuOverride_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -228,15 +232,15 @@
                         android:layout_toStartOf="@+id/perInstanceCpuOverride"
                         android:text="@string/setting_per_instance_cpu_override_desc" />
 
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/perInstanceCpuOverride"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/advancedCpuTuning_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -254,6 +258,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/advancedCpuTuning_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -263,15 +268,15 @@
                         android:layout_toStartOf="@+id/advancedCpuTuning"
                         android:text="@string/setting_advanced_cpu_tuning_desc" />
 
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/advancedCpuTuning"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/bigCoreAffinity_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -290,6 +295,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/bigCoreAffinity_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -299,15 +305,15 @@
                         android:layout_toStartOf="@+id/bigCoreAffinity"
                         android:text="@string/setting_thread_affinity_desc" />
 
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/bigCoreAffinity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/schedulerTuning_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -326,6 +332,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/schedulerTuning_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -335,13 +342,13 @@
                         android:layout_toStartOf="@+id/schedulerTuning"
                         android:text="@string/setting_scheduler_tuning_desc" />
 
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/schedulerTuning"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <!-- ── Memory Optimizer ─────────────────────────────────────────── -->
@@ -362,7 +369,7 @@
                     android:text="@string/setting_category_phone_memory"
                     android:textColor="@color/accent_primary" />
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/autoRamCalculator_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -380,6 +387,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/autoRamCalculator_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -389,15 +397,15 @@
                         android:layout_toStartOf="@+id/autoRamCalculator"
                         android:text="@string/setting_auto_ram_calculator_desc" />
 
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/autoRamCalculator"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/equalHeapSizes_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -415,6 +423,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/equalHeapSizes_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -424,15 +433,15 @@
                         android:layout_toStartOf="@+id/equalHeapSizes"
                         android:text="@string/setting_equal_heap_sizes_desc" />
 
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/equalHeapSizes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/ramPreset_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -456,9 +465,9 @@
                         android:layout_alignParentStart="true"
                         android:layout_alignParentEnd="true"
                         android:text="@string/setting_ram_preset_balanced" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/deviceRamDetection_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -481,9 +490,9 @@
                         android:layout_alignParentStart="true"
                         android:layout_alignParentEnd="true"
                         tools:text="8192 MB total / 3200 MB free" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/memoryPressureMonitor_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -501,6 +510,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/memoryPressureMonitor_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -510,15 +520,15 @@
                         android:layout_toStartOf="@+id/memoryPressureMonitor"
                         android:text="@string/setting_memory_pressure_monitor_desc" />
 
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/memoryPressureMonitor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/gcStatistics_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -536,6 +546,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/gcStatistics_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -545,13 +556,13 @@
                         android:layout_toStartOf="@+id/gcStatistics"
                         android:text="@string/setting_gc_statistics_desc" />
 
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/gcStatistics"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <!-- ── JNI Optimization ─────────────────────────────────────────── -->
@@ -580,7 +591,7 @@
                     android:textSize="@dimen/_10ssp"
                     android:text="@string/setting_jni_optimization_desc" />
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/jniBatching_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -598,6 +609,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/jniBatching_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -607,15 +619,15 @@
                         android:layout_toStartOf="@+id/jniBatching"
                         android:text="@string/setting_jni_batching_desc" />
 
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/jniBatching"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/jniCachedReferences_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -633,6 +645,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/jniCachedReferences_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -642,15 +655,15 @@
                         android:layout_toStartOf="@+id/jniCachedReferences"
                         android:text="@string/setting_jni_cached_references_desc" />
 
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/jniCachedReferences"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/nativeObjectPooling_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -668,6 +681,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/nativeObjectPooling_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -677,15 +691,15 @@
                         android:layout_toStartOf="@+id/nativeObjectPooling"
                         android:text="@string/setting_native_object_pooling_desc" />
 
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/nativeObjectPooling"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/reducedJniCalls_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -703,6 +717,7 @@
                         android:textColor="@color/turtle_primary_text" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/reducedJniCalls_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -712,13 +727,13 @@
                         android:layout_toStartOf="@+id/reducedJniCalls"
                         android:text="@string/setting_reduced_jni_calls_desc" />
 
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/reducedJniCalls"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
             </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.appcompat.widget.LinearLayoutCompat>

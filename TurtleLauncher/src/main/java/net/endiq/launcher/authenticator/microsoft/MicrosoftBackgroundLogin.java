@@ -7,12 +7,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.endiq.mcgui.ProgressLayout;
-import com.endiq.turtlelauncher.R;
-import com.endiq.turtlelauncher.feature.accounts.AccountType;
-import com.endiq.turtlelauncher.feature.log.Logging;
-import com.endiq.turtlelauncher.task.Task;
-import com.endiq.turtlelauncher.task.TaskExecutors;
-import com.endiq.turtlelauncher.utils.path.UrlManager;
+import com.cyplixlauncher.mc.R;
+import com.cyplixlauncher.mc.feature.accounts.AccountType;
+import com.cyplixlauncher.mc.feature.log.Logging;
+import com.cyplixlauncher.mc.task.Task;
+import com.cyplixlauncher.mc.task.TaskExecutors;
+import com.cyplixlauncher.mc.utils.path.UrlManager;
 
 import net.endiq.launcher.Tools;
 import net.endiq.launcher.authenticator.listener.DoneListener;

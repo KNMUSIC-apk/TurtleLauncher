@@ -2,8 +2,8 @@ package net.endiq.launcher.progresskeeper;
 
 import static net.endiq.launcher.Tools.BYTE_TO_MB;
 
-import com.endiq.turtlelauncher.utils.ZHTools;
-import com.endiq.turtlelauncher.utils.file.FileTools;
+import com.cyplixlauncher.mc.utils.ZHTools;
+import com.cyplixlauncher.mc.utils.file.FileTools;
 
 import net.endiq.launcher.Tools;
 import net.endiq.launcher.tasks.SpeedCalculator;

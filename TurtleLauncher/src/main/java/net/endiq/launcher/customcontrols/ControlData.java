@@ -1,13 +1,13 @@
 package net.endiq.launcher.customcontrols;
 
-import static com.endiq.turtlelauncher.context.ContextExecutor.getString;
+import static com.cyplixlauncher.mc.context.ContextExecutor.getString;
 import static net.endiq.launcher.LwjglGlfwKeycode.GLFW_KEY_UNKNOWN;
 import android.content.Context;
 import android.util.ArrayMap;
 import androidx.annotation.Keep;
-import com.endiq.turtlelauncher.R;
-import com.endiq.turtlelauncher.setting.AllSettings;
-import com.endiq.turtlelauncher.utils.stringutils.StringUtils;
+import com.cyplixlauncher.mc.R;
+import com.cyplixlauncher.mc.setting.AllSettings;
+import com.cyplixlauncher.mc.utils.stringutils.StringUtils;
 import net.endiq.launcher.Tools;
 import net.endiq.launcher.customcontrols.buttons.ControlInterface;
 import net.endiq.launcher.utils.JSONUtils;
@@ -61,6 +61,8 @@ public class ControlData {
     public boolean displayInGame;
     public boolean displayInMenu;
     public String customImagePath;
+    /** Non-null means this is a command button: pressing it opens chat and sends this text. */
+    public String command;
     private float width;         //Dp instead of Px now
     private float height;        //Dp instead of Px now
 
@@ -148,6 +150,7 @@ public class ControlData {
                 controlData.passThruEnabled
         );
         this.customImagePath = controlData.customImagePath;
+        this.command = controlData.command;
     }
 
     public static ControlData[] getSpecialButtons(Context context) {

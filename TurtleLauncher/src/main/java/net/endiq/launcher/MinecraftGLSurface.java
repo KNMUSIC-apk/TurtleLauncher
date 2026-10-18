@@ -19,12 +19,12 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
-import com.endiq.turtlelauncher.event.single.RefreshHotbarEvent;
-import com.endiq.turtlelauncher.feature.MCOptions;
-import com.endiq.turtlelauncher.feature.log.Logging;
-import com.endiq.turtlelauncher.setting.AllSettings;
-import com.endiq.turtlelauncher.setting.AllStaticSettings;
-import com.endiq.turtlelauncher.ui.activity.BaseActivity;
+import com.cyplixlauncher.mc.event.single.RefreshHotbarEvent;
+import com.cyplixlauncher.mc.feature.MCOptions;
+import com.cyplixlauncher.mc.feature.log.Logging;
+import com.cyplixlauncher.mc.setting.AllSettings;
+import com.cyplixlauncher.mc.setting.AllStaticSettings;
+import com.cyplixlauncher.mc.ui.activity.BaseActivity;
 import net.endiq.launcher.customcontrols.ControlLayout;
 import net.endiq.launcher.customcontrols.gamepad.DefaultDataProvider;
 import net.endiq.launcher.customcontrols.gamepad.Gamepad;
@@ -34,7 +34,7 @@ import net.endiq.launcher.customcontrols.mouse.InGUIEventProcessor;
 import net.endiq.launcher.customcontrols.mouse.InGameEventProcessor;
 import net.endiq.launcher.customcontrols.mouse.TouchEventProcessor;
 import net.endiq.launcher.utils.JREUtils;
-import com.endiq.turtlelauncher.game.sdl.SdlBridge;
+import com.cyplixlauncher.mc.game.sdl.SdlBridge;
 import org.libsdl.app.SDLActivity;
 import org.libsdl.app.SDLSurface;
 import org.greenrobot.eventbus.EventBus;
@@ -86,6 +86,8 @@ public class MinecraftGLSurface extends View implements GrabListener {
     private boolean mIsRenderingStarted = false;
 
     private volatile boolean mSurfaceValid = false;
+
+    /** Resolution scale the window was last sized with; NaN until the first refreshSize(). */
 
     /* Source token (SurfaceHolder or SurfaceTexture) of the Surface currently
      * registered with SDL, for matching destroy callbacks to their Surface. */
@@ -183,10 +185,11 @@ public class MinecraftGLSurface extends View implements GrabListener {
                         return;
                     }
                     isCalled = true;
+                    // Valid before realStart so its launch-time refreshSize() is not skipped.
+                    markSurfaceValid();
 
                     realStart(surfaceView.getHolder().getSurface());
                     publishSurfaceToSdl(surfaceView.getHolder().getSurface(), holder);
-                    markSurfaceValid();
                 }
 
                 @Override
@@ -219,10 +222,11 @@ public class MinecraftGLSurface extends View implements GrabListener {
                         return;
                     }
                     isCalled = true;
+                    // Valid before realStart so its launch-time refreshSize() is not skipped.
+                    markSurfaceValid();
 
                     realStart(tSurface);
                     publishSurfaceToSdl(tSurface, surface);
-                    markSurfaceValid();
                 }
 
                 @Override
@@ -320,7 +324,7 @@ public class MinecraftGLSurface extends View implements GrabListener {
                 CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
                 return true;
             case MotionEvent.ACTION_SCROLL:
-                CallbackBridge.sendScroll(event.getAxisValue(MotionEvent.AXIS_HSCROLL), event.getAxisValue(MotionEvent.AXIS_VSCROLL));
+                CallbackBridge.sendScrollEvent(event.getEventTime(), event.getAxisValue(MotionEvent.AXIS_HSCROLL), event.getAxisValue(MotionEvent.AXIS_VSCROLL));
                 return true;
             case MotionEvent.ACTION_BUTTON_PRESS:
                 return sendMouseButtonUnconverted(event.getActionButton(),true);
@@ -435,6 +439,11 @@ public class MinecraftGLSurface extends View implements GrabListener {
             Logging.e("MGLSurface", String.format(Locale.getDefault(), "Impossible resolution : %dx%d", newWidth, newHeight));
             return;
         }
+        // Cursor is stored in window pixels of the previous size. Keep its fraction of the window.
+        final int prevWidth = windowWidth;
+        final int prevHeight = windowHeight;
+        final float fracX = prevWidth > 0 ? CallbackBridge.mouseX / prevWidth : 0f;
+        final float fracY = prevHeight > 0 ? CallbackBridge.mouseY / prevHeight : 0f;
         windowWidth = newWidth;
         windowHeight = newHeight;
         if(mSurface == null){
@@ -454,6 +463,13 @@ public class MinecraftGLSurface extends View implements GrabListener {
         }
 
         CallbackBridge.sendUpdateWindowSize(windowWidth, windowHeight);
+
+        // When the window size changes, put the cursor back at the same fraction of the window,
+        // so it stays on the same spot on screen instead of jumping.
+        if (prevWidth > 0 && prevHeight > 0 && (newWidth != prevWidth || newHeight != prevHeight)) {
+            CallbackBridge.sendCursorPos(fracX * newWidth, fracY * newHeight);
+        }
+
         notifySdlOfSurfaceSize();
         EventBus.getDefault().post(new RefreshHotbarEvent());
     }
@@ -474,6 +490,8 @@ public class MinecraftGLSurface extends View implements GrabListener {
     }
 
     private void realStart(Surface surface){
+        // Touch mapping must use the saved resolution before the first size push.
+        AllStaticSettings.syncScaleFromSettings();
         // Initial size set
         refreshSize();
 
@@ -481,6 +499,7 @@ public class MinecraftGLSurface extends View implements GrabListener {
         MCOptions.INSTANCE.set("fullscreen", "false");
         MCOptions.INSTANCE.set("overrideWidth", String.valueOf(windowWidth));
         MCOptions.INSTANCE.set("overrideHeight", String.valueOf(windowHeight));
+        com.cyplixlauncher.mc.feature.graphics.GraphicsApiOptions.apply();
         MCOptions.INSTANCE.save();
         MCOptions.INSTANCE.getMcScale();
 

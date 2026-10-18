@@ -1,11 +1,11 @@
 package net.endiq.launcher;
 
-import static com.endiq.turtlelauncher.context.ContextExecutor.getString;
+import static com.cyplixlauncher.mc.context.ContextExecutor.getString;
 import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
 
 import android.view.KeyEvent;
 
-import com.endiq.turtlelauncher.R;
+import com.cyplixlauncher.mc.R;
 
 import org.lwjgl.glfw.CallbackBridge;
 

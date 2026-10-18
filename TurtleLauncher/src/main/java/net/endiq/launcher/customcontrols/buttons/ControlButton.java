@@ -1,5 +1,7 @@
 package net.endiq.launcher.customcontrols.buttons;
 
+import static net.endiq.launcher.LwjglGlfwKeycode.GLFW_KEY_ENTER;
+import static net.endiq.launcher.LwjglGlfwKeycode.GLFW_KEY_T;
 import static net.endiq.launcher.LwjglGlfwKeycode.GLFW_KEY_UNKNOWN;
 import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
 import static org.lwjgl.glfw.CallbackBridge.sendMouseButton;
@@ -14,14 +16,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
-import com.endiq.turtlelauncher.R;
-import com.endiq.turtlelauncher.setting.AllSettings;
+import com.cyplixlauncher.mc.R;
+import com.cyplixlauncher.mc.setting.AllSettings;
 
 import net.endiq.launcher.LauncherActivity;
 import net.endiq.launcher.LwjglGlfwKeycode;
@@ -49,8 +50,8 @@ public class ControlButton extends TextView implements ControlInterface {
     private final RectF mImageDrawRect = new RectF();
     private final Paint mImagePaint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
 
-    protected boolean mIsToggled = false;
     protected boolean mIsPointerOutOfBounds = false;
+    private static final long COMMAND_STEP_DELAY_MS = 50;
 
     public ControlButton(ControlLayout layout, ControlData properties) {
         super(layout.getContext());
@@ -82,16 +83,8 @@ public class ControlButton extends TextView implements ControlInterface {
         ControlInterface.super.setProperties(properties, changePos);
         mComputedRadius = ControlInterface.super.computeCornerRadius(mProperties.cornerRadius);
 
-        if (mProperties.isToggle) {
-            //For the toggle layer
-            final TypedValue value = new TypedValue();
-            getContext().getTheme().resolveAttribute(R.attr.colorAccent, value, true);
-            mRectPaint.setColor(value.data);
-            mRectPaint.setAlpha(128);
-        } else {
-            mRectPaint.setColor(Color.WHITE);
-            mRectPaint.setAlpha(60);
-        }
+        mRectPaint.setColor(Color.WHITE);
+        mRectPaint.setAlpha(60);
 
         setText(properties.name);
         loadCustomImageIfNeeded();
@@ -132,7 +125,7 @@ public class ControlButton extends TextView implements ControlInterface {
         }
 
         super.onDraw(canvas);
-        if (mIsToggled || (!mProperties.isToggle && isActivated()))
+        if (isActivated())
             canvas.drawRoundRect(0, 0, getWidth(), getHeight(), mComputedRadius, mComputedRadius, mRectPaint);
     }
 
@@ -178,9 +171,7 @@ public class ControlButton extends TextView implements ControlInterface {
                         event.getY() < getControlView().getTop()  || event.getY() > getControlView().getBottom()){
                     if(getProperties().isSwipeable && !mIsPointerOutOfBounds){
                         //Remove keys
-                        if(!triggerToggle()) {
-                            sendKeyPresses(false);
-                        }
+                        sendKeyPresses(false);
                     }
                     mIsPointerOutOfBounds = true;
                     getControlLayoutParent().onTouch(this, event);
@@ -191,7 +182,7 @@ public class ControlButton extends TextView implements ControlInterface {
                 if(mIsPointerOutOfBounds) {
                     getControlLayoutParent().onTouch(this, event);
                     //RE-press the button
-                    if(getProperties().isSwipeable && !getProperties().isToggle){
+                    if(getProperties().isSwipeable){
                         sendKeyPresses(true);
                     }
                 }
@@ -200,9 +191,8 @@ public class ControlButton extends TextView implements ControlInterface {
 
             case MotionEvent.ACTION_DOWN: // 0
             case MotionEvent.ACTION_POINTER_DOWN: // 5
-                if(!getProperties().isToggle){
-                    sendKeyPresses(true);
-                }
+                sendKeyPresses(true);
+                if (isCommandButton()) sendCommand();
                 break;
 
             case MotionEvent.ACTION_UP: // 1
@@ -215,9 +205,7 @@ public class ControlButton extends TextView implements ControlInterface {
                 if(mIsPointerOutOfBounds) getControlLayoutParent().onTouch(this, event);
                 mIsPointerOutOfBounds = false;
 
-                if(!triggerToggle()) {
-                    sendKeyPresses(false);
-                }
+                sendKeyPresses(false);
                 break;
 
             default:
@@ -228,16 +216,19 @@ public class ControlButton extends TextView implements ControlInterface {
     }
 
 
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
-    public boolean triggerToggle(){
-        //returns true a the toggle system is triggered
-        if(mProperties.isToggle){
-            mIsToggled = !mIsToggled;
-            invalidate();
-            sendKeyPresses(mIsToggled);
-            return true;
-        }
-        return false;
+    public boolean isCommandButton() {
+        return mProperties.command != null && !mProperties.command.trim().isEmpty();
+    }
+
+    /** Opens the chat, types the command and submits it. Each step waits briefly so the game can process it. */
+    private void sendCommand() {
+        final String text = mProperties.command.trim();
+        final String command = text.startsWith("/") ? text : "/" + text;
+        CallbackBridge.sendKeyPress(GLFW_KEY_T);
+        postDelayed(() -> {
+            for (char c : command.toCharArray()) CallbackBridge.sendChar(c, 0);
+            postDelayed(() -> CallbackBridge.sendKeyPress(GLFW_KEY_ENTER), COMMAND_STEP_DELAY_MS);
+        }, COMMAND_STEP_DELAY_MS);
     }
 
     public void sendKeyPresses(boolean isDown){

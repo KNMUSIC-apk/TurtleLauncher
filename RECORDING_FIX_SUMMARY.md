@@ -12,7 +12,7 @@ The MediaMuxer (which combines video and audio streams into an MP4 file) was not
 However, the muxer writes data asynchronously, and even after calling `stop()` and `release()`, the file might not be fully written to disk yet.
 
 ## Solution
-Modified `/TurtleLauncher/src/main/java/com/endiq/turtlelauncher/feature/turtle/ScreenRecorder.kt` with the following fixes:
+Modified `/TurtleLauncher/src/main/java/com/cyplixlauncher/mc/feature/turtle/ScreenRecorder.kt` with the following fixes:
 
 ### 1. Added Delays Before Muxer Release
 ```kotlin

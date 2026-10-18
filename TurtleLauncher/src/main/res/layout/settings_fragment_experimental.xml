@@ -73,7 +73,7 @@
                     android:text="@string/setting_category_experimental_patches"
                     android:textColor="@color/accent_primary" />
     
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/dump_shaders_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -91,6 +91,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/dump_shaders_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -100,15 +101,51 @@
                         android:layout_toStartOf="@+id/dump_shaders"
                         android:text="@string/setting_shader_dump_desc" />
     
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/dump_shaders"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
     
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
+                    android:id="@+id/turnip_sysmem_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:padding="@dimen/_12sdp">
+
+                    <TextView
+                        android:id="@+id/turnip_sysmem_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_toStartOf="@+id/turnip_sysmem"
+                        android:text="@string/setting_turnip_sysmem_title"
+                        android:textColor="@color/turtle_primary_text" />
+
+                    <TextView
+        android:fontFamily="@font/exo2"
+                        android:id="@+id/turnip_sysmem_summary"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/turnip_sysmem_title"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_toStartOf="@+id/turnip_sysmem"
+                        android:text="@string/setting_turnip_sysmem_desc" />
+
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
+                        android:id="@+id/turnip_sysmem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true" />
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
+
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/bigCoreAffinity_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -126,6 +163,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/bigCoreAffinity_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -135,15 +173,15 @@
                         android:layout_toStartOf="@+id/bigCoreAffinity"
                         android:text="@string/setting_force_big_core_desc" />
     
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/bigCoreAffinity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
     
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/fastBoot_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -161,6 +199,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/fastBoot_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -170,15 +209,15 @@
                         android:layout_toStartOf="@+id/fastBoot"
                         android:text="@string/setting_fast_boot_desc" />
     
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/fastBoot"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
     
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/modConflictDetection_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -196,6 +235,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/modConflictDetection_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -205,15 +245,15 @@
                         android:layout_toStartOf="@+id/modConflictDetection"
                         android:text="@string/setting_mod_conflict_detection_desc" />
     
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/modConflictDetection"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
     
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/lwjglCompatMode_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -230,6 +270,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/lwjglCompatMode_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -246,9 +287,9 @@
                         android:layout_alignParentStart="true"
                         android:layout_alignParentEnd="true"
                         android:text="@string/setting_lwjgl_compat_mode_auto" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
     
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/backgroundServiceOptimization_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -266,6 +307,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/backgroundServiceOptimization_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -275,16 +317,161 @@
                         android:layout_toStartOf="@+id/backgroundServiceOptimization"
                         android:text="@string/setting_background_service_optimization_summary" />
     
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/backgroundServiceOptimization"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
     
             </androidx.appcompat.widget.LinearLayoutCompat>
     
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/ai_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:background="@drawable/background_card"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/_2sdp"
+                android:paddingVertical="@dimen/_12sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_12sdp"
+                    android:text="@string/setting_ai_category_title"
+                    android:textColor="@color/accent_primary" />
+
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
+                    android:id="@+id/aiWebSearchEnabled_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:padding="@dimen/_12sdp">
+
+                    <TextView
+                        android:id="@+id/aiWebSearchEnabled_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_toStartOf="@+id/aiWebSearchEnabled"
+                        android:text="@string/setting_ai_web_search_title"
+                        android:textColor="@color/turtle_primary_text" />
+
+                    <TextView
+                        android:id="@+id/aiWebSearchEnabled_summary"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/aiWebSearchEnabled_title"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_toStartOf="@+id/aiWebSearchEnabled"
+                        android:text="@string/setting_ai_web_search_desc" />
+
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
+                        android:id="@+id/aiWebSearchEnabled"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true" />
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
+
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
+                    android:id="@+id/aiAssistantExp_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:padding="@dimen/_12sdp">
+
+                    <TextView
+                        android:id="@+id/aiAssistantExp_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_toStartOf="@+id/aiAssistantExp"
+                        android:text="@string/setting_ai_assistant_title"
+                        android:textColor="@color/turtle_primary_text" />
+
+                    <TextView
+                        android:id="@+id/aiAssistantExp_summary"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/aiAssistantExp_title"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_toStartOf="@+id/aiAssistantExp"
+                        android:text="@string/setting_ai_assistant_desc" />
+
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
+                        android:id="@+id/aiAssistantExp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true" />
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
+
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
+                    android:id="@+id/aiCustomEnabled_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:padding="@dimen/_12sdp">
+
+                    <TextView
+                        android:id="@+id/aiCustomEnabled_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_toStartOf="@+id/aiCustomEnabled"
+                        android:text="@string/setting_ai_custom_title"
+                        android:textColor="@color/turtle_primary_text" />
+
+                    <TextView
+                        android:id="@+id/aiCustomEnabled_summary"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/aiCustomEnabled_title"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:layout_toStartOf="@+id/aiCustomEnabled"
+                        android:text="@string/setting_ai_custom_desc" />
+
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
+                        android:id="@+id/aiCustomEnabled"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true" />
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
+
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
+                    android:id="@+id/aiCustomConfig_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:padding="@dimen/_12sdp">
+
+                    <TextView
+                        android:id="@+id/aiCustomConfig_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/setting_ai_custom_config_title"
+                        android:textColor="@color/turtle_primary_text" />
+
+                    <TextView
+                        android:id="@+id/aiCustomConfig_summary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/aiCustomConfig_title"
+                        android:text="@string/setting_ai_custom_config_desc" />
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/support_category"
                 android:layout_width="match_parent"
@@ -302,7 +489,7 @@
                     android:text="@string/setting_category_support"
                     android:textColor="@color/accent_primary" />
     
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/tcVibrateDuration_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -320,6 +507,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/tcVibrateDuration_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -349,7 +537,7 @@
                         android:layout_marginVertical="@dimen/_8sdp"
                         android:layout_marginEnd="@dimen/_12sdp"
                         tools:text="0" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
     
             </androidx.appcompat.widget.LinearLayoutCompat>
     
@@ -372,7 +560,7 @@
                     android:textColor="@color/accent_primary" />
     
                 <!-- Auto-check on launch -->
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/autoCheckPluginUpdates_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -388,6 +576,7 @@
                         android:text="@string/setting_plugin_update_auto_title"
                         android:textColor="@color/turtle_primary_text" />
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/autoCheckPluginUpdates_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -396,16 +585,16 @@
                         android:layout_marginEnd="@dimen/_8sdp"
                         android:layout_toStartOf="@+id/autoCheckPluginUpdates"
                         android:text="@string/setting_plugin_update_auto_desc" />
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/autoCheckPluginUpdates"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
     
                 <!-- Manual check button -->
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/checkPluginUpdates_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -418,15 +607,16 @@
                         android:text="@string/setting_plugin_update_check_now_title"
                         android:textColor="@color/turtle_primary_text" />
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/checkPluginUpdates_summary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/checkPluginUpdates_title"
                         android:text="@string/setting_plugin_update_check_now_desc" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
     
                 <!-- Crash diagnostics telemetry (local counts only, never uploaded) -->
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/crashDiagnostics_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -439,469 +629,16 @@
                         android:text="@string/setting_crash_diagnostics_title"
                         android:textColor="@color/turtle_primary_text" />
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/crashDiagnostics_summary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/crashDiagnostics_title"
                         android:text="@string/setting_crash_diagnostics_desc" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
     
             </androidx.appcompat.widget.LinearLayoutCompat>
     
-            <!-- Advanced Tools -->
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/advanced_tools_category"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:background="@drawable/background_card"
-                android:orientation="vertical"
-                android:paddingHorizontal="@dimen/_2sdp"
-                android:paddingVertical="@dimen/_12sdp">
-    
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:text="@string/setting_category_v10_tools"
-                    android:textColor="@color/accent_primary" />
-    
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
-                    android:id="@+id/exportSettings_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/_12sdp">
-                    <TextView
-                        android:id="@+id/exportSettings_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_export_settings_title"
-                        android:textColor="@color/turtle_primary_text" />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/exportSettings_title"
-                        android:text="@string/setting_export_settings_desc" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
-    
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
-                    android:id="@+id/importSettings_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/_12sdp">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_import_settings_title"
-                        android:textColor="@color/turtle_primary_text" />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_import_settings_desc" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
-    
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
-                    android:id="@+id/crashHistory_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/_12sdp">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_crash_history_title"
-                        android:textColor="@color/turtle_primary_text" />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_crash_history_desc" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
-    
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
-                    android:id="@+id/crashRuleEditor_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/_12sdp">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_crash_rule_editor_title"
-                        android:textColor="@color/turtle_primary_text" />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_crash_rule_editor_desc" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
-    
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
-                    android:id="@+id/aiCrashHelp_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/_12sdp">
-    
-                    <TextView
-                        android:id="@+id/aiCrashHelp_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginEnd="@dimen/_8sdp"
-                        android:layout_toStartOf="@+id/aiCrashHelp"
-                        android:text="@string/setting_ai_crash_help_title"
-                        android:textColor="@color/turtle_primary_text" />
-    
-                    <TextView
-                        android:id="@+id/aiCrashHelp_summary"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/aiCrashHelp_title"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginEnd="@dimen/_8sdp"
-                        android:layout_toStartOf="@+id/aiCrashHelp"
-                        android:text="@string/setting_ai_crash_help_desc" />
-    
-                    <Switch
-                        android:id="@+id/aiCrashHelp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:checked="false"/>
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
-    
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
-                    android:id="@+id/aiCrashHelpApiKey_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/_12sdp">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_ai_key_title"
-                        android:textColor="@color/turtle_primary_text" />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_ai_key_desc" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
-    
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
-                    android:id="@+id/aiSkinFilter_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/_12sdp">
-    
-                    <TextView
-                        android:id="@+id/aiSkinFilter_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginEnd="@dimen/_8sdp"
-                        android:layout_toStartOf="@+id/aiSkinFilter"
-                        android:text="@string/setting_ai_skin_filter_title"
-                        android:textColor="@color/turtle_primary_text" />
-    
-                    <TextView
-                        android:id="@+id/aiSkinFilter_summary"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/aiSkinFilter_title"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginEnd="@dimen/_8sdp"
-                        android:layout_toStartOf="@+id/aiSkinFilter"
-                        android:text="@string/setting_ai_skin_filter_desc" />
-    
-                    <Switch
-                        android:id="@+id/aiSkinFilter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:checked="false"/>
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
-    
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
-                    android:id="@+id/aiLanguage_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/_12sdp">
-                    <TextView
-                        android:id="@+id/aiLanguage_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_ai_language_title"
-                        android:textColor="@color/turtle_primary_text" />
-                    <TextView
-                        android:id="@+id/aiLanguage_summary"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_ai_language_desc" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
-    
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
-                    android:id="@+id/aiBrain_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/_12sdp">
-    
-                    <TextView
-                        android:id="@+id/aiBrain_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginEnd="@dimen/_8sdp"
-                        android:layout_toStartOf="@+id/aiBrain"
-                        android:text="@string/setting_ai_brain_title"
-                        android:textColor="@color/turtle_primary_text" />
-    
-                    <TextView
-                        android:id="@+id/aiBrain_summary"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/aiBrain_title"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginEnd="@dimen/_8sdp"
-                        android:layout_toStartOf="@+id/aiBrain"
-                        android:text="@string/setting_ai_brain_desc" />
-    
-                    <Switch
-                        android:id="@+id/aiBrain"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:checked="false"/>
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
-    
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
-                    android:id="@+id/aiModel_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/_12sdp">
-                    <TextView
-                        android:id="@+id/aiModel_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_ai_model_title"
-                        android:textColor="@color/turtle_primary_text" />
-                    <TextView
-                        android:id="@+id/aiModel_summary"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_ai_model_desc" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
-
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
-                    android:id="@+id/aiVoice_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/_12sdp">
-                    <TextView
-                        android:id="@+id/aiVoice_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_ai_voice_title"
-                        android:textColor="@color/turtle_primary_text" />
-                    <TextView
-                        android:id="@+id/aiVoice_summary"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_ai_voice_desc" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
-
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
-                    android:id="@+id/aiWebSearch_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/_12sdp">
-    
-                    <TextView
-                        android:id="@+id/aiWebSearch_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginEnd="@dimen/_8sdp"
-                        android:layout_toStartOf="@+id/aiWebSearch"
-                        android:text="@string/setting_ai_web_search_title"
-                        android:textColor="@color/turtle_primary_text" />
-    
-                    <TextView
-                        android:id="@+id/aiWebSearch_summary"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/aiWebSearch_title"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginEnd="@dimen/_8sdp"
-                        android:layout_toStartOf="@+id/aiWebSearch"
-                        android:text="@string/setting_ai_web_search_desc" />
-    
-                    <Switch
-                        android:id="@+id/aiWebSearch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:checked="false"/>
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
-    
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
-                    android:id="@+id/aiSearchProvider_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/_12sdp">
-                    <TextView
-                        android:id="@+id/aiSearchProvider_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_ai_search_provider_title"
-                        android:textColor="@color/turtle_primary_text" />
-                    <TextView
-                        android:id="@+id/aiSearchProvider_summary"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_ai_search_provider_desc" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
-    
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
-                    android:id="@+id/aiSearchUrl_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/_12sdp">
-                    <TextView
-                        android:id="@+id/aiSearchUrl_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_ai_search_url_title"
-                        android:textColor="@color/turtle_primary_text" />
-                    <TextView
-                        android:id="@+id/aiSearchUrl_summary"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_ai_search_url_desc" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
-    
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
-                    android:id="@+id/aiSearchKey_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/_12sdp">
-                    <TextView
-                        android:id="@+id/aiSearchKey_title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_ai_search_key_title"
-                        android:textColor="@color/turtle_primary_text" />
-                    <TextView
-                        android:id="@+id/aiSearchKey_summary"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_ai_search_key_desc" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
-    
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
-                    android:id="@+id/configEditor_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/_12sdp">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_config_editor_title"
-                        android:textColor="@color/turtle_primary_text" />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_config_editor_desc" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
-    
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
-                    android:id="@+id/dependencyGraph_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/_12sdp">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_dependency_graph_title"
-                        android:textColor="@color/turtle_primary_text" />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/setting_dependency_graph_desc" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
-    
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
-                    android:id="@+id/offlineModeFallback_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/_12sdp">
-                    <TextView
-                        android:id="@+id/offlineModeFallback_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_toStartOf="@+id/offlineModeFallback"
-                        android:text="@string/setting_offline_mode_fallback_title"
-                        android:textColor="@color/turtle_primary_text" />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/offlineModeFallback_title"
-                        android:layout_toStartOf="@+id/offlineModeFallback"
-                        android:text="@string/setting_offline_mode_fallback_desc" />
-                    <Switch
-                        android:id="@+id/offlineModeFallback"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
-    
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
-                    android:id="@+id/anrDetectorEnabled_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:padding="@dimen/_12sdp">
-                    <TextView
-                        android:id="@+id/anrDetectorEnabled_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_toStartOf="@+id/anrDetectorEnabled"
-                        android:text="@string/setting_anr_detector_title"
-                        android:textColor="@color/turtle_primary_text" />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/anrDetectorEnabled_title"
-                        android:layout_toStartOf="@+id/anrDetectorEnabled"
-                        android:text="@string/setting_anr_detector_desc" />
-                    <Switch
-                        android:id="@+id/anrDetectorEnabled"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
-    
-            </androidx.appcompat.widget.LinearLayoutCompat>
     
         </androidx.appcompat.widget.LinearLayoutCompat>
     

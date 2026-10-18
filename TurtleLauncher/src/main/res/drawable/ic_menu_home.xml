@@ -6,5 +6,17 @@
     android:viewportHeight="24">
     <path
         android:fillColor="@color/turtle_bg_elevated"
-        android:pathData="M10,20v-6h4v6h5v-8h3L12,3 2,12h3v8z"/>
+        android:fillAlpha="0.2"
+        android:pathData="M4,10.5 L12,4 L20,10.5 V19.5 A1.5,1.5 0 0 1 18.5,21 H5.5 A1.5,1.5 0 0 1 4,19.5 Z"
+        android:strokeColor="@color/turtle_bg_elevated"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="2" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M9.5,21 V15 H14.5 V21"
+        android:strokeColor="@color/turtle_bg_elevated"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="2" />
 </vector>

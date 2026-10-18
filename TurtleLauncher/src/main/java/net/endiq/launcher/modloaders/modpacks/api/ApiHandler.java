@@ -3,8 +3,8 @@ package net.endiq.launcher.modloaders.modpacks.api;
 import android.util.ArrayMap;
 
 import com.google.gson.Gson;
-import com.endiq.turtlelauncher.feature.log.Logging;
-import com.endiq.turtlelauncher.utils.path.UrlManager;
+import com.cyplixlauncher.mc.feature.log.Logging;
+import com.cyplixlauncher.mc.utils.path.UrlManager;
 
 import net.endiq.launcher.Tools;
 

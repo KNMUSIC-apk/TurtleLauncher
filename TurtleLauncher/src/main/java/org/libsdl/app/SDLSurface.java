@@ -31,7 +31,7 @@ import android.view.View;
 import android.view.WindowInsets;
 import android.view.WindowManager;
 
-import com.endiq.turtlelauncher.game.sdl.SdlBridge;
+import com.cyplixlauncher.mc.game.sdl.SdlBridge;
 
 
 /**

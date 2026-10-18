@@ -14,8 +14,8 @@ import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.core.math.MathUtils;
 
-import com.endiq.turtlelauncher.feature.log.Logging;
-import com.endiq.turtlelauncher.setting.AllSettings;
+import com.cyplixlauncher.mc.feature.log.Logging;
+import com.cyplixlauncher.mc.setting.AllSettings;
 
 import net.endiq.launcher.GrabListener;
 import net.endiq.launcher.Tools;

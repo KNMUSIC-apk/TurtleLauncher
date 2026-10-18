@@ -38,7 +38,7 @@
                 android:layout_height="@dimen/_1sdp"
                 android:background="@color/game_panel_overlay"/>
 
-            <com.endiq.turtlelauncher.ui.view.AnimTextView
+            <com.cyplixlauncher.mc.ui.view.AnimTextView
                 android:id="@+id/add_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -50,7 +50,19 @@
                 android:paddingHorizontal="@dimen/_8sdp"
                 app:ripple_for_text="true"/>
 
-            <com.endiq.turtlelauncher.ui.view.AnimTextView
+            <com.cyplixlauncher.mc.ui.view.AnimTextView
+                android:id="@+id/add_command_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/background_item"
+                android:text="@string/customctrl_addcommandbutton"
+                android:gravity="center_horizontal"
+                android:paddingVertical="@dimen/_12sdp"
+                android:paddingHorizontal="@dimen/_8sdp"
+                app:ripple_for_text="true"/>
+
+            <com.cyplixlauncher.mc.ui.view.AnimTextView
                 android:id="@+id/add_drawer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,7 +74,7 @@
                 android:paddingHorizontal="@dimen/_8sdp"
                 app:ripple_for_text="true"/>
 
-            <com.endiq.turtlelauncher.ui.view.AnimTextView
+            <com.cyplixlauncher.mc.ui.view.AnimTextView
                 android:id="@+id/add_joystick"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,7 +99,7 @@
                 android:layout_height="@dimen/_1sdp"
                 android:background="@color/game_panel_overlay"/>
 
-            <com.endiq.turtlelauncher.ui.view.AnimTextView
+            <com.cyplixlauncher.mc.ui.view.AnimTextView
                 android:id="@+id/load"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -99,7 +111,7 @@
                 android:paddingHorizontal="@dimen/_8sdp"
                 app:ripple_for_text="true"/>
 
-            <com.endiq.turtlelauncher.ui.view.AnimTextView
+            <com.cyplixlauncher.mc.ui.view.AnimTextView
                 android:id="@+id/save"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -111,7 +123,7 @@
                 android:paddingHorizontal="@dimen/_8sdp"
                 app:ripple_for_text="true"/>
 
-            <com.endiq.turtlelauncher.ui.view.AnimTextView
+            <com.cyplixlauncher.mc.ui.view.AnimTextView
                 android:id="@+id/save_and_exit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -123,7 +135,7 @@
                 android:paddingHorizontal="@dimen/_8sdp"
                 app:ripple_for_text="true"/>
 
-            <com.endiq.turtlelauncher.ui.view.AnimTextView
+            <com.cyplixlauncher.mc.ui.view.AnimTextView
                 android:id="@+id/save_and_export"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -148,7 +160,7 @@
                 android:layout_height="@dimen/_1sdp"
                 android:background="@color/game_panel_overlay"/>
 
-            <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+            <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                 android:id="@+id/snapping_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -168,13 +180,13 @@
                     android:text="@string/controls_settings_button_snapping"
                     android:textColor="@color/turtle_primary_text" />
 
-                <Switch
+                <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                     android:id="@+id/snapping"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true" />
-            </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+            </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
             <LinearLayout
                 android:id="@+id/snapping_distance_layout"
@@ -243,7 +255,7 @@
 
             </LinearLayout>
 
-            <com.endiq.turtlelauncher.ui.view.AnimTextView
+            <com.cyplixlauncher.mc.ui.view.AnimTextView
                 android:id="@+id/select_default"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -255,7 +267,7 @@
                 android:paddingHorizontal="@dimen/_8sdp"
                 app:ripple_for_text="true"/>
 
-            <com.endiq.turtlelauncher.ui.view.AnimTextView
+            <com.cyplixlauncher.mc.ui.view.AnimTextView
                 android:id="@+id/exit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

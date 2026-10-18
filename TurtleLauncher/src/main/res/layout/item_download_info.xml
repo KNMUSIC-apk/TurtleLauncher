@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.endiq.turtlelauncher.ui.layout.AnimConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.cyplixlauncher.mc.ui.layout.AnimConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -79,6 +79,7 @@
         app:layout_constraintTop_toBottomOf="@+id/title_textview"/>
 
     <TextView
+        android:fontFamily="@font/exo2"
         android:id="@+id/description_textview"
         style="@style/TextAppearance.AppCompat.Body1"
         android:layout_width="0dp"
@@ -108,7 +109,7 @@
 
     <!-- One-tap shortcut to the same version/detail screen the row itself opens (see
          InfoAdapter.ViewHolder.setStateLimited) - purely additive, doesn't change navigation. -->
-    <com.endiq.turtlelauncher.ui.view.AnimButton
+    <com.cyplixlauncher.mc.ui.view.AnimButton
         android:id="@+id/install_button"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_26sdp"
@@ -124,4 +125,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-</com.endiq.turtlelauncher.ui.layout.AnimConstraintLayout>
+</com.cyplixlauncher.mc.ui.layout.AnimConstraintLayout>

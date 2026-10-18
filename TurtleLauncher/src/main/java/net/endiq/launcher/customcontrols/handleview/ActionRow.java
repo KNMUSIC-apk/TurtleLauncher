@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 import androidx.core.math.MathUtils;
 
-import com.endiq.turtlelauncher.R;
+import com.cyplixlauncher.mc.R;
 
 import net.endiq.launcher.customcontrols.buttons.ControlInterface;
 

@@ -2,10 +2,10 @@ package net.endiq.launcher.utils;
 
 import androidx.annotation.Nullable;
 
-import com.endiq.turtlelauncher.feature.log.Logging;
-import com.endiq.turtlelauncher.utils.path.PathManager;
-import com.endiq.turtlelauncher.utils.ZHTools;
-import com.endiq.turtlelauncher.utils.path.UrlManager;
+import com.cyplixlauncher.mc.feature.log.Logging;
+import com.cyplixlauncher.mc.utils.path.PathManager;
+import com.cyplixlauncher.mc.utils.ZHTools;
+import com.cyplixlauncher.mc.utils.path.UrlManager;
 
 import net.endiq.launcher.Tools;
 

@@ -67,9 +67,9 @@
                         android:padding="@dimen/padding_heavy"
                         app:layout_constraintTop_toBottomOf="@id/isolation_type_title"
                         app:spinner_arrow_tint="@color/turtle_primary_text"
-                        app:spinner_item_height="@dimen/_40sdp"
-                        app:spinner_popup_background="@drawable/background_edit_box"
+                        app:spinner_item_height="@dimen/_48sdp"
                         app:spinner_popup_max_height="@dimen/_240sdp"
+                        app:spinner_popup_background="@drawable/background_spinner_popup"
                         tools:paddingVertical="@dimen/_12sdp" />
 
                     <TextView
@@ -81,7 +81,7 @@
                         app:layout_constraintStart_toStartOf="@+id/control_name"
                         app:layout_constraintTop_toBottomOf="@+id/isolation_type" />
 
-                    <com.endiq.turtlelauncher.ui.view.AnimTextView
+                    <com.cyplixlauncher.mc.ui.view.AnimTextView
                         android:id="@+id/control_name"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -94,7 +94,7 @@
                         app:layout_constraintEnd_toStartOf="@id/reset_control"
                         app:layout_constraintTop_toBottomOf="@+id/control_title" />
 
-                    <com.endiq.turtlelauncher.ui.view.AnimButton
+                    <com.cyplixlauncher.mc.ui.view.AnimButton
                         android:id="@+id/reset_control"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
@@ -118,7 +118,7 @@
                             app:layout_constraintStart_toStartOf="@+id/custom_path"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <com.endiq.turtlelauncher.ui.view.AnimTextView
+                        <com.cyplixlauncher.mc.ui.view.AnimTextView
                             android:id="@+id/custom_path"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -132,7 +132,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/custom_path_title"
                             tools:ignore="HardcodedText" />
 
-                        <com.endiq.turtlelauncher.ui.view.AnimButton
+                        <com.cyplixlauncher.mc.ui.view.AnimButton
                             android:id="@+id/reset_custom_path"
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
@@ -160,9 +160,9 @@
                         android:padding="@dimen/padding_heavy"
                         app:layout_constraintTop_toBottomOf="@+id/renderer_title"
                         app:spinner_arrow_tint="@color/turtle_primary_text"
-                        app:spinner_item_height="@dimen/_40sdp"
-                        app:spinner_popup_background="@drawable/background_edit_box"
+                        app:spinner_item_height="@dimen/_48sdp"
                         app:spinner_popup_max_height="@dimen/_240sdp"
+                        app:spinner_popup_background="@drawable/background_spinner_popup"
                         tools:paddingVertical="@dimen/_12sdp" />
 
                     <TextView
@@ -182,9 +182,9 @@
                         android:padding="@dimen/padding_heavy"
                         app:layout_constraintTop_toBottomOf="@+id/driver_title"
                         app:spinner_arrow_tint="@color/turtle_primary_text"
-                        app:spinner_item_height="@dimen/_40sdp"
-                        app:spinner_popup_background="@drawable/background_edit_box"
+                        app:spinner_item_height="@dimen/_48sdp"
                         app:spinner_popup_max_height="@dimen/_240sdp"
+                        app:spinner_popup_background="@drawable/background_spinner_popup"
                         tools:paddingVertical="@dimen/_12sdp" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -212,13 +212,14 @@
                         android:text="@string/setting_version_custom_info_title" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/custom_info_desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/_10ssp"
                         android:text="@string/setting_version_custom_info_desc" />
 
-                    <com.endiq.turtlelauncher.ui.view.AnimEditText
+                    <com.cyplixlauncher.mc.ui.view.AnimEditText
                         android:id="@+id/custom_info_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -237,13 +238,14 @@
                         android:text="@string/setting_java_args_title" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/jvm_args_desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/_10ssp"
                         android:text="@string/setting_java_args_desc" />
 
-                    <com.endiq.turtlelauncher.ui.view.AnimEditText
+                    <com.cyplixlauncher.mc.ui.view.AnimEditText
                         android:id="@+id/jvm_args_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -262,13 +264,14 @@
                         android:text="@string/setting_cpu_core_override_title" />
 
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/cpu_core_override_desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/_10ssp"
                         android:text="@string/setting_cpu_core_override_desc" />
 
-                    <com.endiq.turtlelauncher.ui.view.AnimEditText
+                    <com.cyplixlauncher.mc.ui.view.AnimEditText
                         android:id="@+id/cpu_core_override_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -294,9 +297,9 @@
                         android:background="@drawable/background_item"
                         android:padding="@dimen/padding_heavy"
                         app:spinner_arrow_tint="@color/turtle_primary_text"
-                        app:spinner_item_height="@dimen/_40sdp"
-                        app:spinner_popup_background="@drawable/background_edit_box"
+                        app:spinner_item_height="@dimen/_48sdp"
                         app:spinner_popup_max_height="@dimen/_240sdp"
+                        app:spinner_popup_background="@drawable/background_spinner_popup"
                         tools:paddingVertical="@dimen/_12sdp" />
 
                 </LinearLayout>
@@ -333,7 +336,7 @@
             app:layout_constraintStart_toEndOf="@+id/shadowView"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.endiq.turtlelauncher.ui.layout.AnimConstraintLayout
+            <com.cyplixlauncher.mc.ui.layout.AnimConstraintLayout
                 android:id="@+id/icon_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -363,7 +366,7 @@
                     app:layout_constraintBottom_toBottomOf="@+id/icon"
                     app:layout_constraintEnd_toEndOf="@+id/icon" />
 
-            </com.endiq.turtlelauncher.ui.layout.AnimConstraintLayout>
+            </com.cyplixlauncher.mc.ui.layout.AnimConstraintLayout>
 
             <ImageView
                 android:id="@+id/icon_reset"
@@ -375,7 +378,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/icon_layout" />
 
-            <com.endiq.turtlelauncher.ui.view.AnimButton
+            <com.cyplixlauncher.mc.ui.view.AnimButton
                 android:id="@+id/save_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -385,7 +388,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <com.endiq.turtlelauncher.ui.view.AnimButton
+            <com.cyplixlauncher.mc.ui.view.AnimButton
                 android:id="@+id/cancel_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

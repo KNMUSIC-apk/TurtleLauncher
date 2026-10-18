@@ -1,0 +1,28 @@
+package com.cyplixlauncher.mc.feature.download.enums
+
+import com.cyplixlauncher.mc.feature.download.platform.AbstractPlatformHelper
+import com.cyplixlauncher.mc.feature.download.platform.curseforge.CurseForgeHelper
+import com.cyplixlauncher.mc.feature.download.platform.modrinth.ModrinthHelper
+
+enum class Platform(val pName: String, val helper: AbstractPlatformHelper) {
+    MODRINTH("Modrinth", ModrinthHelper()),
+    CURSEFORGE("CurseForge", CurseForgeHelper());
+
+    /** Whether this source can search and install the given resource type. */
+    fun supports(classify: Classify): Boolean = when (this) {
+        MODRINTH -> classify != Classify.WORLD // Modrinth has no world archives
+        CURSEFORGE -> classify != Classify.MODPACK // Modpack install is not wired for CurseForge yet
+    }
+
+    companion object {
+        /** The sources offered in a resource tab's source spinner, in display order. */
+        fun forClassify(classify: Classify): List<Platform> {
+            return Platform.entries.filter { it.supports(classify) }
+        }
+
+        /** The source a resource tab starts on. */
+        fun defaultFor(classify: Classify): Platform {
+            return forClassify(classify).first()
+        }
+    }
+}

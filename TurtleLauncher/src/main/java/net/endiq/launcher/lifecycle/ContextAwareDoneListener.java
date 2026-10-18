@@ -9,14 +9,14 @@ import android.content.Intent;
 import androidx.annotation.NonNull;
 
 import com.endiq.mcgui.ProgressLayout;
-import com.endiq.turtlelauncher.R;
-import com.endiq.turtlelauncher.context.ContextExecutor;
-import com.endiq.turtlelauncher.feature.mod.parser.ModChecker;
-import com.endiq.turtlelauncher.feature.mod.parser.ModInfo;
-import com.endiq.turtlelauncher.feature.mod.parser.ModParser;
-import com.endiq.turtlelauncher.feature.mod.parser.ModParserListener;
-import com.endiq.turtlelauncher.feature.version.Version;
-import com.endiq.turtlelauncher.setting.AllSettings;
+import com.cyplixlauncher.mc.R;
+import com.cyplixlauncher.mc.context.ContextExecutor;
+import com.cyplixlauncher.mc.feature.mod.parser.ModChecker;
+import com.cyplixlauncher.mc.feature.mod.parser.ModInfo;
+import com.cyplixlauncher.mc.feature.mod.parser.ModParser;
+import com.cyplixlauncher.mc.feature.mod.parser.ModParserListener;
+import com.cyplixlauncher.mc.feature.version.Version;
+import com.cyplixlauncher.mc.setting.AllSettings;
 
 import net.endiq.launcher.MainActivity;
 import net.endiq.launcher.Tools;
@@ -65,7 +65,7 @@ public class ContextAwareDoneListener implements AsyncMinecraftDownloader.DoneLi
                 if (modInfoList.isEmpty()) executeTask();
                 else {
                     ContextExecutor.executeTaskWithAllContext(context ->
-                        com.endiq.turtlelauncher.feature.mod.ModAutoMaintenance.runForVersion(
+                        com.cyplixlauncher.mc.feature.mod.ModAutoMaintenance.runForVersion(
                             context, mVersion, modInfoList, () ->
                                 new ModChecker().check(context, modInfoList, modCheckResult -> {
                                     mVersion.setModCheckResult(modCheckResult);
@@ -88,9 +88,9 @@ public class ContextAwareDoneListener implements AsyncMinecraftDownloader.DoneLi
     public void executeWithActivity(Activity activity) {
         try {
             Intent gameStartIntent = createGameStartIntent(activity);
-            com.endiq.turtlelauncher.task.TaskExecutors.setGameSessionActive(true);
-            com.endiq.turtlelauncher.feature.turtle.BackgroundServiceManager.onGameSessionStart(activity);
-            com.endiq.turtlelauncher.feature.shizuku.ShizukuActions.applyBeforeLaunchIfEnabled();
+            com.cyplixlauncher.mc.task.TaskExecutors.setGameSessionActive(true);
+            com.cyplixlauncher.mc.feature.turtle.BackgroundServiceManager.onGameSessionStart(activity);
+            com.cyplixlauncher.mc.feature.shizuku.ShizukuActions.applyBeforeLaunchIfEnabled();
             activity.startActivity(gameStartIntent);
             if (AllSettings.getQuitLauncher().getValue()) {
                 activity.finish();

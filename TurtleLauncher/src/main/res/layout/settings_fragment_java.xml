@@ -66,7 +66,7 @@
                 android:paddingHorizontal="@dimen/_2sdp"
                 android:paddingVertical="@dimen/_12sdp">
     
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/install_jre_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -83,6 +83,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/install_jre_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -90,9 +91,9 @@
                         android:layout_alignParentStart="true"
                         android:layout_alignParentEnd="true"
                         android:text="@string/setting_java_multirt_desc" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
     
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/selectRuntimeMode_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -109,6 +110,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/selectRuntimeMode_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -125,9 +127,9 @@
                         android:layout_alignParentStart="true"
                         android:layout_alignParentEnd="true"
                         android:text="@string/setting_java_select_runtime_ask_me" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
     
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/javaArgs_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -144,6 +146,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/javaArgs_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -152,7 +155,7 @@
                         android:layout_alignParentEnd="true"
                         android:text="@string/setting_java_args_desc" />
     
-                    <com.endiq.turtlelauncher.ui.view.AnimEditText
+                    <com.cyplixlauncher.mc.ui.view.AnimEditText
                         android:id="@+id/javaArgs_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -160,9 +163,9 @@
                         android:layout_marginTop="@dimen/_8sdp"
                         android:background="@drawable/background_edit_box"
                         android:paddingHorizontal="@dimen/_8sdp" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
     
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/allocation_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -180,6 +183,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/allocation_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -217,9 +221,9 @@
                         android:layout_marginVertical="@dimen/_8sdp"
                         android:layout_marginEnd="@dimen/_12sdp"
                         tools:text="0" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
     
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/java_sandbox_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -237,6 +241,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/java_sandbox_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -246,13 +251,13 @@
                         android:layout_toStartOf="@+id/java_sandbox"
                         android:text="@string/setting_java_sandbox_desc" />
     
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/java_sandbox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
     
             </androidx.appcompat.widget.LinearLayoutCompat>
 

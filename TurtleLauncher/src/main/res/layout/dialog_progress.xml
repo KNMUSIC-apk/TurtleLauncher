@@ -69,7 +69,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.endiq.turtlelauncher.ui.view.AnimButton
+    <com.cyplixlauncher.mc.ui.view.AnimButton
         android:id="@+id/cancel_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

@@ -48,7 +48,7 @@ public class CallbackBridge {
     }
 
     public static void sendKeycode(int keycode, char keychar, int scancode, int modifiers, boolean isDown) {
-        com.endiq.turtlelauncher.feature.inputstats.InputStatsTracker.onKeyEvent(keycode, isDown);
+        com.cyplixlauncher.mc.feature.inputstats.InputStatsTracker.onKeyEvent(keycode, isDown);
         // TODO CHECK: This may cause input issue, not receive input!
         if(keycode != 0)  nativeSendKey(keycode,scancode,isDown ? 1 : 0, modifiers);
         if(isDown && keychar != '\u0000') {
@@ -84,7 +84,7 @@ public class CallbackBridge {
     }
 
     public static void sendMouseKeycode(int button, int modifiers, boolean isDown) {
-        com.endiq.turtlelauncher.feature.inputstats.InputStatsTracker.onMouseEvent(button, isDown);
+        com.cyplixlauncher.mc.feature.inputstats.InputStatsTracker.onMouseEvent(button, isDown);
         // if (isGrabbing()) DEBUG_STRING.append("MouseGrabStrace: " + android.util.Log.getStackTraceString(new Throwable()) + "\n");
         nativeSendMouseButton(button, isDown ? 1 : 0, modifiers);
     }
@@ -96,6 +96,34 @@ public class CallbackBridge {
     
     public static void sendScroll(double xoffset, double yoffset) {
         nativeSendScroll(xoffset, yoffset);
+    }
+
+    /**
+     * Wheel events can arrive twice: once through the generic motion path and once through the
+     * captured-pointer path, both reading the same MotionEvent. Drop a repeat of the same event,
+     * and keep the fractional part of small deltas so they add up to whole notches (the native
+     * side truncates each value to an int, so a 0.5 notch would otherwise be lost).
+     */
+    private static long sLastScrollEventTime = Long.MIN_VALUE;
+    private static float sLastScrollH = 0f;
+    private static float sLastScrollV = 0f;
+    private static double sScrollRemainderX = 0d;
+    private static double sScrollRemainderY = 0d;
+
+    public static void sendScrollEvent(long eventTime, float hScroll, float vScroll) {
+        if (eventTime == sLastScrollEventTime && hScroll == sLastScrollH && vScroll == sLastScrollV) return;
+        sLastScrollEventTime = eventTime;
+        sLastScrollH = hScroll;
+        sLastScrollV = vScroll;
+
+        sScrollRemainderX += hScroll;
+        sScrollRemainderY += vScroll;
+        double wholeX = (int) sScrollRemainderX;
+        double wholeY = (int) sScrollRemainderY;
+        sScrollRemainderX -= wholeX;
+        sScrollRemainderY -= wholeY;
+        if (wholeX == 0 && wholeY == 0) return;
+        sendScroll(wholeX, wholeY);
     }
 
     public static void sendUpdateWindowSize(int w, int h) {

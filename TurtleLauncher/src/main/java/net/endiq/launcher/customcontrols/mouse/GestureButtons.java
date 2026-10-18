@@ -1,6 +1,6 @@
 package net.endiq.launcher.customcontrols.mouse;
 
-import com.endiq.turtlelauncher.setting.AllSettings;
+import com.cyplixlauncher.mc.setting.AllSettings;
 
 import net.endiq.launcher.LwjglGlfwKeycode;
 

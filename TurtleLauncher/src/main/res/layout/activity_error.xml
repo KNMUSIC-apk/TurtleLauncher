@@ -184,7 +184,7 @@
                     android:textColor="#333333"
                     tools:ignore="HardcodedText"/>
 
-                <com.endiq.turtlelauncher.ui.view.AnimButton
+                <com.cyplixlauncher.mc.ui.view.AnimButton
                     android:id="@+id/copy_log"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -258,7 +258,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.22">
 
-        <com.endiq.turtlelauncher.ui.view.AnimButton
+        <com.cyplixlauncher.mc.ui.view.AnimButton
             android:id="@+id/ai_inspect_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -271,7 +271,7 @@
             android:textSize="@dimen/_12ssp"
             android:text="@string/crash_inspect_with_ai"/>
 
-        <com.endiq.turtlelauncher.ui.view.AnimButton
+        <com.cyplixlauncher.mc.ui.view.AnimButton
             android:id="@+id/crash_export_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -285,7 +285,7 @@
             android:visibility="gone"
             android:text="@string/crash_export_button"/>
 
-        <com.endiq.turtlelauncher.ui.view.AnimButton
+        <com.cyplixlauncher.mc.ui.view.AnimButton
             android:id="@+id/share_log"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -331,14 +331,14 @@
 
         <!-- Hidden triggers kept for logic reuse (repair / search-online), surfaced via the
              overflow (⋯) button above through a PopupMenu instead of being shown inline. -->
-        <com.endiq.turtlelauncher.ui.view.AnimButton
+        <com.cyplixlauncher.mc.ui.view.AnimButton
             android:id="@+id/crash_repair_button"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:visibility="gone"
             android:text="@string/crash_repair_button"/>
 
-        <com.endiq.turtlelauncher.ui.view.AnimButton
+        <com.cyplixlauncher.mc.ui.view.AnimButton
             android:id="@+id/crash_search_online_button"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -350,7 +350,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"/>
 
-        <com.endiq.turtlelauncher.ui.view.AnimButton
+        <com.cyplixlauncher.mc.ui.view.AnimButton
             android:id="@+id/error_restart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

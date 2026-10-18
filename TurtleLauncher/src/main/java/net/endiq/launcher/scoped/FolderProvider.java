@@ -16,11 +16,11 @@ import android.webkit.MimeTypeMap;
 
 import androidx.annotation.Nullable;
 
-import com.endiq.turtlelauncher.BuildConfig;
-import com.endiq.turtlelauncher.InfoDistributor;
-import com.endiq.turtlelauncher.R;
-import com.endiq.turtlelauncher.feature.log.Logging;
-import com.endiq.turtlelauncher.utils.path.PathManager;
+import com.cyplixlauncher.mc.BuildConfig;
+import com.cyplixlauncher.mc.InfoDistributor;
+import com.cyplixlauncher.mc.R;
+import com.cyplixlauncher.mc.feature.log.Logging;
+import com.cyplixlauncher.mc.utils.path.PathManager;
 
 import net.endiq.launcher.Tools;
 

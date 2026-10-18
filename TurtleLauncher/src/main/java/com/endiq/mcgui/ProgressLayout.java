@@ -16,8 +16,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.endiq.turtlelauncher.R;
-import com.endiq.turtlelauncher.feature.log.Logging;
+import com.cyplixlauncher.mc.R;
+import com.cyplixlauncher.mc.feature.log.Logging;
 
 import net.endiq.launcher.progresskeeper.ProgressKeeper;
 import net.endiq.launcher.progresskeeper.ProgressListener;
@@ -128,7 +128,13 @@ public class ProgressLayout extends ConstraintLayout implements View.OnClickList
     public void onUpdateTaskCount(int tc) {
         post(()->{
             mTaskNumberDisplayer.setText(getContext().getString(R.string.progresslayout_tasks_in_progress, tc));
-            setVisibility(GONE);
+            // Tasks show directly on the launcher while they run (game launch, downloads, ...)
+            // and hide again once the last one finishes.
+            if (tc > 0) {
+                mLinearLayout.setVisibility(VISIBLE);
+                mFlipArrow.setRotation(180);
+            }
+            setVisibility(tc > 0 ? VISIBLE : GONE);
         });
     }
 

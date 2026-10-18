@@ -120,7 +120,7 @@
                 android:orientation="horizontal"
                 android:layout_marginBottom="@dimen/space_s">
 
-                <com.endiq.turtlelauncher.ui.view.AnimButton
+                <com.cyplixlauncher.mc.ui.view.AnimButton
                     android:id="@+id/install_emotecraft_button"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -129,7 +129,7 @@
                     android:visibility="gone"
                     android:text="@string/emotes_install_button"/>
 
-                <com.endiq.turtlelauncher.ui.view.AnimButton
+                <com.cyplixlauncher.mc.ui.view.AnimButton
                     android:id="@+id/open_browser_button"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
