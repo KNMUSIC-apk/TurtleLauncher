@@ -52,6 +52,10 @@ class LaunchArgs(
             argsList.add("-Dorg.lwjgl.libname=$lwjglNativeOverride")
         }
 
+        if (runtime.javaVersion >= 25) {
+            // LWJGL's Unsafe memory backend reaches jdk.internal.misc; JDK 25 blocks it unless exported.
+            argsList.add("--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED")
+        }
         if (runtime.javaVersion > 8) {
             val mainClass = versionInfo.mainClass ?: ""
             val lastDot = mainClass.lastIndexOf(".")

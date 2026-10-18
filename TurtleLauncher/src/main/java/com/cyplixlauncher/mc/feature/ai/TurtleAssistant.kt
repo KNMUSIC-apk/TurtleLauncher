@@ -46,7 +46,7 @@ object TurtleAssistant {
                 startingSuggestions()
             )
         }
-        if (TurtleAiGemini.apiKey().isEmpty() && !TurtleAiCustom.isEnabled()) {
+        if (TurtleAiGemini.apiKey().isEmpty()) {
             return Reply(TurtleAiLanguage.shell(TurtleAiLanguage.ENGLISH).videoFailed, startingSuggestions())
         }
         val video = TurtleAiGemini.generateVideo(prompt)

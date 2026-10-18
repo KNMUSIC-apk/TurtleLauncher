@@ -128,11 +128,9 @@ object TurtleAiGemini {
     /** True when the AI brain is switched on *and* there is a key to use. */
     @JvmStatic
     fun isConfigured(): Boolean {
-        // Turning the custom AI on is an explicit opt-in, so it counts even when the Gemini brain switch is off.
-        if (TurtleAiCustom.isEnabled()) return true
         val enabled =
             runCatching { AllSettings.aiAssistantCloudBrain.getValue() }.getOrDefault(false)
-        return enabled && (apiKey().isNotEmpty() || TurtleAiCustom.isEnabled())
+        return enabled && apiKey().isNotEmpty()
     }
 
     /** True when the user asked for internet search (Google Search grounding). */
@@ -180,9 +178,8 @@ object TurtleAiGemini {
         task: TurtleAiModels.Task = TurtleAiModels.Task.CHAT
     ): Answer? {
         if (question.isBlank()) return null
-        val custom = TurtleAiCustom.isEnabled()
         val key = apiKey()
-        if (key.isEmpty() && !custom) return null
+        if (key.isEmpty()) return null
 
         val systemPrompt = buildString {
             append(TurtleAiPrompt.systemPrompt())
@@ -210,7 +207,6 @@ object TurtleAiGemini {
             }
         }
 
-        if (custom) return TurtleAiCustom.chat(systemPrompt, userContent, history, 0.3, MAX_OUTPUT_TOKENS)
 
         val contents = buildContents(userContent, history)
 
@@ -265,9 +261,6 @@ object TurtleAiGemini {
         task: TurtleAiModels.Task = TurtleAiModels.Task.REASONING
     ): String? {
         if (systemPrompt.isBlank() || userText.isBlank()) return null
-        if (TurtleAiCustom.isEnabled()) {
-            return TurtleAiCustom.chat(systemPrompt, userText, emptyList(), temperature, maxOutputTokens)?.text
-        }
         val key = apiKey()
         if (key.isEmpty()) return null
 
@@ -850,7 +843,6 @@ object TurtleAiGemini {
     /** Short, user-facing reason the most recent Gemini request failed, or null if it didn't. */
     @JvmStatic
     fun failureReason(): String? {
-        if (TurtleAiCustom.isEnabled()) return TurtleAiCustom.failureReason()
         val f = lastFailure ?: return null
         return when {
             f == "no key" -> "No Gemini API key is set (Settings -> Experimental)."

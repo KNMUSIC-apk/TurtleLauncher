@@ -12,7 +12,6 @@ import com.cyplixlauncher.mc.feature.accounts.AccountType
 import com.cyplixlauncher.mc.feature.accounts.AccountUtils
 import com.cyplixlauncher.mc.feature.accounts.AccountsManager
 import com.cyplixlauncher.mc.feature.log.Logging
-import com.cyplixlauncher.mc.feature.mod.NanoVGNativesFix
 import com.cyplixlauncher.mc.feature.version.Version
 import com.cyplixlauncher.mc.renderer.Renderers
 import com.cyplixlauncher.mc.setting.AllSettings
@@ -53,13 +52,6 @@ class LaunchGame {
          */
         @JvmStatic
         fun preLaunch(context: Context, version: Version) {
-            runCatching {
-                val loader = version.getVersionInfo()?.loaderInfo?.firstNotNullOfOrNull {
-                    com.cyplixlauncher.mc.feature.download.utils.ModLoaderUtils.getModLoader(it.name)
-                }
-                NanoVGNativesFix.ensureInstalled(context, loader, File(version.getGameDir(), "mods"))
-            }.onFailure { e -> Logging.e("LaunchGame", "NanoVGNativesFix check failed", e) }
-
             runCatching {
                 val rendererUniqueId = version.getRenderer()
                 val rendererInstance = runCatching {

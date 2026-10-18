@@ -115,8 +115,6 @@ class ExperimentalSettingsFragment :
 
         SwitchSettingsWrapper(context, AllSettings.aiWebSearchEnabled, binding.aiWebSearchEnabledLayout, binding.aiWebSearchEnabled)
         SwitchSettingsWrapper(context, AllSettings.aiAssistantEnabled, binding.aiAssistantExpLayout, binding.aiAssistantExp)
-        SwitchSettingsWrapper(context, AllSettings.aiCustomEnabled, binding.aiCustomEnabledLayout, binding.aiCustomEnabled)
-        binding.aiCustomConfigLayout.setOnClickListener { promptCustomAi(context) }
 
         // Turtle AI: language, optional cloud brain, optional web search. See
         // feature/ai/TurtleAiLanguage.kt, TurtleAiGemini.kt and TurtleAiWebSearch.kt.
@@ -171,30 +169,6 @@ class ExperimentalSettingsFragment :
                 .setConfirm(R.string.generic_ok)
                 .showDialog()
         }
-    }
-
-    /** Only a token is needed: the service and model are detected from the token's format. */
-    private fun promptCustomAi(context: android.content.Context) {
-        val current = runCatching { AllSettings.aiCustomApiKey.getValue() }.getOrDefault("")
-        com.cyplixlauncher.mc.ui.dialog.EditTextDialog.Builder(context)
-            .setTitle(R.string.setting_ai_custom_config_title)
-            .setHintText(R.string.setting_ai_custom_key_hint)
-            .setEditText(current)
-            .setInputType(
-                android.text.InputType.TYPE_CLASS_TEXT or
-                    android.text.InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-            )
-            .setConfirmListener { editText, _ ->
-                AllSettings.aiCustomApiKey.put(editText.text.toString().trim()).save()
-                val detected = com.cyplixlauncher.mc.feature.ai.TurtleAiCustom.detectedProvider()
-                Toast.makeText(
-                    context,
-                    if (detected != null) "Đã nhận diện: $detected" else "Không nhận diện được token này",
-                    Toast.LENGTH_LONG
-                ).show()
-                true
-            }
-            .showDialog()
     }
 
     private fun promptSetAiCrashHelpApiKey(context: android.content.Context) {

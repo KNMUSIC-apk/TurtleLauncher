@@ -423,9 +423,6 @@ class AllSettings {
          *  session starts from a clean transcript. */
         @JvmStatic val aiAssistantHistoryEnabled = BooleanSettingUnit("aiAssistantHistoryEnabled", true)
 
-        // ── Custom AI provider: any OpenAI-compatible endpoint (Settings -> Experimental) ──
-        @JvmStatic val aiCustomEnabled          = BooleanSettingUnit("aiCustomEnabled", false)
-        @JvmStatic val aiCustomApiKey           = StringSettingUnit("aiCustomApiKey", "")
         // One-time refresh flag: the bundled default control layouts were replaced.
         @JvmStatic val ctrlmapDefaultsV2        = BooleanSettingUnit("ctrlmapDefaultsV2", false)
 
