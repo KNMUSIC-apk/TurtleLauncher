@@ -165,7 +165,7 @@ object TurtleAiCustom {
                 if (!response.isSuccessful) {
                     // The token is never logged; only the service, model, status and the start of the message.
                     Logging.w(TAG, "${provider.name} $model HTTP ${response.code}: ${text.take(300)}")
-                    failures.add("${provider.name}: ${describe(response.code)}${errorDetail(text, token)}")
+                    failures.add("${provider.name}: ${describe(response.code, text)}${errorDetail(text, token)}")
                     return@use when (response.code) {
                         400, 404, 422 -> Outcome.NextModel
                         else -> Outcome.NextProvider
@@ -207,10 +207,13 @@ object TurtleAiCustom {
         return if (message.isNullOrEmpty()) "" else " ($message)".take(160)
     }
 
-    private fun describe(code: Int): String = when (code) {
+    private fun describe(code: Int, body: String): String = when (code) {
         401, 403 -> "token bị từ chối (sai hoặc đã hết hạn)"
         402 -> "tài khoản hết tiền hoặc chưa có gói trả phí"
-        429 -> "vượt hạn mức hoặc gửi quá nhanh"
+        // OpenAI and others answer HTTP 429 when the account has no credit left.
+        429 -> if (listOf("quota", "credit", "balance").any { body.contains(it, ignoreCase = true) })
+            "key đúng nhưng hết credit, cần nạp thêm tiền"
+        else "gửi quá nhanh, thử lại sau"
         400, 404, 422 -> "mô hình không hợp lệ (HTTP $code)"
         in 500..599 -> "máy chủ đang lỗi (HTTP $code)"
         else -> "HTTP $code"

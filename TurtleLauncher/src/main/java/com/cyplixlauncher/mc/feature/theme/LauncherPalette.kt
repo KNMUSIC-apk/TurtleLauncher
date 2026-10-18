@@ -52,16 +52,18 @@ object LauncherPalette {
         /** Tint for vector icons on every screen. */
         val iconTint: Int,
         /** Tint for card and panel backgrounds on every screen. */
-        val surface: Int
+        val surface: Int,
+        /** Hairline drawn around every card and panel: the glass edge, or the theme's neon line. */
+        val frame: Int
     )
 
     private val PALETTES = listOf(
-        Palette("nebula", 0xFF0B1020.toInt(), 0xFF00C8FF.toInt(), 0xFF5427A8.toInt(), 0xFF00C8FF.toInt(), Style.NEBULA, 0xFF9ED8FF.toInt(), 0xCC141E3A.toInt()),
-        Palette("cyberpunk", 0xFF09090F.toInt(), 0xFF00E5FF.toInt(), 0xFFA855F7.toInt(), 0xFF00E5FF.toInt(), Style.CYBERPUNK, 0xFF00E5FF.toInt(), 0xCC15151F.toInt()),
-        Palette("emerald", 0xFF071713.toInt(), 0xFF34D399.toInt(), 0xFF087F6B.toInt(), 0xFF34D399.toInt(), Style.EMERALD, 0xFF6EE7B7.toInt(), 0xCC0E2A23.toInt()),
-        // Liquid Glass: deep blue base, soft light blobs and a diagonal reflection, with translucent
-        // glass surfaces. Everything is static and cached, so it costs no per-frame blur.
-        Palette("liquid", 0xFF0A0F1F.toInt(), 0xFF8EC5FF.toInt(), 0xFF3B6CFF.toInt(), 0xFFB18CFF.toInt(), Style.LIQUID, 0xFFE6F0FF.toInt(), 0x2EFFFFFF)
+        Palette("nebula", 0xFF0B1020.toInt(), 0xFF00C8FF.toInt(), 0xFF5427A8.toInt(), 0xFF00C8FF.toInt(), Style.NEBULA, 0xFF9ED8FF.toInt(), 0xCC141E3A.toInt(), 0x6600C8FF),
+        Palette("cyberpunk", 0xFF09090F.toInt(), 0xFF00E5FF.toInt(), 0xFFA855F7.toInt(), 0xFF00E5FF.toInt(), Style.CYBERPUNK, 0xFF00E5FF.toInt(), 0xCC15151F.toInt(), 0xAA00E5FF.toInt()),
+        Palette("emerald", 0xFF071713.toInt(), 0xFF34D399.toInt(), 0xFF087F6B.toInt(), 0xFF34D399.toInt(), Style.EMERALD, 0xFF6EE7B7.toInt(), 0xCC0E2A23.toInt(), 0x6634D399),
+        // Liquid Glass (light): pale frosted base with soft light blobs, translucent white glass
+        // cards and a bright glass edge. Everything is static and cached, so it costs no per-frame blur.
+        Palette("liquid", 0xFFEEF3FB.toInt(), 0xFF3B82F6.toInt(), 0xFFB9D4FF.toInt(), 0xFFD9C6FF.toInt(), Style.LIQUID, 0xFF1E3A5F.toInt(), 0xB8FFFFFF.toInt(), 0xE6FFFFFF.toInt())
     )
 
     /** Accent used by switches and highlights when no palette theme is active. */
@@ -136,7 +138,7 @@ object LauncherPalette {
             override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
                 if (active == null) return
                 activity.window.setBackgroundDrawable(backgroundDrawable(activity))
-                clearOpaqueBackgrounds(activity.window.decorView)
+                clearOpaqueBackgrounds(activity.window.decorView, isRoot = true)
                 if (activity is FragmentActivity) {
                     activity.supportFragmentManager.registerFragmentLifecycleCallbacks(fragmentCallbacks, true)
                 }
@@ -152,11 +154,11 @@ object LauncherPalette {
 
     private val fragmentCallbacks = object : FragmentManager.FragmentLifecycleCallbacks() {
         override fun onFragmentViewCreated(fm: FragmentManager, f: Fragment, v: View, savedInstanceState: Bundle?) {
-            if (active != null) clearOpaqueBackgrounds(v)
+            if (active != null) clearOpaqueBackgrounds(v, isRoot = true)
         }
     }
 
-    private fun clearOpaqueBackgrounds(view: View) {
+    private fun clearOpaqueBackgrounds(view: View, isRoot: Boolean = false) {
         val p = active ?: return
         val ctx = view.context
         val app = ContextCompat.getColor(ctx, R.color.background_app)
@@ -166,6 +168,15 @@ object LauncherPalette {
             bg is ColorDrawable && (bg.color == app || bg.color == deep) -> { view.background = null }
             bg != null && bg !is ColorDrawable -> {
                 bg.mutate().colorFilter = PorterDuffColorFilter(p.surface, PorterDuff.Mode.SRC_ATOP)
+                // Glass edge around cards and panels. Screen roots stay plain so no frame runs along the screen edge.
+                if (!isRoot && view.foreground == null) {
+                    val density = ctx.resources.displayMetrics.density
+                    val radius = (bg as? GradientDrawable)?.cornerRadius?.takeIf { it > 0f } ?: 14f * density
+                    view.foreground = GradientDrawable().apply {
+                        setStroke(maxOf(1, (density + 0.5f).toInt()), p.frame)
+                        cornerRadius = radius
+                    }
+                }
             }
         }
         if (view is ImageView && (view.imageTintList != null || view.drawable is VectorDrawable)) {
@@ -228,12 +239,13 @@ object LauncherPalette {
                 Style.LIQUID -> {
                     paint.style = Paint.Style.FILL
                     paint.color = 0xFFFFFFFF.toInt()
-                    paint.alpha = 16
-                    canvas.drawCircle(b.left + w * 0.2f, b.top + h * 0.18f, w * 0.55f, paint)
-                    paint.alpha = 10
-                    canvas.drawCircle(b.left + w * 0.9f, b.top + h * 0.75f, w * 0.45f, paint)
+                    paint.alpha = 150
+                    canvas.drawCircle(b.left + w * 0.2f, b.top + h * 0.18f, w * 0.5f, paint)
+                    paint.alpha = 110
+                    canvas.drawCircle(b.left + w * 0.9f, b.top + h * 0.78f, w * 0.45f, paint)
                     // Diagonal reflection band across the glass.
-                    paint.alpha = 12
+                    paint.color = 0xFF8FB8FF.toInt()
+                    paint.alpha = 60
                     val band = Path().apply {
                         moveTo(b.left.toFloat(), b.top + h * 0.42f)
                         lineTo(b.right.toFloat(), b.top + h * 0.22f)

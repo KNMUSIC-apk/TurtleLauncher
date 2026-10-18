@@ -9,12 +9,13 @@ import com.cyplixlauncher.mc.setting.Settings
  *  - "light"     -> light palette (white backgrounds)
  *  - "dark"      -> dark palette (black backgrounds)
  *  - "system"    -> follows the system theme
- *  - "nebula", "cyberpunk", "emerald", "liquid" -> dark palette themes from [LauncherPalette]
+ *  - "nebula", "cyberpunk", "emerald" -> dark palette themes from [LauncherPalette]
+ *  - "liquid" -> light frosted-glass palette theme (follows the light base)
  */
 object LauncherTheme {
 
     fun nightModeFor(value: String): Int = when (value) {
-        "dark", "nebula", "cyberpunk", "emerald", "liquid" -> AppCompatDelegate.MODE_NIGHT_YES
+        "dark", "nebula", "cyberpunk", "emerald" -> AppCompatDelegate.MODE_NIGHT_YES
         "system" -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
         else -> AppCompatDelegate.MODE_NIGHT_NO
     }

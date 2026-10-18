@@ -278,7 +278,7 @@ class LaunchArgs(
             // cacio-agent's premain relies on sun.java2d internals that no longer exist on
             // JDK 25 (ClassNotFoundException: sun/java2d/SurfaceManagerFactory), and the failed
             // agent leaves the VM unstable (SIGSEGV in libjvm on 26.x). Skip the agent there.
-            val useCacioAgent = javaVersion < 25
+            val useCacioJars = javaVersion < 25
             val argsList: MutableList<String> = ArrayList()
 
             argsList.add("-Djava.awt.headless=false")
@@ -292,7 +292,7 @@ class LaunchArgs(
             } else {
                 argsList.add("-Dawt.toolkit=com.github.caciocavallosilano.cacio.ctc.CTCToolkit")
                 argsList.add("-Djava.awt.graphicsenv=com.github.caciocavallosilano.cacio.ctc.CTCGraphicsEnvironment")
-                if (useCacioAgent) {
+                if (useCacioJars) {
                     argsList.add("-javaagent:" + LibPath.CACIO_17_AGENT.getAbsolutePath())
                 }
                 argsList.add("--add-exports=java.desktop/java.awt=ALL-UNNAMED")
@@ -319,7 +319,8 @@ class LaunchArgs(
             cacioFiles.listFiles()?.onEach {
                 if (it.name.endsWith(".jar")) cacioClassPath.append(":").append(it.absolutePath)
             }
-            argsList.add(cacioClassPath.toString())
+            // Cacio's JDK 17 classes must not be prepended to the boot classpath of JDK 25.
+            if (useCacioJars) argsList.add(cacioClassPath.toString())
 
             return argsList
         }
