@@ -368,6 +368,9 @@ class AllSettings {
         @JvmStatic val anrTimeoutMs             = IntSettingUnit("anrTimeoutMs", 5000)
         @JvmStatic val logRegexFilterHistory    = StringSettingUnit("logRegexFilterHistory", "")
 
+        // One-time refresh flag: the bundled default control layouts were replaced.
+        @JvmStatic val ctrlmapDefaultsV2        = BooleanSettingUnit("ctrlmapDefaultsV2", false)
+
         // Custom DNS resolver for the launcher's own network requests (downloads/API
         // calls), independent of the download-source (BMCLAPI) mirror above.
         @JvmStatic val dnsServer                = StringSettingUnit("dnsServer", "cloudflare")
