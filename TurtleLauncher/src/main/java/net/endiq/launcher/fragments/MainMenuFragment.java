@@ -167,12 +167,6 @@ public class MainMenuFragment extends FragmentWithAnim {
         binding.topBarSettingsButton.setOnClickListener(v -> ZHTools.swapFragmentWithAnim(this,
             com.cyplixlauncher.mc.ui.fragment.settings.SettingsFragment.class,
             com.cyplixlauncher.mc.ui.fragment.settings.SettingsFragment.TAG, null));
-        binding.topBarAiButton.setVisibility(
-            com.cyplixlauncher.mc.setting.AllSettings.getAiAssistantEnabled().getValue()
-                ? View.VISIBLE : View.GONE);
-        binding.topBarAiButton.setOnClickListener(v -> ZHTools.swapFragmentWithAnim(this,
-            com.cyplixlauncher.mc.ui.fragment.AiChatFragment.class,
-            com.cyplixlauncher.mc.ui.fragment.AiChatFragment.TAG, null));
 
         // Today's Statistics dashboard
         refreshStatistics();

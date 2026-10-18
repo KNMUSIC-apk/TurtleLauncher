@@ -22,8 +22,7 @@ import com.cyplixlauncher.mc.setting.AllSettings
  *  - No Activity teardown. The launcher stays resident so coming back from the game is
  *    instant; it just lowers its own thread priority and stops starting background work.
  *
- * The full policy (and the wording the assistant uses when explaining it to a player) lives in
- * com.cyplixlauncher.mc.feature.ai.TurtleAiPrompt.LAUNCHER_SIDE_MEMORY_MANAGEMENT.
+ * The full policy is documented in this file.
  */
 object BackgroundServiceManager {
     private const val TAG = "BackgroundServiceManager"

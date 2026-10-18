@@ -107,13 +107,6 @@ import java.util.concurrent.Future;
 
 
 public class LauncherActivity extends BaseActivity {
-    /** Extras used by ShareReceiverActivity to open the Assistant with a shared game log. */
-    public static final String EXTRA_OPEN_ASSISTANT = "open_assistant";
-    public static final String EXTRA_SHARED_LOG_PATH = "shared_log_path";
-
-    /** Set when the share sheet handed the launcher a recording to transcribe. */
-    public static final String EXTRA_SHARED_AUDIO_PATH = "shared_audio_path";
-
     private final AnimPlayer noticeAnimPlayer = new AnimPlayer();
     public final ActivityResultLauncher<Object> modInstallerLauncher =
             registerForActivityResult(new OpenDocumentWithExtension("jar"), (uris) -> {
@@ -363,8 +356,6 @@ public class LauncherActivity extends BaseActivity {
         processFragment();
         processViews();
 
-        handleAssistantShortcut(getIntent());
-
         // Startup/background music (see the Music screen's "Enable Startup Music" +
         // playback scope). Gated internally on AllSettings.musicEnabled and a track
         // actually being set, so this is a no-op otherwise.
@@ -409,37 +400,6 @@ public class LauncherActivity extends BaseActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
-        handleAssistantShortcut(intent);
-    }
-
-    private void handleAssistantShortcut(Intent intent) {
-        if (intent == null || !intent.getBooleanExtra(EXTRA_OPEN_ASSISTANT, false)) return;
-        final String sharedLogPath = intent.getStringExtra(EXTRA_SHARED_LOG_PATH);
-        final String sharedAudioPath = intent.getStringExtra(EXTRA_SHARED_AUDIO_PATH);
-        // Consume the flags so a configuration change/recreation can't reopen the Assistant.
-        intent.removeExtra(EXTRA_OPEN_ASSISTANT);
-        intent.removeExtra(EXTRA_SHARED_LOG_PATH);
-        intent.removeExtra(EXTRA_SHARED_AUDIO_PATH);
-
-        // processFragment() only *commits* the main menu Fragment; wait a frame for it to
-        // actually be attached before swapping on top of it.
-        binding.getRoot().post(() -> {
-            Fragment currentFragment = getCurrentFragment();
-            if (currentFragment == null) return;
-            Bundle bundle = null;
-            if (sharedLogPath != null || sharedAudioPath != null) {
-                bundle = new Bundle();
-                if (sharedLogPath != null) {
-                    bundle.putString(com.cyplixlauncher.mc.ui.fragment.AiChatFragment.ARG_SHARED_LOG_PATH, sharedLogPath);
-                }
-                if (sharedAudioPath != null) {
-                    bundle.putString(com.cyplixlauncher.mc.ui.fragment.AiChatFragment.ARG_SHARED_AUDIO_PATH, sharedAudioPath);
-                }
-            }
-            ZHTools.swapFragmentWithAnim(currentFragment,
-                com.cyplixlauncher.mc.ui.fragment.AiChatFragment.class,
-                com.cyplixlauncher.mc.ui.fragment.AiChatFragment.TAG, bundle);
-        });
     }
 
     private void processFragment() {

@@ -31,9 +31,7 @@ internal object LittleSkinGalleryApi {
         val keyword = (query as? GalleryQuery.Search)?.text.orEmpty()
         val url = "$BASE/skinlib/list?filter=$filter&sort=$sort&keyword=${encode(keyword)}&page=$page"
         val body = fetchBody(url) ?: return@runCatching emptyList()
-        parseListResponse(body).filter { skin ->
-            AiContentModerator.fetchAndCheck("littleskin:${skin.tid}", thumbnailUrl(skin.tid)) != false
-        }
+        parseListResponse(body)
     }.onFailure { e -> Logging.e("LittleSkinGalleryApi", "Gallery fetch failed for $query page $page", e) }.getOrDefault(emptyList())
 
     /** Confirmed render endpoint - safe to use directly, no guessing involved. */

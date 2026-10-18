@@ -14,7 +14,6 @@ import androidx.core.content.ContextCompat
 import com.cyplixlauncher.mc.InfoCenter
 import com.cyplixlauncher.mc.R
 import com.cyplixlauncher.mc.databinding.ActivityErrorBinding
-import com.cyplixlauncher.mc.feature.log.AiCrashAdvisor
 import com.cyplixlauncher.mc.feature.log.CrashAnalyzer
 import com.cyplixlauncher.mc.feature.log.GameLogcat
 import com.cyplixlauncher.mc.feature.log.Logging
@@ -30,7 +29,6 @@ import java.io.File
 class ErrorActivity : BaseActivity() {
     private lateinit var binding: ActivityErrorBinding
     private var advancedLogContent: String = ""
-    private var aiAnalysisRequested = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,11 +53,7 @@ class ErrorActivity : BaseActivity() {
         }
 
         binding.tabGameLogs.setOnClickListener { selectTab(isGameLogs = true) }
-        binding.tabAiAnalysis.setOnClickListener { selectTab(isGameLogs = false) }
-        binding.aiInspectButton.setOnClickListener {
-            selectTab(isGameLogs = false)
-            requestAiAnalysis()
-        }
+        binding.tabDiagnosis.setOnClickListener { selectTab(isGameLogs = false) }
         selectTab(isGameLogs = true)
 
         if (extras.getBoolean(BUNDLE_IS_LAUNCHER_CRASH, false)) {
@@ -97,15 +91,15 @@ class ErrorActivity : BaseActivity() {
         finish()
     }
 
-    /** Switches between the "Game Logs" and "AI Analysis" tabs, sliding the underline indicator. */
+    /** Switches between the "Game Logs" and "Diagnosis" tabs, sliding the underline indicator. */
     private fun selectTab(isGameLogs: Boolean) {
         binding.apply {
             logTabContent.visibility = if (isGameLogs) View.VISIBLE else View.GONE
-            aiTabContent.visibility = if (isGameLogs) View.GONE else View.VISIBLE
+            diagnosisTabContent.visibility = if (isGameLogs) View.GONE else View.VISIBLE
             tabGameLogs.alpha = if (isGameLogs) 1f else 0.5f
-            tabAiAnalysis.alpha = if (isGameLogs) 0.5f else 1f
+            tabDiagnosis.alpha = if (isGameLogs) 0.5f else 1f
 
-            val indicatorTarget = if (isGameLogs) tabGameLogs else tabAiAnalysis
+            val indicatorTarget = if (isGameLogs) tabGameLogs else tabDiagnosis
             crashTabIndicator.post {
                 val params = crashTabIndicator.layoutParams as androidx.constraintlayout.widget.ConstraintLayout.LayoutParams
                 params.startToStart = indicatorTarget.id
@@ -115,16 +109,16 @@ class ErrorActivity : BaseActivity() {
         }
     }
 
-    /** Populates the "AI Analysis" tab, or hides it if there's nothing useful to say yet. */
+    /** Populates the "Diagnosis" tab, or shows the placeholder if there's nothing specific to say. */
     private fun showFixTips(diagnosisText: String?) {
         binding.apply {
             if (diagnosisText.isNullOrBlank()) {
                 fixText.visibility = View.GONE
-                aiAnalysisPlaceholder.visibility = View.VISIBLE
+                diagnosisPlaceholder.visibility = View.VISIBLE
             } else {
                 fixText.visibility = View.VISIBLE
                 fixText.text = diagnosisText
-                aiAnalysisPlaceholder.visibility = View.GONE
+                diagnosisPlaceholder.visibility = View.GONE
             }
         }
     }
@@ -133,30 +127,6 @@ class ErrorActivity : BaseActivity() {
     private fun setAdvancedLog(rawText: String) {
         advancedLogContent = rawText.ifBlank { "<no log available>" }
         binding.advancedLogText.text = advancedLogContent
-    }
-
-    /**
-     * Calls the (separate, opt-in) AI crash advisor on the current log tail and shows the
-     * result in place of the local rule-based diagnosis, once it comes back. A no-op if AI
-     * crash help isn't configured or a request is already in flight — [AiCrashAdvisor] itself
-     * returns null in those cases, so the local diagnosis text is simply left as-is.
-     */
-    private fun requestAiAnalysis() {
-        if (aiAnalysisRequested) return
-        aiAnalysisRequested = true
-        binding.aiAnalysisPlaceholder.visibility = View.GONE
-        binding.fixText.visibility = View.VISIBLE
-        val previousText = binding.fixText.text.toString()
-        binding.fixText.text = getString(R.string.crash_ai_analysis_loading)
-
-        TaskExecutors.getDefault().execute {
-            val suggestion = runCatching { AiCrashAdvisor.getSuggestion(advancedLogContent) }.getOrNull()
-            TaskExecutors.runInUIThread {
-                binding.fixText.text = suggestion ?: previousText.ifBlank {
-                    getString(R.string.crash_ai_analysis_unavailable)
-                }
-            }
-        }
     }
 
     private fun showDiagnosisActions() {

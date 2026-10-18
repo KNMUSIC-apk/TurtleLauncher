@@ -1,4 +1,4 @@
-package com.cyplixlauncher.mc.ui.subassembly.aichat
+package com.cyplixlauncher.mc.ui.subassembly.chat
 
 import android.content.Context
 import android.graphics.Typeface

@@ -100,20 +100,6 @@ class LauncherSettingsFragment() : AbstractSettingsFragment(R.layout.settings_fr
             binding.addFullResourceName
         )
 
-        SwitchSettingsWrapper(
-            context,
-            AllSettings.aiAssistantEnabled,
-            binding.aiAssistantEnabledLayout,
-            binding.aiAssistantEnabled
-        )
-
-        SwitchSettingsWrapper(
-            context,
-            AllSettings.aiAssistantHistoryEnabled,
-            binding.aiAssistantHistoryEnabledLayout,
-            binding.aiAssistantHistoryEnabled
-        )
-
         ListSettingsWrapper(
             context,
             AllSettings.downloadSource,

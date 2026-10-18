@@ -23,8 +23,8 @@ import com.cyplixlauncher.mc.feature.terracotta.TerracottaNodeList
 import com.cyplixlauncher.mc.feature.terracotta.TerracottaState
 import com.cyplixlauncher.mc.feature.terracotta.chat.TerracottaChat
 import com.cyplixlauncher.mc.task.TaskExecutors
-import com.cyplixlauncher.mc.ui.subassembly.aichat.ChatMessage
-import com.cyplixlauncher.mc.ui.subassembly.aichat.ChatMessageAdapter
+import com.cyplixlauncher.mc.ui.subassembly.chat.ChatMessage
+import com.cyplixlauncher.mc.ui.subassembly.chat.ChatMessageAdapter
 import com.cyplixlauncher.mc.utils.ZHTools
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

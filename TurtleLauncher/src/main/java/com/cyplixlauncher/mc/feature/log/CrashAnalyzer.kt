@@ -1040,27 +1040,6 @@ object CrashAnalyzer {
         }.getOrDefault(emptyList())
     }
 
-    /**
-     * Ported: if [diagnoses] is *only* the generic "no specific known cause matched" fallback,
-     * ask [AiCrashAdvisor] for a suggestion and append it. Never called when a real rule (or a
-     * mod-conflict finding) already explains the crash — the AI is strictly a last resort for
-     * when TurtleLauncher's own knowledge base genuinely doesn't know what happened.
-     */
-    private fun withAiFallback(diagnoses: List<Diagnosis>, fullLogText: String): List<Diagnosis> {
-        val isOnlyGenericFallback = diagnoses.size == 1 &&
-            diagnoses[0].title.startsWith("Unhandled error")
-        if (!isOnlyGenericFallback) return diagnoses
-
-        val aiSuggestion = runCatching { AiCrashAdvisor.getSuggestion(fullLogText) }.getOrNull() ?: return diagnoses
-        return diagnoses + Diagnosis(
-            title = "AI-suggested fix (experimental)",
-            cause = "None of TurtleLauncher's known crash patterns matched, so this suggestion came from the " +
-                "AI crash helper you enabled in Settings — double-check it before relying on it.",
-            fixSteps = listOf(aiSuggestion),
-            severity = Severity.INFO
-        )
-    }
-
     // ── One-click repair ───────────────────────────────────────────────────────
 
     private const val MIN_RAM_MB = 512
@@ -1362,10 +1341,7 @@ object CrashAnalyzer {
             // if a rule ALSO matched (e.g. a generic mixin_failure), both still show — they're
             // complementary, not competing explanations.
             val withConflicts = conflictDiagnoses + ruleDiagnoses
-            val diagnoses = withAiFallback(
-                withConflicts.ifEmpty { ruleDiagnoses },
-                buildString { append(logTail); if (!crashReportText.isNullOrBlank()) { append("\n"); append(crashReportText) } }
-            )
+            val diagnoses = withConflicts.ifEmpty { ruleDiagnoses }
             lastDiagnoses = diagnoses
             lastGameVersion = gameVersion
 

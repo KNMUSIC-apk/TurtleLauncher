@@ -36,9 +36,7 @@ internal object LabyModGalleryApi {
             is GalleryQuery.Search -> "$BASE/skins?input=${encode(query.text)}&page=$page"
         }
         val html = fetchBody(url) ?: return@runCatching emptyList()
-        scrapeSkinHashes(html).map { GallerySkin(it) }.filter { skin ->
-            AiContentModerator.fetchAndCheck("laby:${skin.hash}", thumbnailUrl(skin.hash)) != false
-        }
+        scrapeSkinHashes(html).map { GallerySkin(it) }
     }.onFailure { e -> Logging.e("LabyModGalleryApi", "Gallery fetch failed for $query page $page", e) }.getOrDefault(emptyList())
 
     /** Confirmed render endpoint - safe to use directly, no guessing involved. */

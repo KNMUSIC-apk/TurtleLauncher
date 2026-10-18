@@ -99,16 +99,6 @@
                 android:padding="9dp"
                 android:tint="@color/turtle_text_secondary"
                 android:contentDescription="@string/main_nav_cursor"/>
-
-            <ImageButton
-                android:id="@+id/top_bar_ai_button"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_ai_assistant"
-                android:padding="9dp"
-                android:tint="@color/turtle_text_secondary"
-                android:contentDescription="@string/main_nav_assistant"/>
         </LinearLayout>
 
         <!-- In-game name of the current account, shown right beside its avatar tile -->

@@ -6,7 +6,7 @@ import com.cyplixlauncher.mc.feature.accounts.AccountsManager
 import com.cyplixlauncher.mc.feature.log.Logging
 import com.cyplixlauncher.mc.feature.terracotta.Terracotta
 import com.cyplixlauncher.mc.feature.terracotta.TerracottaState
-import com.cyplixlauncher.mc.ui.subassembly.aichat.ChatMessage
+import com.cyplixlauncher.mc.ui.subassembly.chat.ChatMessage
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.OutputStream

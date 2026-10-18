@@ -1,17 +1,17 @@
-package com.cyplixlauncher.mc.ui.subassembly.aichat
+package com.cyplixlauncher.mc.ui.subassembly.chat
 
 import android.annotation.SuppressLint
-import android.view.LayoutInflater
+import android.text.Spanned
+import android.text.method.LinkMovementMethod
+import android.text.style.URLSpan
 import android.view.Gravity
-import android.view.ViewGroup
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.cyplixlauncher.mc.R
 import com.cyplixlauncher.mc.databinding.ItemChatMessageBinding
-import com.cyplixlauncher.mc.feature.ai.TurtleAiFiles
-import java.io.File
 
 class ChatMessageAdapter(
     private val mData: MutableList<ChatMessage> = mutableListOf()
@@ -43,53 +43,21 @@ class ChatMessageAdapter(
             if (message.isUser) {
                 binding.messageBubble.text = message.text
             } else {
-                // Assistant replies are Markdown (Gemini answers with **bold**, lists, code...).
+                // Incoming messages may carry Markdown; render it so bold, lists and code read properly.
                 val rendered = ChatMarkdown.render(message.text, binding.root.context)
                 binding.messageBubble.text = rendered
                 // Links need LinkMovementMethod, which drops text selection - only swap it in
                 // for bubbles that actually contain a link.
-                if (rendered is android.text.Spanned &&
-                    rendered.getSpans(0, rendered.length, android.text.style.URLSpan::class.java).isNotEmpty()
+                if (rendered is Spanned &&
+                    rendered.getSpans(0, rendered.length, URLSpan::class.java).isNotEmpty()
                 ) {
-                    binding.messageBubble.movementMethod = android.text.method.LinkMovementMethod.getInstance()
+                    binding.messageBubble.movementMethod = LinkMovementMethod.getInstance()
                 }
             }
-            // A turn can be an image with a caption, or (when the model returned no text) an
-            // image alone - an empty bubble next to a picture looks like a bug.
             binding.messageBubble.visibility =
                 if (message.text.isBlank()) View.GONE else View.VISIBLE
 
-            val imagePath = message.imagePath
-            if (imagePath.isNullOrBlank()) {
-                // The holder is recycled: without clearing, a previous row's picture can
-                // reappear under an unrelated message.
-                Glide.with(binding.messageImage).clear(binding.messageImage)
-                binding.messageImage.visibility = View.GONE
-            } else {
-                binding.messageImage.visibility = View.VISIBLE
-                Glide.with(binding.messageImage)
-                    .load(File(imagePath))
-                    .into(binding.messageImage)
-            }
-
             val context = binding.root.context
-
-            // Generated video and audio can't be shown inline, so they get a row that opens
-            // the file in whatever app can play it (the launcher's DocumentsProvider hands
-            // out the URI - see TurtleAiFiles).
-            val mediaPath = message.mediaPath
-            if (mediaPath.isNullOrBlank()) {
-                binding.messageFile.visibility = View.GONE
-                binding.messageFile.setOnClickListener(null)
-            } else {
-                val file = File(mediaPath)
-                binding.messageFile.visibility = View.VISIBLE
-                binding.messageFile.text =
-                    message.mediaLabel ?: context.getString(R.string.ai_media_open_file)
-                binding.messageFile.setOnClickListener {
-                    TurtleAiFiles.openFile(it.context, file)
-                }
-            }
             val params = binding.root.layoutParams as? LinearLayout.LayoutParams
             if (message.isUser) {
                 binding.root.gravity = Gravity.END
@@ -97,7 +65,7 @@ class ChatMessageAdapter(
                 binding.messageBubble.setTextColor(context.getColor(R.color.background_app))
             } else {
                 binding.root.gravity = Gravity.START
-                binding.messageBubble.setBackgroundResource(R.drawable.background_chat_bubble_ai)
+                binding.messageBubble.setBackgroundResource(R.drawable.background_chat_bubble_other)
                 binding.messageBubble.setTextColor(context.getColor(R.color.turtle_text_primary))
             }
             params?.let { binding.root.layoutParams = it }
