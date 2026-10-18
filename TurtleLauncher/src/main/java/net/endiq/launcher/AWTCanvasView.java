@@ -18,10 +18,10 @@ import java.util.LinkedList;
 public class AWTCanvasView extends TextureView implements TextureView.SurfaceTextureListener, Runnable {
     public static final int AWT_CANVAS_WIDTH = Math.min(
             (int) (Tools.currentDisplayMetrics.widthPixels * 0.8),
-            com.endiq.turtlelauncher.setting.AllSettings.getAwtCanvasSizeCap().getValue());
+            com.cyplixlauncher.mc.setting.AllSettings.getAwtCanvasSizeCap().getValue());
     public static final int AWT_CANVAS_HEIGHT = Math.min(
             (int) (Tools.currentDisplayMetrics.heightPixels * 0.8),
-            com.endiq.turtlelauncher.setting.AllSettings.getAwtCanvasSizeCap().getValue());
+            com.cyplixlauncher.mc.setting.AllSettings.getAwtCanvasSizeCap().getValue());
     private static final int MAX_SIZE = 100;
     private static final double NANOS = 1000000000.0;
     private boolean mIsDestroyed = false;

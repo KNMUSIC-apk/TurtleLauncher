@@ -64,9 +64,9 @@
 
 # Turtle's SDL bridge: libsdlhook.so resolves its JNI entry points by exact name,
 # and SDLActivity/SdlImeController call the wrappers from Java.
--keep class com.endiq.turtlelauncher.game.sdl.** { *; }
--keep class com.endiq.turtlelauncher.launch.SdlHook { *; }
--keep class com.endiq.turtlelauncher.launch.SdlAndroidJniPrep { *; }
+-keep class com.cyplixlauncher.mc.game.sdl.** { *; }
+-keep class com.cyplixlauncher.mc.launch.SdlHook { *; }
+-keep class com.cyplixlauncher.mc.launch.SdlAndroidJniPrep { *; }
 
 # SDL native resolves this instance method on the host Activity by exact
 # signature (see MainActivity.messageboxShowMessageBox).

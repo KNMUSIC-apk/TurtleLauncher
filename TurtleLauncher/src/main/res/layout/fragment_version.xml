@@ -85,7 +85,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/shadowView">
 
-            <com.endiq.turtlelauncher.ui.view.AnimEditText
+            <com.cyplixlauncher.mc.ui.view.AnimEditText
                 android:id="@+id/search_version"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
                 android:paddingHorizontal="@dimen/_8sdp"
                 app:layout_constraintTop_toTopOf="parent"/>
 
-            <com.endiq.turtlelauncher.ui.view.AnimButton
+            <com.cyplixlauncher.mc.ui.view.AnimButton
                 android:id="@+id/return_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

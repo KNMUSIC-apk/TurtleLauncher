@@ -30,7 +30,7 @@ import android.view.ViewParent;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 
-import com.endiq.turtlelauncher.game.sdl.SdlBridge;
+import com.cyplixlauncher.mc.game.sdl.SdlBridge;
 import net.endiq.launcher.customcontrols.keyboard.TouchCharInput;
 
 /**

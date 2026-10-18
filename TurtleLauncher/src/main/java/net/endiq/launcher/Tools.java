@@ -2,7 +2,7 @@ package net.endiq.launcher;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.P;
-import static com.endiq.turtlelauncher.setting.AllStaticSettings.notchSize;
+import static com.cyplixlauncher.mc.setting.AllStaticSettings.notchSize;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.NotificationChannel;
@@ -31,20 +31,20 @@ import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.fragment.app.FragmentActivity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.endiq.turtlelauncher.InfoDistributor;
-import com.endiq.turtlelauncher.R;
-import com.endiq.turtlelauncher.context.ContextExecutor;
-import com.endiq.turtlelauncher.utils.LauncherProfiles;
-import com.endiq.turtlelauncher.feature.customprofilepath.ProfilePathHome;
-import com.endiq.turtlelauncher.feature.log.Logging;
-import com.endiq.turtlelauncher.feature.version.Version;
-import com.endiq.turtlelauncher.task.Task;
-import com.endiq.turtlelauncher.ui.activity.BaseActivity;
-import com.endiq.turtlelauncher.ui.dialog.EditTextDialog;
-import com.endiq.turtlelauncher.utils.path.PathManager;
-import com.endiq.turtlelauncher.utils.ZHTools;
-import com.endiq.turtlelauncher.utils.runtime.SelectRuntimeUtils;
-import com.endiq.turtlelauncher.utils.stringutils.StringUtils;
+import com.cyplixlauncher.mc.InfoDistributor;
+import com.cyplixlauncher.mc.R;
+import com.cyplixlauncher.mc.context.ContextExecutor;
+import com.cyplixlauncher.mc.utils.LauncherProfiles;
+import com.cyplixlauncher.mc.feature.customprofilepath.ProfilePathHome;
+import com.cyplixlauncher.mc.feature.log.Logging;
+import com.cyplixlauncher.mc.feature.version.Version;
+import com.cyplixlauncher.mc.task.Task;
+import com.cyplixlauncher.mc.ui.activity.BaseActivity;
+import com.cyplixlauncher.mc.ui.dialog.EditTextDialog;
+import com.cyplixlauncher.mc.utils.path.PathManager;
+import com.cyplixlauncher.mc.utils.ZHTools;
+import com.cyplixlauncher.mc.utils.runtime.SelectRuntimeUtils;
+import com.cyplixlauncher.mc.utils.stringutils.StringUtils;
 import net.endiq.launcher.fragments.MainMenuFragment;
 import net.endiq.launcher.lifecycle.ContextExecutorTask;
 import net.endiq.launcher.memory.MemoryHoleFinder;
@@ -494,7 +494,7 @@ public final class Tools {
     public enum LwjglMode { NEW_SDL, LEGACY }
 
     public static LwjglMode resolveLwjglMode(JMinecraftVersionList.Version info) {
-        String override = com.endiq.turtlelauncher.setting.AllSettings.getLwjglCompatMode().getValue();
+        String override = com.cyplixlauncher.mc.setting.AllSettings.getLwjglCompatMode().getValue();
         if ("new".equals(override)) return LwjglMode.NEW_SDL;
         if ("legacy".equals(override)) return LwjglMode.LEGACY;
         return versionUsesLwjglSdl(info) ? LwjglMode.NEW_SDL : LwjglMode.LEGACY;

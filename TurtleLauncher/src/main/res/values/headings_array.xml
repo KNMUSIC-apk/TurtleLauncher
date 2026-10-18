@@ -49,12 +49,20 @@
         <item>@string/setting_launcher_theme_system</item>
         <item>@string/setting_launcher_theme_light</item>
         <item>@string/setting_launcher_theme_dark</item>
+        <item>@string/setting_launcher_theme_nebula</item>
+        <item>@string/setting_launcher_theme_cyberpunk</item>
+        <item>@string/setting_launcher_theme_emerald</item>
+        <item>@string/setting_launcher_theme_liquid</item>
     </string-array>
 
     <string-array name="launcher_theme_values">
         <item>system</item>
         <item>light</item>
         <item>dark</item>
+        <item>nebula</item>
+        <item>cyberpunk</item>
+        <item>emerald</item>
+        <item>liquid</item>
     </string-array>
 
     <string-array name="animation_enter_names">
@@ -67,6 +75,9 @@
         <item>@string/anim_zoom_in</item>
         <item>@string/anim_zoom</item>
         <item>@string/anim_sheet</item>
+        <item>@string/anim_jelly</item>
+        <item>@string/anim_zalith_bounce</item>
+        <item>@string/anim_slice_in</item>
     </string-array>
 
     <string-array name="animation_enter_values">
@@ -79,6 +90,9 @@
         <item>zoom_in</item>
         <item>zoom</item>
         <item>sheet</item>
+        <item>jelly</item>
+        <item>zalith_bounce</item>
+        <item>slice_in</item>
     </string-array>
 
     <string-array name="animation_exit_names">
@@ -125,4 +139,16 @@
         <item>bottom_or_center</item>
     </string-array>
 
+    <string-array name="graphics_api_names">
+        <item>@string/setting_graphics_api_default</item>
+        <item>@string/setting_graphics_api_opengl</item>
+        <item>@string/setting_graphics_api_default_opengl</item>
+        <item>@string/setting_graphics_api_vulkan</item>
+    </string-array>
+    <string-array name="graphics_api_values">
+        <item>DEFAULT</item>
+        <item>OPENGL</item>
+        <item>DEFAULT_OPENGL</item>
+        <item>VULKAN</item>
+    </string-array>
 </resources>

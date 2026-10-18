@@ -13,8 +13,8 @@
         <item name="android:scrollbarThumbVertical">@color/accent_primary</item>
         <item name="android:textSize">@dimen/_12ssp</item>
         <item name="android:textColor">@color/turtle_text_primary</item>
-        <item name="android:fontFamily">@font/proxima_nova_extrabold</item>
-        <item name="fontFamily">@font/proxima_nova_extrabold</item>
+        <item name="android:fontFamily">@font/oxanium</item>
+        <item name="fontFamily">@font/oxanium</item>
         <item name="colorPrimary">@color/accent_primary</item>
         <item name="colorPrimaryDark">@color/bg_deep</item>
         <item name="colorAccent">@color/turtle_accent_glow</item>
@@ -35,7 +35,7 @@
 
     <style name="Widget.Turtle.Switch" parent="android:Widget.Material.CompoundButton.Switch">
         <item name="android:track">@drawable/switch_track_selector</item>
-        <item name="android:thumb">@drawable/switch_thumb_transparent</item>
+        <item name="android:thumb">@drawable/switch_thumb_round</item>
         <item name="android:switchMinWidth">48dp</item>
     </style>
 

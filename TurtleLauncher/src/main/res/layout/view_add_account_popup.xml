@@ -32,7 +32,7 @@
             android:layout_gravity="center_vertical"
             android:src="@drawable/ic_add" />
 
-        <com.endiq.turtlelauncher.ui.view.AnimTextView
+        <com.cyplixlauncher.mc.ui.view.AnimTextView
             android:id="@+id/popup_add_microsoft_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
             android:layout_gravity="center_vertical"
             android:src="@drawable/ic_add" />
 
-        <com.endiq.turtlelauncher.ui.view.AnimTextView
+        <com.cyplixlauncher.mc.ui.view.AnimTextView
             android:id="@+id/popup_add_local_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
             android:layout_gravity="center_vertical"
             android:src="@drawable/ic_more" />
 
-        <com.endiq.turtlelauncher.ui.view.AnimTextView
+        <com.cyplixlauncher.mc.ui.view.AnimTextView
             android:id="@+id/popup_add_server"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

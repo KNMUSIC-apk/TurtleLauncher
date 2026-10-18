@@ -4,7 +4,7 @@ import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
 
 import android.os.Handler;
 
-import com.endiq.turtlelauncher.setting.AllStaticSettings;
+import com.cyplixlauncher.mc.setting.AllStaticSettings;
 
 import net.endiq.launcher.LwjglGlfwKeycode;
 

@@ -1,8 +1,8 @@
 package net.endiq.launcher;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
-import static com.endiq.turtlelauncher.utils.ZHTools.getVersionCode;
-import static com.endiq.turtlelauncher.utils.ZHTools.getVersionName;
+import static com.cyplixlauncher.mc.utils.ZHTools.getVersionCode;
+import static com.cyplixlauncher.mc.utils.ZHTools.getVersionName;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
@@ -10,14 +10,14 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.util.Log;
 import androidx.annotation.NonNull;
-import com.endiq.turtlelauncher.InfoDistributor;
-import com.endiq.turtlelauncher.context.ContextExecutor;
-import com.endiq.turtlelauncher.context.LocaleHelper;
-import com.endiq.turtlelauncher.feature.log.Logging;
-import com.endiq.turtlelauncher.setting.AllSettings;
-import com.endiq.turtlelauncher.ui.activity.ErrorActivity;
-import com.endiq.turtlelauncher.utils.path.PathManager;
-import com.endiq.turtlelauncher.utils.ZHTools;
+import com.cyplixlauncher.mc.InfoDistributor;
+import com.cyplixlauncher.mc.context.ContextExecutor;
+import com.cyplixlauncher.mc.context.LocaleHelper;
+import com.cyplixlauncher.mc.feature.log.Logging;
+import com.cyplixlauncher.mc.setting.AllSettings;
+import com.cyplixlauncher.mc.ui.activity.ErrorActivity;
+import com.cyplixlauncher.mc.utils.path.PathManager;
+import com.cyplixlauncher.mc.utils.ZHTools;
 import net.endiq.launcher.utils.FileUtils;
 import java.io.File;
 import java.io.PrintStream;
@@ -89,10 +89,10 @@ public class TurtleApplication extends Application {
 			startActivity(ferrorIntent);
 		}
 
-		com.endiq.turtlelauncher.feature.shizuku.ShizukuManager.INSTANCE.init(this);
+		com.cyplixlauncher.mc.feature.shizuku.ShizukuManager.INSTANCE.init(this);
 
 		androidx.startup.AppInitializer.getInstance(this)
-			.initializeComponent(com.endiq.turtlelauncher.startup.TurtleStartupInitializer.class);
+			.initializeComponent(com.cyplixlauncher.mc.startup.TurtleStartupInitializer.class);
 	}
 
 	@Override

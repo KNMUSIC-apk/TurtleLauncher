@@ -5,8 +5,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 
-import com.endiq.turtlelauncher.setting.AllSettings;
-import com.endiq.turtlelauncher.setting.AllStaticSettings;
+import com.cyplixlauncher.mc.setting.AllSettings;
+import com.cyplixlauncher.mc.setting.AllStaticSettings;
 
 import net.endiq.launcher.MinecraftGLSurface;
 import net.endiq.launcher.Tools;
@@ -100,7 +100,8 @@ public class AndroidPointerCapture implements ViewTreeObserver.OnWindowFocusChan
             case MotionEvent.ACTION_BUTTON_RELEASE:
                 return MinecraftGLSurface.sendMouseButtonUnconverted(event.getActionButton(), false);
             case MotionEvent.ACTION_SCROLL:
-                CallbackBridge.sendScroll(
+                CallbackBridge.sendScrollEvent(
+                        event.getEventTime(),
                         event.getAxisValue(MotionEvent.AXIS_HSCROLL),
                         event.getAxisValue(MotionEvent.AXIS_VSCROLL)
                 );

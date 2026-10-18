@@ -14,17 +14,17 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import com.google.gson.JsonSyntaxException;
-import com.endiq.turtlelauncher.R;
-import com.endiq.turtlelauncher.feature.log.Logging;
-import com.endiq.turtlelauncher.setting.AllSettings;
-import com.endiq.turtlelauncher.task.Task;
-import com.endiq.turtlelauncher.task.TaskExecutors;
-import com.endiq.turtlelauncher.ui.dialog.EditControlInfoDialog;
-import com.endiq.turtlelauncher.ui.dialog.SelectControlsDialog;
-import com.endiq.turtlelauncher.ui.dialog.TipDialog;
-import com.endiq.turtlelauncher.ui.subassembly.customcontrols.ControlInfoData;
-import com.endiq.turtlelauncher.utils.path.PathManager;
-import com.endiq.turtlelauncher.utils.stringutils.StringUtilsKt;
+import com.cyplixlauncher.mc.R;
+import com.cyplixlauncher.mc.feature.log.Logging;
+import com.cyplixlauncher.mc.setting.AllSettings;
+import com.cyplixlauncher.mc.task.Task;
+import com.cyplixlauncher.mc.task.TaskExecutors;
+import com.cyplixlauncher.mc.ui.dialog.EditControlInfoDialog;
+import com.cyplixlauncher.mc.ui.dialog.SelectControlsDialog;
+import com.cyplixlauncher.mc.ui.dialog.TipDialog;
+import com.cyplixlauncher.mc.ui.subassembly.customcontrols.ControlInfoData;
+import com.cyplixlauncher.mc.utils.path.PathManager;
+import com.cyplixlauncher.mc.utils.stringutils.StringUtilsKt;
 import net.endiq.launcher.MinecraftGLSurface;
 import net.endiq.launcher.Tools;
 import net.endiq.launcher.customcontrols.buttons.ControlButton;
@@ -127,7 +127,6 @@ public class ControlLayout extends FrameLayout {
 			mLayout = null;
 		}
 
-		System.gc();
 		mapTable.clear();
 
 		// Cleanup buttons only when input layout is null
@@ -267,8 +266,7 @@ public class ControlLayout extends FrameLayout {
 			removeView(button.getControlView());
 		}
 
-		System.gc();
-		//i wanna be sure that all the removed Views will be removed after a reload
+		//removed Views are released once the reference is dropped; no forced GC needed
 		//because if frames will slowly go down after many control changes it will be warm and bad
 	}
 

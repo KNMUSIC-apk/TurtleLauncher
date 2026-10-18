@@ -12,6 +12,6 @@ public class ErrorActivity {
      * {@code showExitMessage(Landroid/content/Context;IZ)V}.
      */
     public static void showExitMessage(Context ctx, int code, boolean isSignal) {
-        com.endiq.turtlelauncher.ui.activity.ErrorActivity.showExitMessage(ctx, code, isSignal);
+        com.cyplixlauncher.mc.ui.activity.ErrorActivity.showExitMessage(ctx, code, isSignal);
     }
 }

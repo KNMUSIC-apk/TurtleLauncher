@@ -34,6 +34,29 @@
 
 static void registerFunctions(JNIEnv *env);
 
+// Sets up the GLFW key/mouse buffers. Returns JNI_FALSE, with the pending exception cleared, when the
+// bundled GLFW class cannot be used on the running LWJGL version.
+static jboolean setupGlfwBuffers(JNIEnv *env) {
+    jclass glfwLocal = (*env)->FindClass(env, "org/lwjgl/glfw/GLFW");
+    if (glfwLocal == NULL || (*env)->ExceptionCheck(env)) goto fail;
+    pojav_environ->vmGlfwClass = (*env)->NewGlobalRef(env, glfwLocal);
+    pojav_environ->method_glftSetWindowAttrib = (*env)->GetStaticMethodID(env, pojav_environ->vmGlfwClass, "glfwSetWindowAttrib", "(JII)V");
+    pojav_environ->method_internalWindowSizeChanged = (*env)->GetStaticMethodID(env, pojav_environ->vmGlfwClass, "internalWindowSizeChanged", "(JII)V");
+    if ((*env)->ExceptionCheck(env)) goto fail;
+    jfieldID keyField = (*env)->GetStaticFieldID(env, pojav_environ->vmGlfwClass, "keyDownBuffer", "Ljava/nio/ByteBuffer;");
+    if (keyField == NULL || (*env)->ExceptionCheck(env)) goto fail;
+    jobject keyBuf = (*env)->GetStaticObjectField(env, pojav_environ->vmGlfwClass, keyField);
+    pojav_environ->keyDownBuffer = (*env)->GetDirectBufferAddress(env, keyBuf);
+    jfieldID mouseField = (*env)->GetStaticFieldID(env, pojav_environ->vmGlfwClass, "mouseDownBuffer", "Ljava/nio/ByteBuffer;");
+    if (mouseField == NULL || (*env)->ExceptionCheck(env)) goto fail;
+    jobject mouseBuf = (*env)->GetStaticObjectField(env, pojav_environ->vmGlfwClass, mouseField);
+    pojav_environ->mouseDownBuffer = (*env)->GetDirectBufferAddress(env, mouseBuf);
+    return JNI_TRUE;
+fail:
+    (*env)->ExceptionClear(env);
+    return JNI_FALSE;
+}
+
 jint JNI_OnLoad(JavaVM* vm, __attribute__((unused)) void* reserved) {
     if (pojav_environ->dalvikJavaVMPtr == NULL) {
         LOG_TO_I("<%s> %s", "Native", "Saving DVM environ...");
@@ -50,15 +73,12 @@ jint JNI_OnLoad(JavaVM* vm, __attribute__((unused)) void* reserved) {
         LOG_TO_I("<%s> %s", "Native", "Saving JVM environ...");
         pojav_environ->runtimeJavaVMPtr = vm;
         (*vm)->GetEnv(vm, (void**) &pojav_environ->runtimeJNIEnvPtr_JRE, JNI_VERSION_1_4);
-        pojav_environ->vmGlfwClass = (*pojav_environ->runtimeJNIEnvPtr_JRE)->NewGlobalRef(pojav_environ->runtimeJNIEnvPtr_JRE, (*pojav_environ->runtimeJNIEnvPtr_JRE)->FindClass(pojav_environ->runtimeJNIEnvPtr_JRE, "org/lwjgl/glfw/GLFW"));
-        pojav_environ->method_glftSetWindowAttrib = (*pojav_environ->runtimeJNIEnvPtr_JRE)->GetStaticMethodID(pojav_environ->runtimeJNIEnvPtr_JRE, pojav_environ->vmGlfwClass, "glfwSetWindowAttrib", "(JII)V");
-        pojav_environ->method_internalWindowSizeChanged = (*pojav_environ->runtimeJNIEnvPtr_JRE)->GetStaticMethodID(pojav_environ->runtimeJNIEnvPtr_JRE, pojav_environ->vmGlfwClass, "internalWindowSizeChanged", "(JII)V");
-        jfieldID field_keyDownBuffer = (*pojav_environ->runtimeJNIEnvPtr_JRE)->GetStaticFieldID(pojav_environ->runtimeJNIEnvPtr_JRE, pojav_environ->vmGlfwClass, "keyDownBuffer", "Ljava/nio/ByteBuffer;");
-        jobject keyDownBufferJ = (*pojav_environ->runtimeJNIEnvPtr_JRE)->GetStaticObjectField(pojav_environ->runtimeJNIEnvPtr_JRE, pojav_environ->vmGlfwClass, field_keyDownBuffer);
-        pojav_environ->keyDownBuffer = (*pojav_environ->runtimeJNIEnvPtr_JRE)->GetDirectBufferAddress(pojav_environ->runtimeJNIEnvPtr_JRE, keyDownBufferJ);
-        jfieldID field_mouseDownBuffer = (*pojav_environ->runtimeJNIEnvPtr_JRE)->GetStaticFieldID(pojav_environ->runtimeJNIEnvPtr_JRE, pojav_environ->vmGlfwClass, "mouseDownBuffer", "Ljava/nio/ByteBuffer;");
-        jobject mouseDownBufferJ = (*pojav_environ->runtimeJNIEnvPtr_JRE)->GetStaticObjectField(pojav_environ->runtimeJNIEnvPtr_JRE, pojav_environ->vmGlfwClass, field_mouseDownBuffer);
-        pojav_environ->mouseDownBuffer = (*pojav_environ->runtimeJNIEnvPtr_JRE)->GetDirectBufferAddress(pojav_environ->runtimeJNIEnvPtr_JRE, mouseDownBufferJ);
+        // A failing GLFW lookup used to crash the VM here: the bundled GLFW class can fail to initialise
+        // (NoSuchMethodError on LWJGL 3.4.3), leaving a pending exception and NULL ids that the next JNI
+        // call dereferenced. Only set up the GLFW buffers when they resolve; the dlopen hook is needed either way.
+        if (!setupGlfwBuffers(pojav_environ->runtimeJNIEnvPtr_JRE)) {
+            LOG_TO_I("<%s> %s", "Native", "GLFW class unavailable, skipping its buffers");
+        }
         hookExec();
         installLwjglDlopenHook();
         installEMUIIteratorMititgation();

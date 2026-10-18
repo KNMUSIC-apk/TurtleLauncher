@@ -11,7 +11,7 @@
     android:background="@color/background_app"
     tools:ignore="ContentDescription">
 
-    <com.endiq.turtlelauncher.ui.view.AnimTextView
+    <com.cyplixlauncher.mc.ui.view.AnimTextView
         android:id="@+id/music_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.endiq.turtlelauncher.ui.view.AnimButton
+    <com.cyplixlauncher.mc.ui.view.AnimButton
         android:id="@+id/return_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -75,14 +75,14 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <com.endiq.turtlelauncher.ui.view.AnimTextView
+                    <com.cyplixlauncher.mc.ui.view.AnimTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/music_enable_startup"
                         android:textStyle="bold"
                         android:textColor="@color/turtle_primary_text" />
 
-                    <com.endiq.turtlelauncher.ui.view.AnimTextView
+                    <com.cyplixlauncher.mc.ui.view.AnimTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/music_enable_startup_desc"
@@ -91,7 +91,7 @@
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
-                <Switch
+                <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                     android:id="@+id/music_enable_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -107,7 +107,7 @@
                 android:orientation="vertical"
                 android:padding="@dimen/space_m">
 
-                <com.endiq.turtlelauncher.ui.view.AnimTextView
+                <com.cyplixlauncher.mc.ui.view.AnimTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/music_playback_scope"
@@ -168,14 +168,14 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <com.endiq.turtlelauncher.ui.view.AnimTextView
+                    <com.cyplixlauncher.mc.ui.view.AnimTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/music_current_track"
                         android:textSize="@dimen/_10ssp"
                         android:textColor="@color/turtle_text_secondary" />
 
-                    <com.endiq.turtlelauncher.ui.view.AnimTextView
+                    <com.cyplixlauncher.mc.ui.view.AnimTextView
                         android:id="@+id/music_current_track_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -187,7 +187,7 @@
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
-                <com.endiq.turtlelauncher.ui.view.AnimTextView
+                <com.cyplixlauncher.mc.ui.view.AnimTextView
                     android:id="@+id/music_current_track_duration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -212,7 +212,7 @@
                     android:src="@drawable/ic_speaker"
                     android:tint="@color/turtle_text_secondary" />
 
-                <com.endiq.turtlelauncher.ui.view.AnimTextView
+                <com.cyplixlauncher.mc.ui.view.AnimTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/space_xs"
@@ -227,7 +227,7 @@
                     android:layout_weight="1"
                     android:max="100" />
 
-                <com.endiq.turtlelauncher.ui.view.AnimTextView
+                <com.cyplixlauncher.mc.ui.view.AnimTextView
                     android:id="@+id/music_volume_value"
                     android:layout_width="@dimen/_32sdp"
                     android:layout_height="wrap_content"
@@ -244,7 +244,7 @@
                 android:layout_marginTop="@dimen/space_m"
                 android:orientation="horizontal">
 
-                <com.endiq.turtlelauncher.ui.view.AnimButton
+                <com.cyplixlauncher.mc.ui.view.AnimButton
                     android:id="@+id/music_play_preview"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -255,7 +255,7 @@
                     android:text="@string/music_play_preview"
                     android:textColor="@color/turtle_text_on_accent" />
 
-                <com.endiq.turtlelauncher.ui.view.AnimButton
+                <com.cyplixlauncher.mc.ui.view.AnimButton
                     android:id="@+id/music_stop_preview"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -285,7 +285,7 @@
         app:layout_constraintStart_toEndOf="@id/music_settings_scroll"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <com.endiq.turtlelauncher.ui.view.AnimTextView
+        <com.cyplixlauncher.mc.ui.view.AnimTextView
             android:id="@+id/music_playlist_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -304,7 +304,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
-            <com.endiq.turtlelauncher.ui.view.AnimButton
+            <com.cyplixlauncher.mc.ui.view.AnimButton
                 android:id="@+id/music_select_file"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -314,7 +314,7 @@
                 android:text="@string/music_select_file"
                 android:textSize="@dimen/_10ssp" />
 
-            <com.endiq.turtlelauncher.ui.view.AnimButton
+            <com.cyplixlauncher.mc.ui.view.AnimButton
                 android:id="@+id/music_add_url"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -327,7 +327,7 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <com.endiq.turtlelauncher.ui.view.AnimTextView
+        <com.cyplixlauncher.mc.ui.view.AnimTextView
             android:id="@+id/music_empty_hint"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -336,7 +336,7 @@
             android:text="@string/music_empty_hint"
             android:textColor="@color/turtle_text_secondary"
             android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@id/music_playlist_title"
+            app:layout_constraintTop_toBottomOf="@id/music_add_group"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:visibility="visible" />
@@ -347,7 +347,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/space_m"
             android:clipToPadding="false"
-            app:layout_constraintTop_toBottomOf="@id/music_playlist_title"
+            app:layout_constraintTop_toBottomOf="@id/music_add_group"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

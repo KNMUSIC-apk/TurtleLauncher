@@ -8,8 +8,8 @@ import static net.endiq.launcher.customcontrols.ControlDrawerData.Orientation.UP
 
 import android.content.Context;
 
-import com.endiq.turtlelauncher.R;
-import com.endiq.turtlelauncher.context.ContextExecutor;
+import com.cyplixlauncher.mc.R;
+import com.cyplixlauncher.mc.context.ContextExecutor;
 
 import net.endiq.launcher.Tools;
 

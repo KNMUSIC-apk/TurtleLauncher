@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-    <com.endiq.turtlelauncher.ui.view.AnimTextView
+    <com.cyplixlauncher.mc.ui.view.AnimTextView
         android:id="@+id/track_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
         app:layout_constraintEnd_toStartOf="@id/track_duration"
         tools:text="LUZ ROJA" />
 
-    <com.endiq.turtlelauncher.ui.view.AnimTextView
+    <com.cyplixlauncher.mc.ui.view.AnimTextView
         android:id="@+id/track_artist"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
         app:layout_constraintEnd_toStartOf="@id/track_duration"
         tools:text="Unknown Artist" />
 
-    <com.endiq.turtlelauncher.ui.view.AnimTextView
+    <com.cyplixlauncher.mc.ui.view.AnimTextView
         android:id="@+id/track_duration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

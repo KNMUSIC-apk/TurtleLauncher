@@ -74,7 +74,7 @@
                     android:text="@string/pedit_control"
                     android:textColor="@color/accent_primary" />
     
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/buttonscale_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -92,6 +92,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/buttonscale_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -121,9 +122,9 @@
                         android:layout_marginVertical="@dimen/_8sdp"
                         android:layout_marginEnd="@dimen/_12sdp"
                         tools:text="0" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
     
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/buttonAllCaps_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -141,6 +142,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/buttonAllCaps_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -150,13 +152,13 @@
                         android:layout_toStartOf="@+id/buttonAllCaps"
                         android:text="@string/setting_button_allcaps_desc" />
     
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/buttonAllCaps"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
     
             </androidx.appcompat.widget.LinearLayoutCompat>
     
@@ -178,7 +180,7 @@
                     android:text="@string/setting_category_gyro_controls"
                     android:textColor="@color/accent_primary" />
     
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/enableGyro_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -196,6 +198,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/enableGyro_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -205,15 +208,15 @@
                         android:layout_toStartOf="@+id/enableGyro"
                         android:text="@string/setting_enable_gyro_desc" />
     
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/enableGyro"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
     
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/gyroSensitivity_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -231,6 +234,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/gyroSensitivity_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -260,9 +264,9 @@
                         android:layout_marginVertical="@dimen/_8sdp"
                         android:layout_marginEnd="@dimen/_12sdp"
                         tools:text="0" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
     
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/gyroSampleRate_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -280,6 +284,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/gyroSampleRate_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -309,9 +314,9 @@
                         android:layout_marginVertical="@dimen/_8sdp"
                         android:layout_marginEnd="@dimen/_12sdp"
                         tools:text="0" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
     
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/gyroSmoothing_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -329,6 +334,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/gyroSmoothing_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -338,16 +344,16 @@
                         android:layout_toStartOf="@+id/gyroSmoothing"
                         android:text="@string/setting_gyro_smoothing_desc" />
     
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/gyroSmoothing"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:checked="true" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
     
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/gyroInvertX_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -365,6 +371,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/gyroInvertX_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -374,15 +381,15 @@
                         android:layout_toStartOf="@+id/gyroInvertX"
                         android:text="@string/setting_gyro_invert_x_axis_description" />
     
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/gyroInvertX"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
     
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/gyroInvertY_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -400,6 +407,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/gyroInvertY_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -409,13 +417,13 @@
                         android:layout_toStartOf="@+id/gyroInvertY"
                         android:text="@string/setting_gyro_invert_y_axis_description" />
     
-                    <Switch
+                    <com.cyplixlauncher.mc.ui.view.TurtleSwitch
                         android:id="@+id/gyroInvertY"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
     
             </androidx.appcompat.widget.LinearLayoutCompat>
     
@@ -436,7 +444,7 @@
                     android:text="@string/setting_category_controller_settings"
                     android:textColor="@color/accent_primary" />
     
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/changeControllerBindings_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -453,6 +461,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/changeControllerBindings_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -460,9 +469,9 @@
                         android:layout_alignParentStart="true"
                         android:layout_alignParentEnd="true"
                         android:text="@string/setting_remap_controller_desc" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
     
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/resetControllerBindings_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -479,6 +488,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/resetControllerBindings_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -486,9 +496,9 @@
                         android:layout_alignParentStart="true"
                         android:layout_alignParentEnd="true"
                         android:text="@string/setting_wipe_controller_desc" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
     
-                <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                     android:id="@+id/gamepad_deadzone_scale_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -506,6 +516,7 @@
                         android:textColor="@color/turtle_primary_text" />
     
                     <TextView
+        android:fontFamily="@font/exo2"
                         android:id="@+id/gamepad_deadzone_scale_summary"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -535,7 +546,7 @@
                         android:layout_marginVertical="@dimen/_8sdp"
                         android:layout_marginEnd="@dimen/_12sdp"
                         tools:text="0" />
-                </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
     
             </androidx.appcompat.widget.LinearLayoutCompat>
     

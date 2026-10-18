@@ -9,12 +9,12 @@ import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.os.Build;
 
-import com.endiq.turtlelauncher.feature.log.Logging;
-import com.endiq.turtlelauncher.feature.unpack.Jre;
-import com.endiq.turtlelauncher.setting.AllSettings;
-import com.endiq.turtlelauncher.setting.AllStaticSettings;
-import com.endiq.turtlelauncher.setting.Settings;
-import com.endiq.turtlelauncher.ui.activity.BaseActivity;
+import com.cyplixlauncher.mc.feature.log.Logging;
+import com.cyplixlauncher.mc.feature.unpack.Jre;
+import com.cyplixlauncher.mc.setting.AllSettings;
+import com.cyplixlauncher.mc.setting.AllStaticSettings;
+import com.cyplixlauncher.mc.setting.Settings;
+import com.cyplixlauncher.mc.ui.activity.BaseActivity;
 
 import net.endiq.launcher.Tools;
 import net.endiq.launcher.multirt.MultiRTUtils;

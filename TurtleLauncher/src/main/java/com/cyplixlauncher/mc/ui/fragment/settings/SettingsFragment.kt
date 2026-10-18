@@ -1,0 +1,225 @@
+package com.cyplixlauncher.mc.ui.fragment.settings
+import com.cyplixlauncher.mc.utils.anim.TurtleTransitions
+
+import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import com.endiq.anim.AnimPlayer
+import com.endiq.anim.animations.Animations
+import com.cyplixlauncher.mc.R
+import com.cyplixlauncher.mc.databinding.FragmentSettingsBinding
+import com.cyplixlauncher.mc.setting.Settings
+import com.cyplixlauncher.mc.ui.fragment.AboutFragment
+import com.cyplixlauncher.mc.ui.fragment.AccountFragment
+import com.cyplixlauncher.mc.ui.fragment.EmotesFragment
+import com.cyplixlauncher.mc.ui.fragment.FragmentWithAnim
+import com.cyplixlauncher.mc.utils.ZHTools
+
+class SettingsFragment : FragmentWithAnim(R.layout.fragment_settings) {
+    companion object {
+        const val TAG: String = "SettingsFragment"
+    }
+
+    private lateinit var binding: FragmentSettingsBinding
+
+    /** Left-rail categories, modelled on Zalith Launcher 2's settings rail. */
+    private enum class RailCategory { RENDERER, GAME, CONTROL, LAUNCHER, OTHER }
+
+    private var selectedCategory = RailCategory.RENDERER
+
+    private class RailItem(
+        val category: RailCategory,
+        val root: android.view.View,
+        val icon: android.widget.ImageView,
+        val label: android.widget.TextView
+    )
+
+    private val railItems by lazy {
+        listOf(
+            RailItem(RailCategory.RENDERER, binding.railRenderer, binding.railRendererIcon, binding.railRendererText),
+            RailItem(RailCategory.GAME, binding.railGame, binding.railGameIcon, binding.railGameText),
+            RailItem(RailCategory.CONTROL, binding.railControl, binding.railControlIcon, binding.railControlText),
+            RailItem(RailCategory.LAUNCHER, binding.railLauncher, binding.railLauncherIcon, binding.railLauncherText),
+            RailItem(RailCategory.OTHER, binding.railOther, binding.railOtherIcon, binding.railOtherText),
+        )
+    }
+
+    /** Which rail category each settings row belongs to. */
+    private val rowCategories by lazy {
+        mapOf(
+            binding.videoSettingsRow to RailCategory.RENDERER,
+            binding.optimizationSettingsRow to RailCategory.RENDERER,
+            binding.javaSettingsRow to RailCategory.GAME,
+            binding.phoneSettingsRow to RailCategory.GAME,
+            binding.controlsSettingsRow to RailCategory.CONTROL,
+            binding.mouseKeyboardSettingsRow to RailCategory.CONTROL,
+            binding.launcherSettingsRow to RailCategory.LAUNCHER,
+            binding.accountSettingsRow to RailCategory.LAUNCHER,
+            binding.discordSettingsRow to RailCategory.LAUNCHER,
+            binding.shizukuSettingsRow to RailCategory.LAUNCHER,
+            binding.recordingSettingsRow to RailCategory.OTHER,
+            binding.emotesSettingsRow to RailCategory.OTHER,
+            binding.experimentalSettingsRow to RailCategory.OTHER,
+            binding.aboutSettingsRow to RailCategory.OTHER,
+        )
+    }
+
+    /** Each hub card's row view, the section container it lives in, and the string resource
+     *  its title is drawn from - used by the search filter below. Section headers aren't in
+     *  this list; they're derived from their container's visibility instead. */
+    private val searchableCards by lazy {
+        listOf(
+            Triple(binding.launcherSettingsRow, binding.generalSectionContainer, R.string.settings_row_launcher_title),
+            Triple(binding.accountSettingsRow, binding.generalSectionContainer, R.string.settings_row_account_title),
+            Triple(binding.shizukuSettingsRow, binding.generalSectionContainer, R.string.settings_row_shizuku_title),
+            Triple(binding.discordSettingsRow, binding.generalSectionContainer, R.string.discord_settings_title),
+            Triple(binding.videoSettingsRow, binding.performanceSectionContainer, R.string.settings_row_video_title),
+            Triple(binding.javaSettingsRow, binding.performanceSectionContainer, R.string.settings_row_java_title),
+            Triple(binding.controlsSettingsRow, binding.performanceSectionContainer, R.string.settings_row_controls_title),
+            Triple(binding.mouseKeyboardSettingsRow, binding.performanceSectionContainer, R.string.settings_row_mouse_keyboard_title),
+            Triple(binding.optimizationSettingsRow, binding.performanceSectionContainer, R.string.settings_row_optimization_title),
+            Triple(binding.phoneSettingsRow, binding.performanceSectionContainer, R.string.settings_row_phone_title),
+            Triple(binding.recordingSettingsRow, binding.performanceSectionContainer, R.string.settings_row_recording_title),
+            Triple(binding.emotesSettingsRow, binding.otherSectionContainer, R.string.settings_row_emotes_title),
+            Triple(binding.experimentalSettingsRow, binding.otherSectionContainer, R.string.settings_row_advanced_title),
+            Triple(binding.aboutSettingsRow, binding.otherSectionContainer, R.string.settings_row_about_title),
+        )
+    }
+
+    private val sectionHeaders by lazy {
+        listOf(
+            binding.generalSectionContainer to binding.generalSectionHeader,
+            binding.performanceSectionContainer to binding.performanceSectionHeader,
+            binding.otherSectionContainer to binding.otherSectionHeader,
+        )
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentSettingsBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.backButton.setOnClickListener { ZHTools.onBackPressed(requireActivity()) }
+
+        binding.launcherSettingsRow.setOnClickListener {
+            ZHTools.swapFragmentWithAnim(this, LauncherSettingsFragment::class.java, LauncherSettingsFragment.TAG, null)
+        }
+        binding.accountSettingsRow.setOnClickListener {
+            ZHTools.swapFragmentWithAnim(this, AccountFragment::class.java, AccountFragment.TAG, null)
+        }
+        binding.shizukuSettingsRow.setOnClickListener {
+            ZHTools.swapFragmentWithAnim(this, ShizukuSettingsFragment::class.java, ShizukuSettingsFragment.TAG, null)
+        }
+        binding.discordSettingsRow.setOnClickListener {
+            ZHTools.swapFragmentWithAnim(this, com.cyplixlauncher.mc.ui.fragment.settings.DiscordSettingsFragment::class.java, com.cyplixlauncher.mc.ui.fragment.settings.DiscordSettingsFragment.TAG, null)
+        }
+        binding.videoSettingsRow.setOnClickListener {
+            ZHTools.swapFragmentWithAnim(this, VideoSettingsFragment::class.java, VideoSettingsFragment.TAG, null)
+        }
+        binding.javaSettingsRow.setOnClickListener {
+            ZHTools.swapFragmentWithAnim(this, JavaSettingsFragment::class.java, JavaSettingsFragment.TAG, null)
+        }
+        binding.controlsSettingsRow.setOnClickListener {
+            ZHTools.swapFragmentWithAnim(this, ControlSettingsFragment::class.java, ControlSettingsFragment.TAG, null)
+        }
+        binding.mouseKeyboardSettingsRow.setOnClickListener {
+            ZHTools.swapFragmentWithAnim(this, MouseKeyboardSettingsFragment::class.java, MouseKeyboardSettingsFragment.TAG, null)
+        }
+        binding.optimizationSettingsRow.setOnClickListener {
+            ZHTools.swapFragmentWithAnim(this, OptimizationSettingsFragment::class.java, OptimizationSettingsFragment.TAG, null)
+        }
+        binding.phoneSettingsRow.setOnClickListener {
+            ZHTools.swapFragmentWithAnim(this, PhoneSettingsFragment::class.java, PhoneSettingsFragment.TAG, null)
+        }
+        binding.recordingSettingsRow.setOnClickListener {
+            ZHTools.swapFragmentWithAnim(this, RecordingSettingsFragment::class.java, RecordingSettingsFragment.TAG, null)
+        }
+        binding.emotesSettingsRow.setOnClickListener {
+            ZHTools.swapFragmentWithAnim(this, EmotesFragment::class.java, EmotesFragment.TAG, null)
+        }
+        binding.experimentalSettingsRow.setOnClickListener {
+            ZHTools.swapFragmentWithAnim(this, ExperimentalSettingsFragment::class.java, ExperimentalSettingsFragment.TAG, null)
+        }
+        binding.aboutSettingsRow.setOnClickListener {
+            ZHTools.swapFragmentWithAnim(this, AboutFragment::class.java, AboutFragment.TAG, null)
+        }
+
+        railItems.forEach { item ->
+            item.root.setOnClickListener { selectCategory(item.category) }
+        }
+        selectCategory(selectedCategory)
+
+        binding.searchClearButton.setOnClickListener { binding.searchInput.text?.clear() }
+        binding.searchInput.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                binding.searchClearButton.visibility = if (s.isNullOrEmpty()) View.GONE else View.VISIBLE
+                filterCards(s?.toString().orEmpty())
+            }
+        })
+    }
+
+    /** Shows the rows of [category] and highlights its rail item. While searching, the rail is ignored. */
+    private fun selectCategory(category: RailCategory) {
+        selectedCategory = category
+        railItems.forEach { item ->
+            val selected = item.category == category
+            item.root.alpha = if (selected) 1f else 0.6f
+            val color = androidx.core.content.ContextCompat.getColor(
+                requireContext(),
+                if (selected) R.color.accent_primary else R.color.turtle_text_secondary
+            )
+            item.icon.imageTintList = android.content.res.ColorStateList.valueOf(color)
+            item.label.setTextColor(color)
+        }
+        filterCards(binding.searchInput.text?.toString().orEmpty())
+    }
+
+    private fun filterCards(query: String) {
+        val needle = query.trim().lowercase()
+        var anyVisible = false
+
+        searchableCards.forEach { (row, _, titleRes) ->
+            val inRail = needle.isNotEmpty() || rowCategories[row] == selectedCategory
+            val matchesText = needle.isEmpty() || getString(titleRes).lowercase().contains(needle)
+            val matches = inRail && matchesText
+            row.visibility = if (matches) View.VISIBLE else View.GONE
+            if (matches) anyVisible = true
+        }
+
+        sectionHeaders.forEach { (container, header) ->
+            val sectionHasVisibleCard = searchableCards.any { (row, cardContainer, _) ->
+                cardContainer === container && row.visibility == View.VISIBLE
+            }
+            container.visibility = if (sectionHasVisibleCard) View.VISIBLE else View.GONE
+            header.visibility = container.visibility
+        }
+
+        binding.settingsEmptyResult.visibility = if (!anyVisible && needle.isNotEmpty()) View.VISIBLE else View.GONE
+        if (!anyVisible && needle.isNotEmpty()) {
+            binding.settingsEmptyResult.text = getString(R.string.settings_hub_empty_result, query.trim())
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Settings.refreshSettings()
+    }
+
+    override fun slideIn(animPlayer: AnimPlayer) {
+        animPlayer.apply(AnimPlayer.Entry(binding.settingsLayout, TurtleTransitions.sheetEnter()))
+    }
+
+    override fun slideOut(animPlayer: AnimPlayer) {
+        animPlayer.apply(AnimPlayer.Entry(binding.settingsLayout, TurtleTransitions.sheetExit()))
+    }
+}

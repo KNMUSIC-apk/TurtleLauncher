@@ -15,7 +15,6 @@
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE"/>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE"/>
@@ -38,7 +37,7 @@
         android:icon="@mipmap/ic_launcher"
         android:hardwareAccelerated="true"
         android:isGame="true"
-        android:label="Turtle Launcher"
+        android:label="${launcher_name}"
         android:process=":launcher"
         android:resizeableActivity="true"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -50,7 +49,7 @@
             android:name="android.max_aspect"
             android:value="ratio_float" />
         <activity
-            android:name="com.endiq.turtlelauncher.ui.activity.SplashActivity"
+            android:name="com.cyplixlauncher.mc.ui.activity.SplashActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation"
@@ -73,37 +72,12 @@
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation"
             android:screenOrientation="sensorLandscape" />
         <activity
-            android:name="com.endiq.turtlelauncher.ui.activity.ShareReceiverActivity"
-            android:exported="true"
-            android:excludeFromRecents="true"
-            android:launchMode="singleTop"
-            android:theme="@style/ShareTrampolineTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation">
-            <!-- Shared log text (e.g. selected log content, or apps that share text). -->
-            <intent-filter>
-                <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/plain" />
-            </intent-filter>
-            <!-- Shared log files: .txt/.log and friends come through as text/*; some file
-                 managers hand out application/zip or a generic octet-stream instead. -->
-            <intent-filter>
-                <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/*" />
-                <data android:mimeType="application/zip" />
-                <data android:mimeType="application/x-zip" />
-                <data android:mimeType="application/x-zip-compressed" />
-                <data android:mimeType="application/octet-stream" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.endiq.turtlelauncher.ui.activity.ErrorActivity"
+            android:name="com.cyplixlauncher.mc.ui.activity.ErrorActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation"
             android:theme="@style/AppTheme"
             android:screenOrientation="sensorLandscape" />
         <activity
-            android:name="com.endiq.turtlelauncher.ui.activity.ConfigEditorActivity"
+            android:name="com.cyplixlauncher.mc.ui.activity.ConfigEditorActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name="net.endiq.launcher.ShowErrorActivity"
@@ -185,7 +159,7 @@
              Android's own guidance for VPN foreground services (it was specialUse here,
              which is a Play-policy grey zone and not the designated VPN type). -->
         <service
-            android:name="com.endiq.turtlelauncher.feature.terracotta.TerracottaVpnService"
+            android:name="com.cyplixlauncher.mc.feature.terracotta.TerracottaVpnService"
             android:permission="android.permission.BIND_VPN_SERVICE"
             android:foregroundServiceType="connectedDevice"
             android:exported="false">

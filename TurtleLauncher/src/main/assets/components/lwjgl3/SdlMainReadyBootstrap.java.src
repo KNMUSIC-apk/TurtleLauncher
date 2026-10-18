@@ -1,4 +1,4 @@
-package com.endiq.turtlelauncher.launch;
+package com.cyplixlauncher.mc.launch;
 
 import java.lang.reflect.Method;
 
@@ -27,7 +27,7 @@ import java.lang.reflect.Method;
  * from it. An earlier attempt at this fix put it in the app's own Kotlin
  * source instead, which produced:
  *   Error: Could not find or load main class
- *     com.endiq.turtlelauncher.launch.SdlMainReadyBootstrap
+ *     com.cyplixlauncher.mc.launch.SdlMainReadyBootstrap
  * because that class simply didn't exist anywhere on the game process's
  * classpath.
  *
@@ -39,7 +39,7 @@ import java.lang.reflect.Method;
  * lwjgl-glfw-classes.jar is unchanged; comments are not part of bytecode) ──
  * The wiring described above is now verified end-to-end statically:
  * assets/components/lwjgl3/lwjgl-glfw-classes.jar contains
- * com/endiq/turtlelauncher/launch/SdlMainReadyBootstrap.class (Java 8
+ * com/cyplixlauncher/mc/launch/SdlMainReadyBootstrap.class (Java 8
  * bytecode), Components.kt unpacks the lwjgl3 component into
  * <gameHome>/lwjgl3/, Tools.getLWJGL3ClassPath() puts that jar on the game
  * -cp, and LaunchArgs routes every NEW_SDL launch's main class through here.

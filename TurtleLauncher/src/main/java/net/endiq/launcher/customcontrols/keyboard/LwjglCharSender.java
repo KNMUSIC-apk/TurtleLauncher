@@ -4,8 +4,8 @@ import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
 
 import net.endiq.launcher.LwjglGlfwKeycode;
 
-import com.endiq.turtlelauncher.game.sdl.SdlBridge;
-import com.endiq.turtlelauncher.game.sdl.SdlTextSender;
+import com.cyplixlauncher.mc.game.sdl.SdlBridge;
+import com.cyplixlauncher.mc.game.sdl.SdlTextSender;
 
 import org.lwjgl.glfw.CallbackBridge;
 

@@ -4,12 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.endiq.mcgui.ProgressLayout;
-import com.endiq.turtlelauncher.R;
-import com.endiq.turtlelauncher.feature.customprofilepath.ProfilePathHome;
-import com.endiq.turtlelauncher.feature.log.Logging;
-import com.endiq.turtlelauncher.setting.AllSettings;
-import com.endiq.turtlelauncher.task.Task;
-import com.endiq.turtlelauncher.utils.path.PathManager;
+import com.cyplixlauncher.mc.R;
+import com.cyplixlauncher.mc.feature.customprofilepath.ProfilePathHome;
+import com.cyplixlauncher.mc.feature.log.Logging;
+import com.cyplixlauncher.mc.setting.AllSettings;
+import com.cyplixlauncher.mc.task.Task;
+import com.cyplixlauncher.mc.utils.path.PathManager;
 
 import net.endiq.launcher.JAssetInfo;
 import net.endiq.launcher.JAssets;
@@ -28,7 +28,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
@@ -51,6 +51,11 @@ public class MinecraftDownloader {
     private boolean mUseFileCounter; // Whether a file counter or a size counter should be used for progress
 
     private static final ThreadLocal<byte[]> sThreadLocalDownloadBuffer = new ThreadLocal<>();
+
+    /** Written next to the client jar once a full download/verify pass has succeeded. */
+    private static final String VERIFIED_MARKER = ".turtle_verified";
+    /** How long a verified version is launched without re-fetching its metadata or re-hashing its files. */
+    private static final long VERIFIED_TTL_MS = 7L * 24 * 60 * 60 * 1000;
 
     /**
      * Start the game version download process on the global executor service.
@@ -80,6 +85,12 @@ public class MinecraftDownloader {
         // Put up a dummy progress line, for the activity to start the service and do all the other necessary
         // work to keep the launcher alive. We will replace this line when we will start downloading stuff.
         ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT, 0, R.string.newdl_starting);
+
+        // Quick launch: a version that passed a full verification recently and still has its jar
+        // skips the metadata request and the per-file hash pass, which dominate the wait before the game.
+        File verifiedJar = createGameJarPath(versionName);
+        if (isRecentlyVerified(verifiedJar)) return;
+
         SpeedCalculator speedCalculator = new SpeedCalculator();
 
         mTargetJarFile = createGameJarPath(versionName);
@@ -114,6 +125,7 @@ public class MinecraftDownloader {
             } else {
                 ensureJarFileCopy();
                 extractNatives(versionName);
+                markVerified(verifiedJar);
             }
         }catch (InterruptedException e) {
             // Interrupted while waiting, which means that the download was cancelled.
@@ -128,12 +140,16 @@ public class MinecraftDownloader {
         if (mScheduledDownloadTasks.size() <= maxThreads) {
             maxThreads = mScheduledDownloadTasks.size();
         }
+        // Core == max, with an unbounded queue: ThreadPoolExecutor only grows past the core
+        // size when the queue is full, so a bounded queue sized to the task count kept the pool
+        // at maxThreads / 2 threads and silently halved download concurrency.
+        int threads = Math.max(1, maxThreads);
         return new ThreadPoolExecutor(
-                Math.max(1, (int) (maxThreads / 2)),
-                maxThreads,
-                500,
+                threads,
+                threads,
+                0,
                 TimeUnit.MILLISECONDS,
-                new ArrayBlockingQueue<>(mScheduledDownloadTasks.size(), false)
+                new LinkedBlockingQueue<>()
         );
     }
 
@@ -155,6 +171,21 @@ public class MinecraftDownloader {
 
     private File createGameJsonPath(String versionId) {
         return new File(ProfilePathHome.getVersionsHome(), versionId + File.separator + versionId + ".json");
+    }
+
+    private static boolean isRecentlyVerified(File jar) {
+        File marker = new File(jar.getParentFile(), VERIFIED_MARKER);
+        return jar.isFile() && marker.isFile()
+                && System.currentTimeMillis() - marker.lastModified() < VERIFIED_TTL_MS;
+    }
+
+    private static void markVerified(File jar) {
+        try {
+            File marker = new File(jar.getParentFile(), VERIFIED_MARKER);
+            java.nio.file.Files.write(marker.toPath(), String.valueOf(System.currentTimeMillis()).getBytes());
+        } catch (IOException ignored) {
+            // Only a cache hint: the next launch simply runs the full check again.
+        }
     }
 
     private File createGameJarPath(String versionId) {

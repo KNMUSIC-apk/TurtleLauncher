@@ -19,9 +19,9 @@ package org.jackhuang.hmcl.ui.versions;
 
 import static org.jackhuang.hmcl.util.Pair.pair;
 
-import com.endiq.turtlelauncher.feature.download.enums.Classify;
-import com.endiq.turtlelauncher.feature.log.Logging;
-import com.endiq.turtlelauncher.utils.stringutils.StringUtilsKt;
+import com.cyplixlauncher.mc.feature.download.enums.Classify;
+import com.cyplixlauncher.mc.feature.log.Logging;
+import com.cyplixlauncher.mc.utils.stringutils.StringUtilsKt;
 
 import net.endiq.launcher.Tools;
 

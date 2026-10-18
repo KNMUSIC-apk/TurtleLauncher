@@ -4,11 +4,11 @@ import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 
 import com.google.gson.JsonSyntaxException;
-import com.endiq.turtlelauncher.feature.accounts.AccountsManager;
-import com.endiq.turtlelauncher.feature.log.Logging;
-import com.endiq.turtlelauncher.utils.path.PathManager;
-import com.endiq.turtlelauncher.utils.skin.SkinFileDownloader;
-import com.endiq.turtlelauncher.utils.stringutils.StringUtilsKt;
+import com.cyplixlauncher.mc.feature.accounts.AccountsManager;
+import com.cyplixlauncher.mc.feature.log.Logging;
+import com.cyplixlauncher.mc.utils.path.PathManager;
+import com.cyplixlauncher.mc.utils.skin.SkinFileDownloader;
+import com.cyplixlauncher.mc.utils.stringutils.StringUtilsKt;
 
 import net.endiq.launcher.Tools;
 

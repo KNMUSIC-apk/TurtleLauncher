@@ -2,8 +2,8 @@ package net.endiq.launcher.authenticator.microsoft;
 
 import android.content.Context;
 
-import com.endiq.turtlelauncher.R;
-import com.endiq.turtlelauncher.utils.stringutils.StringUtils;
+import com.cyplixlauncher.mc.R;
+import com.cyplixlauncher.mc.utils.stringutils.StringUtils;
 
 public class PresentedException extends RuntimeException {
     final int localizationStringId;

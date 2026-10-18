@@ -1,0 +1,251 @@
+package com.cyplixlauncher.mc.feature.update;
+
+import static com.cyplixlauncher.mc.task.TaskExecutors.runInUIThread;
+import static com.cyplixlauncher.mc.utils.file.FileTools.formatFileSize;
+import static com.cyplixlauncher.mc.utils.path.UrlManager.TIME_OUT;
+
+import android.app.Dialog;
+import android.content.Context;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.cyplixlauncher.mc.R;
+import com.cyplixlauncher.mc.feature.log.Logging;
+import com.cyplixlauncher.mc.ui.dialog.ProgressDialog;
+import com.cyplixlauncher.mc.utils.ZHTools;
+import com.cyplixlauncher.mc.utils.path.PathManager;
+import com.cyplixlauncher.mc.utils.path.UrlManager;
+
+import net.endiq.launcher.Tools;
+
+import org.apache.commons.io.FileUtils;
+
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.function.Consumer;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Response;
+
+public final class UpdateLauncher {
+    private final Context context;
+    private final LauncherVersion launcherVersion;
+    private final boolean isZipAsset;
+    private final File downloadedFile;
+    private final Call call;
+    private ProgressDialog dialog;
+    private Timer timer;
+    private boolean isCanceled = false;
+
+    public UpdateLauncher(Context context, LauncherVersion launcherVersion) {
+        this.context = context;
+        this.launcherVersion = launcherVersion;
+
+        String assetName = launcherVersion.getAssetName();
+        this.isZipAsset = assetName != null && assetName.toLowerCase(Locale.ROOT).endsWith(".zip");
+        this.downloadedFile = isZipAsset
+                ? new File(PathManager.DIR_APP_CACHE, "update_download.zip")
+                : UpdateUtils.sApkFile;
+
+        this.call = new OkHttpClient.Builder()
+                .writeTimeout(TIME_OUT.getFirst(), TIME_OUT.getSecond())
+                .build()
+                .newCall(
+                        UrlManager.createRequestBuilder(launcherVersion.getAssetDownloadUrl()).build()
+                );
+    }
+
+    public void start() {
+        this.call.enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                UpdateUtils.showFailToast(context, context.getString(R.string.update_fail));
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    UpdateUtils.showFailToast(context, context.getString(R.string.update_fail_code, response.code()));
+                    throw new IOException("Unexpected code " + response);
+                } else {
+                    File outputFile = UpdateLauncher.this.downloadedFile;
+                    Objects.requireNonNull(response.body());
+                    try (InputStream inputStream = response.body().byteStream();
+                         OutputStream outputStream = Files.newOutputStream(outputFile.toPath())
+                    ) {
+                        byte[] buffer = new byte[1024 * 1024];
+                        int bytesRead;
+
+                        runInUIThread(() -> {
+                            UpdateLauncher.this.dialog = new ProgressDialog(UpdateLauncher.this.context, () -> {
+                                UpdateLauncher.this.stop();
+                                return true;
+                            });
+                            UpdateLauncher.this.dialog.show();
+                        });
+
+                        final long[] downloadedSize = new long[1];
+                        final long[] lastSize = {0};
+                        final long[] lastTime = {ZHTools.getCurrentTimeMillis()};
+
+                        // Throttle the refresh rate.
+                        timer = new Timer();
+                        timer.schedule(new TimerTask() {
+                            @Override
+                            public void run() {
+                                long size = downloadedSize[0];
+                                long currentTime = ZHTools.getCurrentTimeMillis();
+                                double timeElapsed = (currentTime - lastTime[0]) / 1000.0;
+                                long sizeChange = size - lastSize[0];
+                                long rate = (long) (sizeChange / timeElapsed);
+
+                                lastSize[0] = size;
+                                lastTime[0] = currentTime;
+
+                                String formattedDownloaded = formatFileSize(size);
+                                String totalSize = formatFileSize(UpdateUtils.getFileSize(launcherVersion.getFileSize()));
+                                handleDialog(dialog -> {
+                                    dialog.updateProgress(size, UpdateUtils.getFileSize(launcherVersion.getFileSize()));
+                                    dialog.updateRate(rate > 0 ? rate : 0L);
+                                    dialog.updateText(String.format(context.getString(R.string.update_downloading), formattedDownloaded, totalSize));
+                                });
+                            }
+                        }, 0, 120);
+
+                        try {
+                            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                                outputStream.write(buffer, 0, bytesRead);
+                                downloadedSize[0] += bytesRead;
+                            }
+                            finish(outputFile);
+                        } catch (Exception e) {
+                            handleDownloadError(e);
+                        }
+                    } catch (Exception e) {
+                        handleDownloadError(e);
+                    }
+                }
+            }
+        });
+    }
+
+    private void finish(File outputFile) {
+        timer.cancel();
+
+        if (!isZipAsset) {
+            handleDialog(Dialog::dismiss);
+            UpdateUtils.installApk(context, outputFile);
+            return;
+        }
+
+        runInUIThread(() -> handleDialog(dialog -> dialog.updateText(context.getString(R.string.update_extracting))));
+        try {
+            File extractedApk = extractApkFromZip(outputFile);
+            FileUtils.deleteQuietly(outputFile); // raw zip no longer needed once the real apk is out
+            handleDialog(Dialog::dismiss);
+            UpdateUtils.installApk(context, extractedApk);
+        } catch (IOException e) {
+            handleDialog(Dialog::dismiss);
+            FileUtils.deleteQuietly(outputFile);
+            FileUtils.deleteQuietly(UpdateUtils.sApkFile);
+            runInUIThread(() -> Toast.makeText(context, context.getString(R.string.update_invalid_package), Toast.LENGTH_LONG).show());
+            Logging.e("Update Launcher", "Downloaded update package did not contain an installable APK", e);
+        }
+    }
+
+    /**
+     * Extracts the real installable .apk from inside the downloaded update .zip.
+     * <p>
+     * Some releases bundle more than one .apk in the zip (per-ABI splits, e.g.
+     * {@code app-arm64-v8a.apk}/{@code app-armeabi-v7a.apk}/...) rather than a single
+     * universal one. Just grabbing the first .apk entry found - the old behavior - would
+     * silently install whichever split happened to be zipped first, regardless of the
+     * device's real ABI. Extracted in two passes so the device's own ABI (from
+     * {@link UpdateUtils#getArchModel()}, the same string {@code pickBestAsset()}
+     * already matches release-level asset names against) is always preferred, falling
+     * back to the first .apk found if no entry names the device's ABI explicitly.
+     */
+    private File extractApkFromZip(File zipFile) throws IOException {
+        String abi = UpdateUtils.getArchModel();
+
+        if (abi != null) {
+            File abiMatch = extractFirstMatchingApk(zipFile, abi);
+            if (abiMatch != null) return abiMatch;
+        }
+
+        File anyApk = extractFirstMatchingApk(zipFile, null);
+        if (anyApk != null) return anyApk;
+
+        throw new IOException("No .apk entry found inside downloaded update package");
+    }
+
+    /**
+     * Scans {@code zipFile} for the first .apk entry whose name contains {@code abiFilter}
+     * (case-insensitively), or the first .apk entry at all if {@code abiFilter} is null.
+     * Returns null (instead of throwing) if nothing matches, so the caller can fall back.
+     */
+    @Nullable
+    private File extractFirstMatchingApk(File zipFile, @Nullable String abiFilter) throws IOException {
+        try (ZipInputStream zis = new ZipInputStream(new BufferedInputStream(Files.newInputStream(zipFile.toPath())))) {
+            ZipEntry entry;
+            while ((entry = zis.getNextEntry()) != null) {
+                String name = entry.getName();
+                if (entry.isDirectory() || !name.toLowerCase(Locale.ROOT).endsWith(".apk")) {
+                    continue;
+                }
+                if (abiFilter != null && !name.toLowerCase(Locale.ROOT).contains(abiFilter.toLowerCase(Locale.ROOT))) {
+                    continue;
+                }
+                try (OutputStream out = Files.newOutputStream(UpdateUtils.sApkFile.toPath())) {
+                    byte[] buffer = new byte[1024 * 1024];
+                    int bytesRead;
+                    while ((bytesRead = zis.read(buffer)) != -1) {
+                        out.write(buffer, 0, bytesRead);
+                    }
+                }
+                return UpdateUtils.sApkFile;
+            }
+        }
+        return null;
+    }
+
+    public void handleDialog(Consumer<ProgressDialog> func) {
+        if (UpdateLauncher.this.dialog != null) {
+            runInUIThread(() -> func.accept(UpdateLauncher.this.dialog));
+        }
+    }
+
+    private void handleDownloadError(Exception e) {
+        if (isCanceled) {
+            // The download was cancelled; swallow every cancellation exception.
+            return;
+        }
+
+        handleDialog(Dialog::dismiss);
+        runInUIThread(() -> Tools.showError(context, R.string.update_fail, e));
+        timer.cancel();
+        FileUtils.deleteQuietly(downloadedFile);
+        Logging.e("Update Launcher", "There was an exception downloading the update!", e);
+    }
+
+    private void stop() {
+        this.isCanceled = true;
+        this.call.cancel();
+        this.timer.cancel();
+        FileUtils.deleteQuietly(downloadedFile);
+    }
+}

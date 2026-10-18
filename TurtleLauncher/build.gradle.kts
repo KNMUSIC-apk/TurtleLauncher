@@ -41,13 +41,13 @@ val getBuildType = {
     buildType
 }
 
-val nameId = "com.endiq.turtlelauncher"
+val nameId = "com.cyplix.launcher"
 // namespace controls where the generated R/BuildConfig classes land, and must match
-// the Kotlin/Java source package (com.endiq.turtlelauncher.*) or every implicit "R"
+// the Kotlin/Java source package (com.cyplixlauncher.mc.*) or every implicit "R"
 // reference and "import ...BuildConfig" across the codebase breaks. Since the full
-// Turtle rebrand renamed the source tree to com.endiq.turtlelauncher.*, namespace and
+// Turtle rebrand renamed the source tree to com.cyplixlauncher.mc.*, namespace and
 // applicationId now coincide.
-val namespaceId = "com.endiq.turtlelauncher"
+val namespaceId = "com.cyplixlauncher.mc"
 val generatedTurtleDir = file("$buildDir/generated/source/turtle/java")
 val launcherAPPName = project.findProperty("launcher_app_name") as? String ?: error("The \"launcher_app_name\" property is not set in gradle.properties.")
 val launcherName = project.findProperty("launcher_name") as? String ?: error("The \"launcher_name\" property is not set in gradle.properties.")
@@ -102,37 +102,30 @@ android {
         multiDexEnabled = true //important
         manifestPlaceholders["launcher_name"] = launcherAPPName
 
-        // The Gemini API key, baked into BuildConfig so a build can ship with the AI working
-        // without the user pasting anything. Read in this order:
-        //   1. -PGEMINI_API_KEY=... on the Gradle command line
-        //   2. the GEMINI_API_KEY environment variable (what CI passes from the repo secret)
-        //   3. GEMINI_API_KEY=... in local.properties (gitignored - the local-dev option)
-        // Absent everywhere = empty, and the app then asks the user for their own key in
-        // Settings; everything else keeps working.
-        //
-        // Anything compiled into an APK can be extracted from it. This is a convenience for a
-        // personal/private build, not a secret-keeping mechanism: restrict the key in Google
-        // Cloud (Generative Language API only) and rotate the repo secret if an APK is shared.
-        val geminiApiKey = (
-            (project.findProperty("GEMINI_API_KEY") as String?)
-                ?: System.getenv("GEMINI_API_KEY")
+        // The CurseForge key for the world download tab. Same lookup order as the Gemini key:
+        // -PCURSEFORGE_API_KEY=..., the CURSEFORGE_API_KEY environment variable (the CI secret),
+        // then CURSEFORGE_API_KEY=... in local.properties. The key a person enters in Settings
+        // takes priority at runtime, so an empty value here just means "ask the user".
+        val curseForgeApiKey = (
+            (project.findProperty("CURSEFORGE_API_KEY") as String?)
+                ?: System.getenv("CURSEFORGE_API_KEY")
                 ?: rootProject.file("local.properties")
                     .takeIf { it.isFile }
                     ?.let { localProperties ->
                         Properties().apply { localProperties.inputStream().use { load(it) } }
-                            .getProperty("GEMINI_API_KEY")
+                            .getProperty("CURSEFORGE_API_KEY")
                     }
             ).orEmpty().trim()
         buildConfigField(
             "String",
-            "GEMINI_API_KEY",
-            "\"" + geminiApiKey.replace("\\", "\\\\").replace("\"", "\\\"") + "\""
+            "CURSEFORGE_API_KEY",
+            "\"" + curseForgeApiKey.replace("\\", "\\\\").replace("\"", "\\\"") + "\""
         )
         logger.lifecycle(
-            if (geminiApiKey.isEmpty()) {
-                "BUILD: no GEMINI_API_KEY - the app will ask the user for a key and work offline until then"
+            if (curseForgeApiKey.isEmpty()) {
+                "BUILD: no CURSEFORGE_API_KEY - the world tab asks the user for a CurseForge key in Settings"
             } else {
-                "BUILD: GEMINI_API_KEY provided (${geminiApiKey.length} chars) - built into the APK"
+                "BUILD: CURSEFORGE_API_KEY provided - built into the APK"
             }
         )
     }
@@ -299,7 +292,7 @@ tasks.register("generateInfoDistributor") {
             "APP_NAME" to appName,
             "BUILD_TYPE" to buildType
         )
-        InfoDistributorGenerator.generate(outputDir, "com.endiq.turtlelauncher", "InfoDistributor", constantMap)
+        InfoDistributorGenerator.generate(outputDir, "com.cyplixlauncher.mc", "InfoDistributor", constantMap)
     }
 }
 

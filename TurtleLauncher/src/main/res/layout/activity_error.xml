@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- ══════════════════════════ Left card: tabs + log/AI content ══════════════════════════ -->
+    <!-- ══════════════════════════ Left card: tabs + log/diagnosis content ══════════════════════════ -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/crash_card"
         android:layout_width="0dp"
@@ -103,7 +103,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/error_tip"/>
 
-        <!-- Tab row: Game Logs / AI Analysis -->
+        <!-- Tab row: Game Logs / Diagnosis -->
         <LinearLayout
             android:id="@+id/crash_tab_row"
             android:layout_width="0dp"
@@ -127,13 +127,13 @@
                 android:textColor="#111111"/>
 
             <TextView
-                android:id="@+id/tab_ai_analysis"
+                android:id="@+id/tab_diagnosis"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:paddingVertical="@dimen/_8sdp"
-                android:text="@string/crash_tab_ai_analysis"
+                android:text="@string/crash_tab_diagnosis"
                 android:textStyle="bold"
                 android:textSize="@dimen/_13ssp"
                 android:textColor="#111111"/>
@@ -184,7 +184,7 @@
                     android:textColor="#333333"
                     tools:ignore="HardcodedText"/>
 
-                <com.endiq.turtlelauncher.ui.view.AnimButton
+                <com.cyplixlauncher.mc.ui.view.AnimButton
                     android:id="@+id/copy_log"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -197,9 +197,9 @@
             </LinearLayout>
         </ScrollView>
 
-        <!-- ── Tab content: AI Analysis ────────────────────────────────────────── -->
+        <!-- ── Tab content: Diagnosis ────────────────────────────────────────── -->
         <ScrollView
-            android:id="@+id/ai_tab_content"
+            android:id="@+id/diagnosis_tab_content"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/_12sdp"
@@ -232,14 +232,14 @@
                     android:textColor="#333333"
                     android:textIsSelectable="true"/>
 
-                <!-- "Inspect with AI" is still loading / hasn't been requested yet -->
+                <!-- Shown when the rule-based check found nothing specific -->
                 <TextView
-                    android:id="@+id/ai_analysis_placeholder"
+                    android:id="@+id/diagnosis_placeholder"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/_12ssp"
                     android:textColor="#777777"
-                    android:text="@string/crash_ai_analysis_placeholder"/>
+                    android:text="@string/crash_diagnosis_placeholder"/>
 
             </LinearLayout>
         </ScrollView>
@@ -258,20 +258,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.22">
 
-        <com.endiq.turtlelauncher.ui.view.AnimButton
-            android:id="@+id/ai_inspect_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="0dp"
-            android:paddingVertical="@dimen/_12sdp"
-            android:background="@drawable/background_pill_filled"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            android:textAllCaps="false"
-            android:textSize="@dimen/_12ssp"
-            android:text="@string/crash_inspect_with_ai"/>
-
-        <com.endiq.turtlelauncher.ui.view.AnimButton
+        <com.cyplixlauncher.mc.ui.view.AnimButton
             android:id="@+id/crash_export_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -285,7 +272,7 @@
             android:visibility="gone"
             android:text="@string/crash_export_button"/>
 
-        <com.endiq.turtlelauncher.ui.view.AnimButton
+        <com.cyplixlauncher.mc.ui.view.AnimButton
             android:id="@+id/share_log"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -331,14 +318,14 @@
 
         <!-- Hidden triggers kept for logic reuse (repair / search-online), surfaced via the
              overflow (⋯) button above through a PopupMenu instead of being shown inline. -->
-        <com.endiq.turtlelauncher.ui.view.AnimButton
+        <com.cyplixlauncher.mc.ui.view.AnimButton
             android:id="@+id/crash_repair_button"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:visibility="gone"
             android:text="@string/crash_repair_button"/>
 
-        <com.endiq.turtlelauncher.ui.view.AnimButton
+        <com.cyplixlauncher.mc.ui.view.AnimButton
             android:id="@+id/crash_search_online_button"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -350,7 +337,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"/>
 
-        <com.endiq.turtlelauncher.ui.view.AnimButton
+        <com.cyplixlauncher.mc.ui.view.AnimButton
             android:id="@+id/error_restart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

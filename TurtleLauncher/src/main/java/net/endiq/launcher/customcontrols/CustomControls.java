@@ -2,7 +2,7 @@ package net.endiq.launcher.customcontrols;
 
 import androidx.annotation.Keep;
 
-import com.endiq.turtlelauncher.ui.subassembly.customcontrols.ControlInfoData;
+import com.cyplixlauncher.mc.ui.subassembly.customcontrols.ControlInfoData;
 
 import net.endiq.launcher.Tools;
 

@@ -6,11 +6,11 @@
     android:id="@+id/fragment_menu_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_app"
+    android:background="@android:color/transparent"
     tools:ignore="ContentDescription">
 
-    <!-- TOP APP BAR: launcher title/subtitle on the left, quick-action icons on the right -
-         spans the full width above both the left content panel and the right play panel. -->
+    <!-- TOP APP BAR: launcher title and subtitle, quick-action icons directly after the title,
+         settings gear at the far right. Spans the full width above both panels. -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/home_top_bar"
         android:layout_width="0dp"
@@ -24,17 +24,17 @@
 
         <TextView
             android:id="@+id/home_top_bar_title"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/main_top_bar_title"
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="@color/turtle_primary_text"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/home_top_bar_actions"/>
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView
+        android:fontFamily="@font/exo2"
             android:id="@+id/home_top_bar_subtitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -44,28 +44,20 @@
             android:textColor="@color/turtle_text_secondary"
             app:layout_constraintTop_toBottomOf="@id/home_top_bar_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/home_top_bar_actions"
+            app:layout_constraintEnd_toStartOf="@id/top_bar_account_name"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
+        <!-- Quick-action icons, directly after the title -->
         <LinearLayout
             android:id="@+id/home_top_bar_actions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_m"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <ImageButton
-                android:id="@+id/top_bar_account_button"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_help"
-                android:padding="9dp"
-                android:tint="@color/turtle_text_secondary"
-                android:contentDescription="@string/main_nav_account"/>
+            app:layout_constraintStart_toEndOf="@id/home_top_bar_title">
 
             <ImageButton
                 android:id="@+id/top_bar_storage_button"
@@ -87,40 +79,6 @@
                 android:tint="@color/turtle_text_secondary"
                 android:contentDescription="@string/main_nav_download"/>
 
-            <FrameLayout
-                android:layout_width="40dp"
-                android:layout_height="40dp">
-
-                <ImageButton
-                    android:id="@+id/top_bar_tasks_button"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_tasks"
-                    android:padding="9dp"
-                    android:tint="@color/turtle_text_secondary"
-                    android:contentDescription="@string/main_nav_tasks"/>
-
-                <TextView
-                    android:id="@+id/top_bar_tasks_badge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top|end"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:minWidth="14dp"
-                    android:minHeight="14dp"
-                    android:background="@drawable/background_task_badge"
-                    android:gravity="center"
-                    android:includeFontPadding="false"
-                    android:textSize="9sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/turtle_text_on_accent"
-                    android:paddingHorizontal="3dp"
-                    android:visibility="gone"
-                    tools:text="2"/>
-
-            </FrameLayout>
 
             <ImageButton
                 android:id="@+id/top_bar_music_button"
@@ -141,28 +99,53 @@
                 android:padding="9dp"
                 android:tint="@color/turtle_text_secondary"
                 android:contentDescription="@string/main_nav_cursor"/>
-
-            <ImageButton
-                android:id="@+id/top_bar_ai_button"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_ai_assistant"
-                android:padding="9dp"
-                android:tint="@color/turtle_text_secondary"
-                android:contentDescription="@string/main_nav_assistant"/>
-
-            <ImageButton
-                android:id="@+id/top_bar_settings_button"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_menu_settings"
-                android:padding="9dp"
-                android:tint="@color/turtle_text_secondary"
-                android:contentDescription="@string/main_nav_settings"/>
-
         </LinearLayout>
+
+        <!-- In-game name of the current account, shown right beside its avatar tile -->
+        <TextView
+            android:id="@+id/top_bar_account_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/space_xs"
+            android:maxWidth="112dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="@color/turtle_primary_text"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/top_bar_account_button"/>
+
+        <!-- Account / skin tile: shows the current avatar and opens the account and wardrobe screen -->
+        <ImageButton
+            android:id="@+id/top_bar_account_button"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginEnd="@dimen/space_xs"
+            android:background="@drawable/background_item"
+            android:padding="8dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_add"
+            android:tint="@color/turtle_text_secondary"
+            android:contentDescription="@string/main_nav_account"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/top_bar_settings_button"/>
+
+        <!-- Settings gear, far right of the top bar -->
+        <ImageButton
+            android:id="@+id/top_bar_settings_button"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/background_item"
+            android:src="@drawable/ic_menu_settings"
+            android:padding="10dp"
+            android:tint="@color/turtle_text_secondary"
+            android:contentDescription="@string/main_nav_settings"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -170,7 +153,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/background_app"
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/play_layout"
         app:layout_constraintStart_toStartOf="parent"
@@ -203,7 +186,7 @@
                     android:paddingHorizontal="@dimen/space_xs">
 
                     <!-- Browse Mods -->
-                    <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                    <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                         android:id="@+id/about_button"
                         android:layout_width="44dp"
                         android:layout_height="44dp"
@@ -225,10 +208,10 @@
                             android:textSize="13sp"
                             android:textStyle="bold"
                             android:textColor="@color/turtle_primary_text"/>
-                    </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                    </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
                     <!-- Custom Controls -->
-                    <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                    <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                         android:id="@+id/custom_control_button"
                         android:layout_width="44dp"
                         android:layout_height="44dp"
@@ -250,10 +233,10 @@
                             android:textSize="13sp"
                             android:textStyle="bold"
                             android:textColor="@color/turtle_primary_text"/>
-                    </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                    </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
                     <!-- Install JAR -->
-                    <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                    <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                         android:id="@+id/install_jar_button"
                         android:layout_width="44dp"
                         android:layout_height="44dp"
@@ -275,10 +258,10 @@
                             android:textSize="13sp"
                             android:textStyle="bold"
                             android:textColor="@color/turtle_primary_text"/>
-                    </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                    </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
                     <!-- Share Logs -->
-                    <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                    <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                         android:id="@+id/share_logs_button"
                         android:layout_width="44dp"
                         android:layout_height="44dp"
@@ -300,10 +283,10 @@
                             android:textSize="13sp"
                             android:textStyle="bold"
                             android:textColor="@color/turtle_primary_text"/>
-                    </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                    </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
                     <!-- Modpack Importer -->
-                    <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+                    <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                         android:id="@+id/modpack_import_button"
                         android:layout_width="44dp"
                         android:layout_height="44dp"
@@ -325,7 +308,7 @@
                             android:textSize="13sp"
                             android:textStyle="bold"
                             android:textColor="@color/turtle_primary_text"/>
-                    </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+                    </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
                 </LinearLayout>
 
@@ -348,18 +331,6 @@
                     android:paddingHorizontal="@dimen/space_m"
                     android:paddingBottom="@dimen/space_l">
 
-                    <!-- TODAY'S STATISTICS header -->
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/main_section_statistics"
-                        android:textSize="11sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/turtle_text_secondary"
-                        android:letterSpacing="0.08"
-                        android:layout_marginBottom="@dimen/space_s"
-                        android:paddingHorizontal="4dp"/>
-
                     <!-- Row 1: weekly playtime chart + community links -->
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -370,6 +341,7 @@
                         <!-- Play Time (Last 7 Days) -->
                         <LinearLayout
                             android:id="@+id/stats_card"
+                            android:visibility="gone"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -378,7 +350,7 @@
                             android:padding="@dimen/space_m"
                             android:background="@drawable/background_grid_card">
 
-                            <com.endiq.turtlelauncher.feature.turtle.WeeklyPlaytimeChartView
+                            <com.cyplixlauncher.mc.feature.turtle.WeeklyPlaytimeChartView
                                 android:id="@+id/stats_chart"
                                 android:layout_width="match_parent"
                                 android:layout_height="90dp"/>
@@ -394,44 +366,11 @@
                         </LinearLayout>
 
                         <!-- Friends / LAN (Terracotta over EasyTier) -->
-                        <LinearLayout
-                            android:id="@+id/terracotta_button"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_marginEnd="@dimen/space_s"
-                            android:orientation="vertical"
-                            android:gravity="center_horizontal"
-                            android:padding="@dimen/space_m"
-                            android:background="@drawable/background_grid_card"
-                            android:foreground="?attr/selectableItemBackground"
-                            android:clickable="true"
-                            android:focusable="true">
-
-                            <ImageView
-                                android:id="@+id/terracotta_icon"
-                                android:layout_width="28dp"
-                                android:layout_height="28dp"
-                                android:layout_marginTop="@dimen/space_xs"
-                                android:src="@drawable/ic_globe"
-                                android:tint="@color/accent_primary"
-                                android:contentDescription="@string/main_terracotta"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/space_s"
-                                android:text="@string/main_terracotta"
-                                android:textSize="12sp"
-                                android:textStyle="bold"
-                                android:textColor="@color/turtle_text_secondary"
-                                android:gravity="center"/>
-
-                        </LinearLayout>
 
                         <!-- Community -->
                         <LinearLayout
                             android:id="@+id/community_card"
+                            android:visibility="gone"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -505,6 +444,7 @@
                         <!-- Last Game Log -->
                         <LinearLayout
                             android:id="@+id/last_log_card"
+                            android:visibility="gone"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -617,6 +557,44 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
+            <!-- LAN card: sits above the selected-version block in the right column -->
+            <LinearLayout
+                android:id="@+id/terracotta_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/space_m"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:padding="@dimen/space_m"
+                android:background="@drawable/background_grid_card"
+                android:foreground="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <ImageView
+                    android:id="@+id/terracotta_icon"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginTop="@dimen/space_xs"
+                    android:src="@drawable/ic_globe"
+                    android:tint="@color/accent_primary"
+                    android:contentDescription="@string/main_terracotta"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_s"
+                    android:text="@string/main_terracotta"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/turtle_text_secondary"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
             <!-- SELECTED VERSION header -->
             <TextView
                 android:id="@+id/selected_version_header"
@@ -631,10 +609,10 @@
                 app:layout_constraintBottom_toTopOf="@+id/version"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@id/terracotta_button"/>
 
             <!-- Version selector -->
-            <com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout
+            <com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout
                 android:id="@+id/version"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
@@ -688,7 +666,7 @@
                         android:textColor="@color/turtle_text_secondary"
                         android:visibility="gone"/>
                 </LinearLayout>
-            </com.endiq.turtlelauncher.ui.layout.AnimRelativeLayout>
+            </com.cyplixlauncher.mc.ui.layout.AnimRelativeLayout>
 
             <ImageButton
                 android:id="@+id/manager_profile_button"
@@ -704,7 +682,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/version"/>
 
-            <com.endiq.turtlelauncher.ui.view.AnimButton
+            <com.cyplixlauncher.mc.ui.view.AnimButton
                 android:id="@+id/play_button"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
