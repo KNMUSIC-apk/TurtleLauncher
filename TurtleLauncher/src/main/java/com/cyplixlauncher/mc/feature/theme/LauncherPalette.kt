@@ -74,6 +74,9 @@ object LauncherPalette {
     private var cachedKey: String? = null
     private var cachedDrawable: Drawable? = null
 
+    /** The palette theme in use, or null for the built-in light/dark themes. */
+    fun current(): Palette? = active
+
     fun iconTint(): Int? = active?.iconTint
 
     fun surfaceColor(): Int? = active?.surface
