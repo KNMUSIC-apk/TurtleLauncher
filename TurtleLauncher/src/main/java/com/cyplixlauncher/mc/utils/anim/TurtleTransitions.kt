@@ -26,6 +26,10 @@ enum class EnterTransition(val key: String, val animation: Animations) {
     ZOOM_IN("zoom_in", Animations.ZoomInUp),
     ZOOM("zoom", Animations.ZoomIn),
     SHEET("sheet", Animations.SheetIn),
+    /** Zalith Launcher 2 "Jelly Bounce" (its default). */
+    JELLY("jelly", Animations.ZalithJellyIn),
+    ZALITH_BOUNCE("zalith_bounce", Animations.ZalithBounceIn),
+    SLICE_IN("slice_in", Animations.ZalithSliceIn),
     ;
 
     companion object {

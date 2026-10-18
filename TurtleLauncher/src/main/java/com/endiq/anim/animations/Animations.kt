@@ -39,6 +39,9 @@ import com.endiq.anim.animations.zoom.ZoomOutRightAnimator
 import com.endiq.anim.animations.zoom.ZoomOutUpAnimator
 import com.endiq.anim.animations.sheet.SheetInAnimator
 import com.endiq.anim.animations.sheet.SheetOutAnimator
+import com.endiq.anim.animations.zalith.ZalithBounceInAnimator
+import com.endiq.anim.animations.zalith.ZalithJellyInAnimator
+import com.endiq.anim.animations.zalith.ZalithSliceInAnimator
 
 
 enum class Animations(val animator: BaseAnimator) {
@@ -91,6 +94,11 @@ enum class Animations(val animator: BaseAnimator) {
     ZoomOutUp(ZoomOutUpAnimator()),
     SheetIn(SheetInAnimator()),
     SheetOut(SheetOutAnimator()),
+
+    //Zalith Launcher 2 screen-swap curves
+    ZalithJellyIn(ZalithJellyInAnimator()),
+    ZalithBounceIn(ZalithBounceInAnimator()),
+    ZalithSliceIn(ZalithSliceInAnimator()),
 
     //Other
     Pulse(PulseAnimator()),

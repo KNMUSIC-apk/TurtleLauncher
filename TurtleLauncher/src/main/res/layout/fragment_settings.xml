@@ -109,14 +109,171 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <androidx.core.widget.NestedScrollView
+    <LinearLayout
+        android:id="@+id/settings_body"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:scrollbars="none"
+        android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/settings_header"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Left category rail (Zalith Launcher 2 style): picks which settings rows are listed. -->
+        <LinearLayout
+            android:id="@+id/settings_rail"
+            android:layout_width="84dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingVertical="@dimen/space_s">
+
+            <LinearLayout
+                android:id="@+id/rail_renderer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingVertical="@dimen/space_m"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:alpha="0.6">
+
+                <ImageView
+                    android:id="@+id/rail_renderer_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_setting_video"
+                    android:tint="@color/turtle_text_secondary"
+                    android:contentDescription="@string/settings_rail_renderer" />
+
+                <TextView
+                    android:id="@+id/rail_renderer_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_xs"
+                    android:text="@string/settings_rail_renderer"
+                    android:textSize="11sp"
+                    android:textColor="@color/turtle_text_secondary" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/rail_game"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingVertical="@dimen/space_m"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:alpha="0.6">
+
+                <ImageView
+                    android:id="@+id/rail_game_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_setting_game"
+                    android:tint="@color/turtle_text_secondary"
+                    android:contentDescription="@string/settings_rail_game" />
+
+                <TextView
+                    android:id="@+id/rail_game_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_xs"
+                    android:text="@string/settings_rail_game"
+                    android:textSize="11sp"
+                    android:textColor="@color/turtle_text_secondary" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/rail_control"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingVertical="@dimen/space_m"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:alpha="0.6">
+
+                <ImageView
+                    android:id="@+id/rail_control_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_setting_accessibility"
+                    android:tint="@color/turtle_text_secondary"
+                    android:contentDescription="@string/settings_rail_control" />
+
+                <TextView
+                    android:id="@+id/rail_control_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_xs"
+                    android:text="@string/settings_rail_control"
+                    android:textSize="11sp"
+                    android:textColor="@color/turtle_text_secondary" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/rail_launcher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingVertical="@dimen/space_m"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:alpha="0.6">
+
+                <ImageView
+                    android:id="@+id/rail_launcher_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_setting_launcher"
+                    android:tint="@color/turtle_text_secondary"
+                    android:contentDescription="@string/settings_rail_launcher" />
+
+                <TextView
+                    android:id="@+id/rail_launcher_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_xs"
+                    android:text="@string/settings_rail_launcher"
+                    android:textSize="11sp"
+                    android:textColor="@color/turtle_text_secondary" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/rail_other"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingVertical="@dimen/space_m"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:alpha="0.6">
+
+                <ImageView
+                    android:id="@+id/rail_other_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_setting_experimental"
+                    android:tint="@color/turtle_text_secondary"
+                    android:contentDescription="@string/settings_rail_other" />
+
+                <TextView
+                    android:id="@+id/rail_other_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_xs"
+                    android:text="@string/settings_rail_other"
+                    android:textSize="11sp"
+                    android:textColor="@color/turtle_text_secondary" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -1160,6 +1317,7 @@
                 android:visibility="gone"/>
 
         </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

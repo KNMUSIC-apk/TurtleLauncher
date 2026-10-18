@@ -196,7 +196,7 @@ class AllSettings {
         @JvmStatic val launcherLanguage         = StringSettingUnit("launcherLanguage", "system")
         @JvmStatic val animation                = BooleanSettingUnit("animation", true)
         @JvmStatic val animationSpeed           = IntSettingUnit("animationSpeed", 300)
-        @JvmStatic val animationEnter           = StringSettingUnit("animationEnter", "slide_up")
+        @JvmStatic val animationEnter           = StringSettingUnit("animationEnter", "jelly")
         /** Screen exit animation - see com.cyplixlauncher.mc.utils.anim.ExitTransition. */
         @JvmStatic val animationExit            = StringSettingUnit("animationExit", "slide_up")
         @JvmStatic val pageOpacity              = IntSettingUnit("pageOpacity", 100)

@@ -7,6 +7,7 @@ import com.cyplixlauncher.mc.renderer.renderers.HolyGL4ESRenderer
 import com.cyplixlauncher.mc.renderer.renderers.KryptonRenderer
 import com.cyplixlauncher.mc.renderer.renderers.PanfrostRenderer
 import com.cyplixlauncher.mc.renderer.renderers.VirGLRenderer
+import com.cyplixlauncher.mc.renderer.renderers.Vulkan26Renderer
 import com.cyplixlauncher.mc.renderer.renderers.ZinkRenderer
 import com.cyplixlauncher.mc.utils.path.PathManager
 import net.endiq.launcher.Tools
@@ -38,7 +39,8 @@ object Renderers {
             com.cyplixlauncher.mc.renderer.renderers.MobileGluesRenderer(),
             com.cyplixlauncher.mc.renderer.renderers.AngleRenderer(),
             com.cyplixlauncher.mc.renderer.renderers.NWRenderer(),
-            com.cyplixlauncher.mc.renderer.renderers.VGPURenderer()
+            com.cyplixlauncher.mc.renderer.renderers.VGPURenderer(),
+            Vulkan26Renderer()
         )
     }
 
@@ -49,7 +51,8 @@ object Renderers {
         val deviceHasVulkan = Tools.checkVulkanSupport(context.packageManager)
         val compatible: MutableList<RendererInterface> = mutableListOf()
         for (renderer in renderers) {
-            if (renderer.getRendererId() == ZinkRenderer.ID && !deviceHasVulkan) continue
+            val needsVulkan = renderer.getRendererId() == ZinkRenderer.ID || renderer.getRendererId() == Vulkan26Renderer.ID
+            if (needsVulkan && !deviceHasVulkan) continue
             if (!hasRequiredLibrary(renderer)) {
                 Logging.w(
                     "Renderers",

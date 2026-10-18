@@ -75,6 +75,9 @@
         <item>@string/anim_zoom_in</item>
         <item>@string/anim_zoom</item>
         <item>@string/anim_sheet</item>
+        <item>@string/anim_jelly</item>
+        <item>@string/anim_zalith_bounce</item>
+        <item>@string/anim_slice_in</item>
     </string-array>
 
     <string-array name="animation_enter_values">
@@ -87,6 +90,9 @@
         <item>zoom_in</item>
         <item>zoom</item>
         <item>sheet</item>
+        <item>jelly</item>
+        <item>zalith_bounce</item>
+        <item>slice_in</item>
     </string-array>
 
     <string-array name="animation_exit_names">

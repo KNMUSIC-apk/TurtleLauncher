@@ -6,6 +6,7 @@ import com.cyplixlauncher.mc.renderer.renderers.HolyGL4ESRenderer
 import com.cyplixlauncher.mc.renderer.renderers.KryptonRenderer
 import com.cyplixlauncher.mc.renderer.renderers.NWRenderer
 import com.cyplixlauncher.mc.renderer.renderers.VGPURenderer
+import com.cyplixlauncher.mc.renderer.renderers.Vulkan26Renderer
 import com.cyplixlauncher.mc.renderer.renderers.VirGLRenderer
 import com.cyplixlauncher.mc.renderer.renderers.ZinkRenderer
 
@@ -29,7 +30,8 @@ object RendererCatalog {
         VGPURenderer.ID to Entry(minMinecraftVersion = "1.16.5", badge = Badge.EXPERIMENTAL),
         AngleRenderer.ID to Entry(badge = Badge.EXPERIMENTAL),
         com.cyplixlauncher.mc.renderer.renderers.LTWRenderer.ID to Entry(badge = Badge.EXPERIMENTAL),
-        com.cyplixlauncher.mc.renderer.renderers.MobileGluesRenderer.ID to Entry(badge = Badge.EXPERIMENTAL)
+        com.cyplixlauncher.mc.renderer.renderers.MobileGluesRenderer.ID to Entry(badge = Badge.EXPERIMENTAL),
+        Vulkan26Renderer.ID to Entry(minMinecraftVersion = Vulkan26Renderer.MIN_MC_VERSION, badge = Badge.EXPERIMENTAL)
     )
 
     fun get(rendererId: String): Entry? = entries[rendererId]

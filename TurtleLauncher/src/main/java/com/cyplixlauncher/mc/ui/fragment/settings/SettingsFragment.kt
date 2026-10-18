@@ -25,6 +25,48 @@ class SettingsFragment : FragmentWithAnim(R.layout.fragment_settings) {
 
     private lateinit var binding: FragmentSettingsBinding
 
+    /** Left-rail categories, modelled on Zalith Launcher 2's settings rail. */
+    private enum class RailCategory { RENDERER, GAME, CONTROL, LAUNCHER, OTHER }
+
+    private var selectedCategory = RailCategory.RENDERER
+
+    private class RailItem(
+        val category: RailCategory,
+        val root: android.view.View,
+        val icon: android.widget.ImageView,
+        val label: android.widget.TextView
+    )
+
+    private val railItems by lazy {
+        listOf(
+            RailItem(RailCategory.RENDERER, binding.railRenderer, binding.railRendererIcon, binding.railRendererText),
+            RailItem(RailCategory.GAME, binding.railGame, binding.railGameIcon, binding.railGameText),
+            RailItem(RailCategory.CONTROL, binding.railControl, binding.railControlIcon, binding.railControlText),
+            RailItem(RailCategory.LAUNCHER, binding.railLauncher, binding.railLauncherIcon, binding.railLauncherText),
+            RailItem(RailCategory.OTHER, binding.railOther, binding.railOtherIcon, binding.railOtherText),
+        )
+    }
+
+    /** Which rail category each settings row belongs to. */
+    private val rowCategories by lazy {
+        mapOf(
+            binding.videoSettingsRow to RailCategory.RENDERER,
+            binding.optimizationSettingsRow to RailCategory.RENDERER,
+            binding.javaSettingsRow to RailCategory.GAME,
+            binding.phoneSettingsRow to RailCategory.GAME,
+            binding.controlsSettingsRow to RailCategory.CONTROL,
+            binding.mouseKeyboardSettingsRow to RailCategory.CONTROL,
+            binding.launcherSettingsRow to RailCategory.LAUNCHER,
+            binding.accountSettingsRow to RailCategory.LAUNCHER,
+            binding.discordSettingsRow to RailCategory.LAUNCHER,
+            binding.shizukuSettingsRow to RailCategory.LAUNCHER,
+            binding.recordingSettingsRow to RailCategory.OTHER,
+            binding.emotesSettingsRow to RailCategory.OTHER,
+            binding.experimentalSettingsRow to RailCategory.OTHER,
+            binding.aboutSettingsRow to RailCategory.OTHER,
+        )
+    }
+
     /** Each hub card's row view, the section container it lives in, and the string resource
      *  its title is drawn from - used by the search filter below. Section headers aren't in
      *  this list; they're derived from their container's visibility instead. */
@@ -110,6 +152,11 @@ class SettingsFragment : FragmentWithAnim(R.layout.fragment_settings) {
             ZHTools.swapFragmentWithAnim(this, AboutFragment::class.java, AboutFragment.TAG, null)
         }
 
+        railItems.forEach { item ->
+            item.root.setOnClickListener { selectCategory(item.category) }
+        }
+        selectCategory(selectedCategory)
+
         binding.searchClearButton.setOnClickListener { binding.searchInput.text?.clear() }
         binding.searchInput.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -121,12 +168,30 @@ class SettingsFragment : FragmentWithAnim(R.layout.fragment_settings) {
         })
     }
 
+    /** Shows the rows of [category] and highlights its rail item. While searching, the rail is ignored. */
+    private fun selectCategory(category: RailCategory) {
+        selectedCategory = category
+        railItems.forEach { item ->
+            val selected = item.category == category
+            item.root.alpha = if (selected) 1f else 0.6f
+            val color = androidx.core.content.ContextCompat.getColor(
+                requireContext(),
+                if (selected) R.color.accent_primary else R.color.turtle_text_secondary
+            )
+            item.icon.imageTintList = android.content.res.ColorStateList.valueOf(color)
+            item.label.setTextColor(color)
+        }
+        filterCards(binding.searchInput.text?.toString().orEmpty())
+    }
+
     private fun filterCards(query: String) {
         val needle = query.trim().lowercase()
         var anyVisible = false
 
         searchableCards.forEach { (row, _, titleRes) ->
-            val matches = needle.isEmpty() || getString(titleRes).lowercase().contains(needle)
+            val inRail = needle.isNotEmpty() || rowCategories[row] == selectedCategory
+            val matchesText = needle.isEmpty() || getString(titleRes).lowercase().contains(needle)
+            val matches = inRail && matchesText
             row.visibility = if (matches) View.VISIBLE else View.GONE
             if (matches) anyVisible = true
         }

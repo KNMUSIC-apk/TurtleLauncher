@@ -495,6 +495,14 @@
     <string name="anim_zoom_out">Thu nhỏ khi biến mất</string>
     <string name="anim_zoom">Thu phóng (từ tâm)</string>
     <string name="anim_sheet">Bảng trượt (từ dưới lên)</string>
+    <string name="anim_jelly">Nảy đàn hồi (Zalith)</string>
+    <string name="anim_zalith_bounce">Nảy bật (Zalith)</string>
+    <string name="anim_slice_in">Trượt vào (Zalith)</string>
+    <string name="settings_rail_renderer">Hiển thị</string>
+    <string name="settings_rail_game">Trò chơi</string>
+    <string name="settings_rail_control">Điều khiển</string>
+    <string name="settings_rail_launcher">Launcher</string>
+    <string name="settings_rail_other">Khác</string>
     <string name="setting_animation_enter_title">Hiệu ứng mở màn hình</string>
     <string name="setting_animation_enter_desc">Cách màn hình hoặc bảng điều khiển xuất hiện</string>
     <string name="setting_animation_exit_title">Hiệu ứng đóng màn hình</string>

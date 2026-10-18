@@ -1,6 +1,8 @@
 package com.cyplixlauncher.mc.feature.graphics
 
 import com.cyplixlauncher.mc.feature.MCOptions
+import com.cyplixlauncher.mc.renderer.Renderers
+import com.cyplixlauncher.mc.renderer.renderers.Vulkan26Renderer
 import com.cyplixlauncher.mc.setting.AllSettings
 
 /**
@@ -15,6 +17,12 @@ object GraphicsApiOptions {
 
     @JvmStatic
     fun apply() {
+        // The 26.3 renderer only works on the game's own Vulkan backend, so it overrides the setting.
+        val selected = runCatching { Renderers.getCurrentRenderer().getRendererId() }.getOrNull()
+        if (selected == Vulkan26Renderer.ID) {
+            MCOptions.set(KEY, "\"vulkan\"")
+            return
+        }
         val mode = runCatching { AllSettings.graphicsApi.getValue() }.getOrDefault("DEFAULT_OPENGL")
         when (mode) {
             "DEFAULT" -> if (!MCOptions.containsKey(KEY)) MCOptions.set(KEY, "\"default\"")
